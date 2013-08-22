@@ -4,6 +4,7 @@ class k_model_menu_menu
 	private $data = array();
 	private $rdata = array();
 	private $level = 0;
+	private $paret = array();
   function getOption($type= 'part',$pid = 0)
   {
 	if($type = 'all')
@@ -28,32 +29,30 @@ class k_model_menu_menu
 	}
 	
 	public function getJsonMenu(){
-		$this->data = $this->getOption();
-		$this->teamData(1);
-		$header = '[';
-		foreach ($this->rdara as $key => $value) {
-			if(isset($value['icon'])
+		
+		$data = $this->getChild(1);
+		foreach($data as $key=>$value){
+			$data[$key]['children']=$this->getChild($value['id']);
+			//print_R($value['children']);exit;
 		}
-		$foot = ']';
-	}
-
-	public function teamData($pid=1){
-		foreach ($this->data as $key => $value) {	
-			if($value['pid']==$pid){
-				$this->level++;
-				if(isset($value['icon'])){
-					array_push($this->rdata, array('icon'=>$value['icon'],'text'=>$value['name'],'url'=>$value['url'],'level'=>$this->level));
-				}else{
-					array_push($this->rdata, array('text'=>$value['name'],'url'=>$value['url'],'level'=>$this->level));
-				}	
-				
-				$tmpdata = $this->teamData($value['id']);
-				if(!$tmpdata){
-					$this->level--;
-					continue;
-				}
-			}	
-		}
+		return  json_encode($data);
 		
 	}
+
+	public function getChild($pid){
+	 	$data=  R::getAll( "select * from menu where pid = {$pid}" );
+	 	$tmpdata = array();
+	 	if($data){
+	 		foreach ($data as $key => $value) {
+	 			$tmpdata[$key]['id'] =  $value['id'];
+	 			$tmpdata[$key]['icon'] =  $value['icon'];
+	 			$tmpdata[$key]['text'] =  $value['name'];
+	 			$tmpdata[$key]['url'] =  $value['url'];
+	 			$tmpdata[$key]['children'] =  array();
+	 		}
+	 	}
+	 	return $tmpdata;
+	}
+	
+	
 }

@@ -3,26 +3,19 @@ class k_model_user_user
 {
   function login($u,$p)
   {
-    //echo 'module login....'.$u.$p;
+   
 	 $ds = R::findOne('user',' user = ? and pass = ? ', 
                 array( $u,$p )
                );
-	// var_dump($ds);
+	
 	 if(empty($ds))
 	 {
 	  return false;
 	 }
-	 
-	
-	
-	 
-	 $_SESSION['is_login']=true;
-	 
+	 			 
+	 $_SESSION['is_login']=true;	 
 	 $_SESSION['user']['user']=$ds->user;
-	 $_SESSION['user']['id']=$ds->id;
-	 
-	 //var_dump($_SESSION);
-	
+	 $_SESSION['user']['id']=$ds->id;		
 	 return true;
 	 
   }

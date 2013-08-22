@@ -82,37 +82,7 @@
 		});
 		
 		
-		var menuData = [{"pid" : 1 , "icon":"http://admin.zg10010.net/resources/images/menu/finance.png", "text": "个人事务", "url":"c_new.html", "children":[
-																					{"pid" : 2 , "text": "我的列表", "url":"grid-tree.html", "children":[], "did":1},
-																					{"pid" : 3 , "text": "我的表单", "url":"c_from.html", "children":[], "did":1},
-																					{"pid" : 4 , "text": "个人桌面", "url":"c_new.html", "children":[], "did":1},
-																					{"pid" : 5 , "text": "企业资料", "url":"c_new.html", "children":[], "did":1},
-																					{"pid" : 6 , "text": "下载管理", "url":"c_new.html", "children":[], "did":1}
-																					]},
-				{"pid" : 7 , "icon":"http://admin.zg10010.net/resources/images/menu/400.png", "text": "费用管理", "url":"c_from.html", "children":[
-																					{"pid" : 8 , "text": "账户查询", "url":"c_from.html", "children":[], "did":7},
-																					{"pid" : 9 , "text": "分机充值", "url":"c_from.html", "children":[], "did":7},
-																					{"pid" : 10 , "text": "账户定额提醒", "url":"c_from.html", "children":[], "did":7}
-																					]},
-				{"pid" : 11 , "icon":"http://admin.zg10010.net/resources/images/menu/addfun.png", "text": "通话管理", "url":"c_new.html", "children":[
-																					{"pid" : 12 , "text": "通话设置", "url":"c_new.html", "children":[
-																																					   {"pid" : 13 , "text": "坐席设置", "url":"c_new.html", "children":[], "did":12},
-																																					   {"pid" : 14 , "text": "时段设置", "url":"c_new.html", "children":[], "did":12},
-																																					   {"pid" : 15 , "text": "黑白名单设置", "url":"c_new.html", "children":[], "did":12},
-																																					   {"pid" : 16 , "text": "会议密码设置", "url":"c_new.html", "children":[], "did":12}
-																					], "did":11},
-																					{"pid" : 17 , "text": "通话查询", "url":"c_new.html", "children":[
-																																					   {"pid" : 18 , "text": "通话样单", "url":"c_new.html", "children":[], "did":17},
-																																					   {"pid" : 19 , "text": "来电记录", "url":"c_new.html", "children":[], "did":17},
-																																					   {"pid" : 20 , "text": "通话语录查询", "url":"c_new.html", "children":[], "did":17},
-																																					   {"pid" : 21 , "text": "语音留言查询", "url":"c_new.html", "children":[], "did":17}
-																					], "did":11}
-																					]},
-				{"pid" : 22 , "icon":"http://admin.zg10010.net/resources/images/menu/callcenter.png", "text": "附件功能", "url":"c_new.html", "children":[]},
-				{"pid" : 23 , "icon":"http://admin.zg10010.net/resources/images/menu/crm.png", "text": "呼叫中心", "url":"c_new.html", "children":[]},
-				{"pid" : 24 , "icon":"http://admin.zg10010.net/resources/images/menu/report.png", "text": "CRM系统", "url":"c_new.html", "children":[]},
-				{"pid" : 25 , "icon":"http://admin.zg10010.net/resources/images/menu/sys.png", "text": "统计报表", "url":"c_new.html", "children":[]},
-				{"pid" : 26 , "icon":"http://admin.zg10010.net/resources/images/menu/work.png", "text": "系统管理", "url":"c_new.html", "children":[]}];
+		var menuData = <?=$json?>;
 		//下拉菜单插件使用
 		var n_meun = new Nmeun(menuData);
 		n_meun.addListener("click", function(data){

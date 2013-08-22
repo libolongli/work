@@ -3,9 +3,9 @@ class module_home_index
 {
   function run()
   {
+  	$json = k::load('menu','menu')->getJsonMenu();
     $t=new tpl();
-	//$t->assign('url','http://www.project.com/app/home/');
-	
+	$t->assign('json',$json);
 	$t->display('home');
 	
   }

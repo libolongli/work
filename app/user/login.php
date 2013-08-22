@@ -2,17 +2,13 @@
 	class module_user_login{
 		
 		public function run(){
-		 
-		  // 
-		  k::load('user')->login(1,1);
-		  
-		  
-			if($_POST)  $this->login();
+			if($_POST){
+				$id = k::load('user')->login($_POST['username'],$_POST['password']);
+				if($id){
+					header('Location: ?m=home');
+				}
+			}
 			$t=new tpl();
 			$t->display('login');
-		}
-		
-		public function login(){
-			header('Location: http://www.project.com/');
-		}		
+		}	
 	}
