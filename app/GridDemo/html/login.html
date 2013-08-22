@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Login</title>
+		<link rel="stylesheet" href="images/css/login.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+	</head>
+	<body style="background-color: #36c1ec">
+		<div class="cloud"></div>
+		<div class="bg_btm"></div>
+		<div class="login_Main">
+			<div class="logo"></div>
+			<form action="" class="login_box">
+				<dl class="login_con">
+					<dt id="LoginMsg" class="login_message" style="padding-top: 0px;padding-bottom: 0px; ">
+								
+					</dt>
+					<dt class="clearit">
+						<label class="login_user" title="用户名登录" for="LoginBoxem"></label>
+						<input id="LoginBoxem" type="text" name="username" value="请输入用户名" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:#999999"/>
+					</dt>
+					<dt class="clearit">
+						<label class="login_pwd" title="请输入密码" for="LoginBoxPs"></label>
+						<input id="LoginBoxPs" type="password" name="password"/>
+					</dt>
+					<dt class="clearit">
+						<span id="login_submit" class="login_Btn" onclick="checkForm();"></span>
+					</dt>
+				</dl>
+			</form>
+		</div>
+	</body>
+	<script>
+		function checkForm() {
+			var name = $("#LoginBoxem").val();
+			if (name.length <= 0||name == "请输入用户名") {
+				$("#LoginMsg").html("用戶名不能為空!");
+				return false;
+			} else {
+				$("#LoginMsg").html("");
+			}
+			var pwd = $("#LoginBoxPs").val();
+			if (pwd.length <= 0) {
+				$("#LoginMsg").html("密碼不能為空!");
+				return false;
+			} else {
+				$("#LoginMsg").html("");
+			}
+			// 后台验证
+			$.ajax({
+				type : "Post",
+				cache : "false", //默认: true,dataType为script时默认为false) jQuery 1.2 新功能，设置为 false 将不会从浏览器缓存中加载请求信息。
+				url : "login.php", //发送请求的地址。
+				data : "username=" + name + "&pwdword=" + pwd, //发送到服务器的数据
+				dataType : "text",
+				error : function() {
+					$("#LoginMsg").html("*用户名密码错误，请重新登录");
+				},
+				success : function(message) {
+					
+				}
+			});
+		}
+	</script>
+</html>
+
