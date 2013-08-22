@@ -12,10 +12,13 @@ class k_model_user_user
 	 {
 	  return false;
 	 }
-	 			 
+	
+
 	 $_SESSION['is_login']=true;	 
 	 $_SESSION['user']['user']=$ds->user;
-	 $_SESSION['user']['id']=$ds->id;		
+	 $_SESSION['user']['id']=$ds->id;	
+	 
+	// print_R($_SESSION);EXIT;
 	 return true;
 	 
   }

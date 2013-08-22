@@ -3,7 +3,6 @@ class module_menu_getmenu
 {
   function run()
   {
-	
 	$id = k::load('menu')->getJsonMenu();
 	if($id){
 		header('Location: http://www.project.com/?m=menu&a=add');

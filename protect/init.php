@@ -125,5 +125,5 @@ else
 //define ROOT
 define('K_PATH',dirname(__FILE__).'/');
 define('K_ROOT_PATH',dirname(dirname(__FILE__)).'/');
-
+if(!isset($_SESSION)) session_start();
 k::init_db();

@@ -12,7 +12,7 @@
 		<div class="bg_btm"></div>
 		<div class="login_Main">
 			<div class="logo"></div>
-			<form action="?m=user&a=login" class="login_box">
+			<form action="?m=user&a=login" method= "POST" class="login_box" id = "form">
 				<dl class="login_con">
 					<dt id="LoginMsg" class="login_message" style="padding-top: 0px;padding-bottom: 0px; ">							
 					</dt>
@@ -48,20 +48,7 @@
 				$("#LoginMsg").html("");
 			}
 			// 后台验证
-			$.ajax({
-				type : "Post",
-				cache : "false", //默认: true,dataType为script时默认为false) jQuery 1.2 新功能，设置为 false 将不会从浏览器缓存中加载请求信息。
-				url : "", //发送请求的地址。
-				data : "username=" + name + "&pwdword=" + pwd, //发送到服务器的数据
-				dataType : "text",
-				error : function() {
-
-				},
-				success : function(message) {
-					//window.href="";
-					window.location.href=message;
-				}
-			});
+			$("#form").submit();
 		}
 	</script>
 </html>
