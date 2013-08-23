@@ -58,7 +58,32 @@
 				<div class="n_menu_f"></div>
 			</div>
 		</div>
+		<a href="?m=home&a=template&url=c_from" id="stationMsg" style="display:none"><i id="message">您有新的消息</i></a>
 	</body>
+	<style type="text/css">
+			#stationMsg {
+				position:absolute;
+				z-index:100;
+				right:0;
+				bottom: 0;
+				display:block;
+				font-size: 14px;
+				width: 180px;
+				height: 60px;
+				text-align : center;
+				line-height : 60px;
+				border-radius: 4px;
+				text-decoration: none;
+				background: #B6D5FF
+			}
+			#stationMsg:active, #stationMsg:visited {
+				color: #000000;
+			}
+			#stationMsg span {
+				color: red;
+				padding: 0 10px;
+			}
+	</style>
 	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
 	<script src="images/js/n_menu.js" type="text/javascript"></script>
@@ -81,17 +106,24 @@
 			}
 		});
 		
+		$("#stationMsg").click(function(){
+			addTabs({text:"feed", url:'?m=feed&a=get'});
+			return false;			
+		});
+		
 		
 		var menuData = <?=$json?>;
 		//下拉菜单插件使用
 		var n_meun = new Nmeun(menuData);
-		n_meun.addListener("click", function(data){
+		n_meun.addListener("click", addTabs);
+		
+		function addTabs(data){
 			console.log(data);
 			w2ui['tabs'].add({ id: tabsUrl.length, caption: data.text, closable:true});
 			w2ui['tabs'].select(tabsUrl.length);
 			tabsUrl.push(data.url);
 			$(".content iframe").attr("src",  tabsUrl[(tabsUrl.length - 1)]);      
-		});
+		}
 		
 		w2ui['tabs'].on('close', function(target, eventData) {
 			console.log(eventData);
@@ -111,6 +143,32 @@
 			$(this).slideUp();
 		});
 		
+		function GetStationMsg() {
+			$.ajax({
+				type : "POST",
+				dataType : "text",
+				url : "?m=feed&a=get",
+				data : {uid:1},
+				success : function(data) {
+					if(data){
+						$("#message").html(data);
+						//$("#stationMsg").attr('href',data.href);
+						//$("#stationMsg").attr('href',$data.href);
+						$("#stationMsg").show();
+						setTimeout("$('#stationMsg').hide()",3000);
+						
+					}
+				},
+				error : function(msg) {
+
+				}
+			});
+		}
+		(function() {
+			GetStationMsg();
+			window.setInterval("GetStationMsg()", 5000);
+		})();		
 	</script>
+	
 </html>
 

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50515
 File Encoding         : 65001
 
-Date: 2013-08-22 17:45:05
+Date: 2013-08-23 18:10:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,12 +52,12 @@ CREATE TABLE `consult` (
   `comemsg` tinyint(4) DEFAULT NULL COMMENT '考勤短信',
   `status` tinyint(4) DEFAULT NULL,
   `course` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
+  `class` varchar(255) DEFAULT NULL,
   `sex` tinyint(4) DEFAULT NULL,
   `profession` tinyint(4) DEFAULT NULL COMMENT '职业',
   `introduce` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of consult
@@ -174,6 +174,33 @@ INSERT INTO `consult` VALUES ('109', '王麻子', '1376639610', '555555', '王�
 INSERT INTO `consult` VALUES ('110', '王麻子', '1376639633', '555555', '王麻子', 'nomius', '555555', '555555', '2', '3', '英语', '2', '1', '2', '好东西啊');
 INSERT INTO `consult` VALUES ('111', '王麻子', '1376639807', '555555', '王麻子', 'nomius', '555555', '555555', '2', '3', '英语', '2', '1', '2', '好东西啊');
 INSERT INTO `consult` VALUES ('112', '李波马', '1376643258', '333333', '李波', 'omius', '333333', '333333', '2', '2', '语文', '1', '1', '3', '李波李波李波李波李波');
+INSERT INTO `consult` VALUES ('113', '李波', '1356883200', '111111', '李波', 'nomius', '111111', '111111', '2', '3', '111111', '123111111', null, null, '111111');
+INSERT INTO `consult` VALUES ('114', '李波', '1356883200', '111111', '李波', 'qqqqqq', '111111', '111111', '1', '3', '111111', '111111', null, null, '111111');
+INSERT INTO `consult` VALUES ('115', '李波', '1356883200', '111111', '李波', 'nomius', '111111', '111111111', '2', '3', '111111', '111111', null, null, '111111');
+
+-- ----------------------------
+-- Table structure for `feed`
+-- ----------------------------
+DROP TABLE IF EXISTS `feed`;
+CREATE TABLE `feed` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(40) NOT NULL,
+  `getname` varchar(40) NOT NULL,
+  `content` varchar(50) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 未读(默认) 2已读  3代表已 feed但是未读',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of feed
+-- ----------------------------
+INSERT INTO `feed` VALUES ('1', 'livo', 'rose', 'hello', '3');
+INSERT INTO `feed` VALUES ('2', 'system', 'admin', '新注册用户Nomius2', '3');
+INSERT INTO `feed` VALUES ('3', 'system', 'admin', '新注册用户Nomius3', '3');
+INSERT INTO `feed` VALUES ('4', 'system', 'admin', '新注册用户nomius4', '3');
+INSERT INTO `feed` VALUES ('5', 'system', 'admin', '新注册用户nomius5', '3');
+INSERT INTO `feed` VALUES ('6', 'system', 'admin', '新注册用户nomius6', '3');
+INSERT INTO `feed` VALUES ('7', 'system', 'admin', '新注册用户Nomius67', '3');
 
 -- ----------------------------
 -- Table structure for `flow`
@@ -253,7 +280,7 @@ CREATE TABLE `menu` (
   `url` varchar(254) DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
@@ -269,6 +296,10 @@ INSERT INTO `menu` VALUES ('8', '我的表单', '2', 'c_from.html', '');
 INSERT INTO `menu` VALUES ('9', 'CRM系统', '1', '', 'http://admin.zg10010.net/resources/images/menu/report.png');
 INSERT INTO `menu` VALUES ('10', '统计报表', '1', '', 'http://admin.zg10010.net/resources/images/menu/sys.png');
 INSERT INTO `menu` VALUES ('11', '系统管理', '1', '', 'http://admin.zg10010.net/resources/images/menu/work.png');
+INSERT INTO `menu` VALUES ('12', 'OA办公', '1', '', 'http://admin.zg10010.net/resources/images/menu/callcenter.png');
+INSERT INTO `menu` VALUES ('13', '工作流', '12', '', '');
+INSERT INTO `menu` VALUES ('14', 'feed', '12', '', '');
+INSERT INTO `menu` VALUES ('15', '短信息', '12', '?m=msg&a=list', '');
 
 -- ----------------------------
 -- Table structure for `msg`
@@ -283,14 +314,25 @@ CREATE TABLE `msg` (
   `ts_updated` int(11) DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1' COMMENT '0代表已删除,1代表未读,2代表已读...',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of msg
 -- ----------------------------
-INSERT INTO `msg` VALUES ('1', '1', '123,456', '发的法定', '1377052406', '1377052406', '1');
-INSERT INTO `msg` VALUES ('2', '1', '12', '232', '1377161175', '1377161175', '1');
-INSERT INTO `msg` VALUES ('3', '1', '2,3,4', '2423', '1377164359', '1377164359', '1');
+INSERT INTO `msg` VALUES ('1', '1', '4', '发的法定', '1377052406', '1377052406', '1');
+INSERT INTO `msg` VALUES ('2', '1', '5', '232', '1377161175', '1377161175', '1');
+INSERT INTO `msg` VALUES ('3', '1', '6', '2423', '1377164359', '1377164359', '1');
+INSERT INTO `msg` VALUES ('4', '1', '123', null, '1377244681', '1377244681', '1');
+INSERT INTO `msg` VALUES ('5', '1', '123', null, '1377244735', '1377244735', '1');
+INSERT INTO `msg` VALUES ('6', '1', '123', null, '1377244758', '1377244758', '1');
+INSERT INTO `msg` VALUES ('7', '1', '123', null, '1377244891', '1377244891', '1');
+INSERT INTO `msg` VALUES ('8', '1', 'fasdf', 'fasdfads', '1377245094', '1377245094', '1');
+INSERT INTO `msg` VALUES ('9', '1', '12343', '1244545454', '1377245120', '1377245120', '1');
+INSERT INTO `msg` VALUES ('10', '1', '123', 'test', '1377245192', '1377245192', '1');
+INSERT INTO `msg` VALUES ('11', '1', '11111', '12344', '1377245327', '1377245327', '1');
+INSERT INTO `msg` VALUES ('12', '1', '3455', '12344', '1377245367', '1377245367', '1');
+INSERT INTO `msg` VALUES ('14', '1', '3456', '15677', '1377250975', '1377250975', '1');
+INSERT INTO `msg` VALUES ('15', '1', '434343q', 'afadsfasdfadsf', '1377251571', '1377251571', '1');
 
 -- ----------------------------
 -- Table structure for `msg_log`
@@ -347,7 +389,7 @@ CREATE TABLE `user` (
   `user` varchar(254) NOT NULL,
   `pass` varchar(254) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -356,3 +398,9 @@ INSERT INTO `user` VALUES ('1', '1', '3');
 INSERT INTO `user` VALUES ('2', '1', '44');
 INSERT INTO `user` VALUES ('3', '1', '1');
 INSERT INTO `user` VALUES ('4', 'Nomius', '111111');
+INSERT INTO `user` VALUES ('5', 'Nomius2', '111111');
+INSERT INTO `user` VALUES ('6', 'Nomius3', '111111');
+INSERT INTO `user` VALUES ('7', 'nomius4', '111111');
+INSERT INTO `user` VALUES ('8', 'nomius5', '111111');
+INSERT INTO `user` VALUES ('9', 'nomius6', '123456');
+INSERT INTO `user` VALUES ('10', 'Nomius67', '1234567');

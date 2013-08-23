@@ -11,10 +11,8 @@
 		}
 		
 		public function register(){
-			
 			$u=k::load('user');
 			$id = $u->reg($_POST['username'],$_POST['password']);
-			echo $id;exit;
-			
+			header('Location: ?m=home');
 		}		
 	}

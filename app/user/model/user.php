@@ -37,6 +37,13 @@ class k_model_user_user
 	$user->user=$u;
 	$user->pass=$p;
 	$id= R::store($user);
+	$_SESSION['is_login']=true;	 
+	$_SESSION['user']['user']=$u;
+	$_SESSION['user']['id']=$id;	
+	if($id){
+		$data = k::load('feed','feed')->send(array('username'=>'system','getname'=>'admin','content'=>"新注册用户{$u}"));
+	}
+	
 	return $id;
   }
   
