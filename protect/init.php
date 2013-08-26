@@ -48,7 +48,12 @@ class tpl
 	
 	$target='"/images/';
 	
-	$t_array = array('bench.html','bench_left.html','bench_main.html','bench_right.html','c_from.html','c_new.html','c_work.html','demo.html','grid-tree.html','home.html','tree.html');
+	$t_array = array('bench.html','bench_left.html','bench_main.html',
+			'bench_right.html','c_from.html','c_new.html','c_work.html',
+			'demo.html','grid-tree.html','home.html','tree.html',
+			'c_detailed.html','course_popup.html','d_from.html','recruitPeople_k.html',
+			's_detailed.html','s_from.html','theClass.html'
+			);
 	
 	$target_html=str_replace($src,$target,$html);
 	foreach($t_array as $key => $value){
