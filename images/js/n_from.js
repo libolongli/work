@@ -34,7 +34,7 @@ var smartFrom = function(id, obj){
 	
 	//加载头部信息
 
-	var view_header = '<form class="registerform" method="'+obj.httpType+'" action="'+obj.url+'"><table width="100%" style="table-layout:fixed; float: left;">';
+	var view_header = '<form class="registerform" method="'+obj.httpType+'" action="'+obj.url+'"><table width="50%" style="table-layout:fixed; float: left;">';
 	views += view_header;
 
 	var configFrom = function(row){
@@ -142,7 +142,7 @@ var smartFrom = function(id, obj){
 		//console.log(data[i]);
 		if(obj.type == "cross"){
 			if(i == (data.length / 2)){
-				views += '</table><table width="100%" style="table-layout:fixed;">';
+				views += '</table><table width="50%" style="table-layout:fixed;">';
 			};
 			configFrom(data[i]);
 		}else{

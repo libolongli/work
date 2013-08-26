@@ -61,11 +61,17 @@ body {
 .n_cont_view_c .n_cont_view_c_v {
 	float: left;
     padding-top: 35px;
-    width: 50%;
+    width: 100%;
 }
 
 .n_cont_view_btn_v {
 	height: 50px;
     margin: 0 auto;
     width: 385px;
+}
+
+.n_cont_view_btn_v  table {
+	float: left;
+    table-layout: fixed;
+    width: 50%;
 }
