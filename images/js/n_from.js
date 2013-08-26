@@ -114,11 +114,11 @@ var smartFrom = function(id, obj){
 	  	configFrom(data[i]);
 	};
 	
-	//views += '<tr><td class="need"></td><td></td><td colspan="2" style="padding:10px 0 18px 0;">'
-	       //  +'<input type="submit"  value="提 交" /> <input type="reset" value="重 置" /></td></tr></table></form>';
-	
 	views += '<tr><td class="need"></td><td></td><td colspan="2" style="padding:10px 0 18px 0;">'
-	         +'<input type="button" onclick="addRecord();" value="提 交" /> <input type="reset" value="重 置" /></td></tr></table></form>';
+	         +'<input type="submit"  value="提 交" /> <input type="reset" value="重 置" /></td></tr></table></form>';
+	
+	//views += '<tr><td class="need"></td><td></td><td colspan="2" style="padding:10px 0 18px 0;">'
+	  //       +'<input type="button" onclick="addRecord();" value="提 交" /> <input type="reset" value="重 置" /></td></tr></table></form>';
 	
 	$("#"+id).append(views);
 	

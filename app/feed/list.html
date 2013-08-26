@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>w2ui</title>
+		<title>列表</title>
 		<meta name="author" content="Administrator" />
 		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
 		<script src="images/js/jquery-1.8.3.min.js"></script>
@@ -15,6 +15,7 @@
 		<div id="grid" style="width: 100%; height: 400px;"></div>
 	</body>
 	<script>
+		
 		$('#grid').w2grid({
 			name: 'grid',
 			msgDelete: "确定要删除么",
@@ -23,6 +24,7 @@
 				toolbar: true,
 				footer: true,
 				toolbarAdd: true,
+				selectColumn:true,
 				toolbarDelete: true,
 				toolbarSave: true
 			},
@@ -33,8 +35,8 @@
 					if(target == 'add'){
 						$().w2popup('open', {
 							title: '新增条目',
-							body: "<iframe src='http://www.baidu.com' frameborder='0' height='100%' width='100%'></iframe>",
-							buttons: '<input type="button" value="Close" onclick="$().w2popup(\'close\');">',
+							body: "<iframe  src='?m=feed&a=send' frameborder='0' height='100%' width='100%'></iframe>",
+							buttons: '<input id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');">',
 							width: 800,
 							height: 500,overflow: 'hidden',
 							color: '#ffc',
@@ -54,27 +56,25 @@
 				}
 			},
 			searches: [				
-				{ field: 'rpeople', caption: '发件人', type: 'text' },
-				{ field: 'reanlane', caption: '收件人', type: 'text' },
-				{ field: 'class', caption: '班级', type: 'text' },
+				{ field: 'username', caption: '发件人', type: 'text' },
+				{ field: 'content', caption: '发送的内容', type: 'text' },
 			],
-			sortData: [{ field: 'id', direction: 'DESC' }],
+			sortData: [{ field: 'recid', direction: 'ASC' }],
 			columns: [				
-				{ field: 'rpeople', caption: '招生人', size: '50px'},
-				{ field: 'applydate', caption: '报名日期', size: '50px'},
-				{ field: 'studynum', caption: '学号', size: '50px'},
-				{ field: 'realname', caption: '姓名', size: '50px'},
-				{ field: 'englishname', caption: '英语名字', size: '50px'},
-				{ field: 'card', caption: '推荐卡号', size: '50px'},
-				{ field: 'score', caption: '积分', size: '50px'},
-				{ field: 'comemsg', caption: '短信考勤', size: '50px'},
-				{ field: 'status', caption: '状态', size: '50px'},
-				{ field: 'course', caption: '课程', size: '50px'},
-				{ field: 'class', caption: '班级', size: '50px'},
-				{ field: 'introduce', caption: '介绍', size: '50px'},
-			]
+				{ field: 'username', caption: '发件人', size: '50px'},
+				{ field: 'content', caption: '内容', size: '30%'},
+			],
+			records:<?=$json?>
 		});
-		w2ui['grid'].load('?m=home&a=template&url=grid_tree_json');
+		
+		//alert($("#w2ui-popup").html());
+		//$("input[id][name$='man']") 
+		$(".w2ui-grid-popup-btn").live('click', function() {
+			var html = $(this).val();
+			alert(html);
+		});
+	
+		
 	</script>
 </html>
 

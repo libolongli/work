@@ -24,7 +24,7 @@
 			var content = $("textarea[name='content']").val(); 
 			$.ajax({
 				type: "POST",
-				url: "?m=msg&a=send",
+				url: "?m=feed&a=send",
 				data: {rids:rids,content:content,uid:1},
 				success: function(msg){
 					if(msg>0){
@@ -37,10 +37,10 @@
 		//ajaxPost : true,
 		//callback:function(data){}
 		var from = new smartFrom('from_mandatory_table', {
-			url:'?m=msg&a=send',
+			url:'?m=feed&a=send',
 			httpType : 'post',
 			rows : [
-					{type : 'select', name : 'rids', title : '收件人', tip : "请选择收件人！", datatype:"*", errormsg : "请选择收件人！", 
+					{type : 'select', name : 'getname', title : '收件人', tip : "请选择收件人！", datatype:"*", errormsg : "请选择收件人！", 
 														data : <?=$json?>, doption : "--请选择--"},
 					{type : 'textarea', name : 'content', title : '发送的内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的日期格式"},
 				   ],

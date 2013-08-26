@@ -2,12 +2,14 @@
 class k_model_msg_msg
 {
     public function getListJson(){
-		$data = R::getAll('SELECT id as recid,rids,content,ts_created FROM msg order by id desc');
+		$uid = $_SESSION['user']['id'];
+		$data = R::getAll("SELECT id as recid,rids,content,ts_created FROM msg where uid = {$uid} order by id desc");
 		return json_encode($data);
 	}
 	
 	public function addMsg($data){
 		$now = time();
+		$data['uid'] = $_SESSION['user']['id'];
 		$msg = R::dispense('msg');
 		$msg->content = $data['content'];
 		$msg->uid = $data['uid'];

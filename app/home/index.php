@@ -3,6 +3,7 @@ class module_home_index
 {
   function run()
   {
+	if(!isset($_SESSION['user'])) header('Location: ?m=user&a=login');
   	$json = k::load('menu','menu')->getJsonMenu();
     $t=new tpl();
 	

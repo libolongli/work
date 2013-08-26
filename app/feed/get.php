@@ -4,7 +4,9 @@
 			$type = isset($_GET['type'])?$_GET['type']:'index';
 			if($type=='index'){
 				$data = k::load('feed')->getFeed($type);
-				echo $data['content'];exit;
+				if($data){
+					echo $data['content'];exit;
+				}
 			}
 		}
 	}

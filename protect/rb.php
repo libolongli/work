@@ -1810,6 +1810,8 @@ abstract class RedBean_QueryWriter_AQueryWriter {
 	 */
 	public function updateRecord($type, $updatevalues, $id = null) {
 		$table = $type;
+		
+		
 		if (!$id) {
 			$insertcolumns =  $insertvalues = array();
 			foreach($updatevalues as $pair) {
@@ -1822,11 +1824,23 @@ abstract class RedBean_QueryWriter_AQueryWriter {
 		$table = $this->esc($table);
 		$sql = "UPDATE $table SET ";
 		$p = $v = array();
+		
+		
 		foreach($updatevalues as $uv) {
 			$p[] = " {$this->esc($uv["property"])} = ? ";
 			$v[] = $uv['value'];
 		}
-		$sql .= implode(',', $p).' WHERE id = '.intval($id);
+		
+		
+		foreach($updatevalues as $k=>$v)
+		{
+		  $tmp[]="'$k'=$v";
+		}
+		
+		$sql .= implode(',', $tmp).' WHERE id = '.intval($id);
+		echo $sql;exit;
+		
+		
 		$this->adapter->exec($sql, $v);
 		return $id;
 	}

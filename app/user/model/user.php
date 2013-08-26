@@ -61,7 +61,13 @@ class k_model_user_user
   function login_out()
   {
    $_SESSION['is_login']=false;
-   
+  }
+  
+  function getUserList(){
+	$uid = $_SESSION['user']['id'];
+	$sql = "SELECT id as value ,user as name from user where id != {$uid} ";
+
+	return R::getAll($sql);
   }
   
   

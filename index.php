@@ -1,4 +1,5 @@
 <?php
+//PRINT_R($_SESSION);EXIT;
 //mvc 
 /**
 route type 1

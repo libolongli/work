@@ -58,7 +58,7 @@
 				<div class="n_menu_f"></div>
 			</div>
 		</div>
-		<a href="?m=home&a=template&url=c_from" id="stationMsg" style="display:none"><i id="message">您有新的消息</i></a>
+		<a href="?m=feed&a=list" id="stationMsg" style="display:none"><i id="message">您有新的消息</i></a>
 	</body>
 	<style type="text/css">
 			#stationMsg {
@@ -148,14 +148,12 @@
 				type : "POST",
 				dataType : "text",
 				url : "?m=feed&a=get",
-				data : {uid:1},
+				data : {uid:<? echo $_SESSION['user']['id'];?>},
 				success : function(data) {
 					if(data){
 						$("#message").html(data);
-						//$("#stationMsg").attr('href',data.href);
-						//$("#stationMsg").attr('href',$data.href);
 						$("#stationMsg").show();
-						setTimeout("$('#stationMsg').hide()",3000);
+						setTimeout("$('#stationMsg').hide()",30000);
 						
 					}
 				},

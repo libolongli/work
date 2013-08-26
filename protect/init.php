@@ -1,6 +1,13 @@
 <?php
 //helper
 
+//define ROOT
+define('K_PATH',dirname(__FILE__).'/');
+define('K_ROOT_PATH',dirname(dirname(__FILE__)).'/');
+if(!isset($_SESSION)) session_start();
+k::init_db();
+
+
 function err($m)
 {
   echo $m;
@@ -72,7 +79,7 @@ class k
     require_once  K_PATH.'rb.php';
 	
 	 $config=require_once  K_PATH.'config.php';
-	 
+	 //print_r($config);exit;
 	 $db=$config['db'];
 	 $conn="$db[driver]:host=$db[host];dbname=$db[dbname]";
 	//mysql:host=localhost;dbname=project','root','root'
@@ -120,10 +127,74 @@ else
   }
   
 }
+ 
+
+class log{
+	static function change($id,$content,$filed,$table,$db=false){
+		$config=include  K_PATH.'config.php';
+		$writer = MR::getWriter();
+		//print_r(array($filed=>$content));exit;
+		$data[$filed]=$content;
+		//$data[nimei]=$content;
+		//var_dump($data);exit;
+		$writer->updateRecord($table, array($filed=>$content), $id);
+	
+		if(isset($config['log'][$table]) && in_array($filed,$config['log'][$table])){
+			$trace_log = R::dispense('trace_log');
+			$trace_log->content = $content;
+			$trace_log->filed = $filed;
+			$trace_log->o_id = $id;
+			$trace_log->table = $table;
+			$trace_log->db = $db ? $db : $config['db']['dbname'];
+			$trace_log->ts_updated = time();
+			$id = R::store($trace_log);
+		}
+	}
+}
 
 
-//define ROOT
-define('K_PATH',dirname(__FILE__).'/');
-define('K_ROOT_PATH',dirname(dirname(__FILE__)).'/');
-if(!isset($_SESSION)) session_start();
-k::init_db();
+
+
+class MR extends R
+{
+   
+  
+   public function updateRecord($type, $updatevalues, $id = null) {
+		$table = $type;
+		
+		var_dump($updatevalues);
+		
+		if (!$id) {
+			$insertcolumns =  $insertvalues = array();
+			foreach($updatevalues as $pair) {
+				$insertcolumns[] = $pair['property'];
+				$insertvalues[] = $pair['value'];
+			}
+			return $this->insertRecord($table, $insertcolumns, array($insertvalues));
+		}
+		if ($id && !count($updatevalues)) return $id;	
+		$table = $this->esc($table);
+		$sql = "UPDATE $table SET ";
+		$p = $v = array();
+		
+		
+		foreach($updatevalues as $uv) {
+			$p[] = " {$this->esc($uv["property"])} = ? ";
+			$v[] = $uv['value'];
+		}
+		
+		
+		foreach($updatevalues as $k=>$v)
+		{
+		  $tmp[]="'$k'=$v";
+		}
+		
+		$sql .= implode(',', $tmp).' form myrb WHERE id = '.intval($id);
+		echo $sql;exit;
+		
+		
+		$this->adapter->exec($sql, $v);
+		return $id;
+	}
+}
+
