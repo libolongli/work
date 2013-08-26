@@ -41,7 +41,6 @@
 			$map = array('percent'=>90,'id'=>1)
 		*/
 		public function update($map){
-			$sql = "UPDATE flow set ";
 			$tmp = array();
 			$map['ts_updated']=time();
 			foreach($map as $k => $v){

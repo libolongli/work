@@ -155,46 +155,4 @@ class log{
 
 
 
-class MR extends R
-{
-   
-  
-   public function updateRecord($type, $updatevalues, $id = null) {
-		$table = $type;
-		
-		var_dump($updatevalues);
-		
-		if (!$id) {
-			$insertcolumns =  $insertvalues = array();
-			foreach($updatevalues as $pair) {
-				$insertcolumns[] = $pair['property'];
-				$insertvalues[] = $pair['value'];
-			}
-			return $this->insertRecord($table, $insertcolumns, array($insertvalues));
-		}
-		if ($id && !count($updatevalues)) return $id;	
-		$table = $this->esc($table);
-		$sql = "UPDATE $table SET ";
-		$p = $v = array();
-		
-		
-		foreach($updatevalues as $uv) {
-			$p[] = " {$this->esc($uv["property"])} = ? ";
-			$v[] = $uv['value'];
-		}
-		
-		
-		foreach($updatevalues as $k=>$v)
-		{
-		  $tmp[]="'$k'=$v";
-		}
-		
-		$sql .= implode(',', $tmp).' form myrb WHERE id = '.intval($id);
-		echo $sql;exit;
-		
-		
-		$this->adapter->exec($sql, $v);
-		return $id;
-	}
-}
 
