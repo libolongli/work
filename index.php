@@ -1,6 +1,7 @@
 <?php
 //PRINT_R($_SESSION);EXIT;
 //mvc 
+//echo 2222222
 /**
 route type 1
 
