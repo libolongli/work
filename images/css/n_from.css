@@ -3,23 +3,63 @@ body {
 	padding: 0
 }
 
-.f_input { background: url("http://6.url.cn/zc/chs/img/ipt.png?v=10031") no-repeat scroll 0 0 transparent;
+
+.recruit {
+	background: url("../image/i_global.png") no-repeat scroll -126px -158px transparent;
+    height: 20px;
+    margin: 6px 10px;
+    width: 20px;
+}
+
+.theClass {
+	background: url("../image/i_global.png") no-repeat scroll -63px 0 transparent;
+    height: 20px;
+    margin: 6px 10px;
+    width: 20px;
+}
+
+.course {
+	background: url("../image/i_global.png") no-repeat scroll -63px 0 transparent;
+	height: 20px;
+	width:20px;
+	margin: 6px 10px;
+}
+
+.registerform .from_btn {
+	 background: url("../image/button.png") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    float: left;
+    border: medium none;
+    height: 44px;
+    line-height: 45px;
+    margin: 40px 10px 20px 0;
+    text-align: center;
+    width: 162px;
+}
+.d_from td {float: left}
+.n_cont_view_c_v td {float: left}
+
+/*.registerform .f_td { background: url("http://6.url.cn/zc/chs/img/ipt.png?v=10031") no-repeat scroll 0 0 transparent;
     border: medium none;
     height: 35px;
-    width: 300px;}
-.f_input input {
+    width: 300px;}*/
+ 
+  
+.registerform input {
 	background: none repeat scroll 0 0 transparent;
-    border: medium none;
     font-size: 14px;
     height: 18px;
     line-height: 18px;
     padding: 8px;
+    float: left;
     width: 284px;
 }
 
 .from_title {
+	letter-spacing:5px;
 	float: left;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: bold;
     height: 44px;
     line-height: 20px;
     padding-right: 10px;
@@ -35,7 +75,25 @@ body {
     width: 97px;
     border: none
 }
-    
+
+.rp_view {
+	 background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    height: 34px;
+     left: 260px;
+    position: relative;
+    top: 0;
+    width: 40px;
+}
+
+.n_cont_view_c_v .info {width: 200px;border:none}
+.n_cont_view_c_v .dec {display:none}
+
+#w2ui-popup .w2ui-msg-body {
+	 padding: 0;
+}
+
+.from_view_c_v td {float: left}
 
 /*==========以下部分是Validform必须的===========*/
 .Validform_checktip{
@@ -70,7 +128,6 @@ body {
 #Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{line-height:22px; position:absolute; right:8px; top:0px; color:#fff; text-decoration:none;}
 #Validform_msg a.Validform_close:hover{color:#cc0;}
 #Validform_msg .Validform_info{padding:8px;border:1px solid #000; border-top:none; text-align:left;}
-td{line-height:38px;float: left;}
 
 .registerform label {margin-left: 5px;
     margin-right: 20px;}
@@ -85,22 +142,25 @@ td{line-height:38px;float: left;}
 .Validform_right,
 .Validform_loading{display:block;}
 .info{
-	margin-left:8px; 
-	border:1px solid #ccc; 
-	padding:8px 20px 8px 10px; 
-	color:#666; 
-	float:left;
-	position:relative;
-	display:none;
-	line-height:20px;
+	border: 1px solid #CCCCCC;
+    color: #666666;
+    display: none;
+    float: left;
+    font-size: 12px;
+    left: 5px;
+    line-height: 25px;
+    margin-left: 8px;
+    padding: 0 20px 0 10px;
+    position: relative;
+    top: 4px;
 }
 .dec {
-    top: 9px;
-    display: block;
+     display: block;
     height: 17px;
+    left: -8px;
     overflow: hidden;
     position: absolute;
-    left: -8px;
+    top: 3px;
     width: 8px;
 }
 .dec s {

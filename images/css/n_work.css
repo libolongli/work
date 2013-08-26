@@ -43,12 +43,19 @@ p {font-size: 13px}
     width: 15px;
 }
 .rsBullet.rsNavSelected span {
-    background-color: #003399;
+    background: url("../image/d1.png");
 }
 .rsBullet span {
-    background: none repeat scroll 0 0 #777777;
+    background: url("../image/d2.png");
     border-radius: 50% 50% 50% 50%;
     display: block;
     height: 15px;
     width: 15px;
+}
+.rsNav_right_btn { display: inline-block;
+    height: 15px;
+    padding: 6px;
+    width: 15px;}
+.rsNav_right_btn img {
+	 float: left;
 }
