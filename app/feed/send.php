@@ -5,7 +5,9 @@
 				$_POST['username']='system';
 				$id = k::load('feed')->send($_POST);
 				if($id){
-					echo "添加成功!请关闭对话框!";exit;
+					echo "添加成功!请关闭对话框!";
+					echo $_POST;
+					exit;
 				}else{
 					echo "添加失败!请关闭对话框!";exit;
 				}

@@ -4,6 +4,7 @@
 		public function run(){
 			if($_POST)
 			{
+				
 				$this->register();		
 			}	
 			$t=new tpl();

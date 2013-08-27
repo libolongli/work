@@ -4,19 +4,19 @@ class module_new_add
   function run()
   {
 
-	$data = k::load('new')->getRowLi();
+	$data = k::load('new')->getRowLi('new');
 
 	if($data){	
 		foreach($data as $key =>$value){
 					$str = $value;
-				//	print_r($value);
+					//print_r($value);
 
 	}
-	//echo $data;exit;
-	$tpl = new tpl();
-//	$tpl->assign('type_li',$str);
-	$tpl->display('add');
+	 //$data;exit;
+
   }
-  
+  	$tpl = new tpl();
+	//$tpl->assign('data',$str);
+	$tpl->display('add');
   }
 }
