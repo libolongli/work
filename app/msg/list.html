@@ -65,7 +65,7 @@
 					   type: "POST",
 					   dataType:"json",
 					   url: "?m=msg&a=update",
-					   data:{id:ids,status:9},
+					   data:{id:ids,fleg:9},
 					   success: function(msg){
 						 
 					   }
@@ -73,12 +73,12 @@
 				}
 			},
 			searches: [				
-				{ field: 'rids', caption: '收件人', type: 'text' },
+				{ field: 'user', caption: '收件人', type: 'text' },
 				{ field: 'content', caption: '发送的内容', type: 'text' },
 			],
 			sortData: [{ field: 'recid', direction: 'ASC' }],
 			columns: [				
-				{ field: 'rids', caption: '收件人ID', size: '50px'},
+				{ field: 'user', caption: '收件人名字', size: '50px'},
 				{ field: 'content', caption: '内容', size: '30%'},
 				{ field: 'ts_created', caption: '发送时间', size: '30%'},
 			],

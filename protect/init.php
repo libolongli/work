@@ -52,13 +52,13 @@ class tpl
 			'bench_right.html','c_from.html','c_new.html','c_work.html',
 			'demo.html','grid-tree.html','home.html','tree.html',
 			'c_detailed.html','course_popup.html','d_from.html','recruitPeople_k.html',
-			's_detailed.html','s_from.html','theClass.html'
+			's_detailed.html','s_from.html','theClass.html','data.html'
 			);
 	
 	$target_html=str_replace($src,$target,$html);
 	foreach($t_array as $key => $value){
 		$arr = explode(".",$value);
-		$str = "?m=".M."&a=template&url=".$arr[0];
+		$str = "?m=home&a=template&url=".$arr[0];
 		$target_html=str_replace($value,$str,$target_html);
 	}
 	
@@ -83,19 +83,13 @@ class k
 
     require_once  K_PATH.'rb.php';
 	
-	 $config=require_once  K_PATH.'config.php';
-	 //print_r($config);exit;
+	 $config=require_once  K_PATH.'config.php'; 
 	 $db=$config['db'];
 	 $conn="$db[driver]:host=$db[host];dbname=$db[dbname]";
-	//mysql:host=localhost;dbname=project','root','root'
     
-	R::setup($conn,$db['user'],$db['pass']); 
-	
-	
-	
-	//R::setup('mysql:host=localhost;dbname=project','root','root'); 
-	  return true; 
-    // return $db; 
+	R::setup($conn,$db['user'],$db['pass']); 			
+	return true; 
+    
   }
   
   static function  tpl()

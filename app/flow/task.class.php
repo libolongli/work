@@ -23,13 +23,14 @@
 			foreach($this->_config as $key =>$value){
 				if($value['active']){
 					$format = $value['format'];
-					$format = str_replace('{user}', $map['user'], $format);
-					$now = time();
-					$sql = "INSERT INTO flow (uid,rids,content,ts_created,ts_updated,status)  VALUES({$map['uid']},'{$map['rids']}','{$format}',{$now},{$now},1)";
-					$this->_db->query($sql);
-					//echo 1111;exit;
+					$format = str_replace('{user}', $map['content'], $format);
+					$now = time();				
+					//$sql = "INSERT INTO flow (uid,rids,content,ts_created,ts_updated,status)  VALUES({$map['uid']},'{$map['rids']}','{$format}',{$now},{$now},1)";
+					//$this->_db->query($sql);
 					foreach (explode(',', $map['rids']) as $key => $value) {
-						$sql = "INSERT INTO flow_log (uid,rid,ts_created) VALUES({$map['uid']},{$value},{$now})";
+						//$sql = "INSERT INTO flow_log (uid,rid,ts_created) VALUES({$map['uid']},{$value},{$now})";
+						//$this->_db->query($sql);
+						$sql = "INSERT INTO flow (uid,rids,content,ts_created,ts_updated,status)  VALUES({$map['uid']},'{$value}','{$format}',{$now},{$now},1)";
 						$this->_db->query($sql);
 					}
 				}
@@ -70,29 +71,26 @@
 
 
 		public function get($map=array()){
-			$sql = "SELECT f.* FROM flow_log as l INNER JOIN flow as f on l.ts_created = f.ts_created ";
-			$totalsql = "SELECT count(*) as total  FROM flow_log as l INNER JOIN flow as f on l.ts_created = f.ts_created ";
+			$sql = "SELECT * FROM  flow as  ";
+			//$totalsql = "SELECT count(*) as total ";
 			$where = " where 1=1 ";
-			foreach ($map['where'] as $key => $value) {
-				if($key=='rid'){
-					$where .=" AND l.rid = {$value} ";
-				}else{
-					$where .=" AND f.{$key}='{$value}' ";
-				}
+			foreach ($map['where'] as $key => $value) {	
+				$where .=" AND f.{$key}='{$value}' ";	
 			}
 			$sql.= $where;
-			$total = $this->_db->fetch_first($totalsql.$where);
-			if(!isset($map['limit'])) $map['limit']=10;
-			if(!isset($map['page'])) $map['page']=1;
-			if(!isset($map['desc'])) $map['desc']=' desc ';
-			$limitstart = ($map['page']-1)*$map['limit'];
-			$limitstr = "limit {$limitstart},{$map['limit']}";
-			$sql .=" ORDER BY l.id {$map['desc']}".$limitstr;
+			//$total = $this->_db->fetch_first($totalsql.$where);
+			//if(!isset($map['limit'])) $map['limit']=10;
+			//if(!isset($map['page'])) $map['page']=1;
+			//if(!isset($map['desc'])) $map['desc']=' desc ';
+			//$limitstart = ($map['page']-1)*$map['limit'];
+			//$limitstr = "limit {$limitstart},{$map['limit']}";
+			//$sql .=" ORDER BY id {$map['desc']}".$limitstr;
+			$data = $this->_db->fetch_all($sql);
 			return array(
-				'data'=>$this->_db->fetch_all($sql),
-				'page'=>$map['page'],
-				'limit'=>$map['limit'],
-				'total'=>$total['total']
+				'data'=>$data,
+				'page'=>0,
+				//'limit'=>$map['limit'],
+				'total'=>count($data)
 			);
 		}
 

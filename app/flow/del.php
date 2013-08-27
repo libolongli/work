@@ -17,11 +17,11 @@
 			$task = new task();
 			$array = array(
 				'rids'=>$_POST['rids'],
-				'user'=>$_POST['contents'],
+				'content'=>$_POST['content'],
 				'uid'=>$uid
 			);
 			$task->add($array);
-			header("Location: http://www.project.com/?m=flow&a=list");
+			header("Location: ?m=flow&a=list");
 		}
 		
 		function get(){

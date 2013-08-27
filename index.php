@@ -18,7 +18,7 @@ $m=@$_GET['m'];
 $a=@$_GET['a'];
 
 
-if($m=='')$m='index';
+if($m=='')$m='home';
 if($a=='')$a='index';
 
 

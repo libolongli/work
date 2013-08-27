@@ -43,7 +43,8 @@
 					{type : 'input', name : 'from5', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
 					{type : 'select', name : 'from6', title : '考勤短信', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
 													data : [{value:1, name:"在读"}, {value:2, name:"走读"}, {value:3, name:"周末"}], doption : "--请选择--"},	
-					{type : 'popup', name : 'from7', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"}					
+					{type : 'popup', name : 'from7', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"},
+					{type : 'hideInput', name : 'uid', errormsg : "",value :'', display:'none'}
 				   ],
 			type : "cross"
 		});
@@ -64,8 +65,9 @@
 				}
 			});
 			
-			function setrp(name){
-				$(thisRpIn).prev().val(name);
+			function setrp(obj){
+				$(thisRpIn).prev().val(obj.text);
+				$("input[name='uid']").val(obj.uid);
 				$().w2popup('close');
 			};
 	</script>

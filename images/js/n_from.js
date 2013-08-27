@@ -34,7 +34,7 @@ var smartFrom = function(id, obj){
 	
 	//加载头部信息
 
-	var view_header = '<form class="registerform" method="'+obj.httpType+'" action="'+obj.url+'"><table width="50%" style="table-layout:fixed; float: left;">';
+	var view_header = '<form class="registerform" method="'+obj.httpType+'" action="'+obj.url+'"><table width="50%" style="table-layout:fixed; margin: 0 auto;'+(obj.center ? "width:735px;" : 'float: left;')+'">';
 	views += view_header;
 
 	var configFrom = function(row){
@@ -103,7 +103,7 @@ var smartFrom = function(id, obj){
                     		+'errormsg="'+row.errormsg+'" /></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
                     		+'<div class="passwordStrength" style="display:none;"><b>密码强度：</b> <span>弱</span><span>中</span><span class="last">强</span></div>'
-                    		+'<div class="info"><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += input;
 			break;
 			case "popup":
@@ -112,7 +112,7 @@ var smartFrom = function(id, obj){
                     		+'type="'+row.inputType+'" value=""  name="'+row.name+'" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.popupType+'"><div class="'+row.popupType+'"></div></div></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
-                    		+'<div class="info"><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += recruitPeople;
 			break;
 			case "datepicker":
@@ -122,7 +122,7 @@ var smartFrom = function(id, obj){
                     		+'type="'+row.inputType+'" value="" id="'+row.id+'" name="'+row.name+'" plugin="datepicker" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
-                    		+'<div class="info"><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += datepicker;
 			break;
 			case "hideInput":
@@ -131,7 +131,7 @@ var smartFrom = function(id, obj){
                     		+'type="text" value="'+row.value+'" name="'+row.name+'"' 
                     		+'/></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
-                    		+'<div class="info"><span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += input;
 			break;
 		}
@@ -141,7 +141,7 @@ var smartFrom = function(id, obj){
 	for (var i=0; i < data.length; i++) {
 		//console.log(data[i]);
 		if(obj.type == "cross"){
-			if(i == (data.length / 2)){
+			if(i == parseInt(data.length / 2)){
 				views += '</table><table width="50%" style="table-layout:fixed;">';
 			};
 			configFrom(data[i]);
@@ -149,14 +149,14 @@ var smartFrom = function(id, obj){
 			configFrom(data[i]);
 		};
 	};
-	views += '<tr><td class="need"></td><td></td><td colspan="2" style="padding:10px 0 18px 0;'+(obj.type == "cross" ?  " margin-left: -162px;" : "")+'">'
+	views += '<tr><td colspan="2" style="padding:10px 0 18px 0;'+(obj.type == "cross" ?  " margin-left: -162px;" : "margin: 0 25%;")+'">'
 	         +'<input class="from_btn" type="submit" value="提 交" /> <input  class="from_btn" type="reset" value="重 置" /></td></tr></table></form>';
 	         
 	$("#"+id).append(views);
 	
 	var getInfoObj=function(){
 		return 	$(this).parents("td").next().find(".info");
-	}
+	};
 	
 	$("[datatype]").focusin(function(){
 		if(this.timeout){clearTimeout(this.timeout);}
@@ -174,13 +174,44 @@ var smartFrom = function(id, obj){
 	});
 	
 	$(".registerform").Validform({
-		tiptype : 2,
-		btnReset : obj.resetBtn,
-		btnSubmit : obj.saveBtn
+		tiptype : 2
 	});
 
 	for (var i=0; i < times.length; i++) {  
 	  $('#'+times[i]).Zebra_DatePicker();
+	};
+	
+	
+	//弹出窗口
+	var rp_view_c = null;
+	
+	$(".rp_view").click(function(){
+		if(obj.popups && obj.popups.length <= 0){
+			return false;
+		};
+		for (var i=0; i < obj.popups.length; i++) {
+		  	if(obj.popups[i].name == $(this).attr("name")){
+		  		if(obj.popups[i].type == "load"){
+		  			$().w2popup('load', { url: obj.popups[i].url, width:250});
+		  		}else{
+		  			$().w2popup({
+						title   : '课程选择',
+						body    : '<iframe src="'+obj.popups[i].url+'" style="width: 100%; height: 100%;border: medium none;"></iframe>',
+						width   : 600
+					});
+		  		};
+		  	};
+		};
+		rp_view_c(this);
+	});
+	
+	
+	this.addListener = function(view, fun){
+		switch(view){
+			case 'popupCallBack':
+				rp_view_c = fun;
+			break;
+		};
 	};
 	
 	return this;

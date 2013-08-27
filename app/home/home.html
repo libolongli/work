@@ -146,20 +146,26 @@
 		function GetStationMsg() {
 			$.ajax({
 				type : "POST",
-				dataType : "text",
+				dataType : "json",
 				url : "?m=feed&a=get",
 				data : {uid:<? echo $_SESSION['user']['id'];?>},
-				success : function(data) {
-					if(data){
-						$("#message").html(data);
+				success : function(json) {
+					if(json){
+						if(json.type==1){
+							$("#message").html('您有一条新通知!');
+							$("#stationMsg").attr('href','?m=feed&a=list');
+						}else if(json.type==2){
+							$("#message").html('您有一条新短信!');
+							$("#stationMsg").attr('href','?m=msg&a=list');
+						}else if(json.type==3){
+							$("#message").html('您有一条新工作流!');
+							$("#stationMsg").attr('href','?m=flow&a=list');
+						}				
 						$("#stationMsg").show();
 						setTimeout("$('#stationMsg').hide()",30000);
 						
 					}
 				},
-				error : function(msg) {
-
-				}
 			});
 		}
 		(function() {
