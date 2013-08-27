@@ -24,7 +24,7 @@
 			th,td{ border-bottom: 1px solid #CCCCCC;
 		    font-size: 14px;
 		    height: 30px;
-		    padding: 0 5px;}
+		    padding: 5px 5px;}
 			th{font-weight:bold;background:#fff;} 
 		    .t_table .t_table_title {
 		    	background-color: #EEEEEE;
@@ -54,10 +54,10 @@
 	<body>
 		<div class="t_det">
 			<div class="t_det_c" >
-				<div class="t_det_c_left">
+				<div class="t_det_c_left" style="position: absolute;">
 					<img src="http://imgstatic.baidu.com/img/image/shouye/yangmi0816.jpg" width="125px" height="155px" />
 				</div>
-				<div class="t_det_c_right">
+				<div class="t_det_c_right" style="position: relative;left: 145px;">
 					<table class="t_table" width="100%" border="0" cellspacing="1" cellpadding="0" style="table-layout:fixed;" >
 					</table>
 				</div>
@@ -94,7 +94,7 @@
 							+'<td class="t_table_title">'+data[i].title1+'</td><td>'+data[i].name1+'</td></tr>';
 				}else{
 					html += '<tr><td class="t_table_title">'+data[i].title+'</td>'
-								+'<td colspan="0" class="t_table_ko">'+data[i].name+'</td></tr>';
+								+'<td colspan="3" class="t_table_ko">'+data[i].name+'</td></tr>';
 				}
 				view.append(html);
 			};

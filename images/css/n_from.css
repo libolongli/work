@@ -55,6 +55,14 @@ body {
     width: 284px;
 }
 
+
+.n_cont_view_btn_v  table {
+	float: left;
+    table-layout: fixed;
+    width: 50%;
+}
+
+
 .from_title {
 	letter-spacing:5px;
 	float: left;
