@@ -141,7 +141,7 @@ var smartFrom = function(id, obj){
 	for (var i=0; i < data.length; i++) {
 		//console.log(data[i]);
 		if(obj.type == "cross"){
-			if(i == (data.length / 2)){
+			if(i == parseInt(data.length / 2)){
 				views += '</table><table width="50%" style="table-layout:fixed;">';
 			};
 			configFrom(data[i]);
@@ -184,9 +184,8 @@ var smartFrom = function(id, obj){
 	
 	//弹出窗口
 	var rp_view_c = null;
-	
 	$(".rp_view").click(function(){
-		if(obj.popups && obj.popups.length <= 0){
+		if(! obj.popups){
 			return false;
 		};
 		for (var i=0; i < obj.popups.length; i++) {
@@ -204,7 +203,6 @@ var smartFrom = function(id, obj){
 		};
 		rp_view_c(this);
 	});
-	
 	
 	this.addListener = function(view, fun){
 		switch(view){
