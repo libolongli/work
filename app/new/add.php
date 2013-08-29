@@ -3,20 +3,17 @@ class module_new_add
 {
   function run()
   {
+			
+$data = k::load('new')->getOption('all');
+print_r($data);
+	$str = '';
+	//$data = k::load('new')->getRowLi('1');
 
-	$data = k::load('new')->getRowLi('new');
-
-	if($data){	
-		foreach($data as $key =>$value){
-					$str = $value;
-					//print_r($value);
-
-	}
-	 //$data;exit;
-
-  }
-  	$tpl = new tpl();
+  
+    	$tpl = new tpl();
 	//$tpl->assign('data',$str);
+	$tpl->assign('option',$data);
 	$tpl->display('add');
-  }
 }
+}
+

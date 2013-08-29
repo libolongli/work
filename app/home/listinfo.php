@@ -12,7 +12,7 @@ class module_home_listinfo
 	}
 	function shownews($id,$type){
 		if($id && $type){
-		$result =  R::getRow( "select * from news where id='{$id}' or type='{$type}'");
+		$result =  R::getRow( "select * from news where id='{$id}' and type='{$type}'");
 		//var_dump($result);
 		return $result;
 		}

@@ -22,6 +22,7 @@ class k_model_new_new
 			$new = R::dispense('news');
 			 $new->title = $data['title'];
 			$new->content = $data['content'];
+			$new->type = $data['type'];
 			$id = R::store($new);
 			return $id;
 		}
@@ -29,10 +30,23 @@ class k_model_new_new
 	
     public function getJsonNew(){
 		$data = R::getAll("SELECT * FROM news order where type='{$type}' by id desc");
+		//print_r($data);
 		return json_encode($data);
 	}
 
+    public function getListJson(){
+		$data = R::getAll("SELECT id as recid,title,content,ts_created FROM news order by id desc");
+		return json_encode($data);
 
+	}
+	
+	function getOption(){
+	if($type = 'all')
+	 $data = R::getAll("SELECT id ,titles FROM type order by id desc");
+		json_encode($data);
+	 if($data) return $data;
+	 return false;	 
+	}
 	
 	
 }

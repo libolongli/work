@@ -10,7 +10,7 @@
 
 					<?foreach($data as $i):?>	
 					<li>
-					<a href="?m=home&a=listinfo&id=<?echo $i['id']?>&type=<?echo $i['type']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
+					<a href="?m=home&a=listinfo&type=<?echo $i['type']?>&id=<?echo $i['id']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
 								</li>
 				<?endforeach;?>
 			</ul>
@@ -25,7 +25,7 @@
 			<ul>
 					<?foreach($upgrade as $i):?>	
 					<li>
-					<a href="?m=home&a=listinfo&id=<?echo $i['id']?>&type=<?echo $i['type']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
+					<a href="?m=home&a=listinfo&type=<?echo $i['type']?>&id=<?echo $i['id']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
 								</li>
 				<?endforeach;?>
 			</ul>

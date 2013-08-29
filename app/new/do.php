@@ -3,7 +3,9 @@ class module_new_do
 {
   function run()
   {
+	
 	$id = k::load('new')->addNew($_POST);
+	print_r($_POST);
 	if($id){
 	
 		echo '添加成功';
