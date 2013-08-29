@@ -3,14 +3,15 @@ class k_model_menu_menu
 {
 	private $data = array();
 	private $rdata = array();
+	private $jdata = array();
 	private $level = 0;
-	private $paret = array();
-  function getOption($type= 'part',$pid = 0)
-  {
-	if($type = 'all')
-	 $data=  R::getAll( 'select * from menu' );
-	 if($data) return $data;
-	 return false;	 
+	function getOption($type= 'part',$pid = 0)
+	{
+		if($type = 'all') $this->data= R::getAll( 'select * from menu' );
+		$this->teamData();
+		
+		if($this->rdata) return $this->rdata;
+		return false;	 
 	}
 	
 	function addMenu($data){
@@ -29,16 +30,39 @@ class k_model_menu_menu
 	}
 	
 	public function getJsonMenu(){
-		
 		$data = $this->getChild(1);
-		foreach($data as $key=>$value){
-			$data[$key]['children']=$this->getChild($value['id']);
-			//print_R($value['children']);exit;
-		}
-		return  json_encode($data);
-		
+		$this->jdata = $data;
+		$this->recursive($this->jdata);
+		return  json_encode($this->jdata);
 	}
-
+		
+	public function recursive(&$data = array()){
+		foreach($data as $key =>$value){
+			$data[$key]['children']= $this->getChild($value['id']);
+			$tmp = &$data[$key]['children'];
+			if($tmp){
+				$this->recursive($tmp);
+			}
+		}
+	}
+	
+	
+	public function teamData($pid=1){
+		foreach ($this->data as $key => $value) {	
+			if($value['pid']==$pid){
+				$this->level++;
+				array_push($this->rdata, array('name'=>$value['name'],'level'=>$this->level,'id'=>$value['id']));
+							
+				$tmpdata = $this->teamData($value['id']);
+				if(!$tmpdata){
+					$this->level--;
+					continue;
+				}
+			}
+		}	
+	}
+		
+	
 	public function getChild($pid){
 	 	$data=  R::getAll( "select * from menu where pid = {$pid}" );
 	 	$tmpdata = array();

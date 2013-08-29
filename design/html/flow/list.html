@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title><?=$title?></title>
+		<? k::load('layout','layout')->render('list') ?>
+	<script>
+		$('#grid').w2grid({
+			name: 'grid',
+			recordsPerPage: 8,
+			show: {
+				toolbar: true,
+				footer: true,
+				toolbarAdd: true,
+				selectColumn:true,
+				//toolbarDelete: true,
+				//toolbarSave: true
+			},
+			toolbar: {
+				items: [
+					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
+				],
+				onClick: function (target, data) {
+					console.log(target);
+					console.log(data);
+					if(target == 'add'){
+						$().w2popup('open', {
+							title: '新增条目',
+							body: "<iframe  src='?m=flow&a=send' frameborder='0' height='100%' width='100%'></iframe>",
+							buttons: '<input id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');window.location.reload();">',
+							width: 800,
+							height: 500,overflow: 'hidden',
+							color: '#ffc',
+							speed: '0.3',
+							opacity: '0.5',
+							modal: true,
+							showClose: true,
+							showMax: true,
+							onUnlock:       function () { console.log('unlock'); },
+							onUnlockClick:  function () { console.log('unlock click'); },
+							onOpen:         function () { console.log('open'); },
+							onBeforeClose:  function () { console.log('before close (cancelable, just return false)'); },
+							onClose:        function () { console.log('close'); },
+							onMax:          function () { console.log('max'); }
+						});
+					};
+					if(target == 'refresh') {
+						window.location.reload(); 
+					};
+					
+					if(target == 'delete') {
+						var ids = w2ui['grid'].getSelection();
+						if (!confirm('确定删除么?')) {
+							return false
+						} else {
+							w2ui['grid'].remove.apply(w2ui['grid'],ids);
+							$.ajax({
+							   type: "POST",
+							   dataType:"json",
+							   url: "?m=flow&a=update",
+							   data:{id:ids,status:9},
+							   success: function(msg){
+								 
+							   }
+							});		
+						}
+					}
+					
+				}
+			},
+					onSelect: function(target, eventData) {
+				eventData.onComplete = function(){
+					this.toolbar.enable('delete');
+				}
+			},
+			onUnselect: function(target, eventData) {
+				eventData.onComplete = function(){
+					if(this.getSelection().length == 0)					
+						this.toolbar.disable('delete');
+				}
+			},
+			searches: [
+				{ field: 'content', caption: '内容', type: 'text' },
+			],
+			sortData: [{ field: '', direction: 'ASC' }],
+			columns : [{
+				field : 'rids',
+				caption : '收件人',
+				size : '50px'
+			}, {
+				field : 'content',
+				caption : '内容',
+				size : '60%'
+			},{
+				field : 'percent',
+				caption : '进度',
+				size : '5%'
+			},{
+				field : 'operate',
+				caption : '操作',
+				size : '15%'
+			}],
+			
+		});
+		function checkinfo(url) {
+			$().w2popup('open', {
+				body: "<iframe src='"+url+"' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input type="button" value="close" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
+		}
+		w2ui['grid'].load('?m=flow&a=del&f=get');
+	</script>
+</html>

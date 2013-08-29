@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title><?=$title ?></title>
+		<meta name="author" content="Administrator" />
+		<? k::load('layout','layout')->render('form') ?>
+	<script type="text/javascript">
+		//配置磁块
+		var fromL = new smartFrom('from_mandatory_table', {
+			url:'?m=consult&a=add',
+			httpType : 'post',
+			rows : [
+					{type : 'popup', name : 'username', title : '招生人', tip : "请输入招生人！", inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
+					{type : 'input', name : 'studynum', title : '学&nbsp;号', tip : "请填写你学号", inputType:'text', datatype:"n", errormsg : "请填数字"},
+					{type : 'input', name : 'realname', title : '姓&nbsp;名', tip : "请填写你的姓名", inputType:'text', datatype:"*", errormsg : "请输入6-16位数字"},
+					{type : 'input', name : 'englishname', title : '英语名字', tip : "请填姓名英语名字", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
+					{type : 'input', name : 'card', title : '推荐卡号', tip : "请填写推荐卡号", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
+					{type : 'hideInput', name : 'course', errormsg : "",value :'', display:'none'},
+					<? k::load('form','form')->getSelect('user','sex') ?>,
+					{type : 'input', name : 'score', title : '积&nbsp;分', tip : "请填写积分", inputType:'text', datatype:"n", errormsg : "请填数字"},
+					{type : 'select', name : 'sex', title : '性  别', tip : "请选择性别", datatype:"*", errormsg : "请选择性别", 
+													data : [{value:1, name:"男"}, {value:2, name:"女"}], doption : "--请选择--"},	
+					{type : 'textarea', name : 'introduce', title : '介  绍', tip : "请填上介绍", inputType:'text', datatype:"*", errormsg : "请填上学生介绍"},
+					{type : 'popup', name : 'coursename', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"},
+					{type : 'hideInput', name : 'rpeople', errormsg : "",value :'', display:'none'},
+					
+				   ],
+			type : "cross"
+		});
+		
+			var thisRpIn = null;
+			$(".rp_view").click(function(){
+				thisRpIn = this;
+				if($(this).attr("name") == "recruit"){
+					$().w2popup('load', { url: 'recruitPeople_k.html', width:250});
+				}else if($(this).attr("name") == "course"){
+					$().w2popup({
+						title   : '课程选择',
+						body    : '<iframe src="course_popup.html" style="width: 100%; height: 100%;border: medium none;"></iframe>',
+						width   : 600
+					});
+				}else if($(this).attr("name") == "theClass"){
+					$().w2popup('load', { url: 'theClass.html', width:250});
+				}
+			});
+			
+			function setrp(obj){
+				$(thisRpIn).prev().val(obj.text);
+				if(obj.type=='course'){
+					$("input[name='course']").val(obj.uid);
+				}else{
+					$("input[name='rpeople']").val(obj.uid);
+				}
+				$().w2popup('close');
+			};
+	</script>
+</html>
+
