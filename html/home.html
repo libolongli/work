@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>南博教育</title>
+		<meta name="author" content="Administrator" />
+		<!-- Date: 2013-08-19 -->
+		<link href="images/css/w2ui-1.2.min.css" type="text/css" rel="stylesheet" />
+		<link href="images/css/n_menu.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="header">
+				<div class="header_end_top"></div>
+				<div class="header_end_bootm"></div>
+				<a class="n_menu_btn"></a>
+				<div id="n_tabs"></div>
+				<div class="header_right">
+					<a href="#" class="setUp_btn">
+						<img src="images/image/0429362.png" />
+					</a>
+					<a href="#" class="lockScreen_btn">
+						<img src="images/image/04293643.png" />
+					</a>
+					<a href="#" class="skin_btn">
+						<img src="images/image/0429369.png" />
+					</a>
+					<a href="#" class="close_btn">
+						<img src="images/image/04293665.png" />
+					</a>
+				</div>
+			</div>
+			<div class="content">
+				<iframe src="bench.html"></iframe>
+				<iframe src="c_work.html" style="visibility: hidden;"></iframe>
+			</div>
+			<div class="n_menu" style="display: none"> <!--  -->
+				<div class="n_menu_cont">
+					<!-- 一级菜单创建 -->
+					<ul class="n_menu_left">
+						
+					</ul>
+					<div class="n_menu_r">
+						<div class="n_menu_r_h"></div>
+						<!-- 二级、三级菜单创建 -->
+						<ul class="n_menu_right n_menu_r_c">
+							
+						</ul>
+						<div class="n_menu_r_f"></div>
+					</div>
+				</div>
+				<div class="n_menu_h">
+					<div class="user_img"></div>
+				</div>
+				<div class="n_menu_c"></div>
+				<div class="n_menu_f"></div>
+			</div>
+		</div>
+	</body>
+	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
+	<script src="images/js/n_menu.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+	//tab管理机制
+	var tabsView = [];
+		var tabIndex = 0;//选项卡下标
+		var tabsUrl = ["bench.html", "c_work.html"];
+		$('#n_tabs').w2tabs({
+			name: 'tabs',
+			active: '0',
+			tabs: [
+				{ id: '0', caption: '我的工作台', closable:false},
+				{ id: '1', caption: '我的桌面', closable:false}
+			],
+			onClick: function (id, data) {
+				if(tabIndex != id){
+					if(id == "1"){
+						$("iframe").eq((parseInt(id))).css("visibility", "visible");
+					};
+					$("iframe").eq((parseInt(id))).show();
+					$("iframe").eq((parseInt(tabIndex))).hide(); 
+				};
+				tabIndex = id;
+			}
+		});
+		
+		
+		var menuData = [{"pid" : 1 , "icon":"http://admin.zg10010.net/resources/images/menu/finance.png", "text": "个人事务", "url":"c_new.html", "children":[
+																					{"pid" : 2 , "text": "我的列表", "url":"grid-tree.html", "children":[], "did":1},
+																					{"pid" : 3 , "text": "我的表单", "url":"c_from.html", "children":[], "did":1},
+																					{"pid" : 4 , "text": "组织图", "url":"tree_chart.html", "children":[], "did":1},
+																					{"pid" : 5 , "text": "学生信息", "url":"c_detailed.html", "children":[], "did":1},
+																					{"pid" : 6 , "text": "下载管理", "url":"c_new.html", "children":[], "did":1}
+																					]},
+				{"pid" : 7 , "icon":"http://admin.zg10010.net/resources/images/menu/400.png", "text": "费用管理", "url":"c_from.html", "children":[
+																					{"pid" : 8 , "text": "账户查询", "url":"c_from.html", "children":[], "did":7},
+																					{"pid" : 9 , "text": "分机充值", "url":"c_from.html", "children":[], "did":7},
+																					{"pid" : 10 , "text": "账户定额提醒", "url":"c_from.html", "children":[], "did":7}
+																					]},
+				{"pid" : 11 , "icon":"http://admin.zg10010.net/resources/images/menu/addfun.png", "text": "通话管理", "url":"c_new.html", "children":[
+																					{"pid" : 12 , "text": "通话设置", "url":"c_new.html", "children":[
+																																					   {"pid" : 13 , "text": "坐席设置", "url":"c_new.html", "children":[
+																																					   			   {"pid" : 13 , "text": "坐席设置", "url":"c_new.html", "children":[], "did":12},
+																																								   {"pid" : 14 , "text": "时段设置", "url":"c_new.html", "children":[], "did":12},
+																																								   {"pid" : 15 , "text": "黑白名单设置", "url":"c_new.html", "children":[], "did":12},
+																																								   {"pid" : 16 , "text": "会议密码设置", "url":"c_new.html", "children":[], "did":12}
+																																					   ], "did":12},
+																																					   {"pid" : 14 , "text": "时段设置", "url":"c_new.html", "children":[], "did":12},
+																																					   {"pid" : 15 , "text": "黑白名单设置", "url":"c_new.html", "children":[], "did":12},
+																																					   {"pid" : 16 , "text": "会议密码设置", "url":"c_new.html", "children":[], "did":12}
+																					], "did":11},
+																					{"pid" : 17 , "text": "通话查询", "url":"c_new.html", "children":[
+																																					   {"pid" : 18 , "text": "通话样单", "url":"c_new.html", "children":[], "did":17},
+																																					   {"pid" : 19 , "text": "来电记录", "url":"c_new.html", "children":[], "did":17},
+																																					   {"pid" : 20 , "text": "通话语录查询", "url":"c_new.html", "children":[], "did":17},
+																																					   {"pid" : 21 , "text": "语音留言查询", "url":"c_new.html", "children":[], "did":17}
+																					], "did":11}
+																					]},
+				{"pid" : 22 , "icon":"http://admin.zg10010.net/resources/images/menu/callcenter.png", "text": "附件功能", "url":"c_new.html", "children":[]},
+				{"pid" : 23 , "icon":"http://admin.zg10010.net/resources/images/menu/crm.png", "text": "呼叫中心", "url":"c_new.html", "children":[]},
+				{"pid" : 24 , "icon":"http://admin.zg10010.net/resources/images/menu/report.png", "text": "CRM系统", "url":"c_new.html", "children":[]},
+				{"pid" : 25 , "icon":"http://admin.zg10010.net/resources/images/menu/sys.png", "text": "统计报表", "url":"c_new.html", "children":[]},
+				{"pid" : 26 , "icon":"http://admin.zg10010.net/resources/images/menu/work.png", "text": "系统管理", "url":"c_new.html", "children":[]}];
+		//下拉菜单插件使用
+		var n_meun = new Nmeun(menuData);
+		n_meun.addListener("click", function(data){
+			w2ui['tabs'].add({ id: tabsUrl.length, caption: data.text, closable:true});
+			w2ui['tabs'].select(tabsUrl.length);
+			tabsUrl.push(data.url);
+			$(".content").append('<iframe src="'+tabsUrl[(tabsUrl.length - 1)]+'"></iframe>');
+			tabIndex = tabsUrl.length - 1;
+		});
+		
+		w2ui['tabs'].on('close', function(target, eventData) {
+			w2ui['tabs'].select((target - 1));
+			$("iframe").eq((parseInt(target) - 1)).show();
+			$("iframe").eq((parseInt(target))).remove();
+			tabsUrl.splice(target, 1);
+		});
+		
+		$('.n_menu_btn').click(function(){
+			$('.n_menu').slideDown();
+		});
+		
+		$('.n_menu').hover(function(){
+		
+		}, function(){
+			$(this).slideUp();
+		});
+		
+	</script>
+</html>
+
