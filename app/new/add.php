@@ -5,8 +5,8 @@ class module_new_add
   {
 			
 $data = k::load('new')->getOption('all');
-print_r($data);
-	$str = '';
+//print_r($data);
+	
 	//$data = k::load('new')->getRowLi('1');
 
   

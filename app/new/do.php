@@ -5,11 +5,10 @@ class module_new_do
   {
 	
 	$id = k::load('new')->addNew($_POST);
-	print_r($_POST);
+
 	if($id){
 	
-		echo '添加成功';
-		echo "<a href='http://www.project.com/?m=new&a=add'>添加失败!点击返回</a>";
+		echo "<script type='text/javascript'>alert('添加成功');location.href='http://www.project.com?m=new&a=list';</script>";
 	}else{
 		echo "<a href='http://www.project.com/?m=new&a=add'>添加失败!点击返回</a>";
 	}

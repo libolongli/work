@@ -29,25 +29,41 @@ class k_model_new_new
 	}
 	
     public function getJsonNew(){
-		$data = R::getAll("SELECT * FROM news order where type='{$type}' by id desc");
+		$data = R::getAll("SELECT * FROM news where type='{$type}' and status='0' order by id desc");
 		//print_r($data);
 		return json_encode($data);
 	}
 
     public function getListJson(){
-		$data = R::getAll("SELECT id as recid,title,content,ts_created FROM news order by id desc");
+		$data = R::getAll("SELECT id as recid,title,content,ts_created FROM news where status='0' order by id desc");
 		return json_encode($data);
 
 	}
 	
 	function getOption(){
-	if($type = 'all')
-	 $data = R::getAll("SELECT id ,titles FROM type order by id desc");
-		json_encode($data);
-	 if($data) return $data;
-	 return false;	 
+				if($type = 'all')
+				 $data = R::getAll("SELECT titles as name,type_id as id FROM type order by id desc");
+				if($data){
+					foreach($data as $key =>$value){
+						if($str){
+							$str.=",{value:{$value['id']}, name:'{$value['name']}'}";
+						}else{
+							$str.="{value:{$value['id']}, name:'{$value['name']}'}";
+						}
+					}
+				}
+					
+				
+					if($str) return $str;
+
+				 return false;	 
+	}
+				
+				
+
+			
+			
 	}
 	
-	
-}
+
 	

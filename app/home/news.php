@@ -12,13 +12,13 @@
 			function get_news()
 			{
 		
-			$result =  R::getAll("select * from news where type='1' order by id desc limit 0,5");
+			$result =  R::getAll("select * from news where type='1' and status='0' order by id desc limit 0,5");
 			
 			//var_dump($result);
 			  return $result;
 			}
 			function get_upgrade(){
-						$upgrade =  R::getAll("select * from news where type='2' order by id desc limit 0,5");
+			$upgrade =  R::getAll("select * from news where type='2' and status='0' order by id desc limit 0,5");
 			
 			//var_dump($upgrade);
 			  return $upgrade;

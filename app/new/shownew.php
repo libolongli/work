@@ -10,7 +10,7 @@ class module_new_shownew
 				$this->$f($_POST);
 				echo 111;
 			}
-	$data = k::load('new')->getRowLi();
+	$data = k::load('new')->getRowLi('1');
 	if($data){	
 		foreach($data as $key =>$value){
 		  $str = $value;
