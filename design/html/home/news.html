@@ -7,9 +7,10 @@
 		</dt>
 		<dd>
 			<ul>	
+
 					<?foreach($data as $i):?>	
 					<li>
-					<a href="?m=home&a=listinfo&id=<?echo $i['id']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
+					<a href="?m=home&a=listinfo&type=<?echo $i['type']?>&id=<?echo $i['id']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
 								</li>
 				<?endforeach;?>
 			</ul>
@@ -22,18 +23,11 @@
 		</dt>
 		<dd>
 			<ul>
-			<li>
-					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
-				</li>
-				<li>
-					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
-				</li>
-				<li>
-					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
-				</li>
-				<li>
-					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
-				</li>
+					<?foreach($upgrade as $i):?>	
+					<li>
+					<a href="?m=home&a=listinfo&type=<?echo $i['type']?>&id=<?echo $i['id']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
+								</li>
+				<?endforeach;?>
 			</ul>
 		</dd>
 	</dl>

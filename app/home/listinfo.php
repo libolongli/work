@@ -4,13 +4,15 @@ class module_home_listinfo
 	function run()
 	{
 			$id = $_GET['id'];
+			$type = $_GET['type'];
+			//echo $type;
 			$t = new tpl();
-			$t->assign('data',$this->shownews($id));
+			$t->assign('data',$this->shownews($id,$type));
 			$t->display('listinfo');				
 	}
-	function shownews($id){
-		if($id){
-		$result =  R::getRow( "select * from new where id='{$id}'");
+	function shownews($id,$type){
+		if($id && $type){
+		$result =  R::getRow( "select * from news where id='{$id}' and type='{$type}'");
 		//var_dump($result);
 		return $result;
 		}

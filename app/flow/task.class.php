@@ -1,13 +1,13 @@
 <?php
 	require_once 'db.class.php';
-	R::setup('mysql:host=localhost;dbname=project','root','root'); 
+	R::setup('mysql:host=localhost;dbname=project','root','7322290'); 
 	class task{
 		private $_db;
 		private $_config;
 		private $_url;
 		public function __construct($url = 'user/pay'){
 			$this->_db = new db();
-			$this->_db->connect('localhost','root','root','project');
+			$this->_db->connect('localhost','root','7322290','project');
 			$sql = "SELECT * FROM common_config where url = '{$url}' ";
 			$this->_config = $this->_db->fetch_all($sql);
 		}
@@ -23,14 +23,13 @@
 			foreach($this->_config as $key =>$value){
 				if($value['active']){
 					$format = $value['format'];
-					$format = str_replace('{user}', $map['content'], $format);
-					$now = time();				
-					//$sql = "INSERT INTO flow (uid,rids,content,ts_created,ts_updated,status)  VALUES({$map['uid']},'{$map['rids']}','{$format}',{$now},{$now},1)";
-					//$this->_db->query($sql);
+					$format = str_replace('{user}', $map['user'], $format);
+					$now = time();
+					$sql = "INSERT INTO flow (uid,rids,content,ts_created,ts_updated,status)  VALUES({$map['uid']},'{$map['rids']}','{$format}',{$now},{$now},1)";
+					$this->_db->query($sql);
+					//echo 1111;exit;
 					foreach (explode(',', $map['rids']) as $key => $value) {
-						//$sql = "INSERT INTO flow_log (uid,rid,ts_created) VALUES({$map['uid']},{$value},{$now})";
-						//$this->_db->query($sql);
-						$sql = "INSERT INTO flow (uid,rids,content,ts_created,ts_updated,status)  VALUES({$map['uid']},'{$value}','{$format}',{$now},{$now},1)";
+						$sql = "INSERT INTO flow_log (uid,rid,ts_created) VALUES({$map['uid']},{$value},{$now})";
 						$this->_db->query($sql);
 					}
 				}
@@ -71,26 +70,29 @@
 
 
 		public function get($map=array()){
-			$sql = "SELECT * FROM  flow as  ";
-			//$totalsql = "SELECT count(*) as total ";
+			$sql = "SELECT f.* FROM flow_log as l INNER JOIN flow as f on l.ts_created = f.ts_created ";
+			$totalsql = "SELECT count(*) as total  FROM flow_log as l INNER JOIN flow as f on l.ts_created = f.ts_created ";
 			$where = " where 1=1 ";
-			foreach ($map['where'] as $key => $value) {	
-				$where .=" AND f.{$key}='{$value}' ";	
+			foreach ($map['where'] as $key => $value) {
+				if($key=='rid'){
+					$where .=" AND l.rid = {$value} ";
+				}else{
+					$where .=" AND f.{$key}='{$value}' ";
+				}
 			}
 			$sql.= $where;
-			//$total = $this->_db->fetch_first($totalsql.$where);
-			//if(!isset($map['limit'])) $map['limit']=10;
-			//if(!isset($map['page'])) $map['page']=1;
-			//if(!isset($map['desc'])) $map['desc']=' desc ';
-			//$limitstart = ($map['page']-1)*$map['limit'];
-			//$limitstr = "limit {$limitstart},{$map['limit']}";
-			//$sql .=" ORDER BY id {$map['desc']}".$limitstr;
-			$data = $this->_db->fetch_all($sql);
+			$total = $this->_db->fetch_first($totalsql.$where);
+			if(!isset($map['limit'])) $map['limit']=10;
+			if(!isset($map['page'])) $map['page']=1;
+			if(!isset($map['desc'])) $map['desc']=' desc ';
+			$limitstart = ($map['page']-1)*$map['limit'];
+			$limitstr = "limit {$limitstart},{$map['limit']}";
+			$sql .=" ORDER BY l.id {$map['desc']}".$limitstr;
 			return array(
-				'data'=>$data,
-				'page'=>0,
-				//'limit'=>$map['limit'],
-				'total'=>count($data)
+				'data'=>$this->_db->fetch_all($sql),
+				'page'=>$map['page'],
+				'limit'=>$map['limit'],
+				'total'=>$total['total']
 			);
 		}
 

@@ -26,7 +26,9 @@
 			url:'http://www.project.com/?m=new&a=do',
 			httpType : 'post',
 			rows : [
-							{type : 'input', name : 'title', title : '新闻标题', tip : "请输入新闻标题！", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
+							{type : 'select', name : 'type', title : '添加类型', tip : "请选择类型", datatype:"*", errormsg : "请选择类型！", 
+								data :[<?=$option?>], doption : "--请选择--"},
+							{type : 'input', name : 'title', title : '标题', tip : "请输入标题！", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
 							{type : 'textarea', name : 'content', title : '发表内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的日期格式"},
 							],
 			callback:function(data){

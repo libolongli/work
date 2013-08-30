@@ -4,10 +4,10 @@ class k_model_new_new
 	private $data = array();
 
 
-  function getRowLi()
+  function getRowLi($type)
   {
-		$data=  R::getAll( 'select * from new order by id desc' );
-	
+		$data=  R::getAll("select * from news where type='{$type}' order by id desc");
+
 	 if($data) return $data;
 	
 	 return false;	 
@@ -19,21 +19,51 @@ class k_model_new_new
 			if($value == '请输入新闻标题！') $data[$key]='';
 		}
 		if($data){
-			$new = R::dispense('new');
+			$new = R::dispense('news');
 			 $new->title = $data['title'];
 			$new->content = $data['content'];
+			$new->type = $data['type'];
 			$id = R::store($new);
 			return $id;
 		}
 	}
 	
     public function getJsonNew(){
-		$data = R::getAll('SELECT * FROM new order by id desc');
+		$data = R::getAll("SELECT * FROM news where type='{$type}' and status='0' order by id desc");
+		//print_r($data);
 		return json_encode($data);
 	}
 
+    public function getListJson(){
+		$data = R::getAll("SELECT id as recid,title,content,ts_created FROM news where status='0' order by id desc");
+		return json_encode($data);
 
+	}
 	
+	function getOption(){
+				if($type = 'all')
+				 $data = R::getAll("SELECT titles as name,type_id as id FROM type order by id desc");
+				if($data){
+					foreach($data as $key =>$value){
+						if($str){
+							$str.=",{value:{$value['id']}, name:'{$value['name']}'}";
+						}else{
+							$str.="{value:{$value['id']}, name:'{$value['name']}'}";
+						}
+					}
+				}
+					
+				
+					if($str) return $str;
+
+				 return false;	 
+	}
+				
+				
+
+			
+			
+	}
 	
-}
+
 	
