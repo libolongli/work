@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>c_work</title>
+		<meta name="author" content="Administrator" />
+		<!-- Date: 2013-08-19 -->
+		<link href="images/css/n_work.css" type="text/css" rel="stylesheet" />
+		<link href="images/css/royalslider.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<img class="backImg" src="images/image/3.jpg" />
+		<div id="wrok">
+			<ul id="slider-in-laptop" class="royalSlider"></ul>
+		</div>
+	</body>
+	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="images/js/jquery.royalslider.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+		var lists = [{
+					"id":0,
+					"data" : [
+								{"id":1, "icon":"images/image/p (1).png", "name":"工作月台"},
+								{"id":2, "icon":"images/image/p (7).png", "name":"消息通知"},
+								{"id":3, "icon":"images/image/p (9).png", "name":"招生统计"},
+								{"id":4, "icon":"images/image/p (13).png", "name":"文件管理"},
+								{"id":5, "icon":"images/image/p (16).png", "name":"财务信息"},
+								{"id":6, "icon":"images/image/p (29).png", "name":"我的密匙"},
+								{"id":7, "icon":"images/image/p (36).png", "name":"工具箱"},
+								{"id":8, "icon":"images/image/p (38).png", "name":"我的收藏"},
+								{"id":9, "icon":"images/image/p (67).png", "name":"财务信息"},
+								{"id":10, "icon":"images/image/p (85).png", "name":"我的消息"}
+							]
+					}, {
+						"id":0,
+						"data" : [
+								{"id":1, "icon":"images/image/p (1).png", "name":"工作月台"},
+								{"id":2, "icon":"images/image/p (7).png", "name":"消息通知"},
+								{"id":3, "icon":"images/image/p (9).png", "name":"招生统计"},
+								{"id":4, "icon":"images/image/p (13).png", "name":"文件管理"},
+								{"id":5, "icon":"images/image/p (16).png", "name":"财务信息"},
+								{"id":6, "icon":"images/image/p (29).png", "name":"我的密匙"},
+								{"id":7, "icon":"images/image/p (36).png", "name":"工具箱"},
+								{"id":8, "icon":"images/image/p (38).png", "name":"我的收藏"},
+								{"id":9, "icon":"images/image/p (67).png", "name":"财务信息"},
+								{"id":10, "icon":"images/image/p (85).png", "name":"我的消息"}
+							]
+					}];
+	
+		var newList = function (data, id){
+			var view = "";
+			for (var i=0; i < data.length; i++) {
+				view += "<li><ul class='w_list'>";
+			  	for (var k=0; k < data[i].data.length; k++) {
+					view += '<li><img src="'+data[i].data[k].icon+'" /><span>'+data[i].data[k].name+'</span></li>';
+				};
+				view += "</ul></li>";
+			};
+
+			$("#"+id).html(view);
+		};
+		
+		newList(lists, 'slider-in-laptop');
+		
+		function newPageList (){
+			var rsi = $('#slider-in-laptop').royalSlider({
+			    autoHeight: false,
+			    arrowsNav: false,
+			    fadeinLoadedSlide: false,
+			    controlNavigationSpacing: 0,
+			    controlNavigation: 'bullets',
+			    imageScaleMode: 'fill',
+			    imageAlignCenter: true,
+			    loop: false,
+			    loopRewind: false,
+			    numImagesToPreload: 6,
+			    keyboardNavEnabled: true,
+			    autoScaleSlider: true,  
+			    autoScaleSliderWidth: 800,     
+			    autoScaleSliderHeight: 350,
+			    imgWidth: 800,
+			    imgHeight: 350
+			}).data('royalSlider');
+		};
+		
+		newPageList();
+		
+		$(".rsNav").append('<a href="#" class="rsNav_right_btn"><img src="images/image/d3.png"></a>');
+		
+		$(".rsNav_right_btn").live("click", function(){
+			alert("111");
+		});
+		
+	</script>
+</html>

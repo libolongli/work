@@ -1,0 +1,61 @@
+body {
+	margin: 0;
+	padding: 0
+}
+ul {}
+ul li { list-style: none outside none;}
+p {font-size: 13px}
+.backImg { height: 100%;
+    position: absolute;
+    width: 100%;background: url("../image/3.jpg") no-repeat;background-position:center;background-repeat:no-repeat;}
+#wrok { height: 100%;
+    position: absolute;
+    width: 100%;}
+.w_list li {  float: left;
+    text-align: center;
+    width: 145px;}
+.w_list li span {   background-color: #003399;
+    border-radius: 22px 22px 22px 22px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 13px;
+    margin: 0 15px;
+    padding: 3px 0;
+    width: 120px;}
+.rsBullets {
+	 height: auto;
+    line-height: 5px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 4px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    z-index: 35;
+    top: -400px;
+}
+
+
+.rsBullet {
+    display: inline-block;
+    height: 15px;
+    padding: 6px;
+    width: 15px;
+}
+.rsBullet.rsNavSelected span {
+    background: url("../image/d1.png");
+}
+.rsBullet span {
+    background: url("../image/d2.png");
+    border-radius: 50% 50% 50% 50%;
+    display: block;
+    height: 15px;
+    width: 15px;
+}
+.rsNav_right_btn { display: inline-block;
+    height: 15px;
+    padding: 6px;
+    width: 15px;}
+.rsNav_right_btn img {
+	 float: left;
+}

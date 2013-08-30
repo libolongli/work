@@ -3,7 +3,7 @@
 		function run(){
 			if($_POST){
 				$id = k::load('msg')->addMsg($_POST);
-				if($id){
+				if($id){		
 					echo "添加成功!请关闭对话框!";exit;
 				}else{
 					echo "添加失败!请关闭对话框!";exit;

@@ -1,6 +1,7 @@
 <?php
 //PRINT_R($_SESSION);EXIT;
 //mvc 
+//echo 225454545433
 /**
 route type 1
 
@@ -17,7 +18,7 @@ $m=@$_GET['m'];
 $a=@$_GET['a'];
 
 
-if($m=='')$m='index';
+if($m=='')$m='home';
 if($a=='')$a='index';
 
 
