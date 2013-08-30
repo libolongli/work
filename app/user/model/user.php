@@ -41,7 +41,7 @@ class k_model_user_user
 	$_SESSION['user']['user']=$u;
 	$_SESSION['user']['id']=$id;	
 	if($id){
-		$data = k::load('feed','feed')->send(array('username'=>'system','getname'=>'admin','content'=>"新注册用户{$u}"));
+		$data = k::load('feed','feed')->send(array('uid'=>1,'rid'=>$id,'content'=>"新注册用户{$u}"));
 	}
 	
 	return $id;
@@ -65,10 +65,36 @@ class k_model_user_user
   
   function getUserList(){
 	$uid = $_SESSION['user']['id'];
-	$sql = "SELECT id as value ,user as name from user where id != {$uid} ";
+	$sql = "SELECT id as recid ,user as name from user where id != {$uid} ";
 
-	return R::getAll($sql);
+	$data = R::getAll($sql);
+	return array(
+		'total'=>count($data),
+		'page'=>0,
+		'records'=>$data,
+	);
   }
   
+  function getUserli(){
+	$data = $this->getUserList();
+	$data = $data['records'];
+	$str = '';		
+	foreach($data as $k=>$v){
+		$str .= "<li uid='{$v['recid']}'>".$v['name']."</li>";
+	}
+	echo $str;
+  }
+  
+  function getConsultInfo(){
+	$sql = "select * from consult order by id desc limit 1";
+	$data = R::getAll($sql);
+	$data = $data[0];
+	//print_R($data);exit;
+	$json = "[{'title':'姓名', 'name':'{$data['realname']}','title1':'学号', 'name1':'{$data['studynum']}'},
+			 {'title':'英语名字', 'name':'{$data['englishname']}','title1':'推荐卡号', 'name1':'{$data['card']}'},
+			 {'title':'积分', 'name':'{$data['score']}','title1':'性别', 'name1':'男'},
+			 {'title':'介绍', 'name':'{$data['introduce']}'}]";
+	echo $json;
+  }
   
 }

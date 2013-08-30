@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>添加菜单</title>
+		<meta name="author" content="Administrator" />
+		<!-- Date: 2013-08-16 -->
+		<link href="images/css/w2ui-1.2.min.css" type="text/css" rel="stylesheet" />
+		<link href="images/css/naobo.css" type="text/css" rel="stylesheet" />
+		<link href="images/css/n_from.css" type="text/css" rel="stylesheet" />
+	    <link href="images/css/metallic.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<div id="from_mandatory_table" class="d_from"></div>
+	</body>
+	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
+	<script src="images/js/Validform_v5.3.2.js" type="text/javascript"></script>
+	<script src="images/js/zebra_datepicker.js" type="text/javascript" ></script>
+	<script src="images/js/n_from.js" type="text/javascript"></script> 
+	<script type="text/javascript">
+	
+		//配置磁块
+		//ajaxPost : true,
+		//callback:function(data){}
+		var from = new smartFrom('from_mandatory_table', {
+			url:'?m=menu&a=do',
+			center:true,
+			httpType : 'post',
+			rows : [
+					{type : 'select', name : 'pid', title : '父级菜单', tip : "请选择父级菜单", datatype:"*", errormsg : "请选择父级菜单！", 
+						data : [<?=$option?>], doption : "--请选择--"},
+					{type : 'input', name : 'name', title : '菜单名称', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的菜单名称"},
+					{type : 'input', name : 'url', title : '菜单URL', tip : "请填写内容！", inputType:'text', datatype:"", errormsg : "请填写正确的URL"},
+					{type : 'input', name : 'icon', title : 'iconURL', tip : "请填写内容！", inputType:'text', datatype:"", errormsg : "请填写正确的URL"},
+				   ],
+			callback:function(data){
+				
+			}
+		});
+	</script>
+</html>

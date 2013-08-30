@@ -3,7 +3,11 @@ class k_model_msg_msg
 {
     public function getListJson(){
 		$uid = $_SESSION['user']['id'];
-		$data = R::getAll("SELECT id as recid,rids,content,ts_created FROM msg where rids = {$uid} and status !=9 order by id desc");
+		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created)as ts_created ,u.`user`  
+			from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 
+			INNER JOIN user as u on u.id= l.rid 	
+			where l.uid = {$uid} and l.fleg !=9 order by l.id desc";
+		$data = R::getAll($sql);
 		return json_encode($data);
 	}
 	
@@ -16,7 +20,21 @@ class k_model_msg_msg
 		$msg->rids = $data['rids'];
 		$msg->ts_created=$now;
 		$msg->ts_updated = $now;
+		$rids = explode(',',$data['rids']);
+		if(count($rids>1)) $msg->isgroup=1;
 		$id = R::store($msg);
+		foreach($rids  as $k=>$v){
+			$msg_log = R::dispense('msg_log');
+			$msg_log->uid=$data['uid'];
+			$msg_log->rid=$v;
+			$msg_log->fleg=1;
+			$msg_log->ts_created=$now;
+			$cid = R::store($msg_log);
+			if($id){
+				k::load('feed','feed')->send(array('uid'=>$data['uid'],'rid'=>$v,'content'=>$data['content'],'type'=>2));
+			}
+		}
+		
 		return $id;
 	}
 	
@@ -29,7 +47,7 @@ class k_model_msg_msg
 		}
 		$value  = join(',',$tmp);
 		if(is_array($map['id'])) $map['id'] = join(",",$map['id']);
-		$sql = "UPDATE msg set {$value} where id in({$map['id']})";
+		$sql = "UPDATE msg_log set {$value} where id in({$map['id']})";
 		R::exec($sql);
 	}
   

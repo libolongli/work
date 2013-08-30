@@ -5,7 +5,8 @@
 			if($type=='index'){
 				$data = k::load('feed')->getFeed($type);
 				if($data){
-					echo $data['content'];exit;
+					echo json_encode($data);
+					exit;
 				}
 			}
 		}

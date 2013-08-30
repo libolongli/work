@@ -4,6 +4,7 @@
 //define ROOT
 define('K_PATH',dirname(__FILE__).'/');
 define('K_ROOT_PATH',dirname(dirname(__FILE__)).'/');
+
 if(!isset($_SESSION)) session_start();
 k::init_db();
 
@@ -21,7 +22,7 @@ class tpl
    $this->data[$k]=$v;
   }
   
-  function display($f)
+  function display($f,$model='')
   {
 	if($this->data){
 		extract($this->data);
@@ -33,9 +34,12 @@ class tpl
 	
 	if(!file_exists($tpl))
 	{  
-		$tpl=K_ROOT_PATH.APP_PATH_BASE.M.'/'. $f.'.html';
+		$tpl=K_ROOT_PATH.'design/html/'.M.'/'. $f.'.html';
 	}
 	
+	if($model){
+		$tpl=K_ROOT_PATH.'design/html/'.$model.'/'. $f.'.html';
+	}
 	
 	ob_start();
     include_once $tpl;
@@ -46,19 +50,19 @@ class tpl
 	
 	$src='"images/';
 	
-	$target='"/images/';
+	$target='"/design/images/';
 	
 	$t_array = array('bench.html','bench_left.html','bench_main.html',
 			'bench_right.html','c_from.html','c_new.html','c_work.html',
 			'demo.html','grid-tree.html','home.html','tree.html',
 			'c_detailed.html','course_popup.html','d_from.html','recruitPeople_k.html',
-			's_detailed.html','s_from.html','theClass.html'
+			's_detailed.html','s_from.html','theClass.html','data.html'
 			);
 	
 	$target_html=str_replace($src,$target,$html);
 	foreach($t_array as $key => $value){
 		$arr = explode(".",$value);
-		$str = "?m=".M."&a=template&url=".$arr[0];
+		$str = "?m=home&a=template&url=".$arr[0];
 		$target_html=str_replace($value,$str,$target_html);
 	}
 	
@@ -83,19 +87,13 @@ class k
 
     require_once  K_PATH.'rb.php';
 	
-	 $config=require_once  K_PATH.'config.php';
-	 //print_r($config);exit;
+	 $config=require_once  K_PATH.'config.php'; 
 	 $db=$config['db'];
 	 $conn="$db[driver]:host=$db[host];dbname=$db[dbname]";
-	//mysql:host=localhost;dbname=project','root','root'
     
-	R::setup($conn,$db['user'],$db['pass']); 
-	
-	
-	
-	//R::setup('mysql:host=localhost;dbname=project','root','root'); 
-	  return true; 
-    // return $db; 
+	R::setup($conn,$db['user'],$db['pass']); 			
+	return true; 
+    
   }
   
   static function  tpl()
@@ -134,28 +132,28 @@ else
 }
  
 
-class log{
-	static function change($id,$content,$filed,$table,$db=false){
-		$config=include  K_PATH.'config.php';
-		$writer = MR::getWriter();
-		//print_r(array($filed=>$content));exit;
-		$data[$filed]=$content;
-		//$data[nimei]=$content;
-		//var_dump($data);exit;
-		$writer->updateRecord($table, array($filed=>$content), $id);
+// class log{
+// 	static function change($id,$content,$filed,$table,$db=false){
+// 		$config=include  K_PATH.'config.php';
+// 		$writer = MR::getWriter();
+// 		//print_r(array($filed=>$content));exit;
+// 		$data[$filed]=$content;
+// 		//$data[nimei]=$content;
+// 		//var_dump($data);exit;
+// 		$writer->updateRecord($table, array($filed=>$content), $id);
 	
-		if(isset($config['log'][$table]) && in_array($filed,$config['log'][$table])){
-			$trace_log = R::dispense('trace_log');
-			$trace_log->content = $content;
-			$trace_log->filed = $filed;
-			$trace_log->o_id = $id;
-			$trace_log->table = $table;
-			$trace_log->db = $db ? $db : $config['db']['dbname'];
-			$trace_log->ts_updated = time();
-			$id = R::store($trace_log);
-		}
-	}
-}
+// 		if(isset($config['log'][$table]) && in_array($filed,$config['log'][$table])){
+// 			$trace_log = R::dispense('trace_log');
+// 			$trace_log->content = $content;
+// 			$trace_log->filed = $filed;
+// 			$trace_log->o_id = $id;
+// 			$trace_log->table = $table;
+// 			$trace_log->db = $db ? $db : $config['db']['dbname'];
+// 			$trace_log->ts_updated = time();
+// 			$id = R::store($trace_log);
+// 		}
+// 	}
+// }
 
 
 
