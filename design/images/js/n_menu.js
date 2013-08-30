@@ -33,20 +33,27 @@ var Nmeun = function(data){
 		  if(data[i].text == text){
 		  	 var children = data[i].children;
 		  	 for (var k = children.length - 1; k >= 0; k--){
-		  	 	var right_li = '<li><a href="'+children[k].url+'" class="n_menu_right_a" ><p>'+children[k].text+'</p></a>';
-		  	 	// var children1 = children[k].children;
-		  	 	// if(children1.length > 0){
-		  	 		// right_li += '<ul style="display: none;">';
-		  	 		// for (var j=0; j < children1.length; j++) {
-						 // right_li += '<li><a href="#">'+children1[j].text+'</a></li>';
-					// };
-					// right_li += "</ul>";
-		  	 	// };
-				 $("."+name).append(right_li+'</li>');
+		  	 	 var right_li = '<li><a href="'+children[k].url+'" class="n_menu_right_a" ><p>'+children[k].text+'</p></a>';
+				 $("."+name).append(addLi(right_li, children[k].children)+'</li>');
 			 };
 		  };
 		};
 	};
+	
+	//无限级加载子菜单
+	function addLi(view, data){
+		if(data && data.length > 0){
+  	 		view += '<ul style="display: none;">';
+  	 		for (var j=0; j < data.length; j++) {
+				 view += '<li><a href="#">'+data[j].text+'</a>';
+				 view += addLi(view, data[j].children)+'</li>';
+			};
+			view += "</ul>";
+  	 	};
+  	 	return view;
+	};
+	
+	
 	//2级点击事件
 	$(".n_menu_right_a").live("click", function(){
 		liClick({text: $(this).find("p").html(), url:$(this).attr("href")});
