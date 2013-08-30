@@ -1810,8 +1810,6 @@ abstract class RedBean_QueryWriter_AQueryWriter {
 	 */
 	public function updateRecord($type, $updatevalues, $id = null) {
 		$table = $type;
-		
-		
 		if (!$id) {
 			$insertcolumns =  $insertvalues = array();
 			foreach($updatevalues as $pair) {
@@ -1824,23 +1822,11 @@ abstract class RedBean_QueryWriter_AQueryWriter {
 		$table = $this->esc($table);
 		$sql = "UPDATE $table SET ";
 		$p = $v = array();
-		
-		
 		foreach($updatevalues as $uv) {
 			$p[] = " {$this->esc($uv["property"])} = ? ";
 			$v[] = $uv['value'];
 		}
-		
-		
-		foreach($updatevalues as $k=>$v)
-		{
-		  $tmp[]="'$k'=$v";
-		}
-		
-		$sql .= implode(',', $tmp).' WHERE id = '.intval($id);
-		echo $sql;exit;
-		
-		
+		$sql .= implode(',', $p).' WHERE id = '.intval($id);
 		$this->adapter->exec($sql, $v);
 		return $id;
 	}
@@ -5777,8 +5763,7 @@ class RedBean_Facade {
 	 * @return array $oneOrMoreBeans
 	 */
 	public static function dispense($type, $num = 1) {
-		//update @libo 2013-08-20 取消验证.以免带下划线这种表不能创建
-		//if (!preg_match('/^[\d]+$/', $type) && self::$strictType) throw new RedBean_Exception_Security('Invalid type: '.$type); 
+		//if (!preg_match('/^[a-z0-9]+$/', $type) && self::$strictType) throw new RedBean_Exception_Security('Invalid type: '.$type); 
 		return self::$redbean->dispense($type, $num);
 	}
 	/**

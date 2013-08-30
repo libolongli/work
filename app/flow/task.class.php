@@ -22,8 +22,11 @@
 		public function add($map = array()){
 			foreach($this->_config as $key =>$value){
 				if($value['active']){
-					$format = $value['format'];
-					$format = str_replace('{user}', $map['content'], $format);
+					$format = $map['content'];
+					if(!$map['transmit']){
+						$format = $value['format'];
+						$format = str_replace('{user}', $map['content'], $format);
+					}	
 					$now = time();				
 					//$sql = "INSERT INTO flow (uid,rids,content,ts_created,ts_updated,status)  VALUES({$map['uid']},'{$map['rids']}','{$format}',{$now},{$now},1)";
 					//$this->_db->query($sql);
