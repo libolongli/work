@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<script src="images/js/calendar-widget.js"></script>
+		<link rel="stylesheet" href="images/css/module.css" />
+		<style type="text/css" media="screen">
+
+		</style>
+	</head>
+	<body>
+		<div id="calendar"></div>
+	</body>
+	<script>
+		(function(){
+			$("#calendar").calendarWidget({
+				month : 7,
+				year : 2013
+			});
+			var now = new Date();
+			var nd = ".day"+now.getDate();
+			$(nd).css({"background":"#44B5DF","color":"#FFF"})
+		})();
+	</script>
+</html>
+

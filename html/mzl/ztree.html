@@ -1,0 +1,55 @@
+<ul id="tree" class="ztree"></ul>
+<script>
+	// function zTreeOnClick(event, treeId, treeNode) {
+		// if (treeNode.tId == 'tree_2') {
+			// w2ui['Main'].content('main', "<iframe name='grid' height='100%' width='100%'></iframe>");
+		// }
+		// if (treeNode.tId == 'tree_3') {
+			// w2ui['Main'].content('main', "<iframe name='baidu' frameborder='0' height='100%' width='100%'></iframe>");
+		// }
+		// if (treeNode.tId == 'tree_4') {
+			// w2ui['Main'].content('main', "<iframe name='google' frameborder='0' height='100%' width='100%'></iframe>");
+		// }
+	// };
+	// var setting = {
+		// callback : {
+			// onClick : zTreeOnClick
+		// }
+	// };
+	var setting = {
+	}
+	var zNodes = [{
+		name : "财务报表",
+		open : true,
+		children : [{
+			name : "缴费明细",
+			 url:"http://www.baidu.com",
+			 target: "grid"
+		}, {
+			name : "分级充值明细",
+			url:"http://www.google.com.cn",
+			target: "grid"
+		}, {
+			name : "分级付款明细",
+			url:"demo.html",
+			target: "grid"
+		}]
+	}, {
+		name : "客户报表",
+		children : [{
+			name : "防伪码报表"
+		}, {
+			name : "满意度报表",
+		}, {
+			name : "分机节点详单"
+		}, {
+			name : "分机统计报表"
+		}]
+	}, {
+		name : "综合统计分析",
+	}];
+
+	$(document).ready(function() {
+		$.fn.zTree.init($("#tree"), setting, zNodes);
+	}); 
+</script>

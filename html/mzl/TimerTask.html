@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>TimerTask</title>
+		<meta name="author" content="Administrator" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<!-- Date: 2013-08-20 -->
+		<style type="text/css">
+			#stationMsg {
+				position:absolute;
+				z-index:100;
+				right:10px;
+				bottom: 10px;
+				display:block;
+				font-size: 14px;
+				width: 180px;
+				height: 60px;
+				text-align : center;
+				line-height : 60px;
+				border-radius: 4px;
+				text-decoration: none;
+				background: #B6D5FF
+			}
+			#stationMsg:active, #stationMsg:visited {
+				color: #000000;
+			}
+			#stationMsg span {
+				color: red;
+				padding: 0 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="" id="stationMsg" style="display: none"><i>您有新的消息</i><span>(1)</span></a>
+	</body>
+	<script>
+			$('#stationMsg').show(600);
+			setTimeout("$('#stationMsg').hide(600)",4000);
+
+		function GetStationMsg() {
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "",
+				data : {
+				},
+				success : function(data) {
+				
+				},
+				error : function(msg) {
+
+				}
+			});
+		}
+		(function() {
+			window.setInterval("GetStationMsg()", 5000);
+		})();
+	</script>
+</html>
+

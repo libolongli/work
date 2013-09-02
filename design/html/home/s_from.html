@@ -4,58 +4,64 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title><?=$title ?></title>
+		<title>s_from</title>
 		<meta name="author" content="Administrator" />
-		<? k::load('layout','layout')->render('form') ?>
+		<!-- Date: 2013-08-25 -->
+		<link href="images/css/w2ui-1.2.min.css" type="text/css" rel="stylesheet" />
+		<link href="images/css/naobo.css" type="text/css" rel="stylesheet" />
+		<link href="images/css/n_from.css" type="text/css" rel="stylesheet" />
+	    <link href="images/css/metallic.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>	
+		<div class="n_cont_view_c">	
+			<div id="from_l" class="n_cont_view_c_v"></div>
+		</div>
+	</body>
+	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
+	<script src="images/js/Validform_v5.3.2.js" type="text/javascript"></script>
+	<script src="images/js/zebra_datepicker.js" type="text/javascript" ></script>
+	<script src="images/js/n_from.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		//配置磁块
-		var fromL = new smartFrom('from_mandatory_table', {
-			url:'?m=consult&a=add',
+		var fromL = new smartFrom('from_l', {
+			url:'test.php',
 			httpType : 'post',
+			center : false,
+			popups : [{url:"recruitPeople_k.html", type:"load", name:'recruit'}, {url:"course_popup.html", type:"cont", name:'course'}],
 			rows : [
-					{type : 'popup', name : 'username', title : '招生人', tip : "请输入招生人！", inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
-					{type : 'input', name : 'studynum', title : '学&nbsp;号', tip : "请填写你学号", inputType:'text', datatype:"n", errormsg : "请填数字"},
-					{type : 'input', name : 'realname', title : '姓&nbsp;名', tip : "请填写你的姓名", inputType:'text', datatype:"*", errormsg : "请输入6-16位数字"},
-					{type : 'input', name : 'englishname', title : '英语名字', tip : "请填姓名英语名字", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
-					{type : 'input', name : 'card', title : '推荐卡号', tip : "请填写推荐卡号", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
-					{type : 'hideInput', name : 'course', errormsg : "",value :'', display:'none'},
-					<? k::load('form','form')->getSelect('user','sex') ?>,
-					{type : 'input', name : 'score', title : '积&nbsp;分', tip : "请填写积分", inputType:'text', datatype:"n", errormsg : "请填数字"},
-					{type : 'select', name : 'sex', title : '性  别', tip : "请选择性别", datatype:"*", errormsg : "请选择性别", 
-													data : [{value:1, name:"男"}, {value:2, name:"女"}], doption : "--请选择--"},	
-					{type : 'textarea', name : 'introduce', title : '介  绍', tip : "请填上介绍", inputType:'text', datatype:"*", errormsg : "请填上学生介绍"},
-					{type : 'popup', name : 'coursename', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"},
-					{type : 'hideInput', name : 'rpeople', errormsg : "",value :'', display:'none'},
-					
+					{type : 'popup', name : 'from1', title : '招生人', tip : "请输入招生人！", inputType:'text', datatype:"/^[\u4e00-\u9fa5]/", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
+					{type : 'input', name : 'from2', title : '学&nbsp;号', tip : "请填写你报名日期", inputType:'text', datatype:"n", errormsg : "请填数字"},
+					{type : 'input', name : 'from3', title : '姓&nbsp;名', tip : "请填写你的学号", inputType:'text', datatype:"n6-16", errormsg : "请输入6-16位数字"},
+					{type : 'input', name : 'from4', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
+					{type : 'input', name : 'from5', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
+					{type : 'select', name : 'from6', title : '考勤短信', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
+													data : [{value:1, name:"在读"}, {value:2, name:"走读"}, {value:3, name:"周末"}], doption : "--请选择--"},	
+					{type : 'radio', name : 'from7', title : '学员来源', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
+													data : [{value:1, name:"农村"}, {value:2, name:"城市"}, {value:3, name:"海外"}, {value:4, name:"外星"}]},	
+					{type : 'popup', name : 'from8', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"},
+					{type : 'popup', name : 'from9', title : '招生人', tip : "请输入招生人！", inputType:'text', datatype:"/^[\u4e00-\u9fa5]/", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
+					{type : 'input', name : 'from10', title : '学&nbsp;号', tip : "请填写你报名日期", inputType:'text', datatype:"n", errormsg : "请填数字"},
+					{type : 'input', name : 'from11', title : '姓&nbsp;名', tip : "请填写你的学号", inputType:'text', datatype:"n6-16", errormsg : "请输入6-16位数字"},
+					{type : 'input', name : 'from12', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
+					{type : 'input', name : 'from13', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
+					{type : 'select', name : 'from14', title : '考勤短信', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
+													data : [{value:1, name:"在读"}, {value:2, name:"走读"}, {value:3, name:"周末"}], doption : "--请选择--"},	
+					{type : 'popup', name : 'from15', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"}	,
+					{type :  'hideInput', name : "from16", display : "none", value : "2222", errormsg : '555', tip : '9999'}
 				   ],
 			type : "cross"
 		});
 		
-			var thisRpIn = null;
-			$(".rp_view").click(function(){
-				thisRpIn = this;
-				if($(this).attr("name") == "recruit"){
-					$().w2popup('load', { url: 'recruitPeople_k.html', width:250});
-				}else if($(this).attr("name") == "course"){
-					$().w2popup({
-						title   : '课程选择',
-						body    : '<iframe src="course_popup.html" style="width: 100%; height: 100%;border: medium none;"></iframe>',
-						width   : 1000
-					});
-				}else if($(this).attr("name") == "theClass"){
-					$().w2popup('load', { url: 'theClass.html', width:250});
-				}
-			});
-			
-			function setrp(obj){
-				$(thisRpIn).prev().val(obj.text);
-				if(obj.type=='course'){
-					$("input[name='course']").val(obj.uid);
-				}else{
-					$("input[name='rpeople']").val(obj.uid);
-				}
-				$().w2popup('close');
-			};
+		var thisView = null;
+		fromL.addListener('popupCallBack', function(view){
+			thisView = view;
+		});
+		
+		function setrp(name){
+			$(thisView).prev().val(name);
+			$().w2popup('close');
+		};
 	</script>
 </html>
 

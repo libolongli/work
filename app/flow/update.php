@@ -4,9 +4,8 @@
 			if($_POST){
 				require 'task.class.php';
 				$task = new task();
-				//print_r($_REQUEST);EXIT;
 				$task->update($_REQUEST);
-				header('Location: ?m=flow&a=list');
+				header('Location:?m=flow&a=list');
 			}
 			$t= new tpl();
 			$t->assign('fid',$_GET['fid']);

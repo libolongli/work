@@ -1,0 +1,94 @@
+<div style="margin-left: 20px;">
+	<dl class="notice_board">
+		<dt>
+			<i></i><span class="notice_title">公告栏</span><span class="notice_close" style="float: right">X</span>
+		</dt>
+		<dd>
+			<ul>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+
+	<dl class="notice_board">
+		<dt>
+			<i></i><span class="notice_title">近期升级班</span><span class="notice_close" style="float: right">X</span>
+		</dt>
+		<dd>
+			<ul>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+	<dl class="notice_board">
+		<dt>
+			<i></i><span class="notice_title">本月过生日的员工</span><span class="notice_close" style="float: right">X</span>
+		</dt>
+		<dd>
+			<ul>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+</div>
+
+<script>
+	(function() {
+		$(document).bind('click', function(e) {
+			$.each($('.notice_close'), function(i, val) {
+				if (e.target == val) {
+					if (!confirm('确定删除么?')) {
+						return false
+					} else {
+						$('.notice_board')[i].remove()
+					}
+				}
+			})
+		})
+	})();
+</script>

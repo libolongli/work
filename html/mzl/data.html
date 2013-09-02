@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>bounced</title>
+		<meta name="author" content="Administrator" />
+		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<script src="images/js/w2ui-1.2.min.js"></script>
+		<!-- Date: 2013-08-26 -->
+	</head>
+	<body>
+		<div id="info" style="height: 430px; width: 100%"></div>
+	</body>
+	<script>
+		$('#info').w2grid({
+			name : 'info',
+			url : 'Demo_list2.json',
+			show : {
+				toolbar : true,
+				selectColumn : true
+			},
+			toolbar : {
+				items: [
+					{ type: 'button',  id: 'commit',  caption: '提交', img: 'icon-add'}
+				],
+				onClick: function(target,data){
+					if(target =="commit") {
+							var rel = w2ui['info'].getSelection();
+							$(window.parent.document).find('#bounced-commit').click();
+							//$(window.parent.document).find('#aaa').text(rel);
+							var selection = w2ui['info'].getSelection();
+							var list =new Array();
+							$.each(selection,function(i,val){
+								list[i] = w2ui['info'].get(val).lname
+							})
+							$(window.parent.document).find('#aaa').text(list)
+					}
+				}
+			},
+			columns : [{
+				field : 'lname',
+				caption : 'Last Name',
+				size : '40%',
+				render : function(record, index) {
+					return record.lname + ', ' + record.fname
+				}
+			}]
+		});
+	</script>
+</html>
+

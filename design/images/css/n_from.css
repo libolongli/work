@@ -55,6 +55,11 @@ body {
     width: 284px;
 }
 
+.registerform .pr1 {
+	width: 5px;
+	float: none;
+	margin: 6px 0;
+}
 
 .n_cont_view_btn_v  table {
 	float: left;

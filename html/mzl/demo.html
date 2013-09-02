@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>w2ui</title>
+		<meta name="author" content="Administrator" />
+		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<script src="images/js/w2ui-1.2.min.js"></script>
+		<!-- Date: 2013-08-08 -->
+	</head>
+	<body>
+			<div id="grid" style="width: 100%; height: 400px;"></div>
+			<div id="page">
+			</div>
+			<script>
+				(function(){
+					$('#page').load('page.html')
+				})()
+			</script>
+	</body>
+	<script>
+		$('#grid').w2grid({
+			name: 'grid',
+			header: '表单名',
+			recordsPerPage: 8,
+			show: {
+				selectColumn: true,
+				toolbar: true,
+				footer: true,
+				toolbarAdd: true,
+				// toolbarDelete: true,
+				// toolbarSave: true
+			},
+			toolbar: {
+				items: [
+					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
+				],
+				onClick: function (target, data) {
+					console.log(target);
+					console.log(data);
+					if(target == 'add') {
+						this.enable('delete');
+						$().w2popup('open', {
+							title: '新增条目',
+							body: "<iframe src='aa.html' frameborder='0' height='100%' width='100%'></iframe>",
+							buttons: '<input class="sdfs" id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');window.location.reload();">',
+							width: 800,
+							height: 500,overflow: 'hidden',
+							color: '#ffc',
+							opacity: '0.5',
+							modal: true,
+							showClose: true,
+							showMax: true,
+							onUnlock:       function () { console.log('unlock'); },
+							onUnlockClick:  function () { console.log('unlock click'); },
+							onOpen:         function () { console.log('open'); },
+							onBeforeClose:  function () { console.log('before close (cancelable, just return false)'); },
+							onClose:        function () { console.log('close'); },
+							onMax:          function () { console.log('max'); }
+						});
+					};
+					if(target == 'refresh') {
+						window.location.reload(); 
+					};
+					if(target == 'delete') {
+						var ids = w2ui['grid'].getSelection();
+						if (!confirm('确定删除么?')) {
+							return false
+						} else {
+							w2ui['grid'].remove.apply(w2ui['grid'],ids);
+							// $.each(ids,function(i,val) {
+								// w2ui['grid'].remove(val);
+							// })
+						}
+					}
+				}
+			},
+			onSelect: function(target, eventData) {
+				eventData.onComplete = function(){
+					this.toolbar.enable('delete');
+				}
+			},
+			onUnselect: function(target, eventData) {
+				eventData.onComplete = function(){
+					if(this.getSelection().length == 0)					
+						this.toolbar.disable('delete');
+				}
+			},
+			// onSave : function(target,eventData) {
+				// //保存
+			// },
+			// onDelete: function(target, eventData) {
+				// var ids = w2ui['grid'].getSelection();
+				// alert(ids);
+				// eventData.onComplete = function(){
+					// alert("hehe");						
+				// }
+			// },
+			searches: [				
+				{ field: 'lname', caption: 'Last Name', type: 'text' },
+				{ field: 'fname', caption: 'First Name', type: 'text' },
+				{ field: 'email', caption: 'Email', type: 'text' },
+				{ field: 'sdate', caption: 'Start Date', type: 'text' }
+			],
+			sortData: [{ field: 'recid', direction: 'ASC' }],
+			columns: [				
+				{ field: 'recid', caption: 'ID', size: '50px'},
+				{ field: 'lname', caption: 'Last Name', size: '30%'},
+				{ field: 'fname', caption: 'First Name', size: '30%'},
+				{ field: 'email', caption: 'Email', size: '40%' },
+				{ field: 'sdate', caption: 'Start Date', size: '120px' },
+			]
+		});
+		w2ui['grid'].load('Demo_list.json');
+	</script>
+</html>
+

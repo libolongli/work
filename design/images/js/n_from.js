@@ -46,6 +46,7 @@ var smartFrom = function(id, obj){
 		}else{
 			lTip = row.tip;
 		};
+		console.log(row.type);
 		switch(row.type){
 			case "input":
 				// inputType 列表类型            <td class="need" style="width:10px">*</td>
@@ -69,11 +70,19 @@ var smartFrom = function(id, obj){
 				views += select;
 			break;
 			case "radio":
-				var radio = '<tr><td class="from_title">'+row.title+'：</td>'
-                    		+'<td><input type="radio" value="'+row.data[0].value+'" name="'+row.name+'" class="pr1" datatype="'+row.datatype+'"' 
-                    		+'errormsg="'+row.errormsg+'" /><label for="male">'+row.data[0].name+'</label>'
-                    		+'<input type="radio" value="'+row.data[1].value+'" name="'+row.name+'" class="pr1" /><label for="female">'+row.data[1].name+'</label></td>'
-                    		+'<td><div class="Validform_checktip">'+row.errormsg+'</div></td></tr>';
+				var radio = '<tr><td class="from_title">'+row.title+'：</td>';
+							if(! row.data){
+								break;
+							};
+							for (var i=0; i < row.data.length; i++) {
+							   if(i == 0){
+							   		radio += '<td><input type="radio" value="'+row.data[i].value+'" name="'+row.name+'" class="pr1" datatype="'+row.datatype+'"' 
+                    						+'errormsg="'+row.errormsg+'" /><label for="male">'+row.data[i].name+'</label>';
+							   }else{
+							   		radio += '<input type="radio" value="'+row.data[i].value+'" name="'+row.name+'" class="pr1" /><label for="female">'+row.data[i].name+'</label>';
+							   }
+							};
+                    		radio += '</td><td><div class="Validform_checktip">'+row.errormsg+'</div></td></tr>';
                 views += radio;
 			break;
 			case "checkbox":
@@ -128,11 +137,15 @@ var smartFrom = function(id, obj){
 			case "hideInput":
 				var input = '<tr style="display:'+row.display+'"><td class="from_title"></td>'
                     		+'<td><input ' 
-                    		+'type="hidden" value="'+row.value+'" name="'+row.name+'"' 
+                    		+'type="text" value="'+row.value+'" name="'+row.name+'"' 
                     		+'/></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
                     		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += input;
+			break;
+			case 'html':
+				var cont = '<tr><td class="from_title">'+row.title+': </td><td>'+row.content+'</td></tr>';
+				views += cont;
 			break;
 		}
 	};
@@ -186,7 +199,6 @@ var smartFrom = function(id, obj){
 	var rp_view_c = null;
 	$(".rp_view").click(function(){
 		if(! obj.popups){
-
 			return false;
 		};
 		for (var i=0; i < obj.popups.length; i++) {
@@ -196,7 +208,7 @@ var smartFrom = function(id, obj){
 		  		}else{
 		  			$().w2popup({
 						title   : '课程选择',
-						body    : '<iframe src="'+obj.popups[i].url+'" style="width: 100%; height: 100%;border: medium none;"></iframe>',
+						body    : '<iframe src="'+obj.popups[i].url+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
 						width   : 600
 					});
 		  		};
