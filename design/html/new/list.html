@@ -70,20 +70,20 @@
 				}
 			},
 			searches: [				
-				{ field: 'rids', caption: '收件人', type: 'text' },
-				{ field: 'content', caption: '发送的内容', type: 'text' },
+				{ field: 'title', caption: '标题', type: 'text' },
+				{ field: 'content', caption: '内容', type: 'text' },
+				{ field: 'type', caption: '类型', type: 'text' },
 			],
 			sortData: [{ field: 'recid', direction: 'ASC' }],
 			columns: [				
 				{ field: 'title', caption: '标题', size: '50px'},
 				{ field: 'content', caption: '内容', size: '30%'},
+				{ field: 'type', caption: '类型', size: '30%'},
 				{ field: 'ts_created', caption: '发送时间', size: '30%'},
 			],
 			records:<?=$json?>
 		});
-		//w2ui['grid'].load('http://www.project.com/?m=flow&a=del&f=get');
-		//alert($("#w2ui-popup").html());
-		//$("input[id][name$='man']") 
+
 		$(".w2ui-grid-popup-btn").live('click', function() {
 			var html = $(this).val();
 			alert(html);

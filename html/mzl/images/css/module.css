@@ -1,0 +1,267 @@
+body {
+	font: 16px/1.6em Arial, Geneva, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%
+}
+ul, li, dl, dt, dd {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style-type: none
+}
+img {
+	border: none
+}
+.clearit {
+	clear: both;
+}
+.font-blue {
+	color: #003399
+}
+/*公告栏组件*/
+.notice_board {
+	margin-top: 20px;
+	overflow: hidden;
+	border: 1px solid #DBDBDB;
+	border-radius: 6px;
+}
+.notice_board dt {
+	height: 35px;
+	color: #0066FF;
+	font: bold 16px "微软雅黑";
+	background: #EFEFEF;
+	border-bottom: 1px solid #DBDBDB
+}
+.notice_board dt i, .notice_board dt span {
+	display: block;
+	height: 35px;
+	line-height: 35px;
+	float: left;
+}
+.notice_board dt i {
+	width: 35px;
+	background: url("../img/N-icon01.png") no-repeat
+}
+.notice_close {
+	text-align: center;
+	cursor: pointer;
+	width: 35px;
+}
+.notice_board dd {
+	font: 12px "微软雅黑";
+	background: #F9F9F9
+}
+.notice_board li {
+	float: left;
+	width: 100%;
+}
+.notice_board dd a {
+	padding: 0 30px 0 10px;
+	cursor: default;
+	overflow: hidden;
+	display: block;
+	height: 26px;
+	line-height: 26px;
+	color: #000000;
+	text-decoration: none
+}
+.notice_board dd a:hover {
+	background: #B6D5FF
+}
+
+.notice_board dd i {
+	display: block;
+	float: left;
+	height: 26px;
+	width: 26px;
+	line-height: 26px;
+	background: url("../img/N-icon02.png") no-repeat
+}
+.notice_board dd span {
+	display: block;
+	height: 26px;
+}
+.notice_content {
+	float: left;
+}
+.notice_time {
+	float: right;
+}
+/*bench-left*/
+.bench_info {
+	width: 227px;
+	height: 100%;
+	background: #F5F5F5;
+	border-right: 1px solid #B7B7B7;
+	font: 12px "微软雅黑"
+}
+.bench_per_info i, .bench_online_info i {
+	display: block;
+	width: 227px;
+	height: 65px;
+	background: url("../img/N-icon04.png") no-repeat
+}
+.bench_online_info i {
+	background: url("../img/N-icon03.png") no-repeat
+}
+.bench_info li {
+	padding-left: 26px;
+	height: 30px;
+	line-height: 30px;
+}
+/*bench-right*/
+.bench_tools {
+	width: 300px;
+	padding: 20px;
+}
+.notice_cal {
+	height: 255px;
+	width: 100%;
+}
+.notice_msg {
+	width: 100%;
+	margin: 10px auto;
+	border: 8px solid #DBDBDB;
+	min-height: 100px;
+	border-radius: 10px
+}
+/*calendar-wideget*/
+#current-month {
+	text-align: center;
+	font-size: 14px;
+	margin: 0px;
+	padding: 14px 0;
+	border-radius: 5px 5px 0 0;
+	background: #DBDBDB
+}
+.calendar-month {
+	font-size: 12px;
+	border-right: 1px solid #DFDFDF;
+	border-top: 1px solid #DFDFDF
+}
+.calendar-month td, th {
+	border-left: 1px solid #DFDFDF;
+	border-bottom: 1px solid #DFDFDF;
+	width: 37px;
+	padding: 6px 0;
+	text-align: center;
+	background: #F2F2F2
+}
+.calendar-month th {
+	background: #5A5A5A;
+	color: #fff
+}
+.other-month {
+	color: #DFDFDF
+}
+/*login*/
+.login_Main {
+	overflow: hidden;
+	margin: 0 auto;
+	margin-top: 200px;
+	position:relative;
+	padding: 30px 26px;
+	width: 600px;
+	height: 260px;
+	border: 1px solid #FFF;
+	border-radius: 8px;
+	box-shadow: 0 3px 3px #DFDFDF
+}
+.login_bg {
+	left: 0px;
+	top:0px;
+	position: absolute;
+	width: 652px;
+	height: 320px;
+	background: #006DB8;
+    filter:alpha(opacity=40);
+	opacity: 0.4;
+	border-radius: 8px;
+}
+.login_content {
+	position: relative;
+	height: 260px;
+	width: 600px;
+	background: #FFF;
+	border: 1px solid #27628A;
+	border-radius:  8px; 
+}
+.logo {
+	float: left;
+	width: 294px;
+	height: 266px;
+	background: url("../img/login.png") no-repeat;
+}
+.login_box {
+	float: left;
+}
+.login_user, .login_pwd {
+	float: left;
+	width: 33px;
+	height: 35px;
+}
+.login_con {
+	width: 100%;
+	height: 100%;
+	padding-top: 30px;
+}
+.login_con dt {
+	padding: 8px 0px;
+	padding-left: 34px;
+}
+.login_user {
+	cursor: pointer;
+	background: url("../img/login_user.png") no-repeat;
+}
+.login_pwd {
+	cursor: pointer;
+	background: url("../img/login_pwd.png") no-repeat;
+}
+dt #LoginBoxem, dt #LoginBoxPs {
+	height: 31px;
+	line-height:31px;
+	width: 190px;
+	background: #E7EBEE;
+	border: 1px solid #A8C7D0;
+	border-radius: 0 3px 3px 0;
+}
+.x-input {
+	width: 70px;
+	height:31px;
+	background: #E7EBEE;
+	border: 1px solid #A8C7D0;
+	border-radius: 3px;
+}
+..verifyCode {
+	float: left
+}
+.verifyCode img {
+	margin: 0 10px;
+	float:left;
+	display: block;
+	width: 70px;
+	height: 35px;
+	background: #D5D8D8
+}
+.verifyCode a {
+	float:left;
+	display: block;
+	width: 60px;
+	height: 35px;
+	line-height: 16px;
+	color: #D1D1D1;
+	font-size: 12px;
+	text-decoration: none;
+}
+.login_Btn {
+	position: relative;
+	cursor: pointer;
+	display: block;
+	width:223px;
+	height: 48px;
+	background: url("../img/login_btn.png") no-repeat;
+	z-index: 100;
+}

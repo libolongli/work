@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>bench</title>
+		<meta name="author" content="Administrator" />
+		<link rel="stylesheet" href="images/css/module.css" type="text/css"/>
+		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<script src="images/js/calendar-widget.js"></script>
+		<script src="images/js/w2ui-1.2.min.js"></script>
+		
+		<!-- Date: 2013-08-20 -->
+	</head>
+	<body>
+		<div id="bench" style="width: 95%; height: 710px;margin-bottom: 10px;">
+		</div>
+	</body>
+	<script>
+		var layStyle = {
+			pstyle : 'background: #FFFFFF;overflow: hidden'
+		}
+		var ContentMain = function(layout) {
+			layout.w2layout({
+				name : 'Bench',
+				panels : [{
+					type : 'left',
+					size : 227,
+					resizable : true,
+					style : layStyle.pstyle
+				}, {
+					type : 'main',
+					style : layStyle.pstyle
+				},{
+					type : 'right',
+					size: 320,
+					style : layStyle.pstyle
+				}]
+			});
+		}
+		window.onload=function() {
+			new ContentMain($('#bench'));
+			w2ui['Bench'].load('main', 'bench_main.html');
+			w2ui['Bench'].load('left', 'bench_left.html')
+			w2ui['Bench'].load('right', 'bench_right.html')
+		}
+	</script>
+</html>
+

@@ -5,18 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>添加新闻</title>
-		<meta name="author" content="Administrator" />
-		<!-- Date: 2013-08-16 -->
-		<link href="images/css/w2ui-1.2.min.css" type="text/css" rel="stylesheet" />
-		<link href="images/css/n_menu.css" type="text/css" rel="stylesheet" />
-	</head>
-	<body>
-		<div id="from_mandatory_table"></div>
-	</body>
-	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
-	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
-	<script src="images/js/Validform_v5.3.2.js" type="text/javascript"></script>
-	<script src="images/js/n_from.js" type="text/javascript"></script>
+		<? k::load('layout','layout')->render('form') ?>
 	<script type="text/javascript">
 	
 		//配置磁块
@@ -24,6 +13,7 @@
 		//callback:function(data){}
 		var from = new smartFrom('from_mandatory_table', {
 			url:'http://www.project.com/?m=new&a=do',
+			center:true,
 			httpType : 'post',
 			rows : [
 							{type : 'select', name : 'type', title : '添加类型', tip : "请选择类型", datatype:"*", errormsg : "请选择类型！", 
@@ -31,9 +21,25 @@
 							{type : 'input', name : 'title', title : '标题', tip : "请输入标题！", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
 							{type : 'textarea', name : 'content', title : '发表内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的日期格式"},
 							],
-			callback:function(data){
-				
+
+		});
+			var thisRpIn = null;
+		$(".rp_view").click(function(){
+			thisRpIn = this;
+			if($(this).attr("name") == "recruit"){
+				$().w2popup('open', {
+				body: "<iframe src='data.html' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input id="bounced-commit" type="button" style="display:none" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
 			}
 		});
+		
+		function setrp(name){
+			$(thisRpIn).prev().val(name);
+			$().w2popup('close');
+		};
 	</script>
 </html>

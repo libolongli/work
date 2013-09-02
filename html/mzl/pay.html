@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>search</title>
+		<meta name="author" content="Administrator" />
+		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<script src="images/js/w2ui-1.2.min.js"></script>
+		<!-- Date: 2013-08-28 -->
+	</head>
+	<body>
+		<div id="pay" style="width: 80%;height:500px;">
+		</div>
+	</body>
+	<script>
+		$('#pay').w2grid({ 
+		    name: 'pay',
+		    show: { selectColumn: true },
+			multiSelect: false, 
+		    sortData: [ { field: 'recid', direction: 'asc' } ],
+		    columns: [                
+		        { field: 'name', caption: '姓名', size: '30%', sortable: true },
+		        { field: 'level', caption: '等级', size: '30%', sortable: true },
+		        { field: 'age', caption: '年龄', size: '40%' },
+		        { field: 'view', caption: '查看', size: '120px', render: function (record, index) {
+					return "<div onclick=checkinfo('http://www.baidu.com')>查看</div>";
+			} },
+		    ],
+		    records: [
+		        { recid: 1, name: 'John', level: 'doe', age: 'jdoe@gmail.com'},
+		        { recid: 2, name: 'Stuart', level: 'Motzart', age: 'jdoe@gmail.com'},
+		        { recid: 3, name: 'Jin', level: 'Franson', age: 'jdoe@gmail.com'},
+		        { recid: 4, name: 'Susan', level: 'Ottie', age: 'jdoe@gmail.com'},
+		        { recid: 5, name: 'Kelly', level: 'Silver', age: 'jdoe@gmail.com'},
+		        { recid: 6, name: 'Francis', level: 'Gatos', age: 'jdoe@gmail.com'},
+		        { recid: 7, name: 'Mark', level: 'Welldo', age: 'jdoe@gmail.com'},
+		        { recid: 8, name: 'Thomas', level: 'Bahh', age: 'jdoe@gmail.com'},
+		        { recid: 9, name: 'Sergei', level: 'Rachmaninov', age: 'jdoe@gmail.com'},
+		        { recid: 20, name: 'Jill', level: 'Doe', age: 'jdoe@gmail.com'},
+		        { recid: 21, name: 'Frank', level: 'Motzart', age: 'jdoe@gmail.com'},
+		        { recid: 22, name: 'Peter', level: 'Franson', age: 'jdoe@gmail.com'},
+		        { recid: 23, name: 'Andrew', level: 'Ottie', age: 'jdoe@gmail.com'},
+		        { recid: 24, name: 'Manny', level: 'Silver', age: 'jdoe@gmail.com'},
+		        { recid: 25, name: 'Ben', level: 'Gatos', age: 'jdoe@gmail.com'},
+		        { recid: 26, name: 'Doer', level: 'Welldo', age: 'jdoe@gmail.com'},
+		        { recid: 27, name: 'Shashi', level: 'bahh', age: 'jdoe@gmail.com'},
+		        { recid: 28, name: 'Av', level: 'Rachmaninov', age: 'jdoe@gmail.com'}
+		    ]
+		});
+		function checkinfo(url) {
+			$().w2popup('open', {
+				body: "<iframe src='"+url+"' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input type="button" value="close" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
+		}
+	</script>
+</html>
+

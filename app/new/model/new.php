@@ -23,7 +23,11 @@ class k_model_new_new
 			 $new->title = $data['title'];
 			$new->content = $data['content'];
 			$new->type = $data['type'];
+			//$time = time();
+			 //date('Y-m-d H:i:s',$time);
+			$new->ts_created = time();
 			$id = R::store($new);
+			print_r($data);
 			return $id;
 		}
 	}
@@ -35,7 +39,9 @@ class k_model_new_new
 	}
 
     public function getListJson(){
-		$data = R::getAll("SELECT id as recid,title,content,ts_created FROM news where status='0' order by id desc");
+		//$data = R::getAll("SELECT id as recid,title,content,type,ts_created FROM news where status='0' order by id desc");
+		$data = R::getAll("SELECT n.id as recid,n.title,n.content,n.ts_created,t.titles as type FROM news as n INNER JOIN type as t on n.type = t.type_id where n.status='0' order by n.id desc");
+	//SELECT n.title,n.content,t.titles as type FROM news as n INNER JOIN type as t on n.type = t.type_id where where n.status='0' order by id desc;
 		return json_encode($data);
 
 	}

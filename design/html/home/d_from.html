@@ -25,28 +25,29 @@
 	<script type="text/javascript">
 		//配置磁块
 		var fromL = new smartFrom('from_s', {
-			url:'www.kkkk.com',
+			url:'test.php',
 			httpType : 'post',
 			center : true,
 			popups : [{url:"recruitPeople_k.html", type:"load", name:'recruit'}, {url:"course_popup.html", type:"cont", name:'course'}],
-			rows : [
+			rows : [		
 					{type : 'popup', name : 'from1', title : '系统名称', tip : "请输入招生人！", inputType:'text', datatype:"/^[\u4e00-\u9fa5]/", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
 					{type : 'input', name : 'from2', title : '学&nbsp;号', tip : "请填写你报名日期", inputType:'text', datatype:"n", errormsg : "请填数字"},
 					{type : 'input', name : 'from3', title : '姓&nbsp;名', tip : "请填写你的学号", inputType:'text', datatype:"n6-16", errormsg : "请输入6-16位数字"},
 					{type : 'input', name : 'from4', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
 					{type : 'input', name : 'from5', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
-					{type : 'popup', name : 'from1', title : '系统名称', tip : "请输入招生人！", inputType:'text', datatype:"/^[\u4e00-\u9fa5]/", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
-					{type : 'input', name : 'from2', title : '学&nbsp;号', tip : "请填写你报名日期", inputType:'text', datatype:"n", errormsg : "请填数字"},
-					{type : 'input', name : 'from3', title : '姓&nbsp;名', tip : "请填写你的学号", inputType:'text', datatype:"n6-16", errormsg : "请输入6-16位数字"},
-					{type : 'input', name : 'from4', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
-					{type : 'input', name : 'from5', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
-					{type : 'input', name : 'from4', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
-					{type : 'input', name : 'from5', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
-					{type : 'input', name : 'from4', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
-					{type : 'input', name : 'from5', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
-					{type : 'select', name : 'from6', title : '考勤短信', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
+					{type : 'popup', name : 'from7', title : '系统名称', tip : "请输入招生人！", inputType:'text', datatype:"/^[\u4e00-\u9fa5]/", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
+					{type : 'input', name : 'from8', title : '学&nbsp;号', tip : "请填写你报名日期", inputType:'text', datatype:"n", errormsg : "请填数字"},
+					{type : 'input', name : 'from9', title : '姓&nbsp;名', tip : "请填写你的学号", inputType:'text', datatype:"n6-16", errormsg : "请输入6-16位数字"},
+					{type : 'input', name : 'from10', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
+					{type : 'input', name : 'from11', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
+					{type : 'input', name : 'from12', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
+					{type : 'input', name : 'from13', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
+					{type : 'input', name : 'from14', title : '姓名拼音', tip : "请填姓名拼音", inputType:'text', datatype:"/^[A-Za-z]/", errormsg : "请输入由26个英文字母组合的字符"},
+					{type : 'input', name : 'from15', title : '一寸照片', tip : "请填上传你的一寸照片", inputType:'text', datatype:"*", errormsg : "请填上传你的一寸照片"},
+					{type : 'select', name : 'from16', title : '考勤短信', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
 													data : [{value:1, name:"在读"}, {value:2, name:"走读"}, {value:3, name:"周末"}], doption : "--请选择--"},	
-					{type : 'popup', name : 'from7', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"},						
+					{type : 'popup', name : 'from17', title : '课程', tip : "请选择你的课程", inputType:'text', datatype:"*", errormsg : "请选择你的课程！", popupType:"course"}	,
+					{type : 'html', title:"html", content : '<input type="text" value="" name="18" />'}	//自定义表单元素   传入html		
 				   ]
 		});
 		

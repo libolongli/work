@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>bounced</title>
+		<meta name="author" content="Administrator" />
+		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<script src="images/js/w2ui-1.2.min.js"></script>
+		<!-- Date: 2013-08-26 -->
+	</head>
+	<body>
+		<div id="aaa">
+			
+		</div>
+		<input id="b" type="button" value="button" onclick="popup();"/>
+	</body>
+	<script>
+		function popup() {
+			$().w2popup('open', {
+				body: "<iframe src='data.html' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input id="bounced-commit" type="button" style="display:none" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
+		}
+	</script>
+</html>
+

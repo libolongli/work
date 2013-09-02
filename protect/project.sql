@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50515
 File Encoding         : 65001
 
-Date: 2013-08-29 11:19:20
+Date: 2013-08-30 17:35:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,7 @@ CREATE TABLE `consult` (
   `profession` tinyint(4) DEFAULT NULL COMMENT '职业',
   `introduce` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of consult
@@ -68,6 +68,9 @@ INSERT INTO `consult` VALUES ('3', '5', null, '1', '张三', 'zhangsan', '123', 
 INSERT INTO `consult` VALUES ('4', '5', null, '123', '李波', 'Nomius', '123456', '123', null, '3', '3', null, '1', null, '这孩子很好');
 INSERT INTO `consult` VALUES ('5', '6', null, '123', '李波2', 'Nomius89', '452452425435', '7894545', null, '2', '3', null, '1', null, '很好啊');
 INSERT INTO `consult` VALUES ('6', '8', null, '12123243', '发得分', 'fadsfadsf', '1212121212', '123232', null, null, '2', null, '2', null, '发生大幅');
+INSERT INTO `consult` VALUES ('7', '8', null, '123', '2323234', 'fadfasdf', '23232', '123', null, null, '2', null, '2', null, '发大水法的说法');
+INSERT INTO `consult` VALUES ('8', '8', null, '12345', '李波', 'fasdfad', '123', '123', null, null, '2', null, '2', null, '发噶');
+INSERT INTO `consult` VALUES ('9', '7', null, '123', '6565', 'Nomius', '54545', '45656', null, null, '1', null, '1', null, '656565');
 
 -- ----------------------------
 -- Table structure for `course`
@@ -101,7 +104,7 @@ CREATE TABLE `feed` (
   `content` varchar(255) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 未读(默认) 2已读  3代表已 feed但是未读',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of feed
@@ -151,6 +154,34 @@ INSERT INTO `feed` VALUES ('42', '4', '7', '2', '你好啊', '3');
 INSERT INTO `feed` VALUES ('43', '4', '5', '2', '很好啊', '3');
 INSERT INTO `feed` VALUES ('44', '4', '6', '2', '很好啊', '3');
 INSERT INTO `feed` VALUES ('45', '4', '7', '2', '很好啊', '3');
+INSERT INTO `feed` VALUES ('46', '4', '6', '2', '你好啊', '3');
+INSERT INTO `feed` VALUES ('47', '4', '7', '2', '你好啊', '3');
+INSERT INTO `feed` VALUES ('48', '4', '8', '2', '你好啊', '3');
+INSERT INTO `feed` VALUES ('49', '4', '5', '2', '123454', '3');
+INSERT INTO `feed` VALUES ('50', '4', '6', '2', '123454', '3');
+INSERT INTO `feed` VALUES ('51', '4', '7', '2', '123454', '3');
+INSERT INTO `feed` VALUES ('52', '4', '8', '2', '123454', '3');
+INSERT INTO `feed` VALUES ('53', '4', '9', '2', '123454', '3');
+INSERT INTO `feed` VALUES ('54', '4', '10', '2', '123454', '3');
+INSERT INTO `feed` VALUES ('55', '4', '11', '2', '123454', '3');
+INSERT INTO `feed` VALUES ('56', '4', '5', '2', 'heheh', '3');
+INSERT INTO `feed` VALUES ('57', '4', '6', '2', 'heheh', '3');
+INSERT INTO `feed` VALUES ('58', '4', '7', '2', 'heheh', '3');
+INSERT INTO `feed` VALUES ('59', '4', '8', '2', 'heheh', '3');
+INSERT INTO `feed` VALUES ('60', '4', '9', '2', 'heheh', '3');
+INSERT INTO `feed` VALUES ('61', '4', '10', '2', 'heheh', '3');
+INSERT INTO `feed` VALUES ('62', '4', '11', '2', 'heheh', '3');
+INSERT INTO `feed` VALUES ('63', '4', '5', '2', 'afasdf', '3');
+INSERT INTO `feed` VALUES ('64', '4', '6', '2', 'afasdf', '3');
+INSERT INTO `feed` VALUES ('65', '4', '7', '2', 'afasdf', '3');
+INSERT INTO `feed` VALUES ('66', '4', '8', '2', 'afasdf', '3');
+INSERT INTO `feed` VALUES ('67', '4', '9', '2', 'afasdf', '3');
+INSERT INTO `feed` VALUES ('68', '4', '10', '2', 'afasdf', '3');
+INSERT INTO `feed` VALUES ('69', '4', '11', '2', 'afasdf', '3');
+INSERT INTO `feed` VALUES ('70', '4', '5', '2', '12345545', '3');
+INSERT INTO `feed` VALUES ('71', '4', '6', '2', '12345545', '3');
+INSERT INTO `feed` VALUES ('72', '4', '7', '2', '12345545', '3');
+INSERT INTO `feed` VALUES ('73', '1', '12', '1', '新注册用户Nomius', '1');
 
 -- ----------------------------
 -- Table structure for `flow`
@@ -166,7 +197,7 @@ CREATE TABLE `flow` (
   `ts_updated` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of flow
@@ -195,7 +226,7 @@ INSERT INTO `flow` VALUES ('21', '4', '11', '用户fadfadfad,已经付款请注�
 INSERT INTO `flow` VALUES ('22', '11', '11', '用户12323232323,已经付款请注意查收!', '0', '1377419480', '1377419480', '1');
 INSERT INTO `flow` VALUES ('23', '11', '4', '用户123456,已经付款请注意查收!', '0', '1377419597', '1377419597', '1');
 INSERT INTO `flow` VALUES ('24', '4', '11', '用户sdfasdfadsf,已经付款请注意查收!', '0', '1377419627', '1377419627', '1');
-INSERT INTO `flow` VALUES ('25', '11', '4', '用户1234,已经付款请注意查收!', '0', '1377419673', '1377419673', '1');
+INSERT INTO `flow` VALUES ('25', '11', '4', '用户1234,已经付款请注意查收!', '90', '1377419673', '1377767423', '9');
 INSERT INTO `flow` VALUES ('26', '11', '1234444', '用户111111,已经付款请注意查收!', '0', '1377419691', '1377419691', '1');
 INSERT INTO `flow` VALUES ('27', '4', '11', '用户124444,已经付款请注意查收!', '0', '1377420083', '1377420083', '1');
 INSERT INTO `flow` VALUES ('28', '11', '8', '用户11111111,已经付款请注意查收!', '0', '1377422087', '1377422087', '1');
@@ -210,10 +241,18 @@ INSERT INTO `flow` VALUES ('36', '4', '11', '用户,已经付款请注意查收!
 INSERT INTO `flow` VALUES ('37', '4', '', '用户,已经付款请注意查收!', '0', '1377573874', '1377573874', '1');
 INSERT INTO `flow` VALUES ('38', '4', '', '用户789,已经付款请注意查收!', '0', '1377573949', '1377573949', '1');
 INSERT INTO `flow` VALUES ('39', '4', '5,6,7,8,9,10,11', '用户344555,已经付款请注意查收!', '0', '1377574017', '1377574017', '1');
-INSERT INTO `flow` VALUES ('40', '11', '4,5,6,7,8,9,10', '用户fadfasdfads,已经付款请注意查收!', '0', '1377574175', '1377574175', '1');
+INSERT INTO `flow` VALUES ('40', '11', '4,5,6,7,8,9,10', '用户fadfasdfads,已经付款请注意查收!', '0', '1377574175', '1377758355', '9');
 INSERT INTO `flow` VALUES ('41', '4', '7', '用户乳房发撒旦发的,已经付款请注意查收!', '0', '1377583421', '1377583421', '1');
 INSERT INTO `flow` VALUES ('42', '4', '8', '用户乳房发撒旦发的,已经付款请注意查收!', '0', '1377583421', '1377583421', '1');
 INSERT INTO `flow` VALUES ('43', '4', '9', '用户乳房发撒旦发的,已经付款请注意查收!', '0', '1377583421', '1377583421', '1');
+INSERT INTO `flow` VALUES ('44', '4', '5', '用户123456,已经付款请注意查收!', '0', '1377833393', '1377833393', '1');
+INSERT INTO `flow` VALUES ('45', '4', '6', '用户123456,已经付款请注意查收!', '0', '1377833393', '1377833393', '1');
+INSERT INTO `flow` VALUES ('46', '4', '7', '用户123456,已经付款请注意查收!', '0', '1377833393', '1377833393', '1');
+INSERT INTO `flow` VALUES ('47', '4', '8', '用户123456,已经付款请注意查收!', '0', '1377833393', '1377833393', '1');
+INSERT INTO `flow` VALUES ('48', '4', '9', '用户123456,已经付款请注意查收!', '0', '1377833393', '1377833393', '1');
+INSERT INTO `flow` VALUES ('49', '4', '10', '用户123456,已经付款请注意查收!', '0', '1377833393', '1377833393', '1');
+INSERT INTO `flow` VALUES ('50', '4', '11', '用户123456,已经付款请注意查收!', '0', '1377833393', '1377833393', '1');
+INSERT INTO `flow` VALUES ('51', '4', '7', '用户123456,已经付款请注意查收!', '0', '1377847665', '1377847665', '1');
 
 -- ----------------------------
 -- Table structure for `flow_log`
@@ -319,7 +358,7 @@ CREATE TABLE `menu` (
   `url` varchar(254) DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
@@ -346,6 +385,8 @@ INSERT INTO `menu` VALUES ('19', '删除feed', '14', 'www.baidu.com', '');
 INSERT INTO `menu` VALUES ('20', '添加feed1', '18', 'www.baidu.com', '');
 INSERT INTO `menu` VALUES ('21', '删除feed1', '19', 'no', '');
 INSERT INTO `menu` VALUES ('22', '学生在线统计', '10', '', '');
+INSERT INTO `menu` VALUES ('23', '121232323', '3', '', '');
+INSERT INTO `menu` VALUES ('24', '454545', '2', '', '');
 
 -- ----------------------------
 -- Table structure for `msg`
@@ -361,7 +402,7 @@ CREATE TABLE `msg` (
   `ts_updated` int(11) DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1' COMMENT '0代表已删除,1代表未读,2代表已读...',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of msg
@@ -407,6 +448,11 @@ INSERT INTO `msg` VALUES ('41', '4', '7', '1', '12121', '1377586879', '137758687
 INSERT INTO `msg` VALUES ('42', '4', '9,11', '1', '12121', '1377586960', '1377586960', '1');
 INSERT INTO `msg` VALUES ('43', '4', '5,6,7', '1', '你好啊', '1377658382', '1377658382', '1');
 INSERT INTO `msg` VALUES ('44', '4', '5,6,7', '1', '很好啊', '1377661534', '1377661534', '1');
+INSERT INTO `msg` VALUES ('45', '4', '6,7,8', '1', '你好啊', '1377746864', '1377746864', '1');
+INSERT INTO `msg` VALUES ('46', '4', '5,6,7,8,9,10,11', '1', '123454', '1377757256', '1377757256', '1');
+INSERT INTO `msg` VALUES ('47', '4', '5,6,7,8,9,10,11', '1', 'heheh', '1377761234', '1377761234', '1');
+INSERT INTO `msg` VALUES ('48', '4', '5,6,7,8,9,10,11', '1', 'afasdf', '1377761612', '1377761612', '1');
+INSERT INTO `msg` VALUES ('49', '4', '5,6,7', '1', '12345545', '1377767468', '1377767468', '1');
 
 -- ----------------------------
 -- Table structure for `msg_log`
@@ -419,12 +465,12 @@ CREATE TABLE `msg_log` (
   `ts_created` int(11) NOT NULL,
   `fleg` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of msg_log
 -- ----------------------------
-INSERT INTO `msg_log` VALUES ('1', '1', '123', '1377052406', '1');
+INSERT INTO `msg_log` VALUES ('1', '1', '1', '1377052406', '1');
 INSERT INTO `msg_log` VALUES ('2', '1', '456', '1377052406', '1');
 INSERT INTO `msg_log` VALUES ('3', '1', '12', '1377161175', '1');
 INSERT INTO `msg_log` VALUES ('4', '1', '2', '1377164359', '1');
@@ -458,17 +504,44 @@ INSERT INTO `msg_log` VALUES ('31', '4', '6', '1377586594', '1');
 INSERT INTO `msg_log` VALUES ('32', '4', '7', '1377586594', '1');
 INSERT INTO `msg_log` VALUES ('33', '4', '5', '1377586639', '1');
 INSERT INTO `msg_log` VALUES ('34', '4', '11', '1377586728', '1');
-INSERT INTO `msg_log` VALUES ('35', '4', '11', '1377586758', '1');
-INSERT INTO `msg_log` VALUES ('36', '4', '11', '1377586794', '1');
+INSERT INTO `msg_log` VALUES ('35', '4', '11', '1377586758', '9');
+INSERT INTO `msg_log` VALUES ('36', '4', '11', '1377586794', '9');
 INSERT INTO `msg_log` VALUES ('37', '4', '7', '1377586879', '1');
-INSERT INTO `msg_log` VALUES ('38', '4', '9', '1377586960', '1');
-INSERT INTO `msg_log` VALUES ('39', '4', '11', '1377586960', '1');
-INSERT INTO `msg_log` VALUES ('40', '4', '5', '1377658382', '1');
-INSERT INTO `msg_log` VALUES ('41', '4', '6', '1377658382', '1');
-INSERT INTO `msg_log` VALUES ('42', '4', '7', '1377658382', '1');
-INSERT INTO `msg_log` VALUES ('43', '4', '5', '1377661534', '1');
-INSERT INTO `msg_log` VALUES ('44', '4', '6', '1377661534', '1');
-INSERT INTO `msg_log` VALUES ('45', '4', '7', '1377661534', '1');
+INSERT INTO `msg_log` VALUES ('38', '4', '9', '1377586960', '9');
+INSERT INTO `msg_log` VALUES ('39', '4', '11', '1377586960', '9');
+INSERT INTO `msg_log` VALUES ('40', '4', '5', '1377658382', '9');
+INSERT INTO `msg_log` VALUES ('41', '4', '6', '1377658382', '9');
+INSERT INTO `msg_log` VALUES ('42', '4', '7', '1377658382', '9');
+INSERT INTO `msg_log` VALUES ('43', '4', '5', '1377661534', '9');
+INSERT INTO `msg_log` VALUES ('44', '4', '6', '1377661534', '9');
+INSERT INTO `msg_log` VALUES ('45', '4', '7', '1377661534', '9');
+INSERT INTO `msg_log` VALUES ('46', '4', '6', '1377746864', '9');
+INSERT INTO `msg_log` VALUES ('47', '4', '7', '1377746864', '9');
+INSERT INTO `msg_log` VALUES ('48', '4', '8', '1377746864', '9');
+INSERT INTO `msg_log` VALUES ('49', '4', '5', '1377757256', '1');
+INSERT INTO `msg_log` VALUES ('50', '4', '6', '1377757256', '1');
+INSERT INTO `msg_log` VALUES ('51', '4', '7', '1377757256', '1');
+INSERT INTO `msg_log` VALUES ('52', '4', '8', '1377757256', '1');
+INSERT INTO `msg_log` VALUES ('53', '4', '9', '1377757256', '1');
+INSERT INTO `msg_log` VALUES ('54', '4', '10', '1377757256', '1');
+INSERT INTO `msg_log` VALUES ('55', '4', '11', '1377757256', '1');
+INSERT INTO `msg_log` VALUES ('56', '4', '5', '1377761234', '1');
+INSERT INTO `msg_log` VALUES ('57', '4', '6', '1377761234', '1');
+INSERT INTO `msg_log` VALUES ('58', '4', '7', '1377761234', '1');
+INSERT INTO `msg_log` VALUES ('59', '4', '8', '1377761234', '1');
+INSERT INTO `msg_log` VALUES ('60', '4', '9', '1377761234', '1');
+INSERT INTO `msg_log` VALUES ('61', '4', '10', '1377761234', '1');
+INSERT INTO `msg_log` VALUES ('62', '4', '11', '1377761234', '1');
+INSERT INTO `msg_log` VALUES ('63', '4', '5', '1377761612', '1');
+INSERT INTO `msg_log` VALUES ('64', '4', '6', '1377761612', '1');
+INSERT INTO `msg_log` VALUES ('65', '4', '7', '1377761612', '1');
+INSERT INTO `msg_log` VALUES ('66', '4', '8', '1377761612', '1');
+INSERT INTO `msg_log` VALUES ('67', '4', '9', '1377761612', '1');
+INSERT INTO `msg_log` VALUES ('68', '4', '10', '1377761612', '1');
+INSERT INTO `msg_log` VALUES ('69', '4', '11', '1377761612', '1');
+INSERT INTO `msg_log` VALUES ('70', '4', '5', '1377767468', '1');
+INSERT INTO `msg_log` VALUES ('71', '4', '6', '1377767468', '1');
+INSERT INTO `msg_log` VALUES ('72', '4', '7', '1377767468', '1');
 
 -- ----------------------------
 -- Table structure for `new`
@@ -579,7 +652,7 @@ CREATE TABLE `user` (
   `user` varchar(254) NOT NULL,
   `pass` varchar(254) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user

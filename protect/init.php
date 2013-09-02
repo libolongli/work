@@ -4,7 +4,7 @@
 //define ROOT
 define('K_PATH',dirname(__FILE__).'/');
 define('K_ROOT_PATH',dirname(dirname(__FILE__)).'/');
-
+require_once  K_PATH.'db.php';
 if(!isset($_SESSION)) session_start();
 k::init_db();
 
@@ -53,17 +53,12 @@ class tpl
 	$target='"/design/images/';
 	
 
-	$t_array = array('bench.html','bench_left.html',
-					 'bench_main.html','bench_right.html','c_from.html',
-					 'c_new.html','c_work.html','demo.html','grid-tree.html',
-					 'home.html','tree.html','course_popup.html','c_detailed.html',
-					 's_from.html','recruitPeople_k.html','s_detailed.html','theClass.html','tree_chart.html');
 
 	$t_array = array('bench.html','bench_left.html','bench_main.html',
 			'bench_right.html','c_from.html','c_new.html','c_work.html',
 			'demo.html','grid-tree.html','home.html','tree.html',
 			'c_detailed.html','course_popup.html','d_from.html','recruitPeople_k.html',
-			's_detailed.html','s_from.html','theClass.html','data.html'
+			's_detailed.html','work_list.htl','search_content.html','s_from.html','theClass.html','data.html'
 			);
 
 	

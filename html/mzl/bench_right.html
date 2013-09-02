@@ -1,0 +1,43 @@
+<div class="bench_tools">
+	<div id="datepicker" class="notice_cal">
+		<div id="calendar"></div>
+		<script>
+		(function(){
+			$("#calendar").calendarWidget({
+				month : 7,
+				year : 2013
+			});
+			var now = new Date();
+			var nd = ".day"+now.getDate();
+			$(nd).css({"background":"#44B5DF","color":"#FFF"})
+		})();
+		</script>		
+	</div>
+	<div class="notice_msg">
+	</div>
+	<dl class="notice_board">
+		<dt>
+			<i></i><span class="notice_title">内部邮件</span><span id="notice_close" style="display: none">X</span>
+		</dt>
+		<dd>
+			<ul>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span style="display: none" class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span style="display: none" class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span style="display: none" class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span style="display: none" class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+				<li>
+					<a href=""><i></i><span class="notice_content">端午节放假通知</span><span style="display: none" class="notice_time">2013/6/20 11:42:13</span></a>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+</div>
+

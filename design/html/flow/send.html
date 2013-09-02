@@ -16,10 +16,10 @@
 			center:true,
 			httpType : 'post',
 			rows : [
-					{type : 'popup',title : '收件人', tip : "请输入招生人！", inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit"},			
-					{type : 'textarea', name : 'content', title : '发送的内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的格式"},
+					{type : 'popup',title : '收件人', tip : "请输入招生人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit"},			
+					{type : 'textarea', name : 'content', title : '发送的内容', tip : "请填写内容！", inputType:'text', datatype:"*", value:'<? echo isset($value)?$value:'';?>',errormsg : "请填写正确的格式"},
 					{type : 'hideInput', name : 'rids', errormsg : "",value :'', display:'none'},
-				  
+					{type : 'hideInput', name : 'transmit', errormsg : "",value :'<?=$transmit?>', display:'none'},
 				   ],	
 		});
 		var thisRpIn = null;
