@@ -137,7 +137,7 @@ var smartFrom = function(id, obj){
 			case "hideInput":
 				var input = '<tr style="display:'+row.display+'"><td class="from_title"></td>'
                     		+'<td><input ' 
-                    		+'type="text" value="'+row.value+'" name="'+row.name+'"' 
+                    		+'type="hidden" value="'+row.value+'" name="'+row.name+'"' 
                     		+'/></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
                     		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';

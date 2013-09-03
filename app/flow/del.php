@@ -1,6 +1,6 @@
 <?php
 	//require_once  K_ROOT_PATH.'protect/rb.php';
-	require_once  K_ROOT_PATH."app/".M."/task.class.php";
+	require_once  K_ROOT_PATH."app/".M."/model/task.php";
 	class module_flow_del{
 		private $_db;
 		function run(){			
@@ -14,7 +14,7 @@
 		
 		function add(){
 			$uid = $_SESSION['user']['id'];
-			$task = new task();
+			$task = new k_model_flow_task();
 			$array = array(
 				'rids'=>$_POST['rids'],
 				'content'=>$_POST['content'],

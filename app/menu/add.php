@@ -1,9 +1,25 @@
 <?php
 class module_menu_add
 {
+  /**
+	 * Executes SQL code and allows key-value binding.
+	 * This function allows you to provide an array with values to bind
+	 * to query parameters. For instance you can bind values to question
+	 * marks in the query. Each value in the array corresponds to the
+	 * question mark in the query that matches the position of the value in the
+	 * array. You can also bind values using explicit keys, for instance
+	 * array(":key"=>123) will bind the integer 123 to the key :key in the
+	 * SQL. This method has no return value.
+	 *
+	 * @param string $sql	  SQL Code to execute
+	 * @param array  $aValues Values to bind to SQL query
+	 *
+	 * @return void
+	 * @author libo
+	 */
   function run()
   {
-  
+	
 	$data = k::load('menu')->getOption('all');
 	$str = '';
 	if($data){

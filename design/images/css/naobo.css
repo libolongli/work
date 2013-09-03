@@ -1,6 +1,7 @@
-body {
+﻿body {
 	margin: 0;
-	padding: 0
+	padding: 0;
+    background-color: #FFFFFF;
 }
 
 /*表单、详细信息框*/

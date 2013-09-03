@@ -19,14 +19,22 @@
 				$data[$i]['value'] = $tmpdata[1];
 				$i++;
 			}
-			$this->_writer->updateRecord($table,$data,$id);
+			return $this->_writer->updateRecord($table,$data,$id);
 		}
 		
 		public  function insertRecord($table, $updatevalues){
-			$this->updateRecord($table, $updatevalues);
+			return $this->updateRecord($table, $updatevalues);
 		}
 		
 		public function getWriter(){
 			return R::getWriter();
+		}
+
+		public  function add($table, $updatevalues){
+			return $this->updateRecord($table, $updatevalues);
+		}
+
+		public  function update($table, $updatevalues,$id){
+			return $this->updateRecord($table, $updatevalues,$id);
 		}
 	}

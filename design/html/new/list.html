@@ -7,6 +7,7 @@
 		<title>w2ui</title>
 		<meta name="author" content="Administrator" />
 		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
+		<link rel="stylesheet" href="images/css/naobo.css" />
 		<script src="images/js/jquery-1.8.3.min.js"></script>
 		<script src="images/js/w2ui-1.2.min.js"></script>
 		<!-- Date: 2013-08-08 -->
@@ -57,7 +58,6 @@
 			},
 			onDelete: function(target, eventData) {
 				var ids = w2ui['grid'].getSelection();
-				alert(ids);
 				eventData.onComplete = function(){
 					$.ajax({
 					   type: "POST",
@@ -82,13 +82,7 @@
 				{ field: 'ts_created', caption: '发送时间', size: '30%'},
 			],
 			records:<?=$json?>
-		});
-
-		$(".w2ui-grid-popup-btn").live('click', function() {
-			var html = $(this).val();
-			alert(html);
-		});
-	
+		});	
 		
 	</script>
 </html>

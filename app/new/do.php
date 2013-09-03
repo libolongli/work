@@ -8,7 +8,7 @@ class module_new_do
 
 	if($id){
 	
-		echo "<script type='text/javascript'>alert('添加成功');location.href='http://www.project.com?m=new&a=list';</script>";
+		echo "<script type='text/javascript'>alert('添加成功');location.href='?m=new&a=list';</script>";
 	}else{
 		echo "<a href='http://www.project.com/?m=new&a=add'>添加失败!点击返回</a>";
 	}
