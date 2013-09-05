@@ -39,15 +39,17 @@ class k_model_new_new
 			$new->ts_created = time();
 			$id = R::store($new);
 
-			$now = time();
-			$idata = array("title=>{$data['title']}","content=>{$data['content']}","type=>{$data['type']}",
-				"ts_created=>{$now}","status=>0");
-			$id = $this->_db->add('news',$idata);
-			$user = $_SESSION['user'];
+//libo			
+			
+		//	$now = time();
+		//	$idata = array("title=>{$data['title']}","author=>{$data['author']}","content=>{$data['content']}","type=>{$data['type']}",
+		//		"ts_created=>{$now}","status=>0");
+		//	$id = $this->_db->add('news',$idata);
+		//	$user = $_SESSION['user'];
 			//发送工作流
-			$flow = k::load('task','flow');
-			$flow->init('news/add');
-			$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0));
+		//	$flow = k::load('task','flow');
+		//	$flow->init('news/add');
+		//	$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0));
 			return $id;
 		}
 	}
@@ -64,27 +66,24 @@ class k_model_new_new
 							from news as n INNER JOIN (SELECT  type_id,titles as active from type where cate = 'active') as a on n.active = a.type_id
 							INNER JOIN (SELECT type_id,titles as type from type where cate = 'type') as t on n.type = t.type_id where n.status = '0' order by id desc
 							");
+							
 		$newdata = R::getAll("select * from news");		
 			foreach($newdata as $k => $v){
-				 $newdata[$k][type];
+				  $newdata[$k][type].'....';
 			}
-			
-			
 			foreach($data as $key => $value){
 			
+				//echo  $data[$key][active].'....';
 				if($data[$key][active]=='审核通过'){
 					$data[$key]['operate'] = $data[$key][active];
 				}else{
+							//active = 3,审核通过
 				$data[$key]['operate'] = "<a href='javascript:void(0);' onclick='updateStatus({$value['recid']},3)'>".$data[$key]['active']."</a>";
 				}			
 				$data[$key]['operate'] .= "｜<a href='?m=home&a=newsList&type={$newdata[$k][type]}&id={$value['recid']}'>查看</a> ";
 				$data[$key]['operate'] .= "｜<a href='?m=home&a=newsList&type={$newdata[$k][type]}&id={$value['recid']}'>修改</a> ";
 			}
-		
-
-		 				
-
-		$data = R::getAll("SELECT n.id as recid,n.title,n.content,n.ts_created,t.titles as type FROM news as n INNER JOIN type as t on n.type = t.type_id where n.status='0' order by n.id desc");
+	
 
 		return json_encode($data);
 
