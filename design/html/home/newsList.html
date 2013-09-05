@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>newsList</title>
+		<meta name="author" content="Administrator" />
+		<!-- Date: 2013-08-25 -->
+		<style type="text/css">
+			.t_det_c {  border: 1px solid #CCCCCC;
+		    float: left;
+		    height: 100%;
+		    overflow: hidden;
+		    width: 100%;}
+			.t_det_c_left {float: left;
+		    height: 100%;
+		    width: 140px;}
+		    .t_det_c_left img {border: 1px solid #CCCCCC;
+    		margin: 10px 5px;}
+			.t_det_c_right {
+		    height: 100%;}
+		    .t_table{border-collapse:collapse;border-spacing:0;border-left:1px solid #ccc;border-top:1px solid #ccc;background:#fff;}
+			th,td{ border-bottom: 1px solid #CCCCCC;
+		    font-size: 14px;
+		    height: 30px;
+		    padding: 5px 5px;}
+			th{font-weight:bold;background:#fff;} 
+		    .t_table .t_table_title {
+		    	background-color: #EEEEEE;
+			    color: #000000;
+			    font-size: 14px;
+			    font-weight: bold;
+			    height: 25px;
+			    text-align: center;
+			    width: 15%;
+			    letter-spacing : 1px;
+			    border-left: 1px solid #CCCCCC;
+    			border-right: 1px solid #CCCCCC;
+		    }
+		    .t_det_f {
+		    	background-color: #EEEEEE;
+			    float: left;
+			    height: 30px;
+			    margin-top: 20px;
+			    width: 100%;
+		    }
+		    .t_det_f_c {
+		    	width:245px;
+		    	margin: 2px auto;
+		    }
+		</style>
+	</head>
+	<body>
+				<div class="t_det">
+			<div class="t_det_c" >
+				
+				<div class="t_det_c_right" style="position: relative;left: 0px;">
+					<table class="t_table" width="100%" border="" cellspacing="1" cellpadding="0" style="table-layout:fixed;" >
+					</table>
+				</div>
+			</div>
+			<div class="t_det_f" >
+				<div class="t_det_f_c">
+					<button>打印</button>
+					<button>发送短信</button>
+					<button>修改</button>
+					<button>返回</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+		var users =<? k::load('new','new')->getNewsInfo(); ?>;
+					 
+		function showTable(data, view){
+			for (var i=0; i < data.length; i++) {
+				var html = "";
+				if(data[i].title1){
+					html += '<tr><td class="t_table_title">'+data[i].title+'</td><td>'+data[i].name+'</td>'
+							+'<td class="t_table_title">'+data[i].title1+'</td><td>'+data[i].name1+'</td></tr>';
+				}else{
+					html += '<tr><td class="t_table_title">'+data[i].title+'</td>'
+								+'<td colspan="3" class="t_table_ko">'+data[i].name+'</td></tr>';
+				}
+				view.append(html);
+			};
+		};			 
+		showTable(users, $(".t_table"));			 
+	</script>
+</html>
