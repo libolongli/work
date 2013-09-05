@@ -7,18 +7,16 @@
 		<title><?=$title?></title>
 		<? k::load('layout','layout')->render('list') ?>
 	<script>
-		
 		$('#grid').w2grid({
 			name: 'grid',
-			header: '表单名',
 			recordsPerPage: 8,
 			show: {
-				selectColumn: true,
 				toolbar: true,
 				footer: true,
 				toolbarAdd: true,
-				// toolbarDelete: true,
-				// toolbarSave: true
+				selectColumn:true,
+				//toolbarDelete: true,
+				//toolbarSave: true
 			},
 			toolbar: {
 				items: [
@@ -27,15 +25,15 @@
 				onClick: function (target, data) {
 					console.log(target);
 					console.log(data);
-					if(target == 'add') {
-						this.enable('delete');
+					if(target == 'add'){
 						$().w2popup('open', {
 							title: '新增条目',
-							body: "<iframe src='<?=$frameurl;?>' frameborder='0' height='100%' width='100%'></iframe>",
-							buttons: '<input class="sdfs" id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');window.location.reload();">',
+							body: "<iframe  src='?m=flow&a=configadd' frameborder='0' height='100%' width='100%'></iframe>",
+							buttons: '<input id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');window.location.reload();">',
 							width: 800,
 							height: 500,overflow: 'hidden',
 							color: '#ffc',
+							speed: '0.3',
 							opacity: '0.5',
 							modal: true,
 							showClose: true,
@@ -51,27 +49,28 @@
 					if(target == 'refresh') {
 						window.location.reload(); 
 					};
+					
 					if(target == 'delete') {
 						var ids = w2ui['grid'].getSelection();
 						if (!confirm('确定删除么?')) {
-							return false;
+							return false
 						} else {
 							w2ui['grid'].remove.apply(w2ui['grid'],ids);
 							$.ajax({
 							   type: "POST",
 							   dataType:"json",
-							   url: "<?=$formurl?>",
-							   data:{id:ids,fleg:9},
+							   url: "?m=flow&a=configupdate",
+							   data:{id:ids,status:9},
 							   success: function(msg){
 								 
 							   }
-							});
-							
+							});		
 						}
 					}
+					
 				}
 			},
-			onSelect: function(target, eventData) {
+					onSelect: function(target, eventData) {
 				eventData.onComplete = function(){
 					this.toolbar.enable('delete');
 				}
@@ -82,23 +81,39 @@
 						this.toolbar.disable('delete');
 				}
 			},
-		
-			searches: [				
-				{ field: 'user', caption: '收件人', type: 'text' },
-				{ field: 'content', caption: '发送的内容', type: 'text' },
+			searches: [
+				{ field: 'name', caption: 'name', type: 'text' },
+				{ field: 'url', caption: 'url', type: 'text' },
 			],
-			sortData: [{ field: 'recid', direction: 'ASC' }],
-			columns: [				
-				{ field: 'user', caption: '收件人名字', size: '50px'},
-				{ field: 'content', caption: '内容', size: '30%'},
-				{ field: 'ts_created', caption: '发送时间', size: '30%'},
-			],
+			sortData: [{ field: '', direction: 'ASC' }],
+			columns : [{
+				field : 'name',
+				caption : '名称',
+				size : '50px'
+			}, {
+				field : 'url',
+				caption : 'url',
+				size : '20%'
+			},{
+				field : 'format',
+				caption : '模板',
+				size : '60%'
+			},{
+				field : 'active',
+				caption : '是否激活',
+				size : '15%'
+			}],
 			records:<?=$json?>
-		});	
-		
-		
-	
-		
+			
+		});
+		function checkinfo(url) {
+			$().w2popup('open', {
+				body: "<iframe src='"+url+"' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input type="button" value="close" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
+		}
 	</script>
 </html>
-

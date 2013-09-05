@@ -2,23 +2,31 @@
 class k_model_new_new
 {
 	private $data = array();
+
 			
 
-  function getRowLi($type)
-  {
+
+	private $_db;
+	function __construct(){
+
+		$this->_db = new db();
+	}
+  	function getRowLi($type)
+  	{
+
 		$data=  R::getAll("select * from news where type='{$type}' order by id desc");
 
-	 if($data) return $data;
+	 	if($data) return $data;
 	
-	 return false;	 
+	 	return false;	 
 	}
 	
 	function addNew($data){
 		foreach($data as $key =>$value){
-			
 			if($value == '请输入新闻标题！') $data[$key]='';
 		}
 		if($data){
+
 			$new = R::dispense('news');
 			 $new->title = $data['title'];
 			$new->content = $data['content'];
@@ -31,17 +39,26 @@ class k_model_new_new
 			$new->ts_created = time();
 			$id = R::store($new);
 
+			$now = time();
+			$idata = array("title=>{$data['title']}","content=>{$data['content']}","type=>{$data['type']}",
+				"ts_created=>{$now}","status=>0");
+			$id = $this->_db->add('news',$idata);
+			$user = $_SESSION['user'];
+			//发送工作流
+			$flow = k::load('task','flow');
+			$flow->init('news/add');
+			$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0));
 			return $id;
 		}
 	}
 	
     public function getJsonNew(){
 		$data = R::getAll("SELECT * FROM news where type='{$type}' and status='0' order by id desc");
-		//print_r($data);
 		return json_encode($data);
 	}
 
     public function getListJson(){
+
 	
 		$data = R::getAll("SELECT n.id as recid,n.title,n.author,n.content,a.active,FROM_UNIXTIME(ts_created) as ts_created,t.type 
 							from news as n INNER JOIN (SELECT  type_id,titles as active from type where cate = 'active') as a on n.active = a.type_id
@@ -66,27 +83,29 @@ class k_model_new_new
 		
 
 		 				
+
+		$data = R::getAll("SELECT n.id as recid,n.title,n.content,n.ts_created,t.titles as type FROM news as n INNER JOIN type as t on n.type = t.type_id where n.status='0' order by n.id desc");
+
 		return json_encode($data);
 
 	}
 	
 	function getOption(){
-				if($type = 'all')
-				 $data = R::getAll("SELECT titles as name,type_id as id FROM type order by id desc");
-				if($data){
-					foreach($data as $key =>$value){
-						if($str){
-							$str.=",{value:{$value['id']}, name:'{$value['name']}'}";
-						}else{
-							$str.="{value:{$value['id']}, name:'{$value['name']}'}";
-						}
-					}
+		if($type = 'all')
+		$data = R::getAll("SELECT titles as name,type_id as id FROM type order by id desc");
+		$str = '';
+		if($data){
+			foreach($data as $key =>$value){
+				if($str){
+					$str.=",{value:{$value['id']}, name:'{$value['name']}'}";
+				}else{
+					$str.="{value:{$value['id']}, name:'{$value['name']}'}";
 				}
+			}
+		}
 					
-				
-					if($str) return $str;
-
-				 return false;	 
+		if($str) return $str;
+		return false;	 
 	}
 				
 	function getNewsInfo(){
@@ -99,12 +118,12 @@ class k_model_new_new
 		{'title':'详细类容', 'name':'{$data['content']}'},	
 		{'title':'创建时间', 'name':'{$data['ts_created']}'},
 			]";
-	echo $json;
+		echo $json;
 	}			
 
 			
 			
-	}
 	
-
+	
+}
 	

@@ -2,8 +2,8 @@
 	class module_flow_update{
 		function run(){
 			if($_POST){
-				require 'task.class.php';
-				$task = new task();
+				require 'model/task.php';
+				$task = new k_model_flow_task();
 				$task->update($_REQUEST);
 				header('Location:?m=flow&a=list');
 			}
