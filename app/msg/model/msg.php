@@ -1,12 +1,16 @@
 <?php
 class k_model_msg_msg
 {
-    public function getListJson(){
+    public function getListJson($map = array()){
+    	$where  = " where l.fleg !=9 ";
+    	foreach ($map as $key => $value) {
+    		$where .= "AND {$key}='{$value}'";
+    	}
 		$uid = $_SESSION['user']['id'];
-		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created)as ts_created ,u.`user`  
+		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created) as ts_created ,u.`user`  
 			from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 
 			INNER JOIN user as u on u.id= l.rid 	
-			where l.uid = {$uid} and l.fleg !=9 order by l.id desc";
+			 {$where}  order by l.id desc";
 		$data = R::getAll($sql);
 		return json_encode($data);
 	}

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>工作流处理</title>
+		<? k::load('layout','layout')->render('form'); ?>
+	<script type="text/javascript">
+	
+		//配置磁块
+		//ajaxPost : true,
+		//callback:function(data){}
+		var from = new smartFrom('from_mandatory_table', {
+			url:'',
+			center:true,
+			httpType : 'post',
+			rows : [		
+					{type : 'textarea', name : 'comment', title : '发送的内容', tip : "请填写内容！", inputType:'text', datatype:"*", value:'<? echo isset($value)?$value:'';?>',errormsg : "请填写正确的格式"},
+					{type : 'select', name : 'status', title : '审核状态', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
+						data : [<?=$status?>], doption : "--请选择--"},
+						{type : 'hideInput', name : 'id', title : '发送的内容', tip : "请填写内容！", datatype:"*", value:'<?=$id?>'},
+				   ],	
+		});
+		
+	</script>
+</html>

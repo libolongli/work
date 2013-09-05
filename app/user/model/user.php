@@ -49,7 +49,8 @@ class k_model_user_user
   
   function uid()
   {
-  return $_SESSION['user']['id'];
+  	if(!isset($_SESSION)) header('Location: ?m=home');
+  	return $_SESSION['user']['id'];
    //return 1;
   }
   

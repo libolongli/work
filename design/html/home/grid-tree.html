@@ -1,23 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" >
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>w2ui</title>
 		<meta name="author" content="Administrator" />
 		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
+		<link rel="stylesheet" href="images/css/zTreeStyle.css" />
 		<script src="images/js/jquery-1.8.3.min.js"></script>
 		<script src="images/js/w2ui-1.2.min.js"></script>
+		<script src="images/js/jquery.ztree.core-3.5.min.js"></script>
 		<!-- Date: 2013-08-08 -->
 	</head>
-	<body>
-		<div id="contentMain" style="width: 95%; height: 410px; margin-bottom: 10px;">
+	<body style="background: #FFF">
+		<div id="contentMain" style="width: 95%; height: 510px; margin-bottom: 10px;">
 		</div>
 	</body>
 	<script>
 		var layStyle = {
-			pstyle : 'background: #FFFFFF'
+			pstyle : 'background: #FFFFFF; overflow: hidden;'
 		}
 		var ContentMain = function(layout) {
 			layout.w2layout({
@@ -26,21 +28,19 @@
 					type : 'left',
 					size : 200,
 					resizable : true,
-					style : layStyle.pstyle,
-					content : 'left'
+					style : layStyle.pstyle
 				}, {
 					type : 'main',
-					style : layStyle.pstyle,
-					content : 'main'
+					style : layStyle.pstyle
 				}]
 			});
 		}
 		window.onload = function() {
 			new ContentMain($('#contentMain'));
-			w2ui['Main'].load('main', 'demo.html',function(){
+			w2ui['Main'].load('main', '<?=$mainurl?>',function(){
 				console.log('ok')
 			});
-			w2ui['Main'].load('left', 'tree.html',function(){
+			w2ui['Main'].load('left', '<?=$lefturl?>',function(){
 				console.log('ok')
 			})
 		}

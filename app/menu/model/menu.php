@@ -77,6 +77,11 @@ class k_model_menu_menu
 	 	}
 	 	return $tmpdata;
 	}
+
+	public function getChildByName($name){
+		$pid = R::getRow("SELECT id from menu where name='{$name}'");
+		return $this->getChild($pid['id']);
+	}
 	
 	
 }

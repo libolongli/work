@@ -17,7 +17,7 @@ class k_model_feed_feed
   function send($data){
 	$feed = R::dispense('feed');
 	$feed->uid = $data['uid'];
-    $feed->rid = $data['rids'];
+    $feed->rid = $data['rid'];
 	$feed->content = $data['content'];
 	if(isset($data['type'])) $feed->type=$data['type'];
 	$id = R::store($feed);

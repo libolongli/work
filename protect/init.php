@@ -58,7 +58,8 @@ class tpl
 			'bench_right.html','c_from.html','c_new.html','c_work.html',
 			'demo.html','grid-tree.html','home.html','tree.html',
 			'c_detailed.html','course_popup.html','d_from.html','recruitPeople_k.html',
-			's_detailed.html','work_list.htl','search_content.html','s_from.html','theClass.html','data.html'
+			's_detailed.html','work_list.htl','search_content.html','s_from.html','theClass.html','data.html',
+			'Grid.html','ztree.html'
 			);
 
 	

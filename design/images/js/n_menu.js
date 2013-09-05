@@ -20,10 +20,10 @@ var Nmeun = function(data){
 		var thisText = $(this).find("a").attr("name");
 		showTwoMeun(thisText, "n_menu_right");
 		if(thisOneLi){
-			thisOneLi.css("background-color", "#E8EBF0").css("border", "none");
+			thisOneLi.css("background-color", "#E8EBF0").css("margin-left", "18px").css("border", "none");
 		};
 		thisOneLi = $(this);
-		thisOneLi.css("background-color", "#39B4EE").css("border-radius", "3px 0 0 3px").css("border", "1px solid #CCCCCC");
+		thisOneLi.css("background-color", "#fff").css("margin-left", "19px").css("margin-left", "19px").css("border-radius", "3px 0 0 3px").css("border", "1px solid #CCCCCC");
 	});				
 	
 	//加载2级菜单
@@ -33,36 +33,36 @@ var Nmeun = function(data){
 		  if(data[i].text == text){
 		  	 var children = data[i].children;
 		  	 for (var k = children.length - 1; k >= 0; k--){
-		  	 	 var right_li = '<li><a href="'+children[k].url+'" class="n_menu_right_a" ><p>'+children[k].text+'</p></a>';
-				 $("."+name).append(addLi(right_li, children[k].children)+'</li>');
+		  	 	var right_li = '<li><a href="#" class="n_menu_right_a"><p>'+children[k].text+'</p></a>';
+		  	 	var children1 = children[k].children;
+		  	 	if(children1.length > 0){
+		  	 		right_li += '<ul style="display: none;">';
+		  	 		for (var j=0; j < children1.length; j++) {
+						 right_li += '<li><a href="'+children[k].url+'">'+children1[j].text+'</a></li>';
+					};
+					right_li += "</ul>";
+		  	 	};
+				$("."+name).append(right_li+'</li>');
 			 };
 		  };
 		};
 	};
-	
-	//无限级加载子菜单
-	function addLi(view, data){
-		if(data && data.length > 0){
-  	 		view += '<ul style="display: none;">';
-  	 		for (var j=0; j < data.length; j++) {
-				 view += '<li><a href="#">'+data[j].text+'</a>';
-				 view += addLi(view, data[j].children)+'</li>';
-			};
-			view += "</ul>";
-  	 	};
-  	 	return view;
-	};
-	
-	
 	//2级点击事件
 	$(".n_menu_right_a").live("click", function(){
-		liClick({text: $(this).find("p").html(), url:$(this).attr("href")});
-		return false;
+		if($(this).next("ul").html()){
+			if($(this).next("ul").css("display") === "none"){
+				$(this).next("ul").slideDown();
+			}else{
+				$(this).next("ul").slideUp();
+			};
+		}else{
+			liClick({text: $(this).find("p").html(), url:$(this).find("a").attr("href")});
+		};
 	});
 	
 	//三级点击事情
 	$(".n_menu_right li ul li").live("click", function(){
-		liClick($(this).find("a").html());
+		liClick({text: $(this).find("a").html(), url:$(this).find("a").attr("href")});
 		return false;
 	});
 	

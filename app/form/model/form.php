@@ -1,6 +1,6 @@
 <?php
 	class k_model_form_form{
-		function getSelect($table,$cate){		//echo 11111;exit;
+		function getSelect($table,$cate){		
 			$sql = "SELECT type_id as value,title as name FROM type where status =1 
 			and tablename = '{$table}' and cate='{$cate}'";	
 			$data = R::getAll($sql);
