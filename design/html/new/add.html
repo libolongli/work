@@ -12,7 +12,7 @@
 		//ajaxPost : true,
 		//callback:function(data){}
 		var from = new smartFrom('from_mandatory_table', {
-			url:'http://www.project.com/?m=new&a=do',
+			url:'?m=new&a=do',
 			center:true,
 			httpType : 'post',
 			rows : [
@@ -21,6 +21,8 @@
 							{type : 'input', name : 'title', title : '标题', tip : "请输入标题！", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
 							{type : 'input', name : 'author', title : '发布者', tip : "请输入身份", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
 							{type : 'textarea', name : 'content', title : '发表内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的日期格式"},
+							{type : 'popup',title : '转发', tip : "请输入转发的人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit",value:'请输入转发的人！'},
+							{type : 'hideInput', name:'rids',inputType:'text', datatype:"*",display:'none',value:''},
 							],
 
 		});

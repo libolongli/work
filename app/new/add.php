@@ -4,7 +4,7 @@ class module_new_add
   function run()
   {
 			
-$data = k::load('new')->getOption('all');
+	$data = k::load('new')->getOption('all');
 //print_r($data);
 	
 	//$data = k::load('new')->getRowLi('1');

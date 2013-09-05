@@ -32,16 +32,13 @@ img {border-width: 0;}
     text-decoration: none;
     width: 17px;}
 
-
-
-
-
-
 .header {height:55px;width: 100%;border-bottom: 1px solid #CCCCCC;background:url("../image/0.jpg")}
 .content { bottom: 0;position: absolute;top: 56px;width: 100%;}
 .content iframe { border: medium none;
     height: 100%;
     position: absolute;
+    background-color: #FFFFFF;
+     z-index: 999;
     width: 100%;}
 .n_menu {margin: 0;padding: 0;}
 .n_menu_btn {background: url("../image/start_menu.png") no-repeat scroll 0 0 transparent;
@@ -103,6 +100,9 @@ img {border-width: 0;}
 	margin: 0;
 	padding: 0;
 	width: 180px;}
+.n_menu_r li {
+	list-style: none outside none;
+}
 .n_menu_r { float: left;
 	height: 100%;
 	margin: 0;
@@ -142,7 +142,6 @@ img {border-width: 0;}
     width: 100%; color: #000000;
     font-size: 13px;
     text-decoration:none}
-.n_menu_right ul li {list-style: none outside none;}
 .n_menu_h {  background: url("../image/start_menu_panel_bg.png") no-repeat scroll 0 0 transparent;
     height: 67px;
     width: 405px;}
