@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>w2ui</title>
+		<title>新闻列表</title>
 		<meta name="author" content="Administrator" />
 		<link rel="stylesheet" href="images/css/w2ui-1.2.css" />
 		<script src="images/js/jquery-1.8.3.min.js"></script>
@@ -57,7 +57,7 @@
 			},
 			onDelete: function(target, eventData) {
 				var ids = w2ui['grid'].getSelection();
-				alert(ids);
+				//alert(ids);
 				eventData.onComplete = function(){
 					$.ajax({
 					   type: "POST",
@@ -69,17 +69,22 @@
 					});					
 				}
 			},
+	
+
 			searches: [				
 				{ field: 'title', caption: '标题', type: 'text' },
 				{ field: 'content', caption: '内容', type: 'text' },
 				{ field: 'type', caption: '类型', type: 'text' },
+				{ field: 'author', caption: '发布者', type: 'text' },
 			],
 			sortData: [{ field: 'recid', direction: 'ASC' }],
 			columns: [				
-				{ field: 'title', caption: '标题', size: '50px'},
-				{ field: 'content', caption: '内容', size: '30%'},
-				{ field: 'type', caption: '类型', size: '30%'},
-				{ field: 'ts_created', caption: '发送时间', size: '30%'},
+				{ field: 'title', caption: '标题', size: '5%'},
+				{ field: 'author', caption: '发布者', size: '5%'},
+				{ field: 'content', caption: '内容', size: '20%'},
+				{ field: 'type', caption: '类型', size: '10%'},
+				{ field: 'ts_created', caption: '编写时间', size: '10%'},
+				{ field: 'operate', caption: '审核状态', size: '8%'},
 			],
 			records:<?=$json?>
 		});
@@ -89,6 +94,18 @@
 			alert(html);
 		});
 	
-		
+			function updateStatus(id,status){
+	$.ajax({
+		type: "POST",
+		dataType:"html",
+		url: "?m=new&a=update",
+		data:{id:id,active:status},
+		success: function(msg){
+			if(msg=="1")
+				alert("审核成功！");
+		}
+	});
+}
+
 	</script>
 </html>

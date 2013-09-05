@@ -16,7 +16,8 @@ function getIp(){
 $UserIp = ($_SERVER['HTTP_VIA']) ?$_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
 $UserIp = ($UserIp) ? $UserIp : $_SERVER['REMOTE_ADDR'];
 echo $UserIp;
-
+$time = time();
+echo date("Y-m-d",$time);
 		 
 }
 

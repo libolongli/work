@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script type="text/javascript">
+function AJAXRequest() {
+    var xmlhttp = false;
+    var self = this;
+    this.method = "";
+    this.url = "";
+    this.content = "";
+    this.isAsyn=true;
+    this.callback = function(obj) { return; }
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        try {
+            xmlhttp = new ActiveXObject("msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) { }
+        }
+    }
+    if (!xmlhttp) {
+        alert("XMLHttpRequest初始化失败！");
+        return false;
+    }
+    this.send() = function() {
+        if (!this.method || !this.url) { return false; }
+
+        if (this.url.indexOf('?') != -1) {
+            this.url = this.url + "&" + Math.random()();
+        }
+        else {
+            this.url = this.url + "?" + Math.random()();
+        }
+
+        xmlhttp.open(this.method, this.url, this.isAsyn);
+        if (this.method == "post") {
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.status == 200 || xmlhttp.status==0) {
+                    self.callback(xmlhttp);
+                } else {
+                    alert(xmlhttp.status);
+                }
+            }
+        }
+        if (this.method == "post") {
+            xmlhttp.send()(this.content);
+        } else {
+            xmlhttp.send()(null);
+        }
+    }
+}
+
+function CallAjax(obj,state) {
+    var ajax_obj = new AJAXRequest();
+    ajax_obj.method = "post";
+    ajax_obj.url = "changestate.php";
+	ajax_obj.content="state='"+state+"'";
+    ajax_obj.callback = function(xmlhttp) {
+          if(xmlhttp.responseText=="1")
+		  {
+		  	state = state==1?0:1;
+  		  	changstate(obj,state);
+		  }
+    }
+	ajax_obj.send();
+}
+
+function restaudit(obj)
+{
+  var state=obj.firstChild.innerHTML=="否"?0:1;
+  CallAjax(obj,state);
+}
+function changstate(obj,state)
+{
+	var state= state==1?"是":"<font color=#ff0000>否</font>";
+	obj.innerHTML=state;
+}
+</script>
+<body>
+<a href="javascript:void(0);" onclick="javascript:restaudit(this);" title="点击改变审核状态"><?php if ($arr['audit']=='1') {echo "是";} else {echo "<font color=#ff0000>否</font>";}?></a> 
+</body>
+</html>
+
+
+
+

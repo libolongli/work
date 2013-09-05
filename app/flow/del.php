@@ -33,7 +33,7 @@
 				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=info&id={$value['recid']}')>查看</a>  ";
 				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=send&id={$value['recid']}')>转发</a>  ";
 			}
-			
+		
 			$arr = array(
 						'total'=>count($result),
 						'recordsPerPage'=>'13',

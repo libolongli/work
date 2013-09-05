@@ -1,8 +1,8 @@
-	<?php
+<?php
 class k_model_new_new
 {
 	private $data = array();
-
+			
 
   function getRowLi($type)
   {
@@ -23,11 +23,14 @@ class k_model_new_new
 			 $new->title = $data['title'];
 			$new->content = $data['content'];
 			$new->type = $data['type'];
-			//$time = time();
+			$new->author = $data['author'];
+			//$new->active = $data['active'];
+			$time = time();
 			 //date('Y-m-d H:i:s',$time);
+			
 			$new->ts_created = time();
 			$id = R::store($new);
-			print_r($data);
+
 			return $id;
 		}
 	}
@@ -39,9 +42,30 @@ class k_model_new_new
 	}
 
     public function getListJson(){
-		//$data = R::getAll("SELECT id as recid,title,content,type,ts_created FROM news where status='0' order by id desc");
-		$data = R::getAll("SELECT n.id as recid,n.title,n.content,n.ts_created,t.titles as type FROM news as n INNER JOIN type as t on n.type = t.type_id where n.status='0' order by n.id desc");
-	//SELECT n.title,n.content,t.titles as type FROM news as n INNER JOIN type as t on n.type = t.type_id where where n.status='0' order by id desc;
+	
+		$data = R::getAll("SELECT n.id as recid,n.title,n.author,n.content,a.active,FROM_UNIXTIME(ts_created) as ts_created,t.type 
+							from news as n INNER JOIN (SELECT  type_id,titles as active from type where cate = 'active') as a on n.active = a.type_id
+							INNER JOIN (SELECT type_id,titles as type from type where cate = 'type') as t on n.type = t.type_id where n.status = '0' order by id desc
+							");
+		$newdata = R::getAll("select * from news");		
+			foreach($newdata as $k => $v){
+				 $newdata[$k][type];
+			}
+			
+			
+			foreach($data as $key => $value){
+			
+				if($data[$key][active]=='审核通过'){
+					$data[$key]['operate'] = $data[$key][active];
+				}else{
+				$data[$key]['operate'] = "<a href='javascript:void(0);' onclick='updateStatus({$value['recid']},3)'>".$data[$key]['active']."</a>";
+				}			
+				$data[$key]['operate'] .= "｜<a href='?m=home&a=newsList&type={$newdata[$k][type]}&id={$value['recid']}'>查看</a> ";
+				$data[$key]['operate'] .= "｜<a href='?m=home&a=newsList&type={$newdata[$k][type]}&id={$value['recid']}'>修改</a> ";
+			}
+		
+
+		 				
 		return json_encode($data);
 
 	}
@@ -65,7 +89,18 @@ class k_model_new_new
 				 return false;	 
 	}
 				
-				
+	function getNewsInfo(){
+		$id =$_GET['id'];
+		$sql = "select title,author,content,FROM_UNIXTIME(ts_created) as ts_created from news where id = '{$id}'";
+		$data = R::getRow($sql);
+		$json = "[
+		{'title':'标题', 'name':'{$data['title']}'},
+		{'title':'发布者', 'name':'{$data['author']}'},
+		{'title':'详细类容', 'name':'{$data['content']}'},	
+		{'title':'创建时间', 'name':'{$data['ts_created']}'},
+			]";
+	echo $json;
+	}			
 
 			
 			
