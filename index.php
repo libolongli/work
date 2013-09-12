@@ -12,8 +12,8 @@ route type 1
 unsafe 
 */
 include 'protect/init.php';
-
-
+//$content = file_get_contents('3.jpg');
+//print_r($content);exit;
 $m=@$_GET['m'];
 $a=@$_GET['a'];
 

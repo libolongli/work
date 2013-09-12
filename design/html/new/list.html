@@ -90,18 +90,20 @@
 
 		});
 
-		function updateStatus(id,status){
-			$.ajax({
-				type: "POST",
-				dataType:"html",
-				url: "?m=new&a=check",
-				data:{id:id,active:status},
-				success: function(msg){
-					if(msg=="1")
-						alert("审核成功！");
-				}
-			});
+function updateStatus(id,active){
+	$.ajax({
+		type: "POST",
+		dataType:"html",
+		url: "?m=new&a=check",
+		data:{id:id,active:active},
+		success: function(msg){
+			if(msg=="1")
+				alert("审核成功！");
+		}
+	});
 }
+
+
 			
 		
 	</script>

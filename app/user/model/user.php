@@ -97,5 +97,14 @@ class k_model_user_user
 			 {'title':'介绍', 'name':'{$data['introduce']}'}]";
 	echo $json;
   }
+
+  function getUser($map = array()){
+  	$where = "WHERE 1=1 ";
+	$sql = "select id,user as name from user ";
+	foreach($map as $key=>$value){
+		$where .= "AND {$key}={$value}";
+	}
+	return R::getAll($sql);
+  }
   
 }

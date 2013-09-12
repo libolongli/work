@@ -11,7 +11,7 @@
 		$('#grid').w2grid({
 			name: 'grid',
 			header: '表单名',
-			recordsPerPage: 8,
+			recordsPerPage: 2,
 			show: {
 				selectColumn: true,
 				toolbar: true,
@@ -20,6 +20,7 @@
 				// toolbarDelete: true,
 				// toolbarSave: true
 			},
+			url:"<? echo $_SERVER['REQUEST_URI']."&back=json" ?>",
 			toolbar: {
 				items: [
 					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
@@ -92,11 +93,26 @@
 				{ field: 'user', caption: '收件人名字', size: '50px'},
 				{ field: 'content', caption: '内容', size: '30%'},
 				{ field: 'ts_created', caption: '发送时间', size: '30%'},
+				{ field: 'operate', caption: '查看', size: '30%'},
 			],
-			records:<?=$json?>
 		});	
 		
-		
+		function checkinfo(url) {
+			$().w2popup('open', {
+				body: "<iframe src='"+url+"' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input type="button" value="close" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
+		}
+		//w2ui['grid'].load('?m=flow&a=del&f=get');
+		window.onload=function(){
+			$('div').live('mouseover', function() {
+  				$(this).attr('title','');
+			});
+	       
+	    }
 	
 		
 	</script>

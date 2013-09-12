@@ -21,6 +21,8 @@
 			$sql = "SELECT * FROM common_config where url = '{$url}' ";
 			$this->_config = R::getAll($sql);
 		}	
+
+		//$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0,'rids'=>$data['rids'],'uid'=>$user['id']));
 		
 		public function add($map = array()){
 			foreach($this->_config as $key =>$value){
@@ -34,15 +36,18 @@
 						$format = $map['content'];
 					}
 					
+					//$format =  $map['content'];
 					
 					$now = time();								
 					if(!isset($map['rids']))  $map['rids']=$value['rids'];
 					if(!isset($map['uid']))  $map['uid']=1;
+					$user = $_SESSION['user'];
+					//print_r($user);exit;
 					foreach (explode(',', $map['rids']) as $key => $value) {
 						$data_flow = array("uid=>{$map['uid']}","rids=>{$value}","content=>{$format}","ts_created=>{$now}","ts_updated=>{$now}","status=>1");
-						//$data_log = array("uid=>{$map['uid']}","rid=>{$value}","ts_created=>{$now}","ts_updated=>{$now}","fleg=>1","comment=>'新的工作流'");					
-						$this->_db->insertRecord('flow',$data_flow);
-						//$this->_db->insertRecord('flow_log',$data_log);
+						$fid = $this->_db->insertRecord('flow',$data_flow);
+						$data_log = array("fid=>{$fid}","uid=>{$map['uid']}","rid=>{$value}","ts_created=>{$now}","fleg=>1","comment=>{$format}");					
+						$this->_db->insertRecord('flow_log',$data_log);
 					}
 				}
 			}	

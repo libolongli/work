@@ -39,6 +39,7 @@
 				//toolbarDelete: true,
 				//toolbarSave: true
 			},
+			url:"<? echo $_SERVER['REQUEST_URI']."&back=json" ?>",
 			toolbar: {
 				items: [
 					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
@@ -125,7 +126,6 @@
 				caption : '操作',
 				size : '20%'
 			}],
-			records:<?=$json?>,
 			
 		});
 		function checkinfo(url) {

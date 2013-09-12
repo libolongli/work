@@ -51,7 +51,7 @@ class tpl
 	$src='"images/';
 	
 	$target='"/design/images/';
-	
+	$target_1="'/design/images/";
 
 
 	$t_array = array('bench.html','bench_left.html','bench_main.html',
@@ -63,7 +63,6 @@ class tpl
 
 			);
 
-	
 	$target_html=str_replace($src,$target,$html);
 	foreach($t_array as $key => $value){
 		$arr = explode(".",$value);

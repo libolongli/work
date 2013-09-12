@@ -16,29 +16,20 @@
 			center:true,
 			httpType : 'post',
 			rows : [
-					{type : 'popup',title : '收件人', tip : "请输入招生人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit"},			
+					{type : 'popup',title : '收件人', tip : "请输入招生人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", data:{url:'data.html',name:'recruit',type:'cont'}},			
 					{type : 'textarea', name : 'content', title : '发送的内容', tip : "请填写内容！", inputType:'text', datatype:"*", value:'<? echo isset($value)?$value:'';?>',errormsg : "请填写正确的格式"},
 					{type : 'hideInput', name : 'rids', errormsg : "",value :'', display:'none'},
 					{type : 'hideInput', name : 'transmit', errormsg : "",value :'<?=$transmit?>', display:'none'},
 				   ],	
 		});
-		var thisRpIn = null;
-		$(".rp_view").click(function(){
-			thisRpIn = this;
-			if($(this).attr("name") == "recruit"){
-				$().w2popup('open', {
-				body: "<iframe src='data.html' frameborder='0' height='100%' width='100%'></iframe>",
-				buttons: '<input id="bounced-commit" type="button" style="display:none" onclick="$().w2popup(\'close\');">',
-				width: 800,
-				height: 500,
-				overflow: 'hidden',
-			});
-			}
+		var thisView = null;
+		from.addListener('popupCallBack', function(view){
+			thisView = view;
 		});
 		
-		function setrp(name){
-			$(thisRpIn).prev().val(name);
-			$().w2popup('close');
-		};
+		// function setrp(name){
+		// 	$(thisRpIn).prev().val(name);
+		// 	$().w2popup('close');
+		// };
 	</script>
 </html>

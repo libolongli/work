@@ -1,7 +1,6 @@
 <?php
 	class module_flow_send{
 		function run(){
-		//echo 111;exit;echo 111;exit;
 			if($_POST){				
 				$uid = $_SESSION['user']['id'];
 				$array = array(

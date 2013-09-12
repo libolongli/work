@@ -20,12 +20,25 @@
 			}else{
 				$map['l.rid']=$id;
 			}
-
-			$json = k::load('msg')->getListJson($map);
-			$t->assign('json',$json);
+			$this->beforeDisplay($map);
 			$t->assign('title','短消息');
 			$t->assign('formurl','?m=msg&a=update');
 			$t->assign('frameurl','?m=msg&a=send');	
 			$t->display('list');
+		}
+
+		function beforeDisplay($map){
+			if(isset($_GET['back'])) {
+				$map['limit'] = $_POST['limit'];
+				$map['offset'] = $_POST['offset'];
+				$data = k::load('msg')->getListJson($map);
+				$array = array(
+					'total'=>$data['total'],
+					'page'=>$_POST['offset']/$_POST['limit'],
+					'records'=>$data['data']
+					);
+				echo json_encode($array);exit;
+			}
+			
 		}
 	}

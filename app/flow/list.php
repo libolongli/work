@@ -10,20 +10,36 @@
 				$model = $_GET['model'];
 				switch ($model) {
 					case 'deal':
-						$map['rids']=$id;$map['status']=8;break;
+						$map['l.rid']=$id;$map['l.fleg']=2;break;
 					case 'send':
-						$map['uid']=$id;break;
+						$map['f.uid']=$id;break;
 					case 'undeal':
-						$map['rids']=$id;$map['status']=1;break;
+						$map['l.rid']=$id;$map['l.fleg']=1;break;
 				} 
-
 			}else{
-				$map['uid']=$id;
+				$model = 'send';
+				$map['f.uid']=$id;
 			}
-
-			$json = k::load('flow')->getListJson($map);
-			$t->assign('json',$json);
+			$this->beforeDisplay($map,$model);
+			//$json = k::load('flow')->getListJson($map,$model);
+			$t->assign('title',"工作流");
 			$t->display('list');
+		
+		}
+
+		function beforeDisplay($map,$model){
+			if(isset($_GET['back'])) {
+				$map['limit'] = $_POST['limit'];
+				$map['offset'] = $_POST['offset'];
+				$data = k::load('flow')->getListJson($map,$model);
+				$array = array(
+					'total'=>$data['total'],
+					'page'=>$_POST['offset']/$_POST['limit'],
+					'records'=>$data['data']
+					);
+				echo json_encode($array);exit;
+			}
+			
 		}
 	}
 	

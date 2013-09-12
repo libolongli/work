@@ -2,9 +2,9 @@
 	class k_model_flow_flow{
 		  private $_db;
 		  
-		  function __construct(){
-		  		$this->_db = new db();
-		  }
+			function __construct(){
+			  	$this->_db = new db();
+			}
 
 
 		  function getFlowInfo($id){
@@ -22,7 +22,7 @@
 				$data = $data[0];
 				return $data;
 			}
-			function configadd($data){
+			function configadd($data,$id=NULL){
 				$variable = array();
 				$str = $data['format'];
 				$arr1 = explode('{', $str);				
@@ -36,8 +36,11 @@
 				
 				$data = array("name=>{$data['name']}","url=>{$data['url']}","format=>{$data['format']}",
 					"active=>{$data['active']}","variable=>{$data['variable']}","rids=>{$data['rids']}");
-				
-				$this->_db->add('common_config',$data);
+				if($id){
+					$this->_db->update('common_config',$data,$id);
+				}else{
+					$this->_db->add('common_config',$data);
+				}
 			}
 
 			function configlist(){
@@ -46,18 +49,23 @@
 				return json_encode($data);
 			}
 
-			function getListJson($map){
-				$sql = "select id as recid,rids,percent,content from flow ";
-				$where = " where status !=9 ";
+			function getListJson($map,$model = 'send'){
+				$sql = "select f.id as recid,rids,percent,f.content from flow as f inner join flow_log as l on  f.id = l.fid ";
+				$where = " where f.status !=9 ";
 				foreach ($map as $key => $value) {
+					if(($key!='offset') && ($key!='limit') )
 					$where .= " AND {$key}='{$value}'";
 				}
-				
 				$sql .= $where;
+				$total = count(R::getAll($sql));
+				if(isset($map['limit']) && isset($map['offset'])){
+					$start = $map['offset'];
+					$limit = "limit {$start},{$map['limit']}";
+					$sql .= $limit;
+				}
+
 				$result = R::getAll($sql);
-
 				
-
 				foreach($result as $key => $value){
 					$result[$key]['percent'] = "<div class='Bar'><div style='width: {$value['percent']}%;' class='progress'><span>{$value['percent']}%</span></div></div>";
 					$result[$key]['operate'] = "<a href= '?m=flow&a=update&fid={$value['recid']}' >修改进度</a>   ";
@@ -68,14 +76,34 @@
 				}
 				
 				//print_r($result);exit;
-				return  json_encode($result);
+				return array(
+					'total' =>$total,
+					'data'=>$result
+				);
+				
+
 			}
 
 			function addlog($map){
 				$now = time();
-				$datalog  = array("fid=>{$map['fid']}","comment=>{$map['comment']}","ts_created=>{$now}");
-				$id = $this->_db->add('flow_log',$datalog);
+				$uid = $_SESSION['user']['id'];
+				$lastlog = $this->getLog(array('fid'=>$map['fid'],'rid'=>$uid,'fleg'=>1));
+				$this->_db->update('flow_log',array("fleg=>2"),$lastlog[0]['id']);
+				$datalog  = array("fid=>{$map['fid']}","uid=>{$uid}","comment=>{$map['comment']}","ts_created=>{$now}");
 				$dataflow = array("status=>{$map['status']}","ts_updated=>{$now}");
+				
+				if($map['rids']){
+					$flow = $this->getFlowById($map['fid']);
+					$rids = $flow['rids'].",".$map['rids'];
+					array_push($datalog, "rid=>{$map['rids']}");				
+					array_push($dataflow, "rids=>'{$rids}'");
+					//print_r("rid=>{$map['rids']}");exit;
+				}else{
+					array_push($datalog, "fleg=>2");
+				}
+				//print_r($dataflow);
+				//print_r($datalog);exit;
+				$id = $this->_db->add('flow_log',$datalog);
 				$this->_db->update('flow',$dataflow,$map['fid']);
 				return $id;
 			}
@@ -87,7 +115,17 @@
 					$where .= " AND {$key}='{$value}' ";
 				}
 				$sql .= $where;
-				//echo $sql;exit;
 				return R::getAll($sql);
+			}
+
+			function getconfig($map){
+				$where = "where 1 =1 ";
+				$sql = "select * from common_config ";
+				foreach ($map as $key => $value) {
+					$where .= "AND {$key}= '$value'";
+				}
+				$sql .= $where;
+				$data = R::getAll($sql);
+				return $data;
 			}
 	}

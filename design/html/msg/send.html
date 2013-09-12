@@ -12,33 +12,16 @@
 		//ajaxPost : true,
 		//callback:function(data){}
 		var from = new smartFrom('from_mandatory_table',{
-			url:'?m=msg&a=send',
+			url:'',
 			center:true,
 			httpType : 'post',
-			rows : [
-					{type : 'popup',title : '收件人', name:'username', tip : "请输入收件人！", inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit",'value':''},			
-					{type : 'textarea', name : 'content', title : '内容', tip : "请填写内容！", inputType:'text', value:'', datatype:"*", errormsg : "请填写正确的日期格式"},
-					{type : 'hideInput', name : 'rids', errormsg : "",value :'', display:'none'}
-				   ],
+			rows : [<?=$html?>],
 		});
 		
-		var thisRpIn = null;
-		$(".rp_view").click(function(){
-			thisRpIn = this;
-			if($(this).attr("name") == "recruit"){
-				$().w2popup('open', {
-				body: "<iframe src='data.html' frameborder='0' height='100%' width='100%'></iframe>",
-				buttons: '<input id="bounced-commit" type="button" style="display:none" onclick="$().w2popup(\'close\');">',
-				width: 800,
-				height: 500,
-				overflow: 'hidden',
-			});
-			}
+		var thisView = null;
+		from.addListener('popupCallBack', function(view){
+			thisView = view;
 		});
-		
-		function setrp(name){
-			$(thisRpIn).prev().val(name);
-			$().w2popup('close');
-		};
+
 	</script>
 </html>

@@ -12,8 +12,13 @@
 				}
 			}			
 			$t=new tpl();
-			$data = k::load('user','user')->getUserList();
-			$t->assign('json',json_encode($data));
+			$html = array();
+			$html[] = k::load('form','form')->setPopup(array('name'=>'username','title'=>'收件人','tip'=>'请输入收件人'));
+			$html[] = k::load('form','form')->setTextarea(array('name'=>'content','title'=>'内容','tip'=>'请填写内容'));
+			$html[] = k::load('form','form')->setHideinput(array('name'=>'rids'));
+			$html = join(",",$html);
+			$t->assign('html',$html); 
 			$t->display('send');
 		}
+
 	}
