@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>calendar</title>
+		<meta name="author" content="Administrator" />
+		<link href="images/css/fullcalendar.css" rel='stylesheet' />
+		<link href="images/css/fullcalendar.print.css" rel='stylesheet' media='print' />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<script src="images/js/jquery-ui.custom.min.js"></script>
+		<script src="images/js/fullcalendar.js"></script>
+
+		<script>
+			$(document).ready(function() {
+				var hol = new Object();
+				hol['2013-10-1'] = 1;
+			 	hol['2013-10-2'] = 1;
+			     hol['2013-10-3'] = 1;
+			     hol['2013-10-5']	 = 1;	
+			     hol['2013-10-7'] = 1;
+			     hol['2013-10-12'] = 1;
+			     hol['2013-10-13'] = 1;
+		//	$.dump(hol);
+			
+				(function(){
+					var flag, num = new Array(), da= new Array(),lastTime = new Object(),hkey;
+					$('.external-event').each(function(i,val){
+						num[$(val).attr('cid')] = $(val).attr('cnum')
+					});
+					$('#external-events div.external-event').each(function() {
+						var eventObject = {
+							title : $.trim($('span',this).text()) // use the element's text as the event title
+						};
+						// store the Event Object in the DOM element so we can get to it later
+						$(this).data('eventObject', eventObject);
+						// make the event draggable using jQuery UI
+						$(this).draggable({
+							zIndex : 999,
+							revert : true, // will cause the event to go back to its
+							revertDuration : 0 //  original position after the drag
+						});
+					});
+					
+					$('#calendar').fullCalendar({
+						header : {
+							left : 'prev,next today',
+							center : 'title',
+							right : 'month,agendaWeek,agendaDay'
+						},
+						//events : 'ata.json',
+						slotEventOverlap: false,
+						slotMinutes: 10,
+						editable : true,
+						defaultEventMinutes: 60,
+						droppable : true, 
+						//defaultView: 'agendaWeek',
+						drop : function(date, allDay, jsEvent) {
+							var originalEventObject = $(this).data('eventObject'),count = $('#c-count').val(),way = parseInt($('#c-way').val()),duration = $(this).attr('cdura');
+							
+							var _this = this;
+							
+							var ss = function(count,date) {
+								
+								var next=0;
+								for (var i=0; i < count; i++) {
+									console.log(count+","+date);
+									
+									flag =  num[$(_this).attr('cid')];
+									flag = flag-1;
+								  	num[$(_this).attr('cid')] =flag;
+								  	if(flag<0) continue;
+								  	
+									da[i] = $.extend({}, originalEventObject);
+									
+									da[i].start = new Date(date);
+									
+									da[i].end = new Date((da[i].start.getTime() + (1000*1*60*duration)));
+									
+									da[i].allDay = allDay;
+									
+									date.setDate(date.getDate() + way);
+									
+									hkey= da[i].start.getFullYear() + "-" + (da[i].start.getMonth()+1) + "-" + da[i].start.getDate();
+					
+									if(hol[hkey]==1) {
+										num[$(_this).attr('cid')] =flag+1;
+										next = next +1
+										continue;
+									}
+								  	$('#calendar').fullCalendar('renderEvent', da[i], true);
+								};
+								
+								if(next == 0) {
+									return;
+								}
+								ss(next,date);
+							}
+							
+							ss(count,date);
+							
+							$('strong', this).text(flag);
+							
+							if(flag <= 0 ) {
+								$(this.remove());
+							}
+						},
+						eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+					        alert(
+					            event.title + " was moved " +
+					            dayDelta + " days and " +
+					            minuteDelta + " minutes."
+					        );
+					        if (allDay) {
+					            alert("Event is now all-day");
+					        }else{
+					            alert("Event has a time-of-day");
+					        }
+					        if (!confirm("Are you sure about this change?")) {
+					            revertFunc();
+					        }
+					    }
+					});
+				})()
+			});
+			
+			function externalSave() {
+				var s = $('#calendar').fullCalendar('clientEvents');
+				$.dump(s);
+			}
+
+		</script>
+		<style>
+			body {
+				margin-top: 40px;
+				text-align: center;
+				font-size: 14px;
+				font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+			}
+
+			#wrap {
+				width: 1200px;
+				margin: 0 auto;
+			}
+			.external-box {
+				border: 1px solid #ccc;
+				background: #eaeaea;
+			}
+			.external-title {
+				margin-top: 10px;
+				font-weight: bold;
+				height: 40px;
+				line-height: 40px;
+				background: #2d6fc3;
+				border-radius: 6px 6px 0 0;
+				padding-left: 10px;
+				color: #FFF;
+			}
+			.external-content {
+				overflow: hidden;
+				height: 300px;
+				border-radius: 0 0 6px 6px;
+				background: #FFFFFF;
+			}
+			.external-event {
+				margin: 8px;
+				padding: 6px 10px;
+				background: #FFF;
+				cursor: pointer;
+				border: 1px solid #ccc;
+				border-radius: 10px;
+				box-shadow: 1px 1px 1px #ccc;
+			}
+			.external-event:hover {
+				background: #ececec;
+			}
+			.external-items {
+				margin: 10px 0;
+				padding-left: 10px;
+				height: 40px;
+				line-height: 40px;
+				background: #FFF;
+				border-radius: 10px;
+				box-shadow: 1px 1px 1px #ccc;
+			}
+			#external-events {
+				float: left;
+				width: 240px;
+				height: 722px;
+				padding: 0 10px;
+				text-align: left;
+			}
+			#external-events p {
+				margin: 1.5em 0;
+				font-size: 11px;
+				color: #666;
+			}
+			#external-events p input {
+				margin: 0;
+				vertical-align: middle;
+			}
+			#calendar {
+				float: right;
+				width: 900px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id='wrap'>
+			<div id='external-events' class="external-box">
+				<div class="external-title">
+					课&nbsp;程
+				</div>
+				<div class="external-content">
+					<div class='external-event' cid="0" cnum="20" cdura="40">
+						<span>C++课程</span> 剩余次数：<strong>20</strong>
+					</div>
+					<div class='external-event' cid="1" cnum="20" cdura="50">
+						<span>JAVA课程</span> 剩余次数：<strong>20</strong>
+					</div>
+					<div class='external-event' cid="2" cnum="20" cdura="60">
+						<span>C#课程</span> 剩余次数：<strong>20</strong>
+					</div>
+					<div class='external-event' cid="3" cnum="20" cdura="80">
+						<span>PHP课程</span> 剩余次数：<strong>20</strong>
+					</div>
+					<div class='external-event' cid="4" cnum="20" cdura="100">
+						<span>Ruby课程</span> 剩余次数：<strong>20</strong>
+					</div>
+				</div>
+				<div class="external-items">
+					循环方式：
+					<select name="" id="c-way">
+						<option value="1">连续</option>
+						<option value="2">隔2日</option>
+						<option value="3">隔3日</option>
+						<option value="4">隔4日</option>
+						<option value="5">隔5日</option>
+						<option value="6">隔6日</option>
+						<option value="7">隔1周</option>
+						
+					</select>
+					
+				</div>
+				<div class="external-items">
+					排课次数：
+					<select name="" id="c-count">
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="6">6</option>
+						<option value="10">10</option>
+						<option value="7">7</option>
+					</select>
+				</div>
+				<div class="external-items">
+					<input type="button" name="external-save" value="保存" id="external-save" onclick="externalSave()"/>
+				</div>
+			</div>
+			<div id='calendar'></div>
+			<div style='clear:both'></div>
+		</div>
+	</body>
+</html>

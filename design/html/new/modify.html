@@ -1,0 +1,49 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>修改新闻</title>
+		<? k::load('layout','layout')->render('form') ?>
+	<script type="text/javascript">
+	
+		//配置磁块
+		//ajaxPost : true,
+		//callback:function(data){}
+		var from = new smartFrom('from_mandatory_table', {
+			url:'http://www.project.com/?m=new&a=modifyOk',
+			center:true,
+			httpType : 'post',
+			rows : [
+			
+			//9.5 在这里post一个影藏的id；用于modifyOk.php 里面拿到id 进行修改
+							{type : 'select', name : 'type', title : '修改类型', tip : "请选择类型", datatype:"*", errormsg : "请选择类型！", 
+								data :[<?=$option?>], doption : "<?echo '公告栏';?>"},
+							{type : 'input',name : 'id', inputType:'text', datatype:"*",value:"<?= $_GET['id'];?>"},
+							{type : 'input', name : 'title', title : '修改标题', tip : "请输入标题！", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!",value:"<?= $type_titles['title'];?>"},
+							{type : 'textarea', name : 'content', title : '修改内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的日期格式",value:"<?= $type_titles['content'];?>"},
+							],
+
+		});
+			var thisRpIn = null;
+		$(".rp_view").click(function(){
+			thisRpIn = this;
+			if($(this).attr("name") == "recruit"){
+				$().w2popup('open', {
+				body: "<iframe src='data.html' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input id="bounced-commit" type="button" style="display:none" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
+			}
+		});
+		
+		function setrp(name){
+			$(thisRpIn).prev().val(name);
+			$().w2popup('close');
+		};
+	</script>
+</html>

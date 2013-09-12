@@ -1,0 +1,5 @@
+[{"id":1,"title":"已经过去的事件","start":"2013-9-30 12:30:00","end":"2013-10-1 12:23:00","editable":false,"allDay":true,"color":"#e7e6e5","borderColor":"#d7d7d7","textColor":"#ffffff","className":"fc_clock"},
+{"id":2,"title":"事件标题","start":"2013-10-12","end":"2013-10-13","editable":true,"allDay":true,"color":"#e6ccc1","borderColor":"#bf9888","textColor":"#ffffff","className":"fc_cycls"},
+{"id":4100,"title":"活动","start":"2013-10-12","end":"2013-10-13","editable":true,"allDay":false,"color":"#ccaaaa","borderColor":"#ad7878","textColor":"#ffffff","className":"fc_cyc"},
+{"id":10,"title":"已经过去的事件","start":"2013-10-10 12:30","end":"2013-10-11 23:23:00","editable":false,"allDay":true,"color":"#e7e6e5","borderColor":"#d7d7d7","textColor":"#333333","className":"fc_cyc"},
+{"id":400,"title":"新活动","start":"2013-10-12 12:30:00","end":"2013-10-12 22:30:00","editable":true,"allDay":false,"color":"#ccaaaa","borderColor":"#ad7878","textColor":"#ffffff","className":"fc_cyc"}]
