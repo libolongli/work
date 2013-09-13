@@ -20,7 +20,7 @@
 		$('#grid').w2grid({
 			name: 'grid',
 			msgDelete: "确定要删除么",
-			recordsPerPage: 8,
+			recordsPerPage:8,
 			show: {
 				toolbar: true,
 				footer: true,
@@ -29,6 +29,8 @@
 				toolbarDelete: true,
 				toolbarSave: true
 			},
+			url: "<?echo $_SERVER['REQUEST_URI'].'&back=json'?>;",
+
 			toolbar: {
 				onClick: function (target, data) {
 					console.log(target);
@@ -70,7 +72,6 @@
 				}
 			},
 	
-
 			searches: [				
 				{ field: 'title', caption: '标题', type: 'text' },
 				{ field: 'content', caption: '内容', type: 'text' },
@@ -86,7 +87,7 @@
 				{ field: 'ts_created', caption: '编写时间', size: '10%'},
 				{ field: 'operate', caption: '审核状态', size: '8%'},
 			],
-			records:<?=$json?>
+		
 
 		});
 
@@ -99,6 +100,7 @@ function updateStatus(id,active){
 		success: function(msg){
 			if(msg=="1")
 				alert("审核成功！");
+				history.go(0);
 		}
 	});
 }

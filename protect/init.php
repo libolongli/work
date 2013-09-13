@@ -59,6 +59,7 @@ class tpl
 			'demo.html','grid-tree.html','home.html','tree.html',
 			'c_detailed.html','course_popup.html','d_from.html','recruitPeople_k.html',
 			's_detailed.html','work_list.htl','search_content.html','s_from.html','theClass.html','data.html',
+			'newsList.html','calendar.html','schedule.html',
 			'Grid.html','ztree.html','newsList.html',
 
 			);

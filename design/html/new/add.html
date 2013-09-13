@@ -11,38 +11,17 @@
 		//配置磁块
 		//ajaxPost : true,
 		//callback:function(data){}
-		var from = new smartFrom('from_mandatory_table', {
-			url:'?m=new&a=do',
+		var from = new smartFrom('from_mandatory_table',{
+			url:'',
 			center:true,
 			httpType : 'post',
-			rows : [
-							{type : 'select', name : 'type', title : '添加类型', tip : "请选择类型", datatype:"*", errormsg : "请选择类型！", 
-								data :[<?=$option?>], doption : "--请选择--"},
-							{type : 'input', name : 'title', title : '标题', tip : "请输入标题！", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
-							{type : 'input', name : 'author', title : '发布者', tip : "请输入身份", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
-							{type : 'textarea', name : 'content', title : '发表内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的日期格式"},
-							{type : 'popup',title : '转发', tip : "请输入转发的人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit",value:'请输入转发的人！'},
-							{type : 'hideInput', name:'rids',inputType:'text', datatype:"*",display:'none',value:''},
-							],
-
-		});
-			var thisRpIn = null;
-		$(".rp_view").click(function(){
-			thisRpIn = this;
-			if($(this).attr("name") == "recruit"){
-				$().w2popup('open', {
-				body: "<iframe src='data.html' frameborder='0' height='100%' width='100%'></iframe>",
-				buttons: '<input id="bounced-commit" type="button" style="display:none" onclick="$().w2popup(\'close\');">',
-				width: 800,
-				height: 500,
-				overflow: 'hidden',
-			});
-			}
+			rows : [<?=$html?>],
 		});
 		
-		function setrp(name){
-			$(thisRpIn).prev().val(name);
-			$().w2popup('close');
-		};
+		var thisView = null;
+		from.addListener('popupCallBack', function(view){
+			thisView = view;
+		});
+
 	</script>
 </html>

@@ -37,6 +37,7 @@
 			}
 
 			return array(
+
 					'search'=>$data,
 					'logic'=>$logic,
 				);
