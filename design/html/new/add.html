@@ -11,17 +11,25 @@
 		//配置磁块
 		//ajaxPost : true,
 		//callback:function(data){}
-		var from = new smartFrom('from_mandatory_table',{
-			url:'',
+		var from = new smartFrom('from_mandatory_table', {
+			url:'?m=new&a=do',
 			center:true,
 			httpType : 'post',
-			rows : [<?=$html?>],
+			rows : [
+							{type : 'select', name : 'type', title : '添加类型', tip : "请选择类型", datatype:"*", errormsg : "请选择类型！", 
+								data :[<?=$option?>], doption : "--请选择--"},
+							{type : 'input', name : 'title', title : '标题', tip : "请输入标题！", inputType:'text', datatype:"*", errormsg : "请至少8位中文字符!"},
+							{type : 'textarea', name : 'content', title : '发表内容', tip : "请填写内容！", inputType:'text', datatype:"*", errormsg : "请填写正确的日期格式"},
+							{type : 'popup',title : '转发', tip : "请输入转发的人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", data:{url:'data.html',name:'recruit',type:'icon'}},
+							{type : 'hideInput', name:'rids',inputType:'text', datatype:"*",display:'none',value:''},
+							],
+
 		});
-		
 		var thisView = null;
 		from.addListener('popupCallBack', function(view){
 			thisView = view;
 		});
-
 	</script>
 </html>
+
+
