@@ -5,6 +5,27 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title><?=$title?></title>
+		<style>
+			.Bar {
+				position: relative;
+				width: 100%;
+				border: 1px solid #7EC4CC;
+				padding: 1px;
+			}
+			.Bar div {
+				position: relative;
+				background: #7EC4CC;
+				background: -webkit-linear-gradient(left, #7EC4CC, #FFFFFF);
+				background: -moz-linear-gradient(left, #7EC4CC, #FFFFFF);
+				height: 12px;
+				line-height: 12px;
+			}
+			.Bar div span {
+				position: absolute;
+				width: 200px;
+				text-align: center;
+			}
+		</style>
 		<? k::load('layout','layout')->render('list') ?>
 	<script>
 		$('#grid').w2grid({
@@ -18,6 +39,7 @@
 				//toolbarDelete: true,
 				//toolbarSave: true
 			},
+			url:"<? echo $_SERVER['REQUEST_URI']."&back=json" ?>",
 			toolbar: {
 				items: [
 					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
@@ -62,7 +84,9 @@
 							   url: "?m=flow&a=update",
 							   data:{id:ids,status:9},
 							   success: function(msg){
-								 
+								 	if(msg){
+								 		alert(msg);
+								 	}
 							   }
 							});		
 						}
@@ -96,11 +120,11 @@
 			},{
 				field : 'percent',
 				caption : '进度',
-				size : '5%'
+				size : '200px'
 			},{
 				field : 'operate',
 				caption : '操作',
-				size : '15%'
+				size : '20%'
 			}],
 			
 		});
@@ -113,6 +137,12 @@
 				overflow: 'hidden',
 			});
 		}
-		w2ui['grid'].load('?m=flow&a=del&f=get');
+		//w2ui['grid'].load('?m=flow&a=del&f=get');
+		window.onload=function(){
+			$('div').live('mouseover', function() {
+  				$(this).attr('title','');
+			});
+	       
+	    }
 	</script>
 </html>

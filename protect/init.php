@@ -51,7 +51,7 @@ class tpl
 	$src='"images/';
 	
 	$target='"/design/images/';
-	
+	$target_1="'/design/images/";
 
 
 	$t_array = array('bench.html','bench_left.html','bench_main.html',
@@ -60,9 +60,10 @@ class tpl
 			'c_detailed.html','course_popup.html','d_from.html','recruitPeople_k.html',
 			's_detailed.html','work_list.htl','search_content.html','s_from.html','theClass.html','data.html',
 			'newsList.html','calendar.html','schedule.html',
+			'Grid.html','ztree.html','newsList.html',
+
 			);
 
-	
 	$target_html=str_replace($src,$target,$html);
 	foreach($t_array as $key => $value){
 		$arr = explode(".",$value);

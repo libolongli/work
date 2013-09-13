@@ -49,7 +49,8 @@ class k_model_user_user
   
   function uid()
   {
-  return $_SESSION['user']['id'];
+  	if(!isset($_SESSION)) header('Location: ?m=home');
+  	return $_SESSION['user']['id'];
    //return 1;
   }
   
@@ -95,6 +96,15 @@ class k_model_user_user
 			 {'title':'积分', 'name':'{$data['score']}','title1':'性别', 'name1':'男'},
 			 {'title':'介绍', 'name':'{$data['introduce']}'}]";
 	echo $json;
+  }
+
+  function getUser($map = array()){
+  	$where = "WHERE 1=1 ";
+	$sql = "select id,user as name from user ";
+	foreach($map as $key=>$value){
+		$where .= "AND {$key}={$value}";
+	}
+	return R::getAll($sql);
   }
   
 }

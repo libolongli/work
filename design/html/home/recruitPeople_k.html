@@ -22,12 +22,13 @@
 				padding: 0
 			}
 		</style>
+		<script src ="/design/images/js/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript">
 			$(".rP_ul li").live("click", function(){
 				var obj = new Object();
 				obj.uid = $(this).attr('uid');
 				obj.text = $(this).html();
-				setrp(obj);
+				parent.setrp(obj);
 			});
 		</script>
 	</div>

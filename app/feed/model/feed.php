@@ -24,10 +24,22 @@ class k_model_feed_feed
 	return $id;
   }
   
-    public function getListJson(){
+    public function getListJson($map){
 		$uid = $_SESSION['user']['id'];
-		$data = R::getAll("SELECT id as recid,uid,rid,content FROM feed where uid = {$uid} and status !=9 order by id desc");
-		return json_encode($data);
+		$where = " where  uid = {$uid} and status !=9 ";
+		$sql = "SELECT id as recid,uid,rid,content FROM feed ";
+		$sql .= $where;
+		$total = count(R::getAll($sql));
+		if(isset($map['limit']) && isset($map['offset'])){
+				$start = $map['offset'];
+				$limit = "limit {$start},{$map['limit']}";
+				$sql .= $limit;
+		}
+		$data = R::getAll($sql);
+		return array(
+			'total'=>$total,
+			'data'=>$data
+			);
 	}
 	
 	public function update($map){

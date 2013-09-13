@@ -16,35 +16,25 @@
 			center:true,
 			httpType : 'post',
 			rows : [
-					{type : 'input', name : 'name', title : '名称', tip : "请填写名称！", inputType:'text', datatype:"*", errormsg : "请填写名称"},
-					{type : 'input', name : 'url', title : 'URL', tip : "请填写URL！", inputType:'text', datatype:"*", errormsg: "请填写URL"},
-					{type : 'popup',title : '收件人', tip : "请输入收件人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", popupType:"recruit"},
+					{type : 'input', name : 'name', title : '名称', tip : "请填写名称！", inputType:'text', datatype:"*", errormsg : "请填写名称",value:'<? if(isset($data)) echo $data['name']?>'},
+					{type : 'input', name : 'url', title : 'URL', tip : "请填写URL！", inputType:'text', datatype:"*", errormsg: "请填写URL",value:'<? if(isset($data)) echo $data['url']?>'},
+					{type : 'popup',title : '收件人', tip : "请输入收件人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", data:{url:'data.html',name:'recruit',type:'cont'},},
 					{type : 'hideInput', name : 'rids', errormsg : "",value :'', display:'none'},
 					{type : 'select', name : 'active', title : '是否激活', tip : "请选择！", inputType:'text', datatype:"*", errormsg: "请选择",data : [{value:1, name:"激活"}, {value:0, name:"不激活"}],doption : "--请选择--"},
 					
-					{type : 'textarea', name : 'format', title : '模板', tip : "请填写模板内容！", inputType:'text', datatype:"*", errormsg : "请填写模板"}
+					{type : 'textarea', name : 'format', title : '模板', tip : "请填写模板内容！", inputType:'text', datatype:"*", errormsg : "请填写模板",value:'<? if(isset($data)) echo $data['format']?>'}
 					
 				   ],
 		
 		});
 
-		var thisRpIn = null;
-		$(".rp_view").click(function(){
-			thisRpIn = this;
-			if($(this).attr("name") == "recruit"){
-				$().w2popup('open', {
-				body: "<iframe src='data.html' frameborder='0' height='100%' width='100%'></iframe>",
-				buttons: '<input id="bounced-commit" type="button" style="display:none" onclick="$().w2popup(\'close\');">',
-				width: 800,
-				height: 500,
-				overflow: 'hidden',
-			});
-			}
+		var thisView = null;
+		from.addListener('popupCallBack', function(view){
+			thisView = view;
 		});
-		
-		function setrp(name){
-			$(thisRpIn).prev().val(name);
-			$().w2popup('close');
-		};
+		// function setrp(name){
+		// 	$(thisRpIn).prev().val(name);
+		// 	$().w2popup('close');
+		// };
 	</script>
 </html>

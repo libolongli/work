@@ -37,4 +37,8 @@
 		public  function update($table, $updatevalues,$id){
 			return $this->updateRecord($table, $updatevalues,$id);
 		}
+
+		public function find($table,$conditions=array(),$addSql=null,$delete = null, $inverse = false, $all = false){
+			return $this->_writer->selectRecord($table, $conditions, $addSql, $delete, $inverse, $all);
+		}
 	}

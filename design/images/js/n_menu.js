@@ -33,7 +33,12 @@ var Nmeun = function(data){
 		  if(data[i].text == text){
 		  	 var children = data[i].children;
 		  	 for (var k = children.length - 1; k >= 0; k--){
-		  	 	 var right_li = '<li><a href="'+children[k].url+'" class="n_menu_right_a" ><p>'+children[k].text+'</p></a>';
+		  	 	 var right_li = '<li><a href="'+children[k].url+'" class="n_menu_right_a" ><p>'+children[k].text+'</p><span ';
+		  	 	 if(children[k].children.length > 0){
+		  	 	 	right_li += 'class="meun_icon"></span></a>';
+		  	 	 }else{
+		  	 	 	right_li += '></span></a>';
+		  	 	 };
 				 $("."+name).append(addLi(right_li, children[k].children)+'</li>');
 			 };
 		  };
@@ -45,24 +50,36 @@ var Nmeun = function(data){
 		if(data && data.length > 0){
   	 		view += '<ul style="display: none;">';
   	 		for (var j=0; j < data.length; j++) {
-				 view += '<li><a href="#">'+data[j].text+'</a>';
-				 view += addLi(view, data[j].children)+'</li>';
+				 view += '<li><a class="n_menu_right_a" href="'+data[j].url+'"><p>'+data[j].text+'</p></a>';
+				 if(data[j].children.length > 0){
+				 	view += addLi(view, data[j].children)+'</li>';
+				 }else{
+				 	view += '</li>';
+				 }; 
 			};
 			view += "</ul>";
   	 	};
   	 	return view;
 	};
 	
-	
-	//2级点击事件
-	$(".n_menu_right_a").live("click", function(){
-		liClick({text: $(this).find("p").html(), url:$(this).attr("href")});
+	$('.meun_icon').live('click', function(){
+		liClick({text: $(this).prev('p').html(), url:$(this).parent().attr('href')});
+		
 		return false;
 	});
-	
-	//三级点击事情
-	$(".n_menu_right li ul li").live("click", function(){
-		liClick($(this).find("a").html());
+
+	//点击展开还是使用链接
+	$(".n_menu_right_a p").live("click", function(){
+		if($(this).parent().next("ul").html()){
+			if($(this).parent().next("ul").css("display") === "none"){
+				$(this).parent().next("ul").slideDown();
+			}else{
+				$(this).parent().next("ul").slideUp();
+			};
+		}else{
+			liClick({text: $(this).html(), url:$(this).parent().attr("href")});
+		};
+		
 		return false;
 	});
 	

@@ -1,0 +1,10 @@
+<ul id="tree" class="ztree"></ul>
+<script>
+	var setting = {
+	}
+	var zNodes = [<?=$json?>];
+
+	$(document).ready(function() {
+		$.fn.zTree.init($("#tree"), setting, zNodes);
+	}); 
+</script>

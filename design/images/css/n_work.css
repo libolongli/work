@@ -27,7 +27,6 @@ p {font-size: 13px}
     float: left;
     font-size: 13px;
     margin: 0 15px;
-    padding: 3px 0;
     width: 120px;}
 .rsBullets {
 	 height: auto;
@@ -41,7 +40,22 @@ p {font-size: 13px}
     z-index: 35;
     top: -25px;
 }
+.wrod_setup {
+	background: url("../image/i_global.png") repeat scroll -190px -191px transparent;
+    float: left;
+    height: 18px;
+    width: 18px;
+}
 
+.delete_icon {
+    background: url("../image/i_global.png") repeat scroll -125px -540px transparent;
+    height: 18px;
+    position: relative;
+    right: -120px;
+    top: -135px;
+    width: 18px;
+    display:none
+}
 
 .rsBullet {
     display: inline-block;

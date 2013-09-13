@@ -25,7 +25,6 @@ obj  对象参数详解
 	
 
 	
-	
 var smartFrom = function(id, obj){
 	var views = '';				 			//表单对象字符
 	var fromMsgNull = "请填入信息！";			//表单元素为空              					  默认提示"请填入信息！"。
@@ -33,6 +32,7 @@ var smartFrom = function(id, obj){
 	var fromErrorMsg = "请输入正确信息！";		//表单元素验证不通过                                            	  默认提示"请输入正确信息！"
 	var tipType = 1;						//提示信息提示位置 					 1为内容里面提示	  	2为右侧提示                  
 	var times = [];
+	var hideView = '';
 	
 	
 	//加载头部信息
@@ -41,15 +41,6 @@ var smartFrom = function(id, obj){
 	views += view_header;
 
 	var configFrom = function(row){
-		var rTip = "";
-		var lTip = "";
-		//判断提示信息位置
-		if(tipType){
-			rTip = row.tip;
-		}else{
-			lTip = row.tip;
-		};
-		console.log(row.type);
 		switch(row.type){
 			case "input":
 				// inputType 列表类型            <td class="need" style="width:10px">*</td>
@@ -67,8 +58,8 @@ var smartFrom = function(id, obj){
                     		+'errormsg="'+row.errormsg+'">';
                     		select += '<option value="">'+row.doption+'</option>'; 
                     		for (var i = row.data.length - 1; i >= 0; i--){
-                    			if(row.value && row.value == i){
-                    				select += '<option value="'+row.data[i].value+'" selected="selected" >'+row.data[i].name+'</option>'; 
+                    			if((row.value && row.value == i) || (row.value && row.value == row.data[i].value)){
+                    				select += '<option value="'+row.data[i].value+'" selected="selected" >'+row.data[i].value+'</option>'; 
                     			}else{
                     				select += '<option value="'+row.data[i].value+'">'+row.data[i].name+'</option>'; 
                     			}
@@ -146,9 +137,11 @@ var smartFrom = function(id, obj){
 				var recruitPeople = '<tr><td class="from_title">'+row.title+'：</td>'
                     		+'<td><input ' 
                     		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'"  name="'+row.name+'" datatype="'+row.datatype+'"' 
-                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.popupType+'"><div class="'+row.popupType+'"></div></div></td>'
+                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.data.name+'" title="'+(row.data.title ? row.data.title : "")+'"' 
+                    		+'url="'+row.data.url+'" width="'+(row.data.width ? row.data.width : "")+'" type="'+row.data.type+'"  >'
+                    		+'<div class="recruit"></div></div></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
-                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';     		
                 views += recruitPeople;
 			break;
 			case "datepicker":
@@ -161,41 +154,46 @@ var smartFrom = function(id, obj){
                     		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += datepicker;
 			break;
-			case "hideInput":
-				var input = '<tr style="display:'+row.display+'"><td class="from_title"></td>'
-                    		+'<td><input ' 
-                    		+'type="hidden" value="'+row.value+'" name="'+row.name+'"' 
-                    		+'/></td>'
-                    		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
-                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
-                views += input;
-			break;
 			case 'html':
 				var cont = '<tr><td class="from_title">'+row.title+': </td><td>'+row.content+'</td></tr>';
 				views += cont;
 			break;
 		}
 	};
-		//加载子元素
+	
+	var showViewIndex = obj.rows.length;
+	//检测是否有隐藏元素
+	for (var i=0; i < obj.rows.length; i++) {
+		if(obj.rows[i].type == 'hideInput'){
+			showViewIndex = showViewIndex - 1;
+		};
+	};
+	
+	//加载子元素
 	var data = obj.rows;
-	for (var i=0; i < data.length; i++) {
+	for (var i=0,k=0; i < data.length; i++) {
+		if(data[i].type == 'hideInput'){
+			hideView += '<input type="hidden" value="'+data[i].value+'" name="'+data[i].name+'" />';
+			continue;
+		};
 		if(! obj.center){
-			if(i == parseInt(data.length / 2)){
+			if(k == parseInt(showViewIndex / 2)){
 				views += '</table><table width="50%" style="table-layout:fixed;">';
 			};
 			configFrom(data[i]);
 		}else{
 			configFrom(data[i]);
 		};
+		k ++;
 	};
-	views += '</table><div class="form_btn"><input class="from_btn" type="submit" value="提 交" /> <input  class="from_btn" type="reset" value="重 置" /></div></form>';
+	views += '</table>'+hideView+'<div class="form_btn"><input class="from_btn" type="submit" value="提 交" /> <input  class="from_btn" type="reset" value="重 置" /></div></form>';
 	         
 	$("#"+id).append(views);
 	
 	var getInfoObj=function(){
 		return 	$(this).parents("td").next().find(".info");
 	};
-	
+	//显示隐藏验证提示信息
 	$("[datatype]").focusin(function(){
 		if(this.timeout){clearTimeout(this.timeout);}
 		var infoObj=getInfoObj.call(this);
@@ -203,7 +201,6 @@ var smartFrom = function(id, obj){
 			return;	
 		}
 		infoObj.show().siblings().hide();
-		
 	}).focusout(function(){
 		var infoObj=getInfoObj.call(this);
 		this.timeout=setTimeout(function(){
@@ -211,37 +208,36 @@ var smartFrom = function(id, obj){
 		},0);
 	});
 	
+	
+	//创建自动验证对象
 	$(".registerform").Validform({
 		tiptype : 2
 	});
-
+	//创建日期显示对象
 	for (var i=0; i < times.length; i++) {  
 	  $('#'+times[i]).Zebra_DatePicker();
 	};
-	
-	
-	//弹出窗口
+	//弹出窗口对象
 	var rp_view_c = null;
 	$(".rp_view").click(function(){
-		if(! obj.popups){
-			return false;
-		};
-		for (var i=0; i < obj.popups.length; i++) {
-		  	if(obj.popups[i].name == $(this).attr("name")){
-		  		if(obj.popups[i].type == "load"){
-		  			$().w2popup('load', { url: obj.popups[i].url, width:250});
-		  		}else{
-		  			$().w2popup({
-						title   : '课程选择',
-						body    : '<iframe src="'+obj.popups[i].url+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
-						width   : 600
-					});
-		  		};
-		  	};
+		if($(this).attr('type') == "load"){
+			$().w2popup('load', { url: $(this).attr('url'), width: ($(this).attr('width') == "" ? 250 : parseInt($(this).attr('width')))});
+		}else{
+			$().w2popup({
+				title   : $(this).attr('title'),
+				body    : '<iframe src="'+$(this).attr('url')+($(this).prev().val() == "" ? "" : '?id='+$(this).prev().val())+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
+				width   : ($(this).attr('width') == "" ? 600 : parseInt($(this).attr('width')))
+			});
 		};
 		rp_view_c(this);
 	});
-	
+
+	/**
+	 * 回调事件监听  获取当前选择对象
+	 * 参数 ： name 监听事件名称
+	 * 		callback 回调函数
+	 * 返回：无
+	 */
 	this.addListener = function(view, fun){
 		switch(view){
 			case 'popupCallBack':
@@ -249,6 +245,10 @@ var smartFrom = function(id, obj){
 			break;
 		};
 	};
-	
+
 	return this;
 };
+
+
+
+

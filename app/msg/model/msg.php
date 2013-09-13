@@ -1,14 +1,35 @@
 <?php
 class k_model_msg_msg
 {
-    public function getListJson(){
+	private $_db;
+	function __construct(){
+		$this->_db = new db();
+	}
+    public function getListJson($map = array()){
+    	$where  = " where l.fleg !=9 ";
+    	foreach ($map as $key => $value) {
+				if(($key!='offset') && ($key!='limit'))
+				$where .= " AND {$key}='{$value}'";
+		}
 		$uid = $_SESSION['user']['id'];
-		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created)as ts_created ,u.`user`  
+		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created) as ts_created ,u.`user`  
 			from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 
-			INNER JOIN user as u on u.id= l.rid 	
-			where l.uid = {$uid} and l.fleg !=9 order by l.id desc";
+			INNER JOIN user as u on u.id= l.rid";
+		$sql .= $where;
+		$total = count(R::getAll($sql));
+		if(isset($map['limit']) && isset($map['offset'])){
+			$start = $map['offset'];
+			$limit = "limit {$start},{$map['limit']}";
+			$sql .= $limit;
+		}
 		$data = R::getAll($sql);
-		return json_encode($data);
+		foreach ($data as $key => $value) {
+			$data[$key]['operate'] = "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=msg&a=detail&id={$value['recid']}')>查看</a>";
+		}
+		return array(
+			'total'=>$total,
+			'data'=>$data
+			);
 	}
 	
 	public function addMsg($data){
@@ -51,4 +72,21 @@ class k_model_msg_msg
 		R::exec($sql);
 	}
   
+  	public function getMsgInfo($id){
+  		$this->_db->update('msg_log',array('fleg=>2'),$id);
+  		$data = $this->getMsgById($id);
+		$json = "[{'title':'收件人', 'name':'{$data['user']}'},
+				 {'title':'内容', 'name':'{$data['content']}'},
+				 ]";
+		return $json;
+  	}
+
+  	public function getMsgById($id){
+  		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created) as ts_created ,u.`user`  
+				from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 
+				INNER JOIN user as u on u.id= l.rid where l.id = {$id}";
+		$data = R::getAll($sql);
+		$data = $data[0];
+		return $data;
+  	}
 }

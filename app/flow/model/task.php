@@ -21,6 +21,8 @@
 			$sql = "SELECT * FROM common_config where url = '{$url}' ";
 			$this->_config = R::getAll($sql);
 		}	
+
+		//$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0,'rids'=>$data['rids'],'uid'=>$user['id']));
 		
 		public function add($map = array()){
 			foreach($this->_config as $key =>$value){
@@ -30,19 +32,21 @@
 						foreach(explode(',',$value['variable']) as $k =>$v){
 							$format = str_replace('{'.$v.'}', $map[$v], $format);
 						}
+					}else{
+						$format = $map['content'];
 					}
 					
+					//$format =  $map['content'];
+					
 					$now = time();								
-					//$format = $value['format'];
-					//$format = str_replace('{user}', $map['content'], $format);
-					$now = time();
 					if(!isset($map['rids']))  $map['rids']=$value['rids'];
 					if(!isset($map['uid']))  $map['uid']=1;
-					//echo $format;exit;
+					$user = $_SESSION['user'];
+					//print_r($user);exit;
 					foreach (explode(',', $map['rids']) as $key => $value) {
 						$data_flow = array("uid=>{$map['uid']}","rids=>{$value}","content=>{$format}","ts_created=>{$now}","ts_updated=>{$now}","status=>1");
-						$data_log = array("uid=>{$map['uid']}","rid=>{$value}","ts_created=>{$now}","ts_updated=>{$now}","fleg=>1");
-						$this->_db->insertRecord('flow',$data_flow);
+						$fid = $this->_db->insertRecord('flow',$data_flow);
+						$data_log = array("fid=>{$fid}","uid=>{$map['uid']}","rid=>{$value}","ts_created=>{$now}","fleg=>1","comment=>{$format}");					
 						$this->_db->insertRecord('flow_log',$data_log);
 					}
 				}
@@ -55,6 +59,10 @@
 		public function update($map){
 			$tmp = array();
 			$map['ts_updated']=time();
+			if(($map['status']==9) && $map['id']){
+				$info = k::load('flow')->getFlowById($map['id']);
+				$uid = k::load('user','user')->get_uid();
+			}
 			foreach($map as $k => $v){
 				if(($k!='id') &&($k!='m') &&($k!='a') ){
 					$tmp[] = "{$k}='{$v}'";
@@ -62,6 +70,7 @@
 			}
 			$value  = join(',',$tmp);
 			if(is_array($map['id'])) $map['id'] = join(",",$map['id']);
+
 			$sql = "UPDATE flow set {$value} where id in({$map['id']})";
 			R::exec($sql);
 		}

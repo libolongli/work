@@ -20,7 +20,11 @@ class k_model_new_new
 	
 	 	return false;	 
 	}
-	
+/**
+*通过执行调用工作流添加新闻
+*@param array $data  category
+*@return array
+*/		
 	function addNew($data){
 		
 			if(isset($_SESSION['user']['user'])){
@@ -29,59 +33,33 @@ class k_model_new_new
 		foreach($data as $key =>$value){
 			if($value == '请输入新闻标题！') $data[$key]='';
 		}
-		if($data){
 
-			$new = R::dispense('news');
-			$new->title = $data['title'];
-			$new->content = $data['content'];
-			$new->type = $data['type'];
-			$new->author = $author;
-			//$new->active = $data['active'];
-			$time = time();
-			 //date('Y-m-d H:i:s',$time);
-			
-			$new->ts_created = time();
-			$id = R::store($new);
+
+		if($data['rids']){
+			//发送工作流
+			$flow = k::load('task','flow');
+			$flow->init('news/add');
+			$user = $_SESSION['user'];
+			$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0,'rids'=>$data['rids'],'uid'=>$user['id']));
+		}
+		
+		if($data){
+			$now = time();
+			$idata = array("title=>{$data['title']}","content=>{$data['content']}","type=>{$data['type']}",
+				"ts_created=>{$now}","status=>0");
+			$id = $this->_db->add('news',$idata);
+
 			return $id;
 		}
 	}
-	
-    public function getJsonNew(){
-		$data = R::getAll("SELECT * FROM news where type='{$type}' and status='0' order by id desc");
-		return json_encode($data);
-	}
-
-    public function getListJson(){
-		
-		$data = R::getAll("SELECT n.id as recid,n.title,n.author,n.content,a.active,FROM_UNIXTIME(ts_created) as ts_created,t.type 
-							from news as n INNER JOIN (SELECT  type_id,titles as active from type where cate = 'active') as a on n.active = a.type_id
-							INNER JOIN (SELECT type_id,titles as type from type where cate = 'type') as t on n.type = t.type_id where n.status = '0' order by ts_created desc
-							");
-							
-		$newdata = R::getAll("select * from news where status='0' order by id desc");		
-
-			for($i=0;$i<count($newdata);$i++){
-				$type = $newdata[$i]['type'];
-			}
-		
-		
-			foreach($data as $key => $value){
-				
-				//echo  $data[$key][active].'....';
-				if($data[$key][active]=='审核通过'){
-					$data[$key]['operate'] = $data[$key][active];
-				}else{
-				//active = 3,审核通过
-				$data[$key]['operate'] = "<a href='javascript:void(0);' onclick='updateStatus({$value['recid']},3)'>".$data[$key]['active']."</a>";
-				}			
-				$data[$key]['operate'] .= "｜<a href='?m=home&a=newsList&type={$type}&id={$value['recid']}'>查看</a> ";
-				$data[$key]['operate'] .= "｜<a href='?m=new&a=modify&type={$type}&id={$value['recid']}'>修改</a> ";
-			}
-				return  json_encode($data);
-	}
-	function getOption(){
+/**
+*得到新闻的类型
+*@param null
+*@return string 
+*/	
+function getOption(){
 		if($type = 'all')
-		$data = R::getAll("SELECT titles as name,type_id as id FROM type where cate = 'type' order by id desc");
+		$data = $this->getType();
 		$str = '';
 		if($data){
 			foreach($data as $key =>$value){
@@ -96,7 +74,17 @@ class k_model_new_new
 		if($str) return $str;
 		return false;	 
 	}
-				
+
+
+	function getType(){
+		return R::getAll("SELECT titles as name,type_id as id FROM type where cate = 'type' order by id desc");
+		
+	}
+/**
+*新闻列表
+*@param null
+*@return array 
+*/		
 	function getNewsInfo(){
 		$id =$_GET['id'];
 		$sql = "select title,author,content,FROM_UNIXTIME(ts_created) as ts_created from news where id = '{$id}'";
@@ -108,7 +96,12 @@ class k_model_new_new
 		{'title':'创建时间', 'name':'{$data['ts_created']}'},
 			]";
 		echo $json;
-	}			
+	}
+/**
+*新闻修改
+*@param null
+*@return array 
+*/			
 	function getModify(){
 		if($_GET['id'] && $_GET['type']){
 			$id = $_GET['id'];
@@ -119,30 +112,112 @@ class k_model_new_new
 			return $result;
 			
 	}
+/**
+*新闻置顶
+*@param null
+*@return array 
+*/
 	function getTop(){
 		echo 1;
 		if($_POST['id'] && $_POST['top']){
-			//where id <> '{$_POST['id']}'只要id不等于post过来的id，n那么所有的id的top都设为0
 			$sql = "update news set top='{$_POST['top']}' where id='{$_POST['id']}';update news set top='0' where id<>'{$_POST['id']}' order by top desc";
 			$data = R::getAll($sql);
-			
+			return $data;
 		}
 		return $data;
 	
 	}
+/**
+*新闻审核
+*@param null
+*@return array 
+*/
 	function checkNews(){
 			echo 1;
 			if($_POST){
 					$id = $_POST['id'];
 					$active = $_POST['active'];
 					}
-			//修改多条数据
 				$data = R::getAll("update news set active ='{$active}' where id = '{$id}'");
 				return $data;	
 	}
 
 
+/**
+* 通过传入的数据将$map里面的信息转换成能形成json格式的array
+*
+ * @param  array $map   category
+ * @return array 	
+ */
+	function searchNew($map = array()){
+		$where = " WHERE ";
+			$arr1 = array();
+			if(isset($map['search'])){
+				foreach($map['search']['search'] as $key=>$value){
+					if($value['field'] == 'title'){
+						array_push($arr1,"n.title ".$value['like']);
+					}elseif($value['field'] == 'content'){
+						array_push($arr1, "n.content ".$value['like']);
+					}elseif($value['field'] == 'type'){
+						array_push($arr1, "t.type ".$value['like']);
+					}elseif($value['field'] == 'author'){
+						array_push($arr1, "n.author ".$value['like']);
+					}else{
+						array_push($arr1, $value['field'].$value['like']);
+					}
+				}
+				$where .= join(" ".$map['search']['logic']." ",$arr1);
+			}
+			foreach ($map as $key => $value) {
+				if(($key!='offset') && ($key!='limit') && ($key!='search')){
+					$where .= " AND {$key}={$value} ";
+				}
+			}
+
+			$sql = "SELECT n.id as recid,n.title,n.author,n.content,a.active,FROM_UNIXTIME(ts_created) as ts_created,t.type from news as n 
+					INNER JOIN (SELECT type_id,titles as active from type where cate = 'active') as a on n.active = a.type_id
+					INNER JOIN (SELECT type_id,titles as type from type where cate = 'type') as t on n.type = t.type_id";
+			if($where == " WHERE "){
+				$sql .=$where." n.status != 9 ";
+				//echo $sql;exit;
+			}else{
+				$sql .=$where." AND n.status != 9 ";
+			}
+				$total =count(R::getAll($sql));
+			if(isset($map['limit']) && isset($map['offset'])){
+				$start = $map['offset'];
+				$limit = "limit {$start},{$map['limit']}";
+				$sql .= $limit;
+			}
+			$data = R::getAll($sql);
+			$newSql = "SELECT * FROM news WHERE status='0' order by id desc";
+			$newdata = R::getAll($newSql);	
+				for($i=0;$i<count($newdata);$i++){
+					$type = $newdata[$i]['type'];
+					}
+				foreach($data as $key => $value){
+					if($data[$key][active]=='审核通过'){
+					   $data[$key]['operate'] = $data[$key][active];
+					}else{
+					//active = 3,审核通过
+						$data[$key]['operate'] = "<a href='javascript:void(0);' onclick='updateStatus({$value['recid']},3)'>".$data[$key]['active']."</a>";
+					}			
+						$data[$key]['operate'] .= "｜<a href='?m=home&a=newsList&type={$type}&id={$value['recid']}'>查看</a> ";
+						$data[$key]['operate'] .= "｜<a href='?m=new&a=modify&type={$type}&id={$value['recid']}'>修改</a> ";
+			}
+
+			$arr = array(
+				'total'=>$total,
+				'data'=>$data
+			);
+			return $arr;
+		}
+
+
+
 	}
+
+	
 	
 
 	
