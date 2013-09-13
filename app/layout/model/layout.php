@@ -1,5 +1,12 @@
 <?php
 	class k_model_layout_layout{
+
+		/**
+		 * 通过传入的$template 返回相应的JS 和 CSS 
+		 *
+		 * @param  string $template
+		 * @return html	
+		 */
 		function render($template){
 			$form = <<<HTML
 		 	<!-- Date: 2013-08-25 -->

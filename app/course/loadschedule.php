@@ -11,7 +11,7 @@
 				//$map['s.g_id'] = $_GET['g_id'];
 				$data = k::load('course')->getSchedule($map);
 				$array = array();
-				foreach ($data['data'] as $key => $value) {
+				foreach ($data['records'] as $key => $value) {
 				 	$arr['id'] = $key;
 				 	$arr['title'] = $value['course_name'];
 				 	$arr['start'] = $value['ts_start'];

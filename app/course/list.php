@@ -17,12 +17,11 @@
 				}
 				
 				$data = k::load('course')->getSchedule($map);
-				$array = array(
-					'total'=>$data['total'],
-					'page'=>$_POST['offset']/$_POST['limit'],
-					'records'=>$data['data']
-					);
-				echo json_encode($array);exit;
+
+				foreach($data['records'] as $key => $value){
+					$data['records'][$key]['op'] = "<a href='javascript:void(0);' onclick=checkinfo('?m=op&a=update&table=schedule&id={$value['recid']}')>修改</a>";
+				}
+				echo json_encode($data);exit;
 			}
 
 			if($_POST){

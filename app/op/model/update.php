@@ -4,13 +4,24 @@
 		function __construct(){
 			$this->_db = new db();
 		}
-		// function getFiledType(){
-
-		// }
+		
+		/**
+		* 通过table 表名 和id 拿取信息
+		* @param  string $table
+		* @param  string $id
+		* @return array
+		*/
 
 		function getRow($table,$id){
 			return   $this->_db->find($table,array('id'=>$id));
 		}
+
+
+		/**
+		* 通过table 表名 获取该表的信息,得到那些字段需要修改,以及使用什么组件,和title是什么
+		* @param  string $table
+		* @return array
+		*/
 
 		function getType($table){
 			$return  = array();
@@ -101,6 +112,15 @@
 			return $return;
 		}
 
+		/**
+		* 主要是为了生成select而返回数据
+		* @see getType
+		* @param  array $map
+		* @param  string $table
+		* @param  string $id
+		* @return int
+		*/
+
 		function getSelectInfo($table){
 			if($table=='user'){
 				return R::getAll("Select id,user as name from {$table}");
@@ -108,6 +128,14 @@
 			return $this->_db->find($table);
 		}
 
+		/**
+		* 通过id,table,map 修改表信息
+		*
+		* @param  array $map
+		* @param  string $table
+		* @param  string $id
+		* @return int
+		*/
 		function update($map,$table,$id){
 			$data = array();
 			foreach($map as $key => $value){

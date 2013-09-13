@@ -1,5 +1,13 @@
 <?php
 	class k_model_form_form{
+	
+	/**
+	 * 通过传入的表名和类型的名字返回select 的HTML
+	 *
+	 * @param  string $table  tablename 
+	 * @param  string $cate   category
+	 * @return html	
+	 */
 		function getSelect($table,$cate){		
 			$sql = "SELECT type_id as value,title as name FROM type where status =1 
 			and tablename = '{$table}' and cate='{$cate}'";	
@@ -10,6 +18,12 @@
 			echo $select;													
 		}
 
+	/**
+	 * 通过传入的$map 生成一个input标签
+	 *
+	 * @param  array $map
+	 * @return html	
+	 */
 		function setInput($map){
 			$map = $this->teamMap($map,'input');
 			$html = "{";
@@ -25,6 +39,12 @@
 			return $html;
 		}
 
+		/**
+		 * 通过传入的$map 生成一个popup标签
+		 *
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setPopup($map){
 			$map = $this->teamMap($map,'popup');
 			$html = "{";
@@ -41,12 +61,25 @@
 			return $html;
 		}
 
+		/**
+		 * 通过传入的$map 生成一个隐藏标签
+		 *
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setHideinput($map){
 			$map = $this->teamMap($map,'hideInput');
 			$html = "{type : 'hideInput', name : '{$map['name']}', errormsg : '',value :'', display:'none'}";
 			return $html;
 		}
 		
+		/**
+		 * 通过传入的$map 生成一个下拉列表
+		 *
+		 * @param  array $map
+		 * @return html	
+		 */
+
 		function setSelect($map){
 			$map = $this->teamMap($map,'select');
 			$data = array();
@@ -69,6 +102,12 @@
 			return $html;	
 		}
 
+		/**
+		 * 通过传入的$map 生成一个Textarea标签
+		 *
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setTextarea($map){
 			$map = $this->teamMap($map,'textarea');
 			$html = "{";
@@ -84,7 +123,15 @@
 			return $html;
 		}
 
-					
+		/**
+		 * 通过传入的$map 生成一个日历插件
+		 * 需要另外引进相关的JS 和 CSS
+		 * <script src="images/js/zebra_datepicker.js" type="text/javascript" ></script>
+		 * <link href="images/css/metallic.css" type="text/css" rel="stylesheet" />
+		 *
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setCalender($map){
 			$map = $this->teamMap($map,'calender');
 			$html = "{";
@@ -102,6 +149,13 @@
 
 		}
 
+		/**
+		 * 通过传入的$map主要是用来设置默认值的,以免插件出问题
+		 *
+		 * @param  array $map
+		 * @param  string $map
+		 * @return html	
+		 */		
 		function teamMap($map,$type){
 			$key = array();
 			$data['datatype'] = "*";
@@ -134,6 +188,7 @@
 				break;
 
 			}
+			
 			foreach ($key as $k => $v) {
 				if(!isset($map[$v])) $map[$v] = $data[$v]; 
 			}

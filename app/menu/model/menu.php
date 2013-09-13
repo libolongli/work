@@ -5,15 +5,29 @@ class k_model_menu_menu
 	private $rdata = array();
 	private $jdata = array();
 	private $level = 0;
+
+	/**
+	 * 通过传入的$type 和 pid  返回相应的树形结构需要的数据
+	 *
+	 * @param  string $type
+	 * @param  int $pid
+	 * @return html	
+	 */
 	function getOption($type= 'part',$pid = 0)
 	{
-		if($type = 'all') $this->data= R::getAll( 'select * from menu' );
+		if($type == 'all') $this->data= R::getAll( 'select * from menu' );
 		$this->teamData();
 		
 		if($this->rdata) return $this->rdata;
 		return false;	 
 	}
 	
+	/**
+	 * 通过传入的$data 添加menu
+	 *
+	 * @param  array $map
+	 * @return int	
+	 */
 	function addMenu($data){
 		foreach($data as $key =>$value){
 			if($value == '请填写内容！') $data[$key]='';
@@ -29,13 +43,26 @@ class k_model_menu_menu
 		}
 	}
 	
-	public function getJsonMenu(){
-		$data = $this->getChild(1);
+	/**
+	 * 通过传入的$pid 返回该pid下面的所有的子数据
+	 *
+	 * @param  int $pid
+	 * @return json	
+	 */
+
+	public function getJsonMenu($pid =1){
+		$data = $this->getChild($pid);
 		$this->jdata = $data;
 		$this->recursive($this->jdata);
 		return  json_encode($this->jdata);
 	}
-		
+	
+	/**
+	 * 通过传入的$data,递归 返回该data下面的所有的子数据
+	 *
+	 * @param  &array $data
+	 */
+
 	public function recursive(&$data = array()){
 		foreach($data as $key =>$value){
 			$data[$key]['children']= $this->getChild($value['id']);
@@ -46,7 +73,11 @@ class k_model_menu_menu
 		}
 	}
 	
-	
+	/**
+	 * 通过递归 返回该pid下面的所有的子数据
+	 *
+	 * @param  int $pid
+	 */
 	public function teamData($pid=1){
 		foreach ($this->data as $key => $value) {	
 			if($value['pid']==$pid){
@@ -62,7 +93,11 @@ class k_model_menu_menu
 		}	
 	}
 		
-	
+	/**
+	 * 通过pid 返回该pid下面的所有的子数据
+	 *
+	 * @param  int $pid
+	 */
 	public function getChild($pid){
 	 	$data=  R::getAll( "select * from menu where pid = {$pid}" );
 	 	$tmpdata = array();
@@ -78,6 +113,12 @@ class k_model_menu_menu
 	 	return $tmpdata;
 	}
 
+	/**
+	 * 通过name 返回该name下面的所有的子数据
+	 *
+	 * @param  string $name
+	 * @return array
+	 */
 	public function getChildByName($name){
 		$pid = R::getRow("SELECT id from menu where name='{$name}'");
 		return $this->getChild($pid['id']);

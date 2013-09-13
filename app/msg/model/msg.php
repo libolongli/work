@@ -2,20 +2,49 @@
 class k_model_msg_msg
 {
 	private $_db;
+	
 	function __construct(){
 		$this->_db = new db();
 	}
+   
+	/**
+	* 通过$map 拿取短信列表
+	*
+	* @param  array $map
+	* @return array	
+	*/
+
     public function getListJson($map = array()){
-    	$where  = " where l.fleg !=9 ";
+    	$where  = " WHERE ";
+    	$ws = '';
+    	$arr = array();
+    	if(isset($map['search'])){
+    		foreach ($map['search']['search'] as $key => $value) {
+    			array_push($arr,$value['field']." ".$value['like']);
+    		}
+    		$ws .= "(".join(" ".$map['search']['logic']." ", $arr).")";
+    	}
+
+    	
     	foreach ($map as $key => $value) {
-				if(($key!='offset') && ($key!='limit'))
-				$where .= " AND {$key}='{$value}'";
+			if(($key!='offset') && ($key!='limit')  && ($key!='search')){
+				if($ws){
+					$ws .= " AND {$key}='{$value}'";
+				}else{
+					$ws .= " {$key}='{$value}'";
+				}
+			}
 		}
 		$uid = $_SESSION['user']['id'];
 		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created) as ts_created ,u.`user`  
 			from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 
 			INNER JOIN user as u on u.id= l.rid";
-		$sql .= $where;
+		if($ws==" WHERE "){
+			$sql .= $where." l.fleg !=9 ";
+		}else{
+			$sql .= $where.$ws." AND l.fleg !=9 ";
+		}
+
 		$total = count(R::getAll($sql));
 		if(isset($map['limit']) && isset($map['offset'])){
 			$start = $map['offset'];
@@ -28,10 +57,17 @@ class k_model_msg_msg
 		}
 		return array(
 			'total'=>$total,
-			'data'=>$data
+			'page'=>$map['offset']/$map['limit'],
+			'records'=>$data
 			);
 	}
 	
+	/**
+	* 通过$data 添加一条短信
+	*
+	* @param  array $map
+	* @return int	
+	*/
 	public function addMsg($data){
 		$now = time();
 		$data['uid'] = $_SESSION['user']['id'];
@@ -52,13 +88,17 @@ class k_model_msg_msg
 			$msg_log->ts_created=$now;
 			$cid = R::store($msg_log);
 			if($id){
-				k::load('feed','feed')->send(array('uid'=>$data['uid'],'rid'=>$v,'content'=>$data['content'],'type'=>2));
+				k::load('feed','feed')->send(array('uid'=>$data['uid'],'rids'=>$v,'content'=>$data['content'],'type'=>2));
 			}
 		}
 		
 		return $id;
 	}
-	
+	/**
+	* 通过$map 修改短信
+	*
+	* @param  array $map
+	*/
 	public function update($map){
 		$tmp = array();
 		foreach($map as $k => $v){
@@ -72,6 +112,12 @@ class k_model_msg_msg
 		R::exec($sql);
 	}
   
+  	/**
+	* 通过id 获得短信信息
+	*
+	* @param  array $map
+	* @return json
+	*/
   	public function getMsgInfo($id){
   		$this->_db->update('msg_log',array('fleg=>2'),$id);
   		$data = $this->getMsgById($id);
@@ -81,6 +127,12 @@ class k_model_msg_msg
 		return $json;
   	}
 
+  	/**
+	* 通过id 获得短信信息
+	*
+	* @param  array $map
+	* @return array
+	*/
   	public function getMsgById($id){
   		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created) as ts_created ,u.`user`  
 				from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 

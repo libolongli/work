@@ -225,7 +225,7 @@ var smartFrom = function(id, obj){
 		}else{
 			$().w2popup({
 				title   : $(this).attr('title'),
-				body    : '<iframe src="'+$(this).attr('url')+'?id='+$(this).prev().val()+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
+				body    : '<iframe src="'+$(this).attr('url')+($(this).prev().val() == "" ? "" : '?id='+$(this).prev().val())+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
 				width   : ($(this).attr('width') == "" ? 600 : parseInt($(this).attr('width')))
 			});
 		};

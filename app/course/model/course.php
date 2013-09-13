@@ -5,17 +5,15 @@
 			$this->_db = new db();
 
 		}
-		function getCourseJosn(){
-			$sql = "SELECT id as recid,name,category,object,tech_method from course";
-			$data = R::getAll($sql);
-			$array = array(
-				'page'=>0,
-				'records'=>$data,
-				'total'=>count($data)
-			);
-			echo json_encode($data);
-		}
 
+	/**
+	 * 通过传入的表名和数据将$map里面的信息写入$table中
+	 *
+	 * @param  string $table  tablename 
+	 * @param  array $map   category
+	 * @return int 	
+	 */
+		
 		function add($table,$map){
 			$data = array();
 			foreach ($map as $key => $value) {
@@ -24,6 +22,13 @@
 			return $this->_db->add($table,$data);
 		}
 
+		/**
+		 * 往课程表里面添加数据
+		 *
+		 * @param  array $map   
+		 * @return int 	
+		 */
+
 		function addSchedule($map=array()){
 			$data = array("course_id=>{$map['course_id']}","t_id=>{$map['t_id']}","r_id=>{$map['r_id']}",
             	"g_id=>{$map['g_id']}","ts_start=>{$map['ts_start']}","ts_end=>{$map['ts_end']}");
@@ -31,11 +36,17 @@
 		}
 
 		/**
-		Get schedule infomation
-		*/
+		 * 通过map条件返回课程表的数据,主要用于ajax加载列表用的
+		 * 
+		 * @param  array $map   
+		 * @return array  
+		 */
 		function getSchedule($map = array()){
 			$where = " WHERE ";
 			$arr1 = array();
+			$ws = '';
+
+			//当用户执行搜索的时候搜索条件
 			if(isset($map['search'])){
 				foreach($map['search']['search'] as $key=>$value){
 					if($value['field'] == 'course_name'){
@@ -46,12 +57,18 @@
 						array_push($arr1, $value['field'].$value['like']);
 					}
 				}
-				$where .= join(" ".$map['search']['logic']." ",$arr1);
+				$ws .= "(".join(" ".$map['search']['logic']." ",$arr1).")";
 			}
 
+			//其他条件
 			foreach ($map as $key => $value) {
 				if(($key!='offset') && ($key!='limit') && ($key!='search')){
-					$where .= " AND {$key}={$value} ";
+					if($ws){
+						$ws .= " AND {$key}={$value} ";
+					}else{
+						$ws .= " {$key}={$value} ";
+					}
+					
 				}
 			}
 
@@ -61,10 +78,10 @@
 					INNER JOIN course as c on s.course_id=c.id 
 					INNER JOIN classroom as r on s.r_id = r.id 
 					INNER JOIN `user` as u on s.t_id=u.id";
-			if($where == " WHERE "){
-				$sql .=$where." s.status != 9 ";
+			if($ws){
+				$sql .=$where.$ws." AND s.status != 9 ";
 			}else{
-				$sql .=$where." AND s.status != 9 ";
+				$sql .=$where." s.status != 9 ";
 			}
 			
 			$total =count(R::getAll($sql));
@@ -74,13 +91,23 @@
 				$sql .= $limit;
 			}
 			$data = R::getAll($sql);
+			$map['offset'] =isset($map['offset']) ? $map['offset'] :0; 
+			$map['limit'] =isset($map['limit']) ? $map['limit'] :1; 
 			$arr = array(
 				'total'=>$total,
-				'data'=>$data
+				'page'=>$map['offset']/$map['limit'],
+				'records'=>$data
 			);
 			return $arr;
 		}
 		
+		/**
+		 * 通过map条件修改课程表
+		 *
+		 * @param  array $map   
+		 * @return void  
+		 */
+
 		function updateSchedule($map){
 			$data = array();
 			foreach ($map as $key => $value) {
@@ -93,10 +120,23 @@
 			}
 		}
 
+		/**
+		 * 获取所有的课程
+		 *
+		 * @return array 
+		 */
+
 		function getCourse(){
 			return $this->_db->find('course');
 		}
 	
+		/**
+		 * 通过data添加课程表,主要是用来处理日历插件异步请求过来的数据
+		 *
+		 * @param  array $data   
+		 * @return int  
+		 */
+
 		function addSchedules($data){
 			$calender = $data['calender'];
 			$course = $data['course'];
@@ -119,6 +159,13 @@
 			if($id) return $id;
 		}
 
+		/**
+		 * 通过map条件拿取班级
+		 *
+		 * @param  array $map   
+		 * @return array  
+		 */
+
 		function getGrade($map = array()){
 			$where = "WHERE 1=1 ";
 			$sql = "select * from grade ";
@@ -127,6 +174,13 @@
 			}
 			return R::getAll($sql);
 		}
+
+		/**
+		 * 通过map条件拿取教室
+		 *
+		 * @param  array $map   
+		 * @return array  
+		 */
 
 		function getRoom($map = array()){
 			$where = "WHERE 1=1 ";

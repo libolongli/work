@@ -1,6 +1,11 @@
 <?php
 	class k_model_op_search{
-		
+			
+		/**
+		* 重新组织POST过来的数据
+		*
+		* @return array
+		*/
 		function teamSearch(){
 			$search = $_POST['search'];
 			$logic = $_POST['search-logic'];

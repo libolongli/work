@@ -32,12 +32,12 @@
 				$map['limit'] = $_POST['limit'];
 				$map['offset'] = $_POST['offset'];
 				$data = k::load('flow')->getListJson($map,$model);
-				$array = array(
-					'total'=>$data['total'],
-					'page'=>$_POST['offset']/$_POST['limit'],
-					'records'=>$data['data']
-					);
-				echo json_encode($array);exit;
+				// $array = array(
+				// 	'total'=>$data['total'],
+				// 	'page'=>$_POST['offset']/$_POST['limit'],
+				// 	'records'=>$data['data']
+				// 	);
+				echo json_encode($data);exit;
 			}
 			
 		}
