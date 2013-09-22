@@ -78,7 +78,8 @@ class tpl
 }
 
 
-class k0
+
+class k
 {
   static $_db;
   
@@ -161,78 +162,5 @@ else
 
 
 
-class k extends k0
-{
-    static function load($class,$module='')
-  {  
-
- $retry = $class;
-
- if($module=='')
- {
- 
- 
-  $f=K_ROOT_PATH.APP_PATH_BASE.M.'/api/'. $class.'.php';
-  $class='module_'.$class.'_api_'.$class;
-  $module=$class;
-}
-else
-{
- 
-
-  $f=K_ROOT_PATH.APP_PATH_BASE.$module.'/api/'. $class.'.php';
-  $class='module_'.$module.'_api_'.$class;
-
-}	
-
-//echo $f;echo $class;
-	if(!file_exists($f))
-	{   
-		$class = $retry;
-		$f=K_ROOT_PATH.'protect/api/'. $class.'.php';
-		
-	}
-	
-	
-
-     include_once  $f;
-	 
-	 if (!class_exists($class, false) && !interface_exists($class, false)) {
-	   self::msg($class.'     <== not found ,please modify it from [model_ ..] to [api ..] mode .....');
-	 }
-	 
-	 
-	 return new $class;
-  }
-  
-  static function msg($msg)
-  {
-    echo '<h1><font color=red>debug msg==>'.$msg.'</font></h1>';
-	die();
-  }
-   
-    
-	/*
-	 $id=user/login
-	 $para=array('u'=>1,'p'=>2)
-	 
-	*/
-	static function url($id, $para = array()) {
-		
-		$id=explode('/',$id);
-		$id=array('m'=>$id[0],'a'=>$id[1]);
-		$para=array_merge($para,$id);
-		$i = 0;
-		$str = '';
-		foreach ($para as $key => $val) {
-			$prefix = ($i == 0) ? '' : '&';
-			$str .= $prefix . $key . '=' . $val;
-			$i++;
-		}	
-		return  '?' . $str;
-	}
- }
- 
- 
 
 

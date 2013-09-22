@@ -47,7 +47,7 @@ img {border-width: 0;}
     margin: 8px 20px;
     width: 97px;}
 .n_menu_btn:active {background: url("../image/start_menu.png") no-repeat scroll 0 -40px transparent;}
-.n_menu { height: 380px;
+.n_menu { height: auto;
     left: 20px;
     margin: 0;
     padding: 0;
@@ -95,7 +95,7 @@ img {border-width: 0;}
 	right: 15px;
 	top: 45px;}
 .n_menu_cont { float: left;
-    height: 295px;
+    height: auto;
     margin: 67px 13px 0;
     width: 360px;padding: 0 10px 0 0;}
 .n_menu_left { float: left;
@@ -111,6 +111,7 @@ img {border-width: 0;}
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
 	width: 179px;}
 .n_menu_left li {float: left;
     list-style: none outside none;
@@ -163,6 +164,7 @@ img {border-width: 0;}
     height: 293px;
     margin: 0;
     padding: 0;
+    overflow:hidden;
     width: 100%;}
 .n_menu_r_f {background: url("../image/second_panel_bg.jpg") no-repeat scroll -400px 0 transparent;
     height: 5px;
