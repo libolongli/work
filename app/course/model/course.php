@@ -8,7 +8,10 @@
 
 	/**
 	 * 通过传入的表名和数据将$map里面的信息写入$table中
-	 *
+	 * $map = array(
+   	 *  'user'=>'Nomius',
+   	 *	'password'=>'1111111'
+	 *)
 	 * @param  string $table  tablename 
 	 * @param  array $map   category
 	 * @return int 	
@@ -24,7 +27,10 @@
 
 		/**
 		 * 往课程表里面添加数据
-		 *
+		 * $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'password'=>'1111111'
+		 *)
 		 * @param  array $map   
 		 * @return int 	
 		 */
@@ -37,27 +43,36 @@
 
 		/**
 		 * 通过map条件返回课程表的数据,主要用于ajax加载列表用的
-		 * 
+		 * $map 里面的search 参照 k::load('search','op')->teamSearch()方法
+		 * $map = array(
+	   	 *  'limit'=>'Nomius',
+	   	 *	'offset'=>'1111111'
+	   	 *	'search'=>array(
+	   	 *		'search'=>array(
+		 *			.......
+	   	 *		 ),
+		 *		'logic'=>'or/and',
+ 		 *
+	   	 *	)
+		 *)
+		 * @see teamSearch 
 		 * @param  array $map   
 		 * @return array  
 		 */
 		function getSchedule($map = array()){
-			$where = " WHERE ";
-			$arr1 = array();
+			$where = " WHERE s.status != 9 ";
 			$ws = '';
-
 			//当用户执行搜索的时候搜索条件
 			if(isset($map['search'])){
 				foreach($map['search']['search'] as $key=>$value){
 					if($value['field'] == 'course_name'){
-						array_push($arr1,"c.name ".$value['like']);
+						$map['search']['search'][$key]['field'] = "c.name";
 					}elseif($value['field'] == 'room_name'){
-						array_push($arr1, "r.name ".$value['like']);
-					}else{
-						array_push($arr1, $value['field'].$value['like']);
+						$map['search']['search'][$key]['field'] = "r.name";
 					}
 				}
-				$ws .= "(".join(" ".$map['search']['logic']." ",$arr1).")";
+				//print_r($map[])
+				$where  = k::load('search','op')->teamSql($where,$map);
 			}
 
 			//其他条件
@@ -78,11 +93,10 @@
 					INNER JOIN course as c on s.course_id=c.id 
 					INNER JOIN classroom as r on s.r_id = r.id 
 					INNER JOIN `user` as u on s.t_id=u.id";
-			if($ws){
-				$sql .=$where.$ws." AND s.status != 9 ";
-			}else{
-				$sql .=$where." s.status != 9 ";
-			}
+			
+			$where .= $ws ? " AND ".$ws :"";
+			$sql.=$where;
+			// echo $sql;exit;
 			
 			$total =count(R::getAll($sql));
 			if(isset($map['limit']) && isset($map['offset'])){
@@ -102,8 +116,12 @@
 		}
 		
 		/**
-		 * 通过map条件修改课程表
-		 *
+		 * 通过map条件修改课程表,id字段是必学的,而且是数组形式
+		 * map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'password'=>'1111111'
+	   	 *	'id'=>array()
+		 *)
 		 * @param  array $map   
 		 * @return void  
 		 */
@@ -115,6 +133,7 @@
 					array_push($data,"{$key}=>{$value}");
 				}
 			}
+			if(!is_array($map['id'])) $map['id']=array($map['id']);
 			foreach ($map['id'] as $k => $id) {
 				$this->_db->update('schedule',$data,$id);
 			}
@@ -132,7 +151,12 @@
 	
 		/**
 		 * 通过data添加课程表,主要是用来处理日历插件异步请求过来的数据
-		 *
+		 * $data = array(
+		 *	'course'=>array(),
+		 *	'calender'=>array(),
+		 *)
+		 *course 主要是课程的信息
+		 *calender 主要是添加课程表的时候从日历传输过来的信息
 		 * @param  array $data   
 		 * @return int  
 		 */
@@ -160,8 +184,11 @@
 		}
 
 		/**
-		 * 通过map条件拿取班级
-		 *
+		 * 通过map条件拿取班级(map 键值对应关系)
+		 * $data = array(
+		 *	'user'=>'111111',
+		 *	'password'=>'11111',
+		 *)
 		 * @param  array $map   
 		 * @return array  
 		 */
@@ -176,8 +203,12 @@
 		}
 
 		/**
-		 * 通过map条件拿取教室
+		 * 通过map条件拿取教室($map 键值对应关系)
 		 *
+		 *$data = array(
+		 *	'user'=>'111111',
+		 *	'password'=>'11111',
+		 *)
 		 * @param  array $map   
 		 * @return array  
 		 */
@@ -189,5 +220,18 @@
 				$where .= "AND {$key}={$value}";
 			}
 			return R::getAll($sql);
+		}
+
+         
+
+		/**
+		 * 通过status条件拿取对应的假期
+		 * 1 代表 放假的  0 代表要上课的
+		 * @param  int $status  
+		 * @return array  
+		 */
+		  
+		function getHoliday($status){
+			return $this->_db->find('holiday',array('isplay'=>$status));
 		}
 	}

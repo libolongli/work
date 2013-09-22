@@ -26,6 +26,10 @@ class k_model_feed_feed
   /**
 	* 发送feed
 	*
+	* $data = array(
+    *	'user'=>'111111',
+    *	'password'=>'11111',
+    *)
 	* @param  array $data  
 	* @return int
 	*/
@@ -44,23 +48,31 @@ class k_model_feed_feed
 		return $id;
     }
   
-  	/**
-	* 用来获取feed列表
-	*
-	* @param  array $map  
-	* @return array	
-	*/
+  		/**
+		 * 通过map条件返回feed列表的数据,主要用于ajax加载列表用的
+		 * $map 里面的search 参照 k::load('search','op')->teamSearch()方法
+		 * $map = array(
+	   	 *  'limit'=>'Nomius',
+	   	 *	'offset'=>'1111111'
+	   	 *	'search'=>array(
+	   	 *		'search'=>array(
+		 *			.......
+	   	 *		 ),
+		 *		'logic'=>'or/and',
+ 		 *
+	   	 *	)
+		 *)
+		 * @see teamSearch 
+		 * @param  array $map   
+		 * @return array  
+		 */
     public function getListJson($map){
-		$uid = $_SESSION['user']['id'];
+		$uid = k::load('user','user')->uid();
 		$where = " where  uid = {$uid} and status !=9 ";
 
-		if(isset($map['search'])){
-			$arr = array();
-    		foreach ($map['search']['search'] as $key => $value) {
-    			array_push($arr,$value['field']." ".$value['like']);
-    		}
-    		$where .= "AND (".join(" ".$map['search']['logic']." ", $arr).")";
-    	}
+		if(isset($_POST['search'])){
+				$where=k::load('search','op')->teamSql($where,$map);
+		}
 
 
 		$sql = "SELECT id as recid,uid,rid,content FROM feed ";
@@ -74,10 +86,23 @@ class k_model_feed_feed
 		$data = R::getAll($sql);
 		return array(
 			'total'=>$total,
-			'data'=>$data
+			'records'=>$data,
+			'page'=>$map['offset']/$map['limit'],
 			);
 	}
 	
+
+		/**
+		 * 通过map数组进行修改feed,传入的数组里面必须包含ID 字段
+		 * $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'id'=>'1,2,3,'
+		 *)
+		 * @see teamSearch 
+		 * @param  array $map   
+		 * @return array  
+		 */
 	public function update($map){
 		$tmp = array();
 		foreach($map as $k => $v){

@@ -7,6 +7,7 @@
 		* @return array
 		*/
 		function teamSearch(){
+			//print_r($_POST);EXIT;
 			$search = $_POST['search'];
 			$logic = $_POST['search-logic'];
 			$data = array();
@@ -24,7 +25,7 @@
 							$like = " LIKE '%{$value['value']}'";
 							break;
 						case 'is':
-							$like = "= '{$value['value']}'";
+							$like = " = '{$value['value']}'";
 							break;
 						default:
 							$like = " LIKE '%{$value['value']}%'";
@@ -33,13 +34,40 @@
 				}
 				$tmp['field'] = $value['field'];
 				$tmp['like'] = $like;
-				array_push($data, $tmp);
+				$tmp['logic'] = isset($value['search-logic']) ? $value['search-logic'] : $logic;
+				if($tmp['logic']=='and'){
+					array_unshift($data,$tmp);
+				}else{
+					array_push($data, $tmp);
+				}
 			}
 
-			return array(
+			// if($data['0']['logic']!='and'){
+			// 	return false;
+			// }
 
-					'search'=>$data,
-					'logic'=>$logic,
-				);
+			$re = array(
+				'search'=>$data,
+				'logic'=>$logic,
+			);
+
+			return $re;
+		}
+
+		function teamSql($sql='',$map){
+			if($map['search']){
+				$str = "";
+				foreach ($map['search']['search'] as $key => $value) {
+	    			$str .= $str ?" ".$value['logic']." ".$value['field'].$value['like'] : " ".$value['field'].$value['like'];
+	    		}
+	    		if($sql){
+	    			return $sql." AND (".$str.") ";
+	    		}else{
+	    			return $str;
+	    		}
+	    		return $sql."(".$str.")";
+    		}else{
+    			return '';
+    		}
 		}
 	}

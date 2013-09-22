@@ -19,7 +19,7 @@
 					{type : 'textarea', name : 'comment', title : '发送的内容', tip : "请填写内容！", inputType:'text', datatype:"*", value:'<? echo isset($value)?$value:'';?>',errormsg : "请填写正确的格式"},
 					{type : 'select', name : 'status', title : '审核状态', tip : "请选择当前状态", datatype:"*", errormsg : "请选择正确的当前状态", 
 						data : [<?=$status?>], doption : "--请选择--"},
-					{type : 'popup',title : '转发', tip : "请输入转发的人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", data:{url:'data.html',name:'recruit',type:'cont'},value:'请输入转发的人！'},
+					{type : 'popup',title : '转发', tip : "请输入转发的人！", name:'username',inputType:'text', datatype:"*", errormsg : "请至少2至8位中文字符", data:{url:'data.html',name:'recruit',type:'cont'},value:''},
 							{type : 'hideInput', name:'rids',inputType:'text', datatype:"*",display:'none',value:''},
 
 					{type : 'hideInput', name : 'id', title : '发送的内容', tip : "请填写内容！", datatype:"*", value:'<?=$id?>'},

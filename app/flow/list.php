@@ -31,6 +31,10 @@
 			if(isset($_GET['back'])) {
 				$map['limit'] = $_POST['limit'];
 				$map['offset'] = $_POST['offset'];
+				if(isset($_POST['search'])){
+					$search = k::load('search','op')->teamSearch();
+					$map['search'] = $search;
+				}
 				$data = k::load('flow')->getListJson($map,$model);
 				// $array = array(
 				// 	'total'=>$data['total'],

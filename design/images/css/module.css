@@ -1,10 +1,49 @@
-body,ul,li,dl,dt,dd {
-	list-style-type: none;
+html {
+	height: 100%;
+}
+body {
+	font: 16px/1.6em Arial, Geneva, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%
+}
+ul, li, dl, dt, dd {
 	margin: 0;
 	padding: 0;
 }
+li {
+	list-style-type: none
+}
+img {
+	border: none
+}
+.clearit {
+	clear: both;
+}
 .font-blue {
 	color: #003399
+}
+.font-red {
+	color: #BC0100;
+}
+.f12 {
+	font-size: 12px;
+}
+.f14 {
+	font-size: 14px;
+}
+.f16 {
+	font-size: 16px;
+}
+.f18 {
+	font-size: 18px;
+}
+.f20 {
+	font-size: 20px;
+}
+.fontred {
+	color: red
 }
 /*公告栏组件*/
 .notice_board {
@@ -16,7 +55,7 @@ body,ul,li,dl,dt,dd {
 .notice_board dt {
 	height: 35px;
 	color: #0066FF;
-	font: bold 16px  "微软雅黑";
+	font: bold 16px "微软雅黑";
 	background: #EFEFEF;
 	border-bottom: 1px solid #DBDBDB
 }
@@ -28,41 +67,45 @@ body,ul,li,dl,dt,dd {
 }
 .notice_board dt i {
 	width: 35px;
-	background: url("../image/N-icon01.png") no-repeat
+	background: url("../img/N-icon01.png") no-repeat
 }
-#notice_close {
-	text-align:center;
-	cursor:pointer;
+.notice_close {
+	text-align: center;
+	cursor: pointer;
 	width: 35px;
-	float: right
 }
 .notice_board dd {
-	font: 12px  "微软雅黑";
+	font: 12px "微软雅黑";
 	background: #F9F9F9
 }
 .notice_board li {
-	float:left;
+	float: left;
 	width: 100%;
-	padding: 0 30px 0 10px;
 }
 .notice_board dd a {
+	padding: 0 30px 0 10px;
+	cursor: default;
 	overflow: hidden;
-	display:block;
-	height:26px;
+	display: block;
+	height: 26px;
 	line-height: 26px;
 	color: #000000;
 	text-decoration: none
 }
+.notice_board dd a:hover {
+	background: #B6D5FF
+}
+
 .notice_board dd i {
 	display: block;
 	float: left;
 	height: 26px;
-	width:26px;
+	width: 26px;
 	line-height: 26px;
-	background: url("../image/N-icon02.png") no-repeat
+	background: url("../img/N-icon02.png") no-repeat
 }
 .notice_board dd span {
-	display:block;
+	display: block;
 	height: 26px;
 }
 .notice_content {
@@ -74,19 +117,19 @@ body,ul,li,dl,dt,dd {
 /*bench-left*/
 .bench_info {
 	width: 227px;
-	height:100%;
+	height: 100%;
 	background: #F5F5F5;
 	border-right: 1px solid #B7B7B7;
 	font: 12px "微软雅黑"
 }
-.bench_per_info i,.bench_online_info i {
+.bench_per_info i, .bench_online_info i {
 	display: block;
 	width: 227px;
 	height: 65px;
-	background: url("../image/N-icon04.png") no-repeat
+	background: url("../img/N-icon04.png") no-repeat
 }
 .bench_online_info i {
-	background: url("../image/N-icon03.png") no-repeat
+	background: url("../img/N-icon03.png") no-repeat
 }
 .bench_info li {
 	padding-left: 26px;
@@ -99,9 +142,7 @@ body,ul,li,dl,dt,dd {
 	padding: 20px;
 }
 .notice_cal {
-	height: 245px;
 	width: 100%;
-	background: #F5F5F5
 }
 .notice_msg {
 	width: 100%;
@@ -109,4 +150,280 @@ body,ul,li,dl,dt,dd {
 	border: 8px solid #DBDBDB;
 	min-height: 100px;
 	border-radius: 10px
+}
+/*calendar-wideget*/
+#current-month {
+	text-align: center;
+	font-size: 14px;
+	margin: 0px;
+	padding: 14px 0;
+	border-radius: 5px 5px 0 0;
+	background: #DBDBDB
+}
+.calendar-month {
+	font-size: 12px;
+	border-right: 1px solid #DFDFDF;
+	border-top: 1px solid #DFDFDF
+}
+.calendar-month td, th {
+	border-left: 1px solid #DFDFDF;
+	border-bottom: 1px solid #DFDFDF;
+	width: 37px;
+	padding: 6px 0;
+	text-align: center;
+	background: #F2F2F2
+}
+.calendar-month th {
+	background: #5A5A5A;
+	color: #fff
+}
+.other-month {
+	color: #DFDFDF
+}
+/*login*/
+.login_Main {
+	overflow: hidden;
+	margin: 0 auto;
+	margin-top: 200px;
+	position: relative;
+	padding: 30px 26px;
+	width: 600px;
+	height: 260px;
+	border: 1px solid #FFF;
+	border-radius: 8px;
+	box-shadow: 0 3px 3px #DFDFDF
+}
+.login_bg {
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	width: 652px;
+	height: 320px;
+	background: #006DB8;
+	filter: alpha(opacity=40);
+	opacity: 0.4;
+	border-radius: 8px;
+}
+.login_content {
+	position: relative;
+	height: 260px;
+	width: 600px;
+	background: #FFF;
+	border: 1px solid #27628A;
+	border-radius: 8px;
+}
+.logo {
+	float: left;
+	width: 294px;
+	height: 266px;
+	background: url("../img/login.png") no-repeat;
+}
+.login_box {
+	float: left;
+}
+.login_user, .login_pwd {
+	float: left;
+	width: 33px;
+	height: 35px;
+}
+.login_con {
+	width: 100%;
+	height: 100%;
+	padding-top: 30px;
+}
+.login_con dt {
+	padding: 8px 0px;
+	padding-left: 34px;
+}
+.login_user {
+	cursor: pointer;
+	background: url("../img/login_user.png") no-repeat;
+}
+.login_pwd {
+	cursor: pointer;
+	background: url("../img/login_pwd.png") no-repeat;
+}
+dt #LoginBoxem, dt #LoginBoxPs {
+	height: 31px;
+	line-height: 31px;
+	width: 190px;
+	background: #E7EBEE;
+	border: 1px solid #A8C7D0;
+	border-radius: 0 3px 3px 0;
+}
+.x-input {
+	width: 70px;
+	height: 31px;
+	background: #E7EBEE;
+	border: 1px solid #A8C7D0;
+	border-radius: 3px;
+}
+.
+.verifyCode {
+	float: left
+}
+.verifyCode img {
+	margin: 0 10px;
+	float: left;
+	display: block;
+	width: 70px;
+	height: 35px;
+	background: #D5D8D8
+}
+.verifyCode a {
+	float: left;
+	display: block;
+	width: 60px;
+	height: 35px;
+	line-height: 16px;
+	color: #D1D1D1;
+	font-size: 12px;
+	text-decoration: none;
+}
+.login_Btn {
+	position: relative;
+	cursor: pointer;
+	display: block;
+	width: 223px;
+	height: 48px;
+	background: url("../img/login_btn.png") no-repeat;
+	z-index: 100;
+}
+/*pay.html*/
+.pay, .stat {
+	width: 1200px;
+	margin: 0 auto;
+	background: #FFF;
+	border: 1px solid #3871BE
+}
+.payTitle, .statTitle {
+	overflow: hidden;
+	width: 1200px;
+	font: bold 14px "微软雅黑";
+	font-size: 14px;
+	height: 40px;
+	color: #FFF;
+	background: #3871BE
+}
+.payTitle i, .payTitle span, .stat i, .stat span {
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	float: left;
+	color: #FFF
+}
+.payTitle i {
+	width: 35px;
+	background: url("../img/payicon.png") 10px 13px no-repeat;
+}
+.stat i {
+	width: 35px;
+	background: url("../img/stat.png") 10px 13px no-repeat;
+}
+.payBox {
+	width: 1120px;
+	margin: 16px auto;
+	overflow: hidden;
+}
+.pay-table {
+	border-collapse: collapse;
+	border: 1px solid #D5D5D5
+}
+.pay-table tr, .pay-table td {
+	margin: 0px;
+	padding: 0px;
+	border: 1px solid #D5D5D5
+}
+.pay-x {
+	text-align: center;
+	height: 26px;
+	line-height: 26px;
+}
+.payItem1, .payItem2 {
+	text-align: center;
+	height: 90px;
+	overflow: hidden;
+	font: bold 14px "微软雅黑";
+	color: #656565;
+	background: #F5F5F5
+}
+.payItem2 {
+	height: 30px;
+}
+.pay-table td {
+	color: #656565;
+}
+.paySelect1 select {
+	width: 200px;
+}
+.paysave {
+	cursor: pointer;
+	display: block;
+	margin: 40px auto 10px;
+	border: 0px;
+	width: 162px;
+	height: 44px;
+	background: url("../img/saveBtn.jpg") no-repeat;
+}
+/*stat.html*/
+.statContent {
+	overflow: hidden;
+}
+.statLeft, .statRight, .statCenter {
+	font-size: 14px;
+	margin: 20px;
+	padding: 20px;
+	float: left;
+	border-radius: 4px;
+}
+.statLeft dt, .statRight dt {
+	font-weight: bold
+}
+.statLeft dd, .statRight dd {
+	cursor: pointer;
+	padding-left: 10px;
+	height: 36px;
+	line-height: 36px;
+	border: 1px solid #FFF
+}
+.statLeft dd:hover, .statRight dd:hover {
+	border: 1px solid #AEAEAE;
+	background: #F0F0F0;
+	border-radius: 4px;
+}
+.statLeft, .statRight {
+	height: 600px;
+	border: 1px solid #CCCCCC;
+	width: 400px;
+}
+.statCenter {
+	padding-top: 160px;
+}
+.statCenter div {
+	cursor: pointer;
+	margin: 15px 0;
+	width: 150px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #AEAEAE;
+	background: #F0F0F0;
+	border-radius: 4px;
+}
+.blue-btn {
+	width: 162px;
+	height: 44px;
+	background: url("../img/bluebtn.png") no-repeat;
+	border: none;
+	color: #FFF;
+	font-size: 16px;
+}
+.statBtn {
+	text-align: center;
+}
+.statBtn input {
+	margin: 10px 16px;
+}
+.statParent {
+	font-weight: bold
 }

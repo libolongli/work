@@ -4,7 +4,10 @@
 			if($_POST){
 				require 'model/task.php';
 				$task = new k_model_flow_task();
-				$task->update($_REQUEST);
+				$map = array();
+				$map['id'] = $_REQUEST['id'];
+				$map['percent'] = $_REQUEST['percent'];
+				$task->update($map);
 				header('Location:?m=flow&a=list');
 			}
 			$t= new tpl();

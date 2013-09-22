@@ -8,44 +8,52 @@ class k_model_msg_msg
 	}
    
 	/**
-	* 通过$map 拿取短信列表
-	*
-	* @param  array $map
-	* @return array	
-	*/
+		 * 通过map条件返回短信息列表的数据,主要用于ajax加载列表用的
+		 * $map 里面的search 参照 k::load('search','op')->teamSearch()方法
+		 * $map = array(
+	   	 *  'limit'=>'Nomius',
+	   	 *	'offset'=>'1111111'
+	   	 *	'search'=>array(
+	   	 *		'search'=>array(
+		 *			.......
+	   	 *		 ),
+		 *		'logic'=>'or/and',
+ 		 *
+	   	 *	)
+		 *)
+		 * @see teamSearch 
+		 * @param  array $map   
+		 * @return array  
+		 */
 
     public function getListJson($map = array()){
-    	$where  = " WHERE ";
+    	$where  = " WHERE l.fleg !=9 ";
     	$ws = '';
-    	$arr = array();
-    	if(isset($map['search'])){
-    		foreach ($map['search']['search'] as $key => $value) {
-    			array_push($arr,$value['field']." ".$value['like']);
-    		}
-    		$ws .= "(".join(" ".$map['search']['logic']." ", $arr).")";
-    	}
-
     	
+    	//遍历通过高级检索进来的条件
+    	
+
+    	//遍历通过其他地方传进来的条件
     	foreach ($map as $key => $value) {
 			if(($key!='offset') && ($key!='limit')  && ($key!='search')){
-				if($ws){
-					$ws .= " AND {$key}='{$value}'";
-				}else{
-					$ws .= " {$key}='{$value}'";
-				}
+				$ws.= $ws ? " AND {$key}='{$value}'" : " {$key}='{$value}'";
 			}
 		}
+
+		if(isset($_POST['search'])){
+				$ws=k::load('search','op')->teamSql($ws,$map);
+		}
+
 		$uid = $_SESSION['user']['id'];
+		
 		$sql = "SELECT l.id as recid,m.content,FROM_UNIXTIME(l.ts_created) as ts_created ,u.`user`  
 			from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 
 			INNER JOIN user as u on u.id= l.rid";
-		if($ws==" WHERE "){
-			$sql .= $where." l.fleg !=9 ";
-		}else{
-			$sql .= $where.$ws." AND l.fleg !=9 ";
-		}
-
+		
+		$sql .= $where.$ws ? " AND " .$ws:"";
+		
 		$total = count(R::getAll($sql));
+		
 		if(isset($map['limit']) && isset($map['offset'])){
 			$start = $map['offset'];
 			$limit = "limit {$start},{$map['limit']}";
@@ -59,12 +67,16 @@ class k_model_msg_msg
 			'total'=>$total,
 			'page'=>$map['offset']/$map['limit'],
 			'records'=>$data
-			);
+		);
 	}
 	
 	/**
 	* 通过$data 添加一条短信
 	*
+	* $map = array(
+   	*  'user'=>'Nomius',
+   	*	'pass'=>'1111111',
+	*)
 	* @param  array $map
 	* @return int	
 	*/
@@ -95,8 +107,13 @@ class k_model_msg_msg
 		return $id;
 	}
 	/**
-	* 通过$map 修改短信
+	* 通过$map 修改短信 ID 是必须的
 	*
+	* $map = array(
+   	 *  'user'=>'Nomius',
+   	 *	'pass'=>'1111111',
+   	 *   'id'=>'1,2,3'
+	 *)
 	* @param  array $map
 	*/
 	public function update($map){

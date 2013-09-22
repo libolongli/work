@@ -26,6 +26,10 @@
 		/**
 		* 添加一个工作流
 		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		 *)
 		* @param  array  $map
 		* @return void	
 		*/
@@ -58,8 +62,13 @@
 		}
 
 		/**
-		* 通过$map 修改工作流
-		*
+		* 通过$map 修改工作流 ,ID 是必须的
+		*	
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'id'=>'1,2,3,'
+		 *)
 		* @param  array  $map
 		* @return void	
 		*/

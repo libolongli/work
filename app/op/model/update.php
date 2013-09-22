@@ -107,6 +107,35 @@
 						'title'=>'班级名称'),
 				);
 				break;
+				case 'holiday':
+				$return = array(
+					'name'=>array(
+						'type'=>"Input",
+						'title'=>'节假日名称'),
+					'ts_start'=>array(
+						'type'=>'Calender',
+						'title'=>'开始时间'
+					),
+					'ts_end'=>array(
+						'type'=>'Calender',
+						'title'=>'结束时间'
+					),
+					'isplay'=>array(
+						'type'=>'Select',
+						'title'=>'是否上班',
+						'data'=>array(
+							0=>array(
+								'id'=>1,
+								'name'=>'不上课'
+							),
+							1=>array(
+								'id'=>0,
+								'name'=>'上课'
+							),
+						),
+					),
+				);
+				break;
 
 			}
 			return $return;
@@ -131,6 +160,10 @@
 		/**
 		* 通过id,table,map 修改表信息
 		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		 *)
 		* @param  array $map
 		* @param  string $table
 		* @param  string $id
@@ -144,4 +177,26 @@
 			}
 			return $this->_db->update($table,$data,$id);
 		}
+
+		/**
+		* 通过table,map 修改表信息
+		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	
+		* @param  array $map
+		* @param  string $table
+		* @param  string $id
+		* @return int
+		*/
+
+		function add($map,$table){
+			$data = array();
+			foreach($map as $key => $value){
+				$str = $key."=>".$value;
+				array_push($data,$str);
+			}
+			return $this->_db->add($table,$data);
+		}
+		
 	}

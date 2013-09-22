@@ -14,12 +14,12 @@ class module_feed_list{
 					$map['search'] = $search;
 				}
 				$data = k::load('feed')->getListJson($map);
-				$array = array(
-					'total'=>$data['total'],
-					'page'=>$_POST['offset']/$_POST['limit'],
-					'records'=>$data['data']
-					);
-				echo json_encode($array);exit;
+				// $array = array(
+				// 	'total'=>$data['total'],
+				// 	'page'=>$_POST['offset']/$_POST['limit'],
+				// 	'records'=>$data['data']
+				// 	);
+				echo json_encode($data);exit;
 			}
 
 			if($_POST){

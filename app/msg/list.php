@@ -35,11 +35,6 @@
 					$map['search'] = $search;
 				}
 				$data = k::load('msg')->getListJson($map);
-				// $array = array(
-				// 	'total'=>$data['total'],
-				// 	'page'=>$_POST['offset']/$_POST['limit'],
-				// 	'records'=>$data['data']
-				// 	);
 				echo json_encode($data);exit;
 			}
 			

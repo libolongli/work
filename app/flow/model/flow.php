@@ -37,7 +37,11 @@
 
 		/**
 		* 添加配置信息或者修改配置信息
-		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'id'=>'1,2,3,'
+		 *)
 		* @param  int $id
 		* @param  array $data
 		* @return void	
@@ -77,6 +81,11 @@
 		/**
 		* 通过$map 拿取某个工作流列表
 		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'id'=>'1,2,3,'
+		 *)
 		* @param  array $map
 		* @param  string $model
 		* @return array	
@@ -85,18 +94,26 @@
 		function getListJson($map,$model = 'send'){
 			$sql = "select f.id as recid,rids,percent,f.content from flow as f inner join flow_log as l on  f.id = l.fid ";
 			$where = " where f.status !=9 ";
+			
+			if(isset($_POST['search'])){
+				$where=k::load('search','op')->teamSql($where,$map);
+			}
+			
 			foreach ($map as $key => $value) {
-				if(($key!='offset') && ($key!='limit') )
+				if(($key!='offset') && ($key!='limit') && ($key!='search'))
 				$where .= " AND {$key}='{$value}'";
 			}
+			
 			$sql .= $where;
+			
 			$total = count(R::getAll($sql));
+			
 			if(isset($map['limit']) && isset($map['offset'])){
 				$start = $map['offset'];
 				$limit = "limit {$start},{$map['limit']}";
 				$sql .= $limit;
 			}
-
+			
 			$result = R::getAll($sql);
 			
 			foreach($result as $key => $value){
@@ -119,8 +136,11 @@
 
 		/**
 		* 添加工作流日志
-		*
-		* @param  array $map
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'id'=>'1,2,3,'
+		 *)		* @param  array $map
 		* @return int	
 		*/
 
@@ -148,6 +168,11 @@
 		/**
 		* 拿取工作流日志
 		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'id'=>'1,2,3,'
+		 *)
 		* @param  array $map
 		* @return array	
 		*/
@@ -165,6 +190,11 @@
 		/**
 		* 拿取配置文件列表
 		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'id'=>'1,2,3,'
+		 *)
 		* @param  array  $map
 		* @return array	
 		*/

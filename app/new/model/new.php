@@ -196,8 +196,8 @@ function getOption(){
 					$type = $newdata[$i]['type'];
 					}
 				foreach($data as $key => $value){
-					if($data[$key][active]=='审核通过'){
-					   $data[$key]['operate'] = $data[$key][active];
+					if($data[$key]['active']=='审核通过'){
+					   $data[$key]['operate'] = $data[$key]['active'];
 					}else{
 					//active = 3,审核通过
 						$data[$key]['operate'] = "<a href='javascript:void(0);' onclick='updateStatus({$value['recid']},3)'>".$data[$key]['active']."</a>";

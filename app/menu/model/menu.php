@@ -25,6 +25,10 @@ class k_model_menu_menu
 	/**
 	 * 通过传入的$data 添加menu
 	 *
+	 * $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		 *)
 	 * @param  array $map
 	 * @return int	
 	 */
