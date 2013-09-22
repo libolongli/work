@@ -114,5 +114,9 @@ var Nmeun = function(data){
 	//显示二级子菜单
 	showTwoMeun(data[0].text, "n_menu_right");
 	
+	
+	$('.n_menu_c').height(((data.length * 40) - 67)+'px');
+	$('.n_menu_r_c').height(((data.length * 40) - 40)+'px');
+	
 	return this;
 };			

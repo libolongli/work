@@ -21,8 +21,9 @@
 			}
 			$this->beforeDisplay($map);
 			$t->assign('title','短消息');
-			$t->assign('formurl','?m=msg&a=update');
-			$t->assign('frameurl','?m=msg&a=send');	
+			//echo k::url('msg/list');exit;
+			$t->assign('formurl',k::url('msg/list'));
+			$t->assign('frameurl',k::url('msg/list'));	
 			$t->display('list');
 		}
 
@@ -34,7 +35,7 @@
 					$search = k::load('search','op')->teamSearch();
 					$map['search'] = $search;
 				}
-				$data = k::load('msg')->getListJson($map);
+				$data = k::load('api')->load('msg','msg')->getListJson($map);
 				echo json_encode($data);exit;
 			}
 			
