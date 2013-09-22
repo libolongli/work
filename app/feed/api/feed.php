@@ -1,5 +1,5 @@
 <?php
-class k_model_feed_feed
+class module_feed_api_feed
 {
   
   	private $_db;

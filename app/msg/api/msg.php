@@ -100,7 +100,7 @@ class module_msg_api_msg
 			$msg_log->ts_created=$now;
 			$cid = R::store($msg_log);
 			if($id){
-				k::load('feed','feed')->send(array('uid'=>$data['uid'],'rids'=>$v,'content'=>$data['content'],'type'=>2));
+				k::load('api')->load('feed','feed')->send(array('uid'=>$data['uid'],'rids'=>$v,'content'=>$data['content'],'type'=>2));
 			}
 		}
 		

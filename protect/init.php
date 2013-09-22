@@ -221,7 +221,7 @@ else
 		
 		$id=explode('/',$id);
 		$id=array('m'=>$id[0],'a'=>$id[1]);
-		$para=array_merge($para,$id);
+		$para=array_merge($id,$para);
 		$i = 0;
 		$str = '';
 		foreach ($para as $key => $val) {

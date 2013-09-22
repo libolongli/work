@@ -1,5 +1,5 @@
 <?php
-class k_model_user_user
+class module_user_api_user
 {
  
   /**
