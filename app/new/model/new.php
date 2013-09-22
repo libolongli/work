@@ -8,16 +8,13 @@ class k_model_new_new
 
 	private $_db;
 	function __construct(){
-
 		$this->_db = new db();
 	}
   	function getRowLi($type)
   	{
 
 		$data=  R::getAll("select * from news where type='{$type}' order by id desc");
-
 	 	if($data) return $data;
-	
 	 	return false;	 
 	}
 /**
@@ -26,15 +23,12 @@ class k_model_new_new
 *@return array
 */		
 	function addNew($data){
-		
 			if(isset($_SESSION['user']['user'])){
 				 $author = $_SESSION['user']['user'];
 			}
 		foreach($data as $key =>$value){
 			if($value == '请输入新闻标题！') $data[$key]='';
 		}
-
-
 		if($data['rids']){
 			//发送工作流
 			$flow = k::load('task','flow');
@@ -42,13 +36,11 @@ class k_model_new_new
 			$user = $_SESSION['user'];
 			$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0,'rids'=>$data['rids'],'uid'=>$user['id']));
 		}
-		
 		if($data){
 			$now = time();
 			$idata = array("title=>{$data['title']}","content=>{$data['content']}","type=>{$data['type']}",
-				"ts_created=>{$now}","status=>0");
+			"ts_created=>{$now}","status=>0");
 			$id = $this->_db->add('news',$idata);
-
 			return $id;
 		}
 	}
@@ -69,22 +61,18 @@ function getOption(){
 					$str.="{value:{$value['id']}, name:'{$value['name']}'}";
 				}
 			}
-		}
-					
+		}		
 		if($str) return $str;
 		return false;	 
 	}
-
-
 	function getType(){
-		return R::getAll("SELECT titles as name,type_id as id FROM type where cate = 'type' order by id desc");
-		
+		return R::getAll("SELECT titles as name,type_id as id FROM type where cate = 'type' order by id desc");	
 	}
 /**
 *新闻列表
 *@param null
 *@return array 
-*/		
+*/	
 	function getNewsInfo(){
 		$id =$_GET['id'];
 		$sql = "select title,author,content,FROM_UNIXTIME(ts_created) as ts_created from news where id = '{$id}'";
@@ -205,16 +193,12 @@ function getOption(){
 						$data[$key]['operate'] .= "｜<a href='?m=home&a=newsList&type={$type}&id={$value['recid']}'>查看</a> ";
 						$data[$key]['operate'] .= "｜<a href='?m=new&a=modify&type={$type}&id={$value['recid']}'>修改</a> ";
 			}
-
 			$arr = array(
 				'total'=>$total,
 				'data'=>$data
 			);
 			return $arr;
 		}
-
-
-
 	}
 
 	

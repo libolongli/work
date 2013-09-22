@@ -24,7 +24,7 @@ class module_menu_add
 		if($id){
 			header('Location: ?m=menu&a=add');
 		}else{
-			echo "<a href='?m=menu&a=add'>添加失败!点击返回</a>";exit;;
+			echo "<a href='?m=menu&a=add'>添加失败!点击返回</a>";exit;
 		}
 	}
 	$data = k::load('menu')->getOption('all');
