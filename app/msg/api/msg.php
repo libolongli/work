@@ -41,7 +41,7 @@ class module_msg_api_msg
 		}
 
 		if(isset($_POST['search'])){
-				$ws=k::load('search','op')->teamSql($ws,$map);
+				$ws=k::load('api')->load('search','op')->teamSql($ws,$map);
 		}
 
 		$uid = $_SESSION['user']['id'];
