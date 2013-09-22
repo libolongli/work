@@ -23,7 +23,8 @@
 			    hol['2013-10-7'] = 1;
 			    hol['2013-10-12'] = 1;
 			    hol['2013-10-13'] = 1;
-		//	$.dump(hol);
+			
+			//$.dump(hol);
 			
 				(function(){
 					var flag, num = new Array(), da= new Array(),lastTime = new Object(),hkey;
@@ -56,7 +57,7 @@
 						editable : true,
 						defaultEventMinutes: 60,
 						droppable : true, 
-						//defaultView: 'agendaWeek',
+						defaultView: 'agendaWeek',
 						drop : function(date, allDay, jsEvent) {
 							var originalEventObject = $(this).data('eventObject'),count = $('#c-count').val(),way = parseInt($('#c-way').val()),duration = $(this).attr('cdura');
 							

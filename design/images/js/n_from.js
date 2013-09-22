@@ -125,11 +125,11 @@ var smartFrom = function(id, obj){
                views += textarea;
 			break;
 			case "password":
-				var input = '<tr><td  class="from_title">'+row.title+'：</td>'
-                    		+'<td style="width:205px;"><input type="password"  plugin="passwordStrength"  value=""  name="'+row.name+'" datatype="'+row.datatype+'"' 
+				var input = '<tr><td class="from_title">'+row.title+'：</td>'
+                    		+'<td><input class="n_password"' 
+                    		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'" nullmsg="'+row.tip+'" name="'+row.name+'" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
-                    		+'<div class="passwordStrength" style="display:none;"><b>密码强度：</b> <span>弱</span><span>中</span><span class="last">强</span></div>'
                     		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += input;
 			break;
@@ -157,6 +157,17 @@ var smartFrom = function(id, obj){
 			case 'html':
 				var cont = '<tr><td class="from_title">'+row.title+': </td><td>'+row.content+'</td></tr>';
 				views += cont;
+			break;
+			case "popup_del":
+				var recruitPeople = '<tr><td class="from_title">'+row.title+'：</td>'
+                    		+'<td><ul class="popup_del"></ul><input ' 
+                    		+'type="'+row.inputType+'" disabled="disabled" value="'+(row.value ? row.value : "")+'"  name="'+row.name+'" datatype="'+row.datatype+'"' 
+                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.data.name+'" title="'+(row.data.title ? row.data.title : "")+'"' 
+                    		+'url="'+row.data.url+'" width="'+(row.data.width ? row.data.width : "")+'" type="'+row.data.type+'"  >'
+                    		+'<div class="recruit"></div></div></td>'
+                    		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';     		
+                views += recruitPeople;
 			break;
 		}
 	};
@@ -231,6 +242,14 @@ var smartFrom = function(id, obj){
 		};
 		rp_view_c(this);
 	});
+	
+	$('.n_password').live('focus', function(){
+		keyBoard.addEvents(this);
+	});
+	
+	$('.n_password').live('blur', function(){
+		keyBoard.removeView();
+	});
 
 	/**
 	 * 回调事件监听  获取当前选择对象
@@ -245,10 +264,30 @@ var smartFrom = function(id, obj){
 			break;
 		};
 	};
-
+	
+	/**
+	* 
+	*
+	*/
+	var lists = {};
+	this.addInputView = function(view, data){
+		var aList = [];
+		if(! lists[$(view).attr('name')]){
+			lists[$(view).attr('name')] = [];
+		};
+		aList = lists[$(view).attr('name')];
+		for (var i=0; i < data.length; i++) {
+			aList.push(data[i].text);
+			view.prev().append('<li><span>'+data[i].text+'</span><div class="n_form_del_icon" zhi="'+i+'"></div></li>');
+		};
+		$(view).css('color', '#FFFFFF');
+		$(view).val(aList);
+	};
+	
+	$('.n_form_del_icon').live('click', function(){
+		$(this).parent().remove();
+	});
+	
 	return this;
 };
-
-
-
 

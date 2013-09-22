@@ -8,7 +8,7 @@
 		}
 
 		function beforeDisplay(){
-			if($_GET['back']){	
+			if(isset($_GET['back'])){	
 				$map = array(
 					'limit'=>$_POST['limit'],
 					'offset'=>$_POST['offset']

@@ -22,7 +22,6 @@
 				$t->assign('transmit',1);
 			}	
 			$t->assign('json',json_encode($data));
-			//echo 111;exit;
 			$t->display('send');
 		}
 	}

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50515
 File Encoding         : 65001
 
-Date: 2013-09-11 19:53:22
+Date: 2013-09-17 21:47:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `classroom` (
 -- ----------------------------
 -- Records of classroom
 -- ----------------------------
-INSERT INTO `classroom` VALUES ('1', '教室1');
+INSERT INTO `classroom` VALUES ('1', '教室3');
 INSERT INTO `classroom` VALUES ('2', '教室2');
 
 -- ----------------------------
@@ -110,32 +110,12 @@ CREATE TABLE `course` (
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES ('2', 'C++课程', '5400', '20', '5', '1');
+INSERT INTO `course` VALUES ('2', 'C++2', '4300', '30', '11', '1');
 INSERT INTO `course` VALUES ('3', 'JAVA课程', '3600', '10', '9', '1');
 INSERT INTO `course` VALUES ('4', 'C#课程', '7200', '15', '10', '1');
 INSERT INTO `course` VALUES ('5', 'PHP课程', '2400', '18', '11', '1');
 INSERT INTO `course` VALUES ('6', 'Ruby', '1800', '12', '8', '1');
 INSERT INTO `course` VALUES ('7', 'C语言', '3600', '10', '5', '1');
-
--- ----------------------------
--- Table structure for `course3`
--- ----------------------------
-DROP TABLE IF EXISTS `course3`;
-CREATE TABLE `course3` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
-  `object` varchar(255) DEFAULT NULL,
-  `tech_method` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of course3
--- ----------------------------
-INSERT INTO `course3` VALUES ('1', 'java', 'IT', '程序开发', '视频授课');
-INSERT INTO `course3` VALUES ('2', 'c#', 'IT', '程序开发', '视频授课');
-INSERT INTO `course3` VALUES ('3', '英语', '高中教学', '教学', '面对面');
 
 -- ----------------------------
 -- Table structure for `feed`
@@ -149,7 +129,7 @@ CREATE TABLE `feed` (
   `content` varchar(255) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '1' COMMENT '1 未读(默认) 2已读  3代表已 feed但是未读',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of feed
@@ -238,6 +218,22 @@ INSERT INTO `feed` VALUES ('81', '6', '4', '2', '你好啊', '3');
 INSERT INTO `feed` VALUES ('82', '4', '5', '2', '123', '3');
 INSERT INTO `feed` VALUES ('83', '4', '5', '2', '123', '3');
 INSERT INTO `feed` VALUES ('84', '1', '5', '1', '1234566', '1');
+INSERT INTO `feed` VALUES ('85', '4', '5', '2', '09131626', '3');
+INSERT INTO `feed` VALUES ('86', '4', '6', '2', '09131626', '3');
+INSERT INTO `feed` VALUES ('87', '4', '7', '2', '09131626', '3');
+INSERT INTO `feed` VALUES ('88', '4', '8', '2', '09131626', '3');
+INSERT INTO `feed` VALUES ('89', '4', '9', '2', '09131626', '3');
+INSERT INTO `feed` VALUES ('90', '4', '10', '2', '09131626', '3');
+INSERT INTO `feed` VALUES ('91', '4', '11', '2', '09131626', '3');
+INSERT INTO `feed` VALUES ('92', '1', '5', '1', '发发达地方', '1');
+INSERT INTO `feed` VALUES ('93', '1', '5', '1', '1234565', '1');
+INSERT INTO `feed` VALUES ('94', '1', '6', '1', '1234565', '1');
+INSERT INTO `feed` VALUES ('95', '1', '7', '1', '1234565', '1');
+INSERT INTO `feed` VALUES ('96', '1', '8', '1', '1234565', '1');
+INSERT INTO `feed` VALUES ('97', '1', '9', '1', '1234565', '1');
+INSERT INTO `feed` VALUES ('98', '1', '10', '1', '1234565', '1');
+INSERT INTO `feed` VALUES ('99', '1', '11', '1', '1234565', '1');
+INSERT INTO `feed` VALUES ('100', '4', '6', '1', 'sds', '3');
 
 -- ----------------------------
 -- Table structure for `flow`
@@ -253,12 +249,15 @@ CREATE TABLE `flow` (
   `ts_updated` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of flow
 -- ----------------------------
 INSERT INTO `flow` VALUES ('1', '4', '11', 'Nomius新发送了一篇新闻test1,请审核...', '90', '1378449286', '1378449286', '1');
+INSERT INTO `flow` VALUES ('2', '4', '11', 'Nomius新发送了一篇新闻1243343,请审核...', '0', '1379066560', '1379066560', '1');
+INSERT INTO `flow` VALUES ('3', '4', '11', 'Nomius新发送了一篇新闻dafadsf,请审核...', '0', '1379066619', '1379066619', '1');
+INSERT INTO `flow` VALUES ('4', '4', '5', 'Nomius新发送了一篇新闻dafadf,请审核...', '0', '1379066651', '1379066651', '1');
 
 -- ----------------------------
 -- Table structure for `flow_log`
@@ -273,12 +272,15 @@ CREATE TABLE `flow_log` (
   `fleg` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1代表没有处理,2代表已经处理',
   `ts_created` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of flow_log
 -- ----------------------------
 INSERT INTO `flow_log` VALUES ('1', 'Nomius新发送了一篇新闻test1,请审核...', '1', '4', '11', '1', '1378449286');
+INSERT INTO `flow_log` VALUES ('2', 'Nomius新发送了一篇新闻1243343,请审核...', '2', '4', '11', '1', '1379066560');
+INSERT INTO `flow_log` VALUES ('3', 'Nomius新发送了一篇新闻dafadsf,请审核...', '3', '4', '11', '1', '1379066619');
+INSERT INTO `flow_log` VALUES ('4', 'Nomius新发送了一篇新闻dafadf,请审核...', '4', '4', '5', '1', '1379066651');
 
 -- ----------------------------
 -- Table structure for `grade`
@@ -294,7 +296,31 @@ CREATE TABLE `grade` (
 -- Records of grade
 -- ----------------------------
 INSERT INTO `grade` VALUES ('1', '大一2班');
-INSERT INTO `grade` VALUES ('4', '大一1班');
+INSERT INTO `grade` VALUES ('4', '大班三班');
+
+-- ----------------------------
+-- Table structure for `graph`
+-- ----------------------------
+DROP TABLE IF EXISTS `graph`;
+CREATE TABLE `graph` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
+  `intro` varchar(255) DEFAULT NULL,
+  `mtable` varchar(255) DEFAULT NULL COMMENT '主表',
+  `ltable` text COMMENT '关联表',
+  `gtype` varchar(255) DEFAULT NULL COMMENT '图表类型',
+  `field` varchar(255) DEFAULT NULL COMMENT '查看的字段',
+  `samm` varchar(255) DEFAULT NULL COMMENT 'avg,sum,max,min',
+  `where` varchar(255) DEFAULT NULL COMMENT '其它条件',
+  `group` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of graph
+-- ----------------------------
+INSERT INTO `graph` VALUES ('3', '报表1', '2', '这是一个很好的表啊', 'kc_course_pack', 'a:2:{s:22:\"kc_course_pack_element\";a:4:{s:2:\"on\";s:14:\"element_packId\";s:7:\"ontable\";s:14:\"kc_course_pack\";s:4:\"join\";s:10:\"inner join\";s:3:\"on1\";s:7:\"pack_id\";}s:9:\"kc_course\";a:4:{s:2:\"on\";s:9:\"course_id\";s:7:\"ontable\";s:22:\"kc_course_pack_element\";s:4:\"join\";s:10:\"inner join\";s:3:\"on1\";s:16:\"element_courseId\";}}', '1', null, 'a:2:{s:10:\"pack_price\";s:15:\"avg,sum,max,min\";s:14:\"pack_courseNum\";s:7:\"avg,sum\";}', 'pack_type=1', 'pack_type');
 
 -- ----------------------------
 -- Table structure for `holiday`
@@ -305,12 +331,17 @@ CREATE TABLE `holiday` (
   `name` varchar(255) DEFAULT NULL,
   `ts_start` int(11) DEFAULT NULL,
   `ts_end` int(11) DEFAULT NULL,
+  `isplay` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of holiday
 -- ----------------------------
+INSERT INTO `holiday` VALUES ('5', '中秋节', '1379520000', '1379692800', '1');
+INSERT INTO `holiday` VALUES ('6', '国庆节', '1380556800', '1381075200', '1');
+INSERT INTO `holiday` VALUES ('10', '周末上班', '1379779200', '1379779200', '0');
+INSERT INTO `holiday` VALUES ('11', '周末上班2', '1380297600', '1380384000', '0');
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -323,7 +354,7 @@ CREATE TABLE `menu` (
   `url` varchar(254) DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
@@ -356,6 +387,8 @@ INSERT INTO `menu` VALUES ('30', '未读短信', '15', '?m=msg&a=list&model=unre
 INSERT INTO `menu` VALUES ('31', '我发送的', '13', '?m=flow&a=list&model=send', '');
 INSERT INTO `menu` VALUES ('32', '我处理的', '13', '?m=flow&a=list&model=deal', '');
 INSERT INTO `menu` VALUES ('33', '待处理的', '13', '?m=flow&a=list&model=undeal', '');
+INSERT INTO `menu` VALUES ('34', 'test', '2', '', '');
+INSERT INTO `menu` VALUES ('35', 'test1', '9', '', '');
 
 -- ----------------------------
 -- Table structure for `msg`
@@ -371,13 +404,13 @@ CREATE TABLE `msg` (
   `ts_updated` int(11) DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1' COMMENT '0代表已删除,1代表未读,2代表已读...',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of msg
 -- ----------------------------
 INSERT INTO `msg` VALUES ('1', '1', '4', '0', '发的法定', '1377052406', '1377052406', '1');
-INSERT INTO `msg` VALUES ('2', '1', '5', '0', '232', '1377161175', '1377161175', '1');
+INSERT INTO `msg` VALUES ('2', '1', '5', '0', '2324', '1378915200', '1377161175', '1');
 INSERT INTO `msg` VALUES ('3', '1', '6', '0', '2423', '1377164359', '1377164359', '1');
 INSERT INTO `msg` VALUES ('4', '1', '123', '0', null, '1377244681', '1377244681', '1');
 INSERT INTO `msg` VALUES ('5', '1', '123', '0', null, '1377244735', '1377244735', '1');
@@ -432,6 +465,9 @@ INSERT INTO `msg` VALUES ('56', '6', '4', '1', '你好啊', '1378454752', '13784
 INSERT INTO `msg` VALUES ('57', '4', '5', '1', '123', '1378457978', '1378457978', '1');
 INSERT INTO `msg` VALUES ('58', '4', '5', '1', null, '1378868461', '1378868461', '1');
 INSERT INTO `msg` VALUES ('59', '4', '5', '1', '123', '1378868492', '1378868492', '1');
+INSERT INTO `msg` VALUES ('60', '4', '5,6,7,8,9,10,11', '1', '09131626', '1379060772', '1379060772', '1');
+INSERT INTO `msg` VALUES ('61', '4', '5,6,7,8,9,10,11', '1', '09131626', '1379061016', '1379061016', '1');
+INSERT INTO `msg` VALUES ('62', '4', '6', '1', 'sds', '1379066212', '1379066212', '1');
 
 -- ----------------------------
 -- Table structure for `msg_log`
@@ -444,7 +480,7 @@ CREATE TABLE `msg_log` (
   `ts_created` int(11) NOT NULL,
   `fleg` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of msg_log
@@ -532,6 +568,15 @@ INSERT INTO `msg_log` VALUES ('80', '6', '4', '1378454752', '2');
 INSERT INTO `msg_log` VALUES ('81', '4', '5', '1378457978', '2');
 INSERT INTO `msg_log` VALUES ('82', '4', '5', '1378868461', '1');
 INSERT INTO `msg_log` VALUES ('83', '4', '5', '1378868492', '1');
+INSERT INTO `msg_log` VALUES ('84', '4', '5', '1379060772', '1');
+INSERT INTO `msg_log` VALUES ('85', '4', '5', '1379061016', '1');
+INSERT INTO `msg_log` VALUES ('86', '4', '6', '1379061016', '1');
+INSERT INTO `msg_log` VALUES ('87', '4', '7', '1379061016', '1');
+INSERT INTO `msg_log` VALUES ('88', '4', '8', '1379061016', '1');
+INSERT INTO `msg_log` VALUES ('89', '4', '9', '1379061016', '1');
+INSERT INTO `msg_log` VALUES ('90', '4', '10', '1379061016', '1');
+INSERT INTO `msg_log` VALUES ('91', '4', '11', '1379061016', '1');
+INSERT INTO `msg_log` VALUES ('92', '4', '6', '1379066212', '1');
 
 -- ----------------------------
 -- Table structure for `news`
@@ -546,46 +591,49 @@ CREATE TABLE `news` (
   `type` int(255) NOT NULL DEFAULT '3' COMMENT '1为news2为upgrade3为其他',
   `status` int(255) NOT NULL,
   `active` int(11) NOT NULL DEFAULT '1',
+  `top` int(11) NOT NULL DEFAULT '1' COMMENT '1为置顶',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of news
 -- ----------------------------
-INSERT INTO `news` VALUES ('1', '', '关于中秋开会的通知', '关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知，，关于中秋开会的通知关于中秋开会的通知', '0', '1', '0', '3');
-INSERT INTO `news` VALUES ('67', '', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班', '0', '1', '0', '3');
-INSERT INTO `news` VALUES ('6', '', '关于中秋开会的通知', '开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知', '0', '1', '0', '3');
-INSERT INTO `news` VALUES ('7', '', '关于中秋开会的通知', '开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知', '0', '1', '0', '3');
-INSERT INTO `news` VALUES ('15', '', '2012级化学班', '2012级化学班同学全部结业', '0', '2', '9', '3');
-INSERT INTO `news` VALUES ('19', '', '2012级语文班', '恭喜2012级语文班全体同学顺利结业！！', '0', '2', '0', '3');
-INSERT INTO `news` VALUES ('20', '', '2012级语物理提高班', '热烈祝贺2012级语物理提高班全体同学顺利升班', '0', '2', '0', '3');
-INSERT INTO `news` VALUES ('21', '', '祝贺2012级语历史班同学顺利结业', '祝贺2012级语历史班同学顺利结业', '0', '2', '0', '3');
-INSERT INTO `news` VALUES ('22', '', '恭喜2012级语数学提高班顺利升班', '恭喜2012级语数学提高班顺利升班', '0', '2', '9', '1');
-INSERT INTO `news` VALUES ('33', '', '关于开展项目对接的通知', '关于开展项目对接的通知，关于开展项目对接的通知，关于开展项目对接的通知，关于开展项目对接的通知，关于开展项目对接的通知', '0', '1', '0', '3');
-INSERT INTO `news` VALUES ('32', '', '关于周末加班的通知', '关于周末加班的通知关于周末加班的通知关于周末加班的通知关于周末加班的通知', '0', '1', '0', '3');
-INSERT INTO `news` VALUES ('34', '', '恭喜2012级语英语提高班', '恭喜2012级语英语提高班恭喜2012级语英语提高班恭喜2012级语英语提高班', '0', '2', '9', '3');
-INSERT INTO `news` VALUES ('60', '', '紧急通知！！！（关于中秋节值班事宜的通知）', '关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）', '0', '1', '9', '3');
-INSERT INTO `news` VALUES ('73', '', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班', '0', '1', '9', '1');
-INSERT INTO `news` VALUES ('74', '', '你好', '整的 阿达', '0', '1', '9', '1');
-INSERT INTO `news` VALUES ('75', '', 'NIHAO ', 'NIHAO 11', '0', '1', '9', '1');
-INSERT INTO `news` VALUES ('71', '', '的萨达萨达', '2012级语物理提高班2012级语物理提高班2012级语物理提高班', '0', '1', '9', '1');
-INSERT INTO `news` VALUES ('72', '', '你好', '你镇海', '0', '1', '9', '1');
-INSERT INTO `news` VALUES ('70', '', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班2012级语物理提高班', '0', '1', '9', '1');
-INSERT INTO `news` VALUES ('76', '', 'dsadsadsa sa dsa', 'DSADSADADSA', '2013', '2', '9', '1');
-INSERT INTO `news` VALUES ('77', '', 'FDSFS F DS', 'FDS FDS S ', '2013', '1', '9', '1');
-INSERT INTO `news` VALUES ('78', '', 'dsadsadsa sa dsa', 'dsadsad', '1378112820', '1', '9', '1');
-INSERT INTO `news` VALUES ('79', '', '恭喜2012级语物理提高班', '恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班,.', '1378171402', '2', '0', '3');
-INSERT INTO `news` VALUES ('80', '系统管理员', '恭喜2012级语英语提高班顺利升班', '恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班', '1378173436', '2', '0', '3');
-INSERT INTO `news` VALUES ('81', '南瓜', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班', '1378175723', '2', '0', '1');
-INSERT INTO `news` VALUES ('82', '系统管理员', '123', '你哈珀啊', '1378370718', '1', '0', '1');
-INSERT INTO `news` VALUES ('83', '系统管理员', '工作流测试', '123', '1378370908', '1', '0', '1');
-INSERT INTO `news` VALUES ('84', '系统管理员', '工作流测试', '你好啊', '1378371056', '1', '0', '1');
-INSERT INTO `news` VALUES ('85', '系统管理员', '你好啊', '你好啊', '1378372351', '1', '0', '1');
-INSERT INTO `news` VALUES ('86', '系统管理员', '哈哈', '123234344', '1378372388', '1', '0', '1');
-INSERT INTO `news` VALUES ('87', '系统管理员', '123', '你好啊', '1378375707', '1', '0', '1');
-INSERT INTO `news` VALUES ('88', '系统管理员', '很好啊', '很好啊', '1378430934', '1', '0', '1');
-INSERT INTO `news` VALUES ('89', '系统管理员', '123434', 'efaefraer', '1378449233', '1', '0', '1');
-INSERT INTO `news` VALUES ('90', '系统管理员', 'test1', 'test1', '1378449287', '1', '0', '1');
+INSERT INTO `news` VALUES ('1', '', '关于中秋开会的通知', '关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知关于中秋开会的通知，，关于中秋开会的通知关于中秋开会的通知', '0', '1', '0', '3', '0');
+INSERT INTO `news` VALUES ('67', '', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班', '0', '1', '0', '3', '1');
+INSERT INTO `news` VALUES ('6', '', '关于中秋开会的通知', '开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知', '0', '1', '0', '3', '0');
+INSERT INTO `news` VALUES ('7', '', '关于中秋开会的通知', '开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知开会的通知', '0', '1', '0', '3', '0');
+INSERT INTO `news` VALUES ('15', '', '2012级化学班', '2012级化学班同学全部结业', '0', '2', '9', '3', '0');
+INSERT INTO `news` VALUES ('19', '', '2012级语文班', '恭喜2012级语文班全体同学顺利结业！！', '0', '2', '0', '3', '0');
+INSERT INTO `news` VALUES ('20', '', '2012级语物理提高班', '热烈祝贺2012级语物理提高班全体同学顺利升班', '0', '2', '0', '3', '0');
+INSERT INTO `news` VALUES ('21', '', '祝贺2012级语历史班同学顺利结业', '祝贺2012级语历史班同学顺利结业', '0', '2', '0', '3', '0');
+INSERT INTO `news` VALUES ('22', '', '恭喜2012级语数学提高班顺利升班', '恭喜2012级语数学提高班顺利升班', '0', '2', '9', '1', '0');
+INSERT INTO `news` VALUES ('33', '', '关于开展项目对接的通知', '关于开展项目对接的通知，关于开展项目对接的通知，关于开展项目对接的通知，关于开展项目对接的通知，关于开展项目对接的通知', '0', '1', '0', '3', '0');
+INSERT INTO `news` VALUES ('32', '', '关于周末加班的通知', '关于周末加班的通知关于周末加班的通知关于周末加班的通知关于周末加班的通知', '0', '1', '0', '3', '0');
+INSERT INTO `news` VALUES ('34', '', '恭喜2012级语英语提高班', '恭喜2012级语英语提高班恭喜2012级语英语提高班恭喜2012级语英语提高班', '0', '2', '9', '3', '0');
+INSERT INTO `news` VALUES ('60', '', '紧急通知！！！（关于中秋节值班事宜的通知）', '关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）关于中秋节值班事宜的通知）', '0', '1', '9', '3', '0');
+INSERT INTO `news` VALUES ('73', '', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班', '0', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('74', '', '你好', '整的 阿达', '0', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('75', '', 'NIHAO ', 'NIHAO 11', '0', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('71', '', '的萨达萨达', '2012级语物理提高班2012级语物理提高班2012级语物理提高班', '0', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('72', '', '你好', '你镇海', '0', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('70', '', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班2012级语物理提高班', '0', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('76', '', 'dsadsadsa sa dsa', 'DSADSADADSA', '2013', '2', '9', '1', '0');
+INSERT INTO `news` VALUES ('77', '', 'FDSFS F DS', 'FDS FDS S ', '2013', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('78', '', 'dsadsadsa sa dsa', 'dsadsad', '1378112820', '1', '9', '1', '0');
+INSERT INTO `news` VALUES ('79', '', '恭喜2012级语物理提高班', '恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班恭喜2012级语物理提高班,.', '1378171402', '2', '0', '3', '0');
+INSERT INTO `news` VALUES ('80', '系统管理员', '恭喜2012级语英语提高班顺利升班', '恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班恭喜2012级语英语提高班顺利升班', '1378173436', '2', '0', '3', '0');
+INSERT INTO `news` VALUES ('81', '南瓜', '2012级语物理提高班', '2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班2012级语物理提高班', '1378175723', '2', '0', '1', '0');
+INSERT INTO `news` VALUES ('82', '系统管理员', '123', '你哈珀啊', '1378370718', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('83', '系统管理员', '工作流测试', '123', '1378370908', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('84', '系统管理员', '工作流测试', '你好啊', '1378371056', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('85', '系统管理员', '你好啊', '你好啊', '1378372351', '1', '0', '3', '0');
+INSERT INTO `news` VALUES ('86', '系统管理员', '哈哈', '123234344', '1378372388', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('87', '系统管理员', '123', '你好啊', '1378375707', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('88', '系统管理员', '很好啊', '很好啊', '1378430934', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('89', '系统管理员', '123434', 'efaefraer', '1378449233', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('90', '系统管理员', 'test1', 'test1', '1378449287', '1', '0', '3', '0');
+INSERT INTO `news` VALUES ('91', '系统管理员', '的萨达萨达', 'dsadadadada', '1379004772', '1', '0', '1', '0');
+INSERT INTO `news` VALUES ('92', '系统管理员', '121323', '12121212121', '1379065823', '1', '0', '1', '1');
 
 -- ----------------------------
 -- Table structure for `schedule`
@@ -601,38 +649,22 @@ CREATE TABLE `schedule` (
   `ts_end` int(11) DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of schedule
 -- ----------------------------
-INSERT INTO `schedule` VALUES ('1', '7', '11', '2', '2', '1378915200', '1378918800', '1');
+INSERT INTO `schedule` VALUES ('1', '5', '10', '1', '1', '1379347200', '1379606400', '1');
 INSERT INTO `schedule` VALUES ('2', '7', '11', '2', '2', '1378828800', '1378832400', '1');
 INSERT INTO `schedule` VALUES ('3', '4', '11', '2', '2', '1378224000', '1378231200', '1');
 INSERT INTO `schedule` VALUES ('4', '4', '11', '2', '2', '1378137600', '1378144800', '1');
-
--- ----------------------------
--- Table structure for `test`
--- ----------------------------
-DROP TABLE IF EXISTS `test`;
-CREATE TABLE `test` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of test
--- ----------------------------
-INSERT INTO `test` VALUES ('1', 'hahaha1');
-INSERT INTO `test` VALUES ('2', 'hahaha2');
-INSERT INTO `test` VALUES ('3', 'hahaha');
-INSERT INTO `test` VALUES ('4', 'hahaha');
-INSERT INTO `test` VALUES ('5', 'hahaha');
-INSERT INTO `test` VALUES ('6', 'hahaha');
-INSERT INTO `test` VALUES ('7', 'hahaha');
-INSERT INTO `test` VALUES ('8', 'hahaha');
-INSERT INTO `test` VALUES ('9', 'hahaha');
+INSERT INTO `schedule` VALUES ('5', '7', '10', '1', '1', '1379606400', '1379610000', '1');
+INSERT INTO `schedule` VALUES ('6', '7', '10', '1', '1', '1379520000', '1379523600', '1');
+INSERT INTO `schedule` VALUES ('7', '2', '10', '1', '1', '1378828800', '1378833100', '1');
+INSERT INTO `schedule` VALUES ('8', '2', '10', '1', '1', '1378742400', '1378746700', '1');
+INSERT INTO `schedule` VALUES ('9', '6', '10', '2', '4', '1379433600', '1380297600', '1');
+INSERT INTO `schedule` VALUES ('10', '7', '10', '1', '1', '1381248000', '1381251600', '1');
+INSERT INTO `schedule` VALUES ('11', '7', '10', '1', '1', '1381161600', '1381165200', '1');
 
 -- ----------------------------
 -- Table structure for `trace_log`

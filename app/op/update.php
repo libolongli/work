@@ -17,7 +17,7 @@
 				$type = k::load('update','op')->getType($table);	
 				$map = array();
 				foreach($type as $key=>$value){
-					if($_POST[$key]){
+					if($_POST[$key]!=''){
 						if($value['type']=='Calender'){
 							$map[$key] = strtotime($_POST[$key]);
 						}else{
@@ -25,6 +25,7 @@
 						}
 					}
 				}	
+
 				$lid = k::load('update','op')->update($map,$table,$id);
 				if($lid) echo "修改成功!";exit;
 			}
@@ -38,7 +39,11 @@
 					$type = $value['type'];
 					$f = 'set'.$value['type'];
 					if($type=='Select'){
-						$data = k::load('update','op')->getSelectInfo($value['link_table']);
+						if(isset($value['data'])){
+							$data = $value['data'];
+						}else{
+							$data = k::load('update','op')->getSelectInfo($value['link_table']);
+						}
 						$html[]=k::load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title'],'data'=>$data));
 					}elseif($type=='Calender'){
 						$html[]=k::load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title'],'id'=>"calender".rand(1,10000)));

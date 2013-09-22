@@ -4,13 +4,24 @@
 		function __construct(){
 			$this->_db = new db();
 		}
-		// function getFiledType(){
-
-		// }
+		
+		/**
+		* 通过table 表名 和id 拿取信息
+		* @param  string $table
+		* @param  string $id
+		* @return array
+		*/
 
 		function getRow($table,$id){
 			return   $this->_db->find($table,array('id'=>$id));
 		}
+
+
+		/**
+		* 通过table 表名 获取该表的信息,得到那些字段需要修改,以及使用什么组件,和title是什么
+		* @param  string $table
+		* @return array
+		*/
 
 		function getType($table){
 			$return  = array();
@@ -96,10 +107,48 @@
 						'title'=>'班级名称'),
 				);
 				break;
+				case 'holiday':
+				$return = array(
+					'name'=>array(
+						'type'=>"Input",
+						'title'=>'节假日名称'),
+					'ts_start'=>array(
+						'type'=>'Calender',
+						'title'=>'开始时间'
+					),
+					'ts_end'=>array(
+						'type'=>'Calender',
+						'title'=>'结束时间'
+					),
+					'isplay'=>array(
+						'type'=>'Select',
+						'title'=>'是否上班',
+						'data'=>array(
+							0=>array(
+								'id'=>1,
+								'name'=>'不上课'
+							),
+							1=>array(
+								'id'=>0,
+								'name'=>'上课'
+							),
+						),
+					),
+				);
+				break;
 
 			}
 			return $return;
 		}
+
+		/**
+		* 主要是为了生成select而返回数据
+		* @see getType
+		* @param  array $map
+		* @param  string $table
+		* @param  string $id
+		* @return int
+		*/
 
 		function getSelectInfo($table){
 			if($table=='user'){
@@ -108,6 +157,18 @@
 			return $this->_db->find($table);
 		}
 
+		/**
+		* 通过id,table,map 修改表信息
+		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		 *)
+		* @param  array $map
+		* @param  string $table
+		* @param  string $id
+		* @return int
+		*/
 		function update($map,$table,$id){
 			$data = array();
 			foreach($map as $key => $value){
@@ -116,4 +177,26 @@
 			}
 			return $this->_db->update($table,$data,$id);
 		}
+
+		/**
+		* 通过table,map 修改表信息
+		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	
+		* @param  array $map
+		* @param  string $table
+		* @param  string $id
+		* @return int
+		*/
+
+		function add($map,$table){
+			$data = array();
+			foreach($map as $key => $value){
+				$str = $key."=>".$value;
+				array_push($data,$str);
+			}
+			return $this->_db->add($table,$data);
+		}
+		
 	}

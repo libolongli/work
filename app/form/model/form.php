@@ -1,5 +1,13 @@
 <?php
 	class k_model_form_form{
+	
+	/**
+	 * 通过传入的表名和类型的名字返回select 的HTML
+	 *
+	 * @param  string $table  tablename 
+	 * @param  string $cate   category
+	 * @return html	
+	 */
 		function getSelect($table,$cate){		
 			$sql = "SELECT type_id as value,title as name FROM type where status =1 
 			and tablename = '{$table}' and cate='{$cate}'";	
@@ -10,6 +18,16 @@
 			echo $select;													
 		}
 
+	/**
+	 * 通过传入的$map 生成一个input标签
+	 *
+	 * $map = array(
+   	 *  'title'=>'Nomius',
+   	 *	'name'=>'test',
+	 *)
+	 * @param  array $map
+	 * @return html	
+	 */
 		function setInput($map){
 			$map = $this->teamMap($map,'input');
 			$html = "{";
@@ -25,6 +43,16 @@
 			return $html;
 		}
 
+		/**
+		 * 通过传入的$map 生成一个popup标签
+		 *
+		 * $map = array(
+   	 	 *  'title'=>'Nomius',
+   		 *	'name'=>'test',
+		 *)
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setPopup($map){
 			$map = $this->teamMap($map,'popup');
 			$html = "{";
@@ -41,12 +69,35 @@
 			return $html;
 		}
 
+		/**
+		 * 通过传入的$map 生成一个隐藏标签
+		 *
+		  * $map = array(
+   	 	 *  'title'=>'Nomius',
+   		 *	'name'=>'test',
+		 *)
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setHideinput($map){
 			$map = $this->teamMap($map,'hideInput');
 			$html = "{type : 'hideInput', name : '{$map['name']}', errormsg : '',value :'', display:'none'}";
 			return $html;
 		}
 		
+		/**
+		 * 通过传入的$map 生成一个下拉列表 里面的data是一个数组用于传送下拉类列表里面的值
+		 * * $map = array(
+   	 	 *  'title'=>'Nomius',
+   		 *	'data'=>array(
+		 *	 	'id'=>1,
+		 *	 	'name'=>'hehe',
+   		 * ),
+		 *)
+		 * @param  array $map
+		 * @return html	
+		 */
+
 		function setSelect($map){
 			$map = $this->teamMap($map,'select');
 			$data = array();
@@ -69,6 +120,16 @@
 			return $html;	
 		}
 
+		/**
+		 * 通过传入的$map 生成一个Textarea标签
+		 *
+		  * $map = array(
+   	 	 *  'title'=>'Nomius',
+   		 *	'name'=>'test',
+		 *)
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setTextarea($map){
 			$map = $this->teamMap($map,'textarea');
 			$html = "{";
@@ -84,7 +145,18 @@
 			return $html;
 		}
 
-					
+		/**
+		 * 通过传入的$map 生成一个日历插件
+		 * 需要另外引进相关的JS 和 CSS
+		 * <script src="images/js/zebra_datepicker.js" type="text/javascript" ></script>
+		 * <link href="images/css/metallic.css" type="text/css" rel="stylesheet" />
+		 *  $map = array(
+   	 	 *  'title'=>'Nomius',
+   		 *	'name'=>'test',
+		 *)
+		 * @param  array $map
+		 * @return html	
+		 */
 		function setCalender($map){
 			$map = $this->teamMap($map,'calender');
 			$html = "{";
@@ -102,6 +174,53 @@
 
 		}
 
+		/**
+		 * 通过传入的$map 生成一个复选框
+		 *
+		  * $map = array(
+   	 	 *  'title'=>'Nomius',
+   		 *	'name'=>'test',
+		 *)
+		 * @param  array $map
+		 * @return html	
+		 */
+		function setCheckbox($map){
+			$map = $this->teamMap($map,'checkbox');
+			$data = array();
+			$i=0;
+			foreach($map['data'] as $key=>$value){
+				$data[$i]['value'] = $value['id'];
+				$data[$i]['name'] = $value['name'];
+				$i++;
+			}
+			$data = json_encode($data);
+			$html = "{";
+			$html .="type:'checkbox',";
+			$html .="name:'{$map['name']}',";
+			$html .="title:'{$map['title']}',";
+			$html .="tip:'{$map['tip']}',";
+			$html .="datatype:'{$map['datatype']}',";
+			$html .="errormsg:'{$map['errormsg']}',";
+			$html .="data:$data,";
+			$html .="value:'[{$map['value']}]',";
+			$html .="}";
+			return $html;
+		}
+
+		/**
+		 * 通过传入的$map主要是用来设置默认值的,以免插件出问题
+		 *
+		 * 通过传入的$map 生成一个Textarea标签
+		 *
+		  * $map = array(
+   	 	 *  'title'=>'Nomius',
+   		 *	'name'=>'test',
+		 *)
+		 *
+		 * @param  array $map
+		 * @param  string $type
+		 * @return html	
+		 */		
 		function teamMap($map,$type){
 			$key = array();
 			$data['datatype'] = "*";
@@ -130,10 +249,14 @@
 					$key = array('name','title','tip','datatype','errormsg','value');
 					break;
 				case 'calender':
-				$key = array('name','title','tip','datatype','errormsg','value','id');
+					$key = array('name','title','tip','datatype','errormsg','value','id');
+				break;
+				case 'checkbox':
+					$key = array('name','title','tip','datatype','errormsg','value','id');
 				break;
 
 			}
+			
 			foreach ($key as $k => $v) {
 				if(!isset($map[$v])) $map[$v] = $data[$v]; 
 			}

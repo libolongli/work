@@ -10,6 +10,16 @@
 			R::setup($conn,$db['user'],$db['pass']);
 			$this->_writer = $this->getWriter();			
 		}
+
+		/**
+		* 修改该或者保存数据
+		* 
+		*$updatevalues = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		*)
+		* @return id
+		*/
 		public  function updateRecord($table, $updatevalues, $id = null){
 			$data = array();
 			$i = 0;
@@ -22,6 +32,15 @@
 			return $this->_writer->updateRecord($table,$data,$id);
 		}
 		
+		/**
+		* 保存数据
+		* 
+		*$updatevalues = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		*)
+		* @return id
+		*/
 		public  function insertRecord($table, $updatevalues){
 			return $this->updateRecord($table, $updatevalues);
 		}
@@ -30,14 +49,43 @@
 			return R::getWriter();
 		}
 
+		/**
+		* 保存数据
+		* 
+		*$updatevalues = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		*)
+		* @return id
+		*/
 		public  function add($table, $updatevalues){
 			return $this->updateRecord($table, $updatevalues);
 		}
 
+		/**
+		* 修改数据
+		* 
+		*$updatevalues = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		*)
+		* @return id
+		*/
 		public  function update($table, $updatevalues,$id){
 			return $this->updateRecord($table, $updatevalues,$id);
 		}
 
+		/**
+		* 查找数据
+		* 
+		*$conditon = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+		*)
+		* @param string $table 
+		* @param array $conditong 
+		* @return array
+		*/
 		public function find($table,$conditions=array(),$addSql=null,$delete = null, $inverse = false, $all = false){
 			return $this->_writer->selectRecord($table, $conditions, $addSql, $delete, $inverse, $all);
 		}
