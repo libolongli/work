@@ -1,5 +1,5 @@
 <?php
-	class k_model_op_update{
+	class module_op_api_update{
 		private $_db;
 		function __construct(){
 			$this->_db = new db();

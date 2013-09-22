@@ -1,5 +1,5 @@
 <?php
-	class k_model_tree_tree{
+	class module_tree_api_tree{
 		function getJsonData($model){
 			$name = '';
 			$tmp = array();
@@ -12,7 +12,7 @@
 				case 'feed':
 					$name = 'feed';break;
 			} 
-			$data = k::load('menu','menu')->getChildByName($name);
+			$data = k::load('api')->load('menu','menu')->getChildByName($name);
 			
 			foreach($data as $k => $v){
 				$tmp[$k]['name'] = $v['text'];

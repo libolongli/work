@@ -1,5 +1,5 @@
 <?php
-	class k_model_form_form{
+	class module_form_api_form{
 	
 	/**
 	 * 通过传入的表名和类型的名字返回select 的HTML

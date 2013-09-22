@@ -1,5 +1,5 @@
 <?php
-class k_model_menu_menu
+class module_menu_api_menu
 {
 	private $data = array();
 	private $rdata = array();
