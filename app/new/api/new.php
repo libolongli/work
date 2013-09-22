@@ -1,5 +1,5 @@
 <?php
-class k_model_new_new
+class module_new_api_new
 {
 	private $data = array();
 
@@ -31,7 +31,7 @@ class k_model_new_new
 		}
 		if($data['rids']){
 			//发送工作流
-			$flow = k::load('task','flow');
+			$flow = k::load('api')->load('task','flow');
 			$flow->init('news/add');
 			$user = $_SESSION['user'];
 			$flow->add(array('title'=>$data['title'],'user'=>$user['user'],'transmit'=>0,'rids'=>$data['rids'],'uid'=>$user['id']));

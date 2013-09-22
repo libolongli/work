@@ -1,5 +1,5 @@
 <?php
-	class k_model_flow_flow{
+	class module_flow_api_flow{
 		private $_db;
 		  
 		function __construct(){

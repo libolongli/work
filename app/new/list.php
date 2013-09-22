@@ -14,10 +14,10 @@
 					'offset'=>$_POST['offset']
 					);
 				if(isset($_POST['search'])){
-					$search = k::load('search','op')->teamSearch();
+					$search = k::load('api')->load('search','op')->teamSearch();
 					$map['search'] = $search;
 				}
-				$data = k::load('new')->searchNew($map);
+				$data = k::load('api')->load('new')->searchNew($map);
 				$array = array(
 					'total'=>$data['total'],
 					'page'=>$_POST['offset']/$_POST['limit'],

@@ -21,8 +21,8 @@
 			}
 			$this->beforeDisplay($map);
 			$t->assign('title','短消息');
-			//echo k::url('msg/list');exit;
-			$t->assign('formurl',k::url('msg/list'));
+			//echo k::url('msg/list',array('id'=>234,'con'=>'567'));exit;
+			$t->assign('formurl',k::url('msg/list',array('id'=>234,'con'=>'567')));
 			$t->assign('frameurl',k::url('msg/list'));	
 			$t->display('list');
 		}

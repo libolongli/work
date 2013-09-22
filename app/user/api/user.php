@@ -1,5 +1,5 @@
 <?php
-class k_model_user_user
+class module_user_api_user
 {
  
   /**
@@ -15,7 +15,7 @@ class k_model_user_user
 	 $ds = R::findOne('user',' user = ? and pass = ? ', 
                 array( $u,$p )
                );
-	
+	echo 1;exit;
 	 if(empty($ds))
 	 {
 	  return false;

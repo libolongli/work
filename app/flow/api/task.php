@@ -1,5 +1,5 @@
 <?php
-	class k_model_flow_task{
+	class module_flow_api_task{
 		private $_db;
 		private $_config;
 		private $_url;
@@ -34,7 +34,7 @@
 		* @return void	
 		*/
 
-		public function add($map = array()){
+		public function add($map = array()){		
 			foreach($this->_config as $key =>$value){
 				if($value['active']){
 					$format = $value['format'];

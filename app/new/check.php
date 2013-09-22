@@ -1,6 +1,6 @@
 <?
 	class module_new_check{
 		function run(){
-		k::load('new')->checkNews();
+		k::laod('api')->load('new')->checkNews();
 			}
 		}
