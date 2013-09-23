@@ -1,1 +1,0 @@
-<iframe src="<?echo k::url('{$_GET['list']}/list');?>" name="grid" frameborder="0" style="width: 100%; height: 100%;"></iframe>
