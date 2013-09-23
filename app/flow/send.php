@@ -9,7 +9,7 @@
 					'uid'=>$uid,
 					'transmit'=>$_POST['transmit'],
 				);
-				k::load('task','flow')->add($array);
+				k::load('api')->load('task','flow')->add($array);
 				echo "添加成功!请关闭对话框!";exit;			
 			}
 			$t=new tpl();

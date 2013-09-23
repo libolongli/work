@@ -12,7 +12,7 @@
 		}
 		
 		public function register(){
-			$u=k::load('user');
+			$u=k::load('api')->load('user');
 			$id = $u->reg($_POST['username'],$_POST['password']);
 			header('Location: ?m=home');
 		}		

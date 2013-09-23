@@ -75,7 +75,7 @@
 	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
 	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-		var users =<? k::load('user','user')->getConsultInfo(); ?>;
+		var users =<? k::load('api')->load('user','user')->getConsultInfo(); ?>;
 					 
 		function showTable(data, view){
 			for (var i=0; i < data.length; i++) {
