@@ -42,6 +42,7 @@
 		}
 		window.onload=function() {
 			new ContentMain($('#bench'));
+			
 			w2ui['Bench'].load('main', '<?echo k::url('home/news');?>');
 			w2ui['Bench'].load('left', 'bench_left.html')
 			w2ui['Bench'].load('right', 'bench_right.html')

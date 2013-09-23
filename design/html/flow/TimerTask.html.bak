@@ -41,7 +41,8 @@
 			$.ajax({
 				type : "POST",
 				dataType : "json",
-				url : "<?echo k::url('flow/del',array('f'=>'get'));?>",
+				<?echo k::url('flow/del',array('f'=>'get'));?>
+				url : "?m=flow&a=del&f=get",
 				data : {uid:1},
 				success : function(data) {
 					if(data){

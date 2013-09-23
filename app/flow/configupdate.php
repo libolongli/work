@@ -11,7 +11,8 @@
 		function beforeDisplay(){
 			if($_POST){
 				k::load('api')->load('flow')->configadd($_POST,$_GET['id']);
-				echo "操作成功!<a href = '?m=flow&a=configupdate&id={$_GET['id']}'>点击返回 </a>";exit;
+				$url = k::url('flow/configupdate',array('id'=>$_GET['id']));
+				echo "操作成功!<a href = '{$url}'>点击返回 </a>";exit;
 			}
 
 			if($_GET['id']){

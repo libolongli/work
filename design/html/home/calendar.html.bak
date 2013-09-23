@@ -132,7 +132,8 @@
 				$.ajax({
 				   type: "POST",
 				   dataType:"json",
-				   url: "<?echo k::url('syllabus/ok');?>",
+				   <?echo k::url('syllabus/ok');?>
+				   url: "?m=syllabus&a=ok",
 				   data:{calender:s},
 				   success: function(msg){
 					 

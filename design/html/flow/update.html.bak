@@ -12,8 +12,8 @@
 		//ajaxPost : true,
 		//callback:function(data){}
 		var from = new smartFrom('from_mandatory_table', {
-			
-			url:'<?echo k::url('flow/update',array('id'=>$fid));?>',
+			<?echo k::url('flow/update',array('id'=>$fid));?>
+			url:'?m=flow&a=update&id=<?=$fid?>',
 			center:true,
 			httpType : 'post',
 			rows : [

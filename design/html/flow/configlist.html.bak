@@ -7,20 +7,17 @@
 		<title><?=$title?></title>
 		<? k::load('api')->load('layout','layout')->render('list') ?>
 	<script>
-		
 		$('#grid').w2grid({
 			name: 'grid',
-			header: '表单名',
-			recordsPerPage: 20,
+			recordsPerPage: 8,
 			show: {
-				selectColumn: true,
 				toolbar: true,
 				footer: true,
-				//toolbarAdd: false,
-				toolbarDelete: false,
+				toolbarAdd: true,
+				selectColumn:true,
+				//toolbarDelete: true,
 				//toolbarSave: true
 			},
-			url:"<? echo $_SERVER['REQUEST_URI']."&back=json" ?>",
 			toolbar: {
 				items: [
 					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
@@ -28,30 +25,52 @@
 				onClick: function (target, data) {
 					console.log(target);
 					console.log(data);
+					if(target == 'add'){
+						$().w2popup('open', {
+							title: '新增条目',
+							body: "<iframe  src='<?echo k::url('flow/configadd');?>' frameborder='0' height='100%' width='100%'></iframe>",
+							buttons: '<input id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');window.location.reload();">',
+							width: 800,
+							height: 500,overflow: 'hidden',
+							color: '#ffc',
+							speed: '0.3',
+							opacity: '0.5',
+							modal: true,
+							showClose: true,
+							showMax: true,
+							onUnlock:       function () { console.log('unlock'); },
+							onUnlockClick:  function () { console.log('unlock click'); },
+							onOpen:         function () { console.log('open'); },
+							onBeforeClose:  function () { console.log('before close (cancelable, just return false)'); },
+							onClose:        function () { console.log('close'); },
+							onMax:          function () { console.log('max'); }
+						});
+					};
 					if(target == 'refresh') {
 						window.location.reload(); 
 					};
+					
 					if(target == 'delete') {
 						var ids = w2ui['grid'].getSelection();
 						if (!confirm('确定删除么?')) {
-							return false;
+							return false
 						} else {
 							w2ui['grid'].remove.apply(w2ui['grid'],ids);
 							$.ajax({
 							   type: "POST",
 							   dataType:"json",
-							   url: "",
+							   url: "?m=flow&a=configupdate",
 							   data:{id:ids,status:9},
 							   success: function(msg){
 								 
 							   }
-							});
-							
+							});		
 						}
 					}
+					
 				}
 			},
-			onSelect: function(target, eventData) {
+					onSelect: function(target, eventData) {
 				eventData.onComplete = function(){
 					this.toolbar.enable('delete');
 				}
@@ -62,22 +81,31 @@
 						this.toolbar.disable('delete');
 				}
 			},
-		
-			searches: [				
-				{ field: 'course_name', caption: '课程名称', type: 'text' },
-				{ field: 'room_name', caption: '房间的名称', type: 'text' },
+			searches: [
+				{ field: 'name', caption: 'name', type: 'text' },
+				{ field: 'url', caption: 'url', type: 'text' },
 			],
-			sortData: [{ field: 'recid', direction: 'ASC' }],
-			columns: [				
-				{ field: 'course_name', caption: '课程名称', size: '10%'},
-				{ field: 'room_name', caption: '房间名称', size: '20%'},
-				{ field: 'ts_start', caption: '开始时间', size: '20%'},
-				{ field: 'ts_end', caption: '结束时间', size: '20%'},
-				{ field: 'op', caption: '操作', size: '30%'},
-			],
+			sortData: [{ field: '', direction: 'ASC' }],
+			columns : [{
+				field : 'name',
+				caption : '名称',
+				size : '50px'
+			}, {
+				field : 'url',
+				caption : 'url',
+				size : '20%'
+			},{
+				field : 'format',
+				caption : '模板',
+				size : '60%'
+			},{
+				field : 'active',
+				caption : '是否激活',
+				size : '15%'
+			}],
+			records:<?=$json?>
 			
-		});	
-		
+		});
 		function checkinfo(url) {
 			$().w2popup('open', {
 				body: "<iframe src='"+url+"' frameborder='0' height='100%' width='100%'></iframe>",
@@ -87,14 +115,5 @@
 				overflow: 'hidden',
 			});
 		}
-		window.onload=function(){
-			$('div').live('mouseover', function() {
-  				$(this).attr('title','');
-			});
-	       
-	    }
-	
-		
 	</script>
 </html>
-

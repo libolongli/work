@@ -26,7 +26,7 @@
 			<ul>
 					<?foreach($upgrade as $i):?>	
 					<li>
-					<a href="<? echo k::url('home/newsList',array('type'=>$i['type'],'id'=>$i['id'])); ?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
+					<a href="?m=home&a=newsList&type=<?echo $i['type']?>&id=<?echo $i['id']?>"><i></i><span class="notice_content"><?=$i['title']?></span><span class="notice_time"><?=$i['ts_created']?></span></a>
 								</li>
 				<?endforeach;?>
 			</ul>

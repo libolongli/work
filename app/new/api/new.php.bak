@@ -190,8 +190,8 @@ function getOption(){
 					//active = 3,审核通过
 						$data[$key]['operate'] = "<a href='javascript:void(0);' onclick='updateStatus({$value['recid']},3)'>".$data[$key]['active']."</a>";
 					}		
-						$seeurl = k::url('home/newsList',array('type'=>$type,'id'=>$value['recid']));
-					    $updateurl = k::url('new/modify',array('type'=>$type,'id'=>$value['recid']));
+						$seeurl = k::url('home/newList',array('type'=>$type,'id'=>$value['recid']));
+					   $updateurl = k::url('new/modify',array('type'=>$type,'id'=>$value['recid']));
 						$data[$key]['operate'] .= "｜<a href='{$seeurl}'>查看</a> ";
 						$data[$key]['operate'] .= "｜<a href='{$updateurl}'>修改</a> ";
 			}

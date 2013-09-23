@@ -71,7 +71,7 @@ class module_user_api_user
   function uid()
   {
 	$url = k::url('home');
-  	if(!isset($_SESSION)) header('Location:$url');
+  	if(!isset($_SESSION)) header('Location: ?m=home');
   	return $_SESSION['user']['id'];
   }
   

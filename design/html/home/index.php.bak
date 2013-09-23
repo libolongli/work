@@ -4,7 +4,7 @@ class module_home_index
   function run()
   {
 	$url = k::url('user/login');
-	if(!isset($_SESSION['user'])) header('Location:$url');
+	if(!isset($_SESSION['user'])) header('Location: ?m=user&a=login');
   	$json = k::load('menu','menu')->getJsonMenu();
     $t=new tpl();
 	

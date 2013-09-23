@@ -15,6 +15,6 @@
 			$u=k::load('user');
 			$id = $u->reg($_POST['username'],$_POST['password']);
 			$url = k::url('home');
-			header('Location: $url');
+			header('Location: ?m=home');
 		}		
 	}

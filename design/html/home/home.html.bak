@@ -164,7 +164,7 @@
 							$("#stationMsg").attr('href','<?echo k::url('msg/list');?>');
 						}else if(json.type==3){
 							$("#message").html('您有一条新工作流!');
-							$("#stationMsg").attr('href','<?echo k::url('flow/list');?>');
+							$("#stationMsg").attr('href','?m=<?echo k::url('flow/list');?>');
 						}				
 						$("#stationMsg").show();
 						//setTimeout("$('#stationMsg').hide()",30000);	

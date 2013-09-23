@@ -100,7 +100,7 @@ function updateTop(id,top){
 	$.ajax({
 		type: "POST",
 		dataType:"html",
-		url: "<?echo k::url('new/updatetop');?>",
+		url: "?m=new&a=updatetop",
 		data:{id:id,top:top},
 		success: function(msg){
 			if(msg=="1")
