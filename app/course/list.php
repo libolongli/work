@@ -16,7 +16,7 @@
 					$map['search'] = $search;
 				}
 				
-				$data = k::load('course')->getSchedule($map);
+				$data = k::load('api')->load('course')->getSchedule($map);
 
 				foreach($data['records'] as $key => $value){
 					$data['records'][$key]['op'] = "<a href='javascript:void(0);' onclick=checkinfo('?m=op&a=update&table=schedule&id={$value['recid']}')>修改</a>";
@@ -25,7 +25,7 @@
 			}
 
 			if($_POST){
-				k::load('course')->updateSchedule($_POST);exit;
+				k::load('api')->load('course')->updateSchedule($_POST);exit;
 			}
 
 			

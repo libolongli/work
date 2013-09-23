@@ -26,7 +26,7 @@
 				text-align: center;
 			}
 		</style>
-		<? k::load('layout','layout')->render('list') ?>
+		<? k::load('api')->load('layout','layout')->render('list') ?>
 	<script>
 		$('#grid').w2grid({
 			name: 'grid',

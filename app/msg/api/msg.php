@@ -40,7 +40,7 @@ class module_msg_api_msg
 			}
 		}
 
-		if(isset($_POST['search'])){
+		if(isset($map['search'])){
 				$ws=k::load('api')->load('search','op')->teamSql($ws,$map);
 		}
 
@@ -50,8 +50,7 @@ class module_msg_api_msg
 			from msg_log as l INNER JOIN msg as m on l.ts_created = m.ts_created 
 			INNER JOIN user as u on u.id= l.rid";
 		
-		$sql .= $where.$ws ? " AND " .$ws:"";
-		
+		$sql .= $where.($ws ? " AND " .$ws:"");
 		$total = count(R::getAll($sql));
 		
 		if(isset($map['limit']) && isset($map['offset'])){
@@ -61,7 +60,8 @@ class module_msg_api_msg
 		}
 		$data = R::getAll($sql);
 		foreach ($data as $key => $value) {
-			$data[$key]['operate'] = "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=msg&a=detail&id={$value['recid']}')>查看</a>";
+			$url = k::url('msg/detail',array('id'=>$value['recid']));
+			$data[$key]['operate'] = "<a href='javascript:void(0);return false;' onclick=checkinfo('{$url}')>查看</a>";
 		}
 		return array(
 			'total'=>$total,
@@ -100,6 +100,7 @@ class module_msg_api_msg
 			$msg_log->ts_created=$now;
 			$cid = R::store($msg_log);
 			if($id){
+
 				k::load('api')->load('feed','feed')->send(array('uid'=>$data['uid'],'rids'=>$v,'content'=>$data['content'],'type'=>2));
 			}
 		}
@@ -126,7 +127,7 @@ class module_msg_api_msg
 		$value  = join(',',$tmp);
 		if(is_array($map['id'])) $map['id'] = join(",",$map['id']);
 		$sql = "UPDATE msg_log set {$value} where id in({$map['id']})";
-		R::exec($sql);
+		return R::exec($sql);
 	}
   
   	/**

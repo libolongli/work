@@ -5,11 +5,11 @@
 			$this->deforeDisplay();
 			$t->assign('url',$_SERVER['REQUEST_URI']);
 			$html = array();
-			$html[] = k::load('form','form')->setInput(array('name'=>'name','title'=>'课程名称','tip'=>'请填写名称'));
-			$html[] = k::load('form','form')->setInput(array('name'=>'long','title'=>'课时长度','tip'=>'请填写秒数'));
-			$html[] = k::load('form','form')->setInput(array('name'=>'times','title'=>'课时次数','tip'=>'请填写次数'));
-			$html[] = k::load('form','form')->setHideinput(array('name'=>'rids'));
-			$html[] = k::load('form','form')->setPopup(array('name'=>'username','title'=>'教师姓名','tip'=>'请填写教师姓名',
+			$html[] = k::load('api')->load('form','form')->setInput(array('name'=>'name','title'=>'课程名称','tip'=>'请填写名称'));
+			$html[] = k::load('api')->load('form','form')->setInput(array('name'=>'long','title'=>'课时长度','tip'=>'请填写秒数'));
+			$html[] = k::load('api')->load('form','form')->setInput(array('name'=>'times','title'=>'课时次数','tip'=>'请填写次数'));
+			$html[] = k::load('api')->load('form','form')->setHideinput(array('name'=>'rids'));
+			$html[] = k::load('api')->load('form','form')->setPopup(array('name'=>'username','title'=>'教师姓名','tip'=>'请填写教师姓名',
 				'ourl'=>'data.html'
 				));
 
@@ -26,7 +26,7 @@
 				$map['times'] = $_POST['times'];
 				$map['t_id'] = $_POST['rids'];
 				$map['status'] = 1;
-				$id = k::load('course')->add('course',$map);
+				$id = k::load('api')->load('course')->add('course',$map);
 				if($id) echo "房间创建成功!<a href='{$_SERVER['REQUEST_URI']}'>点击返回 </a>";
 				exit;
 			}

@@ -9,6 +9,6 @@
 		
 		function beforeDisplay(){
 			$model = $_GET['model'];
-			return k::load('tree')->getJsonData($model);
+			return k::load('api')->load('tree')->getJsonData($model);
 		}
 	}

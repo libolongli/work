@@ -10,12 +10,12 @@
 
 		function beforeDisplay(){
 			if($_POST){
-				K::load('flow')->configadd($_POST,$_GET['id']);
+				k::load('api')->load('flow')->configadd($_POST,$_GET['id']);
 				echo "操作成功!<a href = '?m=flow&a=configupdate&id={$_GET['id']}'>点击返回 </a>";exit;
 			}
 
 			if($_GET['id']){
-				$data = K::load('flow')->getconfig(array('id'=>$_GET['id']));
+				$data = k::load('api')->load('flow')->getconfig(array('id'=>$_GET['id']));
 				if($data) return $data['0'];
 			}
 

@@ -1,5 +1,5 @@
 <?php
-	class k_model_graph_config{
+	class module_graph_api_config{
 		function getTable($table){
 			return $this->tableDetail($table);
 		}

@@ -76,8 +76,8 @@
 			$tmp = array();
 			$map['ts_updated']=time();
 			if(($map['status']==9) && $map['id']){
-				$info = k::load('flow')->getFlowById($map['id']);
-				$uid = k::load('user','user')->get_uid();
+				$info = k::load('api')->load('flow')->getFlowById($map['id']);
+				$uid = k::load('api')->load('user','user')->get_uid();
 			}
 			foreach($map as $k => $v){
 				if(($k!='id') &&($k!='m') &&($k!='a') ){

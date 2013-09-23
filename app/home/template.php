@@ -28,7 +28,7 @@
 			$consult->introduce=$data['introduce'];
 			$id= R::store($consult);
 			if($id){
-				header("Location: ?m=home&a=template&url=grid-tree");
+				header("Location: ".k::url('home/template',array('url'=>'grid-tree')));
 			}
 		}
 		

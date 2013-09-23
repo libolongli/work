@@ -10,7 +10,7 @@
 				$map['s.r_id'] = $_GET['r_id'];
 				//$map['s.g_id'] = $_GET['g_id'];
 				$array = array();
-				$data = k::load('course')->getSchedule($map);
+				$data = k::load('api')->load('course')->getSchedule($map);
 				$holiday = $this->getHoliday();
 				
 				foreach ($data['records'] as $key => $value) {
@@ -64,7 +64,7 @@
 
 			}
 			 $array = array();
-			 $holiday = k::load('course')->getHoliday('1');
+			 $holiday = k::load('api')->load('course')->getHoliday('1');
 			 $noworkdate = array();
 			 foreach ($holiday as $key => $value) {
 			 	 $noworkdate[] = date('Y-m-d',$value['ts_start']);
@@ -77,7 +77,7 @@
 				 	$noworkdate[] = date('Y-m-d',$value['ts_end']);
 			 	 }
 			 }
-			$work = k::load('course')->getHoliday('0');
+			$work = k::load('api')->load('course')->getHoliday('0');
 			$workdate = array();
 			foreach ($work as $key => $value) {
 				 $workdate[] = date('Y-m-d',$value['ts_start']);

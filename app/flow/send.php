@@ -13,11 +13,11 @@
 				echo "添加成功!请关闭对话框!";exit;			
 			}
 			$t=new tpl();
-			$data = k::load('user','user')->getUserList();
+			$data = k::load('api')->load('user','user')->getUserList();
 			$t->assign('value','');
 			$t->assign('transmit',0);
 			if(isset($_GET['id'])){
-				$row = k::load('flow')->getFlowById($_GET['id']);
+				$row = k::load('api')->load('flow')->getFlowById($_GET['id']);
 				$t->assign('value',$row['content']);
 				$t->assign('transmit',1);
 			}	

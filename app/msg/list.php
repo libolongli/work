@@ -2,8 +2,12 @@
 	class module_msg_list{
 		function run(){
 			$t=new tpl();
-			if(isset($_SESSION['user']['id'])) $id = $_SESSION['user']['id'];
-			else header("Location:  ?m=home");
+			if(isset($_SESSION['user']['id'])) {
+				$id = $_SESSION['user']['id'];
+			}else {
+				$url = k::url('home/index');
+				header("Location:  ".$url);
+			}
 			$map = array();
 
 			if(isset($_GET['model'])){
@@ -21,7 +25,7 @@
 			}
 			$this->beforeDisplay($map);
 			$t->assign('title','短消息');
-			$t->assign('formurl',k::url('msg/list'));
+			$t->assign('formurl',k::url('msg/update'));
 			$t->assign('frameurl',k::url('msg/list'));	
 			$t->display('list');
 		}

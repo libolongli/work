@@ -96,7 +96,7 @@
 			$where = " where f.status !=9 ";
 			
 			if(isset($_POST['search'])){
-				$where=k::load('search','op')->teamSql($where,$map);
+				$where=k::load('api')->load('search','op')->teamSql($where,$map);
 			}
 			
 			foreach ($map as $key => $value) {
@@ -117,12 +117,16 @@
 			$result = R::getAll($sql);
 			
 			foreach($result as $key => $value){
+				$detailurl = k::url('flow/detail',array('id'=>$value['recid']));
+				$sendurl = k::url('flow/send',array('id'=>$value['recid']));
+				$dealurl = k::url('flow/deal',array('id'=>$value['recid']));
+				$logurl = k::url('flow/log',array('id'=>$value['recid']));
 				$result[$key]['percent'] = "<div class='Bar'><div style='width: {$value['percent']}%;' class='progress'><span>{$value['percent']}%</span></div></div>";
 				$result[$key]['operate'] = "<a href= '?m=flow&a=update&fid={$value['recid']}' >修改进度</a>   ";
-				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=detail&id={$value['recid']}')>查看</a>  ";
-				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=send&id={$value['recid']}')>转发</a>  ";
-				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=deal&id={$value['recid']}')>处理</a>  ";
-				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=log&id={$value['recid']}')>处理记录</a>  ";
+				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$detailurl}')>查看</a>  ";
+				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$sendurl}')>转发</a>  ";
+				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$dealurl}')>处理</a>  ";
+				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$logurl}')>处理记录</a>  ";
 			}
 			
 			return array(

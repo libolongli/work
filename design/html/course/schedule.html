@@ -51,7 +51,10 @@
 							center : 'title',
 							right : 'month,agendaWeek,agendaDay'
 						},
-						events : '?m=course&a=loadschedule<? echo "&t_id=".$_GET['t_id']."&r_id=".$_GET['r_id']."&g_id=".$_GET['g_id']; ?>',
+						<? 
+						$url=k::url('course/loadschedule',array('t_id'=>$_GET['t_id'],'r_id'=>$_GET['r_id'],'g_id'=>$_GET['g_id'],));
+						 ?>
+						events : '<? echo $url ?>',
 						slotEventOverlap: false,
 						slotMinutes: 10,
 						editable : true,

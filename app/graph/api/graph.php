@@ -1,5 +1,5 @@
 <?php
-	class k_model_graph_graph{
+	class module_graph_api_graph{
 		
 		private $_db;
 		private $data;

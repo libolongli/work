@@ -1,5 +1,5 @@
 <?php
-	class k_model_course_course{
+	class module_course_api_course{
 		private $_db;
 		function __construct(){
 			$this->_db = new db();
@@ -72,7 +72,7 @@
 					}
 				}
 				//print_r($map[])
-				$where  = k::load('search','op')->teamSql($where,$map);
+				$where  = k::load('api')->load('search','op')->teamSql($where,$map);
 			}
 
 			//其他条件
@@ -96,7 +96,7 @@
 			
 			$where .= $ws ? " AND ".$ws :"";
 			$sql.=$where;
-			// echo $sql;exit;
+
 			
 			$total =count(R::getAll($sql));
 			if(isset($map['limit']) && isset($map['offset'])){

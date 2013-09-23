@@ -1,6 +1,7 @@
 <?php
 	class module_msg_update{
 		function run(){
-			k::load('msg')->update($_REQUEST);
+			$id = k::load('api')->load('msg')->update($_REQUEST);
+			echo $id;exit;
 		}
 	}

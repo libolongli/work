@@ -20,14 +20,15 @@ class module_menu_add
   function run()
   {
 	if($_POST){
-		$id = k::load('menu')->addMenu($_POST);
+		$id = k::load('api')->load('menu')->addMenu($_POST);
 		if($id){
-			header('Location: ?m=menu&a=add');
+			header('Location: '.k::load('menu/add'));
 		}else{
-			echo "<a href='?m=menu&a=add'>添加失败!点击返回</a>";exit;
+			$url = k::load('menu/add');
+			echo "<a href='{$url}'>添加失败!点击返回</a>";exit;
 		}
 	}
-	$data = k::load('menu')->getOption('all');
+	$data = k::load('api')->load('menu')->getOption('all');
 	$str = '';
 	if($data){
 		$data = array_reverse($data);

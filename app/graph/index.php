@@ -18,13 +18,13 @@
 			//echo $str;exit;
 			
 			$gid = 3;
-			$graph = k::load('graph')->getGraphById($gid);
-			$data = k::load('graph')->getData($gid);
-			$samm = k::load('graph')->getSamm($data,unserialize($graph['samm']));
-			$sum  = k::load('graph')->sum($data,'pack_price');
-			$avg  = k::load('graph')->avg($data,'pack_price');
-			$max  = k::load('graph')->max($data,'pack_price');
-			$min  = k::load('graph')->min($data,'pack_price');
+			$graph = k::load('api')->load('graph')->getGraphById($gid);
+			$data = k::load('api')->load('graph')->getData($gid);
+			$samm = k::load('api')->load('graph')->getSamm($data,unserialize($graph['samm']));
+			$sum  = k::load('api')->load('graph')->sum($data,'pack_price');
+			$avg  = k::load('api')->load('graph')->avg($data,'pack_price');
+			$max  = k::load('api')->load('graph')->max($data,'pack_price');
+			$min  = k::load('api')->load('graph')->min($data,'pack_price');
 			//print_r($samm);exit;
 			//$count  = k::load('graph')->count($data,'pack_price','400');
 

@@ -67,11 +67,11 @@ class module_feed_api_feed
 		 * @return array  
 		 */
     public function getListJson($map){
-		$uid = k::load('user','user')->uid();
+		$uid = k::load('api')->load('user','user')->uid();
 		$where = " where  uid = {$uid} and status !=9 ";
 
 		if(isset($_POST['search'])){
-				$where=k::load('search','op')->teamSql($where,$map);
+				$where=k::load('api')->load('search','op')->teamSql($where,$map);
 		}
 
 

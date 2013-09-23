@@ -10,10 +10,10 @@ class module_feed_list{
 			if(isset($_GET['back'])) {
 				$map = array('limit'=>$_POST['limit'],'offset'=>$_POST['offset']);
 				if(isset($_POST['search'])){
-					$search = k::load('search','op')->teamSearch();
+					$search = k::load('api')->load('search','op')->teamSearch();
 					$map['search'] = $search;
 				}
-				$data = k::load('feed')->getListJson($map);
+				$data = k::load('api')->load('feed')->getListJson($map);
 				// $array = array(
 				// 	'total'=>$data['total'],
 				// 	'page'=>$_POST['offset']/$_POST['limit'],
@@ -23,7 +23,7 @@ class module_feed_list{
 			}
 
 			if($_POST){
-				k::load('course')->updateSchedule($_POST);exit;
+				k::load('api')->load('course')->updateSchedule($_POST);exit;
 			}
 
 			

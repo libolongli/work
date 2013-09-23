@@ -5,14 +5,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>添加新闻</title>
-		<? k::load('layout','layout')->render('form') ?>
+		<? k::load('api')->load('layout','layout')->render('form') ?>
 	<script type="text/javascript">
 	
 		//配置磁块
 		//ajaxPost : true,
 		//callback:function(data){}
 		var from = new smartFrom('from_mandatory_table', {
-			url:'?m=new&a=do',
+			url:'<? echo k::url('new/do') ?>',
 			center:true,
 			httpType : 'post',
 			rows : [

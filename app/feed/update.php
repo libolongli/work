@@ -1,6 +1,6 @@
 <?php
 	class module_feed_update{
 		function run(){
-			k::load('feed')->update($_REQUEST);
+			k::load('api')->load('feed')->update($_REQUEST);
 		}
 	}

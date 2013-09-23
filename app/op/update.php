@@ -14,7 +14,7 @@
 			$id = isset($_GET['id']) ? $_GET['id'] :'';
 			
 			if($_POST){
-				$type = k::load('update','op')->getType($table);	
+				$type = k::load('api')->load('update','op')->getType($table);	
 				$map = array();
 				foreach($type as $key=>$value){
 					if($_POST[$key]!=''){
@@ -26,14 +26,14 @@
 					}
 				}	
 
-				$lid = k::load('update','op')->update($map,$table,$id);
+				$lid = k::load('api')->load('update','op')->update($map,$table,$id);
 				if($lid) echo "修改成功!";exit;
 			}
 
 			
 			if($id && $table){
-				$row = k::load('update','op')->getRow($table,$id);
-				$type = k::load('update','op')->getType($table);
+				$row = k::load('api')->load('update','op')->getRow($table,$id);
+				$type = k::load('api')->load('update','op')->getType($table);
 				$html = array();
 				foreach ($type as $key => $value) {
 					$type = $value['type'];
@@ -42,13 +42,13 @@
 						if(isset($value['data'])){
 							$data = $value['data'];
 						}else{
-							$data = k::load('update','op')->getSelectInfo($value['link_table']);
+							$data = k::load('api')->load('update','op')->getSelectInfo($value['link_table']);
 						}
-						$html[]=k::load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title'],'data'=>$data));
+						$html[]=k::load('api')->load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title'],'data'=>$data));
 					}elseif($type=='Calender'){
-						$html[]=k::load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title'],'id'=>"calender".rand(1,10000)));
+						$html[]=k::load('api')->load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title'],'id'=>"calender".rand(1,10000)));
 					}else{
-						$html[]=k::load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title']));
+						$html[]=k::load('api')->load('form','form')->$f(array('name'=>$key,'tip'=>'请输入正确的格式','title'=>$value['title']));
 					}
 				}
 				return $html;

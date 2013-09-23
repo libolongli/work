@@ -3,7 +3,7 @@
 		function run(){
 			$t=new tpl();
 			if(isset($_SESSION['user']['id'])) $id = $_SESSION['user']['id'];
-			else header("Location:  ?m=home");
+			else header("Location:  ".k::url('home/index'));
 			$map = array();
 
 			if(isset($_GET['model'])){
@@ -32,10 +32,10 @@
 				$map['limit'] = $_POST['limit'];
 				$map['offset'] = $_POST['offset'];
 				if(isset($_POST['search'])){
-					$search = k::load('search','op')->teamSearch();
+					$search = k::load('api')->load('search','op')->teamSearch();
 					$map['search'] = $search;
 				}
-				$data = k::load('flow')->getListJson($map,$model);
+				$data = k::load('api')->load('flow')->getListJson($map,$model);
 				// $array = array(
 				// 	'total'=>$data['total'],
 				// 	'page'=>$_POST['offset']/$_POST['limit'],

@@ -14,7 +14,8 @@
 		
 		function add(){
 			$uid = $_SESSION['user']['id'];
-			$task = new k_model_flow_task();
+			// $task = new k_model_flow_task();
+			$task = k::load('api')->load('task','flow');
 			$array = array(
 				'rids'=>$_POST['rids'],
 				'content'=>$_POST['content'],
@@ -22,16 +23,19 @@
 				'transmit'=>$_POST['transmit'],
 			);
 			$task->add($array);
-			header("Location: ?m=flow&a=list");
+			$url = k::url('flow/list');
+			header("Location: $url");
 		}
 		
 		function get(){
 			$uid = $_SESSION['user']['id'];
 			$result = R::getAll( "select id as recid,rids,percent,content from flow where rids = {$uid} and status=1 order by id desc");
 			foreach($result as $key => $value){
+				$infourl = k::url('flow/info',array('id'=>$value['recid']));
+				$sendurl = k::url('flow/send',array('id'=>$value['recid']));
 				$result[$key]['operate'] = "<a href= '?m=flow&a=update&fid={$value['recid']}' >修改进度</a>   ";
-				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=info&id={$value['recid']}')>查看</a>  ";
-				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('?m=flow&a=send&id={$value['recid']}')>转发</a>  ";
+				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$infourl}')>查看</a>  ";
+				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$sendurl}')>转发</a>  ";
 			}
 		
 			$arr = array(

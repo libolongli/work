@@ -15,12 +15,12 @@
 				$map['comment'] = $_POST['comment'];
 				$map['status'] = $_POST['status'];
 				if(isset($_POST['rids'])) $map['rids'] = $_POST['rids'];
-				$id = k::load('flow')->addlog($map);
+				$id = k::load('api')->load('flow')->addlog($map);
 				if($id) {echo "操作成功!请关闭对话框!";exit;}
 			}
 			if($_GET['id']){
 				$fid = $_GET['id'];
-				$flow = k::load('flow')->getFlowById($fid);
+				$flow = k::load('api')->load('flow')->getFlowById($fid);
 				$uid = $_SESSION['user']['id'];
 				$json = "{value:2, name:'通过'}, {value:1, name:'未通过'}";
 				return $json;
