@@ -33,7 +33,7 @@
 				{ field: 'object', caption: 'Email', type: 'text' },
 				{ field: 'tech_method', caption: 'Start Date', type: 'text' }
 			],
-			records:<? k::load('course','course')->getCourseJosn();?>,
+			records:<? k::load('api')->load('course','course')->getCourseJosn();?>,
 			onSelect: function(target,eventData) {
 				eventData.onComplete = function(){
 					var obj = new Object();		

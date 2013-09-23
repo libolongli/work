@@ -12,7 +12,7 @@
 				$map = array('limit'=>$_POST['limit'],'offset'=>$_POST['offset']);
 				
 				if(isset($_POST['search'])){
-					$search = k::load('search','op')->teamSearch();
+					$search = k::load('api')->load('search','op')->teamSearch();
 					$map['search'] = $search;
 				}
 				

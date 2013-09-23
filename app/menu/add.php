@@ -22,9 +22,9 @@ class module_menu_add
 	if($_POST){
 		$id = k::load('api')->load('menu')->addMenu($_POST);
 		if($id){
-			header('Location: '.k::load('menu/add'));
+			header('Location: '.k::url('menu/add'));
 		}else{
-			$url = k::load('menu/add');
+			$url = k::url('menu/add');
 			echo "<a href='{$url}'>添加失败!点击返回</a>";exit;
 		}
 	}

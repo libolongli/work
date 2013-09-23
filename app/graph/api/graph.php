@@ -17,7 +17,7 @@
 				$samm =join(',',$samm);
 				$sql = "SELECT {$samm} FROM {$key}";
 
-				$table = k::load('config','graph')->getTable('kc_course_pack');
+				$table = k::load('api')->load('config','graph')->getTable('kc_course_pack');
 				$isnum = array_pop($table);
 				$field = array();
 				foreach($table as $k => $v){

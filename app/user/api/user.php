@@ -57,7 +57,7 @@ class module_user_api_user
 	$_SESSION['user']['user']=$u;
 	$_SESSION['user']['id']=$id;	
 	if($id){
-		$data = k::load('feed','feed')->send(array('uid'=>1,'rid'=>$id,'content'=>"新注册用户{$u}"));
+		$data = k::load('api')->load('feed','feed')->send(array('uid'=>1,'rid'=>$id,'content'=>"新注册用户{$u}"));
 	}
 	
 	return $id;

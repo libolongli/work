@@ -3,7 +3,7 @@ class module_new_do
 {
   function run()
   {
-	$id = k::load('new')->addNew($_POST);
+	$id = k::load('api')->load('new')->addNew($_POST);
 	if($id){
 		$url = k::url('new/list');
 		echo "<script type='text/javascript'>alert('添加成功');location.href='{$url}';</script>";
