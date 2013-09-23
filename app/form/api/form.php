@@ -223,7 +223,7 @@
 		 */		
 		function teamMap($map,$type){
 			$key = array();
-			$data['datatype'] = "*";
+			$data['datatype'] = "";
 			$data['tip'] = isset($map['errormsg']) ? isset($map['errormsg']) :'请输入正确的格式!';
 			$data['errormsg'] = isset($map['tip']) ? isset($map['tip']) :'请输入正确的格式!';
 			$data['title'] = '名称';

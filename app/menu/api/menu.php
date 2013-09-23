@@ -129,4 +129,73 @@ class module_menu_api_menu
 	}
 	
 	
+		/**
+		* 通过$map 拿取某个工作流列表
+		*
+		* $map = array(
+	   	 *  'user'=>'Nomius',
+	   	 *	'pass'=>'1111111',
+	   	 *  'serarch'=>array(
+		 *
+	   	 *
+	   	 *	)
+		 *)
+		* @param  array $map
+		* @param  string $model
+		* @return array	
+		*/
+		
+		function getJsonList($map){
+			$sql  = "SELECT m.id as recid,m.name,p.name as pname,m.url,m.icon FROM menu as m INNER JOIN menu as p on m.pid = p.id";
+			$where = " where m.status !=9 ";
+			if(isset($map['search'])){
+				foreach ($map['search']['search'] as $key => $value) {
+					if($value['field']=='pname') {
+						$map['search']['search'][$key]['field']='p.name';
+					}else{
+						$map['search']['search'][$key]['field']='m.'.$value['field'];
+					}
+				}
+				$where = k::load('api')->load('search','op')->teamSql($where,$map);
+			}
+			$sql .= $where;
+			$total = R::getAll($sql);
+			$offset = isset($_POST['offset']) ? $_POST['offset'] :0 ;
+			$limit = isset($_POST['limit']) ? $_POST['limit'] :10 ;
+			$sql .= " ORDER BY m.id desc limit ".$offset.",".$limit;
+			$data = R::getAll($sql);
+			foreach($data as $key=>$value){
+				$url = k::url('op/update',array('table'=>'menu','id'=>$value['recid']));
+				$data[$key]['op'] = "<a href='#' onclick=checkinfo('{$url}')>修改</a>";
+			}
+			return array(
+				'total'=>count($total),
+				'page'=>$offset/$limit,
+				'records'=>$data
+				);
+		}
+
+		/**
+		*修改菜单信息
+		*$map = array('id'=>'1,2,3','status'=>1)
+		*@param array $map
+		*@return int
+		*
+		*/
+
+		function update($map){
+			$id = isset($map['id']) ? $map['id'] : '';
+			unset($map['id']);
+			$arr = array();
+			foreach($map as $key => $value){
+				array_push($arr,"{$key}=>{$value}");
+			}
+			$db = new db();
+			if(is_string($id)) $id = explode(',', $id);
+			// print_r($id);exit;
+			foreach ($id as $k => $v) {
+				$db->update('menu',$arr,$v);
+			}
+		}
+	
 }

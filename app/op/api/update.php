@@ -136,6 +136,40 @@
 					),
 				);
 				break;
+				case 'menu':
+				$data =  k::load('api')->load('menu','menu')->getOption('all');
+				$data = array_reverse($data);
+				foreach ($data as $key => $value) {
+					$tag = "--";
+					for($i=0;$i<$value['level'];$i++){
+						$tag.=$tag;
+					}
+					$data[$key]['name']=$tag.$data[$key]['name'];
+
+				}
+				//print_r($data);exit;
+				$return = array(
+					'pid'=>array(
+						'type'=>"Select",
+						'title'=>'父级菜单',
+						'data'=>$data
+						),
+						
+					'name'=>array(
+						'type'=>'Input',
+						'title'=>'菜单名称'
+					),
+					'url'=>array(
+						'type'=>'Input',
+						'title'=>'菜单URL'
+					),
+					'icon'=>array(
+						'type'=>'Input',
+						'title'=>'图标URL',
+						
+					),
+				);
+				break;
 
 			}
 			return $return;

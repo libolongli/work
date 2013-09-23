@@ -28,6 +28,7 @@ class module_menu_add
 			echo "<a href='{$url}'>添加失败!点击返回</a>";exit;
 		}
 	}
+
 	$data = k::load('api')->load('menu')->getOption('all');
 	$str = '';
 	if($data){

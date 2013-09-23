@@ -33,9 +33,9 @@
 			
 			if($id && $table){
 				$row = k::load('api')->load('update','op')->getRow($table,$id);
-				$type = k::load('api')->load('update','op')->getType($table);
+				$typedata = k::load('api')->load('update','op')->getType($table);
 				$html = array();
-				foreach ($type as $key => $value) {
+				foreach ($typedata as $key => $value) {
 					$type = $value['type'];
 					$f = 'set'.$value['type'];
 					if($type=='Select'){

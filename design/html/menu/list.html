@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title><?=$title?></title>
+		<? k::load('api')->load('layout','layout')->render('list') ?>
+	<script>
+		
+		$('#grid').w2grid({
+			name: 'grid',
+			header: '表单名',
+			recordsPerPage: 10,
+			show: {
+				selectColumn: true,
+				toolbar: true,
+				footer: true,
+				toolbarAdd: true,
+				// toolbarDelete: true,
+				// toolbarSave: true
+			},
+			url:"<? echo $_SERVER['REQUEST_URI']."&back=json" ?>",
+			toolbar: {
+				items: [
+					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
+				],
+				onClick: function (target, data) {
+					console.log(target);
+					console.log(data);
+					if(target == 'add') {
+						this.enable('delete');
+						$().w2popup('open', {
+							title: '新增条目',
+							body: "<iframe src='<?=$frameurl;?>' frameborder='0' height='100%' width='100%'></iframe>",
+							buttons: '<input class="sdfs" id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');window.location.reload();">',
+							width: 800,
+							height: 500,overflow: 'hidden',
+							color: '#ffc',
+							opacity: '0.5',
+							modal: true,
+							showClose: true,
+							showMax: true,
+							onUnlock:       function () { console.log('unlock'); },
+							onUnlockClick:  function () { console.log('unlock click'); },
+							onOpen:         function () { console.log('open'); },
+							onBeforeClose:  function () { console.log('before close (cancelable, just return false)'); },
+							onClose:        function () { console.log('close'); },
+							onMax:          function () { console.log('max'); }
+						});
+					};
+					if(target == 'refresh') {
+						window.location.reload(); 
+					};
+					if(target == 'delete') {
+						var ids = w2ui['grid'].getSelection();
+						if (!confirm('确定删除么?')) {
+							return false;
+						} else {
+							w2ui['grid'].remove.apply(w2ui['grid'],ids);
+							$.ajax({
+							   type: "POST",
+							   dataType:"json",
+							   url: "",
+							   data:{id:ids,status:9},
+							   success: function(msg){
+								 
+							   }
+							});
+							
+						}
+					}
+				}
+			},
+			onSelect: function(target, eventData) {
+				eventData.onComplete = function(){
+					this.toolbar.enable('delete');
+				}
+			},
+			onUnselect: function(target, eventData) {
+				eventData.onComplete = function(){
+					if(this.getSelection().length == 0)					
+						this.toolbar.disable('delete');
+				}
+			},
+		
+			searches: [				
+				{ field: 'pname', caption: '父级菜单', type: 'text' },
+				{ field: 'name', caption: '菜单名称', type: 'text' },
+				{ field: 'url', caption: 'url', type: 'text' },
+				{ field: 'icon', caption: 'iconUrl', type: 'text' },
+			],
+			sortData: [{ field: 'recid', direction: 'ASC' }],
+			columns: [				
+				{ field: 'pname', caption: '父级菜单', size: '50px'},
+				{ field: 'name', caption: '菜单名称', size: '30%'},
+				{ field: 'url', caption: 'url', size: '30%'},
+				{ field: 'icon', caption: 'iconUrl', size: '30%'},
+				{ field: 'op', caption: '操作', size: '30%'},
+			],
+		});	
+		
+		function checkinfo(url) {
+			$().w2popup('open', {
+				body: "<iframe src='"+url+"' frameborder='0' height='100%' width='100%'></iframe>",
+				buttons: '<input type="button" value="close" onclick="$().w2popup(\'close\');">',
+				width: 800,
+				height: 500,
+				overflow: 'hidden',
+			});
+		}
+		//w2ui['grid'].load('?m=flow&a=del&f=get');
+		window.onload=function(){
+			$('div').live('mouseover', function() {
+  				$(this).attr('title','');
+			});
+	       
+	    }
+	
+		
+	</script>
+</html>
+
