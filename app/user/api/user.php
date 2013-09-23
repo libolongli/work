@@ -11,7 +11,6 @@ class module_user_api_user
 	*/
   function login($u,$p)
   {
-   
 	 $ds = R::findOne('user',' user = ? and pass = ? ', 
                 array( $u,$p )
                );

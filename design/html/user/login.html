@@ -3,38 +3,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>登录</title>
-		<link rel="stylesheet" href="images/css/login.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+		<title>Login</title>
+		<link rel="stylesheet" href="images/css/module.css" />
+		<link rel="stylesheet" href="images/css/style.css" />
 		<script src="images/js/jquery-1.8.3.min.js"></script>
 	</head>
-	<body style="background-color: #36c1ec">
-		<div class="cloud"></div>
-		<div class="bg_btm"></div>
+	<body style='background: url("images/img/lbg2.png") repeat;'>
+		<div class="login_title">南博教育管理系统</div>
 		<div class="login_Main">
-			<div class="logo"></div>
-			<form action="" method= "POST" class="login_box" id = "form">
-				<dl class="login_con">
-					<dt id="LoginMsg" class="login_message" style="padding-top: 0px;padding-bottom: 0px; ">							
-					</dt>
-					<dt class="clearit">
-						<label class="login_user" title="用户名登录" for="LoginBoxem"></label>
-						<input id="LoginBoxem" type="text" name="username" value="请输入用户名" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:#999999"/>
-					</dt>
-					<dt class="clearit">
-						<label class="login_pwd" title="请输入密码" for="LoginBoxPs"></label>
-						<input id="LoginBoxPs" type="password" name="password"/>
-					</dt>
-					<dt class="clearit">
-						<span id="login_submit" class="login_Btn" onclick="checkForm();"></span>
-					</dt>
-				</dl>
-			</form>
+			<div class="login_bg"></div>
+			<div class="login_content">
+				<div class="logo"></div>
+				<form action="" class="login_box">
+					<dl class="login_con">
+						<dt id="LoginMsg" class="login_message" style=""></dt>
+						<dt class="clearit">
+							<label class="login_user" title="用户名登录" for="LoginBoxem"></label>
+							<input id="LoginBoxem" type="text" name="username" value="请输入用户名" onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:#999999"/>
+						</dt>
+						<dt class="clearit">
+							<label class="login_pwd" title="请输入密码" for="LoginBoxPs"></label>
+							<input id="LoginBoxPs" type="password" name="password"/>
+						</dt>
+						<dt class="clearit">
+							<input style="float: left;" class="x-input " type="text" maxlength="4" size="4"  />
+							<div class="verifyCode">
+								<img id="" border="1" src="" />
+								<a href="">看不清，请点刷新。</a>
+							</div>
+						</dt>
+						<dt class="clearit">
+							<span id="login_submit" class="login_Btn" onclick="checkForm();"></span>
+						</dt>
+					</dl>
+				</form>
+			</div>
 		</div>
 	</body>
 	<script>
 		function checkForm() {
 			var name = $("#LoginBoxem").val();
-			if (name.length <= 0||name == "请输入用户名") {
+			if (name.length <= 0 || name == "请输入用户名") {
 				$("#LoginMsg").html("用戶名不能為空!");
 				return false;
 			} else {
@@ -48,7 +57,23 @@
 				$("#LoginMsg").html("");
 			}
 			// 后台验证
-			$("#form").submit();
+			$.ajax({
+				type : "Post",
+				cache : "false", //默认: true,dataType为script时默认为false) jQuery 1.2 新功能，设置为 false 将不会从浏览器缓存中加载请求信息。
+				url : "", //发送请求的地址。
+				data : "username=" + name + "&password=" + pwd, //发送到服务器的数据
+				dataType : "text",
+				error : function() {
+					$("#LoginMsg").html("*用户名密码错误，请重新登录");
+				},
+				success : function(message) {
+					if(message=='ok'){
+						window.location.href="<? echo k::url('home/index')?>";
+					}else{
+						$("#LoginMsg").html("*用户名密码错误，请重新登录");
+					}
+				}
+			});
 		}
 	</script>
 </html>

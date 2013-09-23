@@ -2,7 +2,6 @@ html {
 	height: 100%;
 }
 body {
-	font: 16px/1.6em Arial, Geneva, Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -184,32 +183,36 @@ img {
 .login_Main {
 	overflow: hidden;
 	margin: 0 auto;
-	margin-top: 200px;
+	margin-top: 40px;
 	position: relative;
 	padding: 30px 26px;
-	width: 600px;
-	height: 260px;
-	border: 1px solid #FFF;
-	border-radius: 8px;
-	box-shadow: 0 3px 3px #DFDFDF
+	width: 606px;
+	height: 311px;
+}
+.login_title {
+	position: relative;
+	margin: 0 auto;
+	margin-top: 200px;
+	width: 606px;
+	height: 30px;
+	font-size: 30px;
+	text-align: center;
+	font-family: "微软雅黑";
+	color: #FFF
 }
 .login_bg {
 	left: 0px;
 	top: 0px;
 	position: absolute;
-	width: 652px;
-	height: 320px;
-	background: #006DB8;
-	filter: alpha(opacity=40);
-	opacity: 0.4;
+	width: 658px;
+	height: 371px;
+	background: url("../img/lbg.png") no-repeat;
 	border-radius: 8px;
 }
 .login_content {
 	position: relative;
 	height: 260px;
 	width: 600px;
-	background: #FFF;
-	border: 1px solid #27628A;
 	border-radius: 8px;
 }
 .logo {
@@ -227,9 +230,16 @@ img {
 	height: 35px;
 }
 .login_con {
-	width: 100%;
+	width: 294px;
 	height: 100%;
-	padding-top: 30px;
+}
+#LoginMsg {
+	padding-top: 0px;
+	padding-bottom: 0px; 
+	font-size: 12px;
+	height: 30px;
+	line-height: 46px;
+	color: #FFF
 }
 .login_con dt {
 	padding: 8px 0px;
