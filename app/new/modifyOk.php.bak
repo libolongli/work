@@ -12,7 +12,7 @@ class module_new_modifyOk
 		$url = k::url('new/list');
 		echo "<script type='text/javascript'>alert('修改成功');location.href='{$url}';</script>";
 	}else{
-		echo "<script type='text/javascript'>alert('修改成功');location.href='{$url}';</script>";
+		echo "<script type='text/javascript'>alert('修改成功');location.href='?m=new&a=list';</script>";
 	}
 		
 		

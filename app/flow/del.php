@@ -33,7 +33,8 @@
 			foreach($result as $key => $value){
 				$infourl = k::url('flow/info',array('id'=>$value['recid']));
 				$sendurl = k::url('flow/send',array('id'=>$value['recid']));
-				$result[$key]['operate'] = "<a href= '?m=flow&a=update&fid={$value['recid']}' >修改进度</a>   ";
+				$schedule = k::url('flow/update',array('fid'=>$value['recid']));
+				$result[$key]['operate'] = "<a href= '{$schedule}' >修改进度</a>   ";
 				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$infourl}')>查看</a>  ";
 				$result[$key]['operate'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$sendurl}')>转发</a>  ";
 			}

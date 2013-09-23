@@ -77,7 +77,7 @@
 	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	
-		var users =<? k::load('api')->load('new','new')->getNewsInfo(); ?>;
+		var users =<? k::load('new','new')->getNewsInfo(); ?>;
 		
 					 
 		function showTable(data, view){
@@ -100,7 +100,7 @@ function updateTop(id,top){
 	$.ajax({
 		type: "POST",
 		dataType:"html",
-		url: "<?echo k::url('new/updatetop');?>",
+		url: "?m=new&a=updatetop",
 		data:{id:id,top:top},
 		success: function(msg){
 			if(msg=="1")

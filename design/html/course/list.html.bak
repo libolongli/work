@@ -87,6 +87,7 @@
 				overflow: 'hidden',
 			});
 		}
+		//w2ui['grid'].load('?m=flow&a=del&f=get');
 		window.onload=function(){
 			$('div').live('mouseover', function() {
   				$(this).attr('title','');

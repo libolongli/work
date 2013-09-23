@@ -95,7 +95,7 @@ function updateStatus(id,active){
 	$.ajax({
 		type: "POST",
 		dataType:"html",
-		url: "<?echo k::url('new/check');?>",
+		url: "?m=new&a=check",
 		data:{id:id,active:active},
 		success: function(msg){
 			if(msg=="1")

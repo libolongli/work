@@ -35,7 +35,7 @@
 					if(target == 'add'){
 						$().w2popup('open', {
 							title: '新增条目',
-							body: "<iframe  src='?m=new&a=add' frameborder='0' height='100%' width='100%'></iframe>",
+							body: "<iframe  src='<?k::url('new/add')?>' frameborder='0' height='100%' width='100%'></iframe>",
 							buttons: '<input id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');">',
 							width: 800,
 							height: 500,overflow: 'hidden',
@@ -62,7 +62,7 @@
 					$.ajax({
 					   type: "POST",
 					   dataType:"json",
-					   url: "?m=new&a=update",
+					   url: "<?k::url('new/update');?>",
 					   data:{id:ids,status:9},
 					   success: function(msg){		 
 					   }

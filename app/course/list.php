@@ -19,7 +19,9 @@
 				$data = k::load('api')->load('course')->getSchedule($map);
 
 				foreach($data['records'] as $key => $value){
-					$data['records'][$key]['op'] = "<a href='javascript:void(0);' onclick=checkinfo('?m=op&a=update&table=schedule&id={$value['recid']}')>修改</a>";
+					$url = k::url('op/update',array('table'=>'schedule','id'=>$value['recid']));
+					$data['records'][$key]['op'] = "<a href='javascript:void(0);' onclick=checkinfo('{$url}')>修改</a>";
+																														
 				}
 				echo json_encode($data);exit;
 			}

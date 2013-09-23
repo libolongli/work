@@ -5,6 +5,27 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title><?=$title?></title>
+		<style>
+			.Bar {
+				position: relative;
+				width: 100%;
+				border: 1px solid #7EC4CC;
+				padding: 1px;
+			}
+			.Bar div {
+				position: relative;
+				background: #7EC4CC;
+				background: -webkit-linear-gradient(left, #7EC4CC, #FFFFFF);
+				background: -moz-linear-gradient(left, #7EC4CC, #FFFFFF);
+				height: 12px;
+				line-height: 12px;
+			}
+			.Bar div span {
+				position: absolute;
+				width: 200px;
+				text-align: center;
+			}
+		</style>
 		<? k::load('api')->load('layout','layout')->render('list') ?>
 	<script>
 		$('#grid').w2grid({
@@ -18,6 +39,7 @@
 				//toolbarDelete: true,
 				//toolbarSave: true
 			},
+			url:"<? echo $_SERVER['REQUEST_URI']."&back=json" ?>",
 			toolbar: {
 				items: [
 					{ type: 'button', id: 'delete', caption: '删除', img: 'icon-delete',disabled : true}
@@ -28,7 +50,7 @@
 					if(target == 'add'){
 						$().w2popup('open', {
 							title: '新增条目',
-							body: "<iframe  src='<?echo k::url('flow/configadd');?>' frameborder='0' height='100%' width='100%'></iframe>",
+							body: "<iframe  src='<?echo k::url('flow/send');?>' frameborder='0' height='100%' width='100%'></iframe>",
 							buttons: '<input id="poclose" type="button" value="Close" onclick="$().w2popup(\'close\');window.location.reload();">',
 							width: 800,
 							height: 500,overflow: 'hidden',
@@ -59,10 +81,12 @@
 							$.ajax({
 							   type: "POST",
 							   dataType:"json",
-							   url: "<?echo k::url('flow/configupdate');?>",
+							   url: "?m=flow&a=update",
 							   data:{id:ids,status:9},
 							   success: function(msg){
-								 
+								 	if(msg){
+								 		alert(msg);
+								 	}
 							   }
 							});		
 						}
@@ -82,28 +106,26 @@
 				}
 			},
 			searches: [
-				{ field: 'name', caption: 'name', type: 'text' },
-				{ field: 'url', caption: 'url', type: 'text' },
+				{ field: 'content', caption: '内容', type: 'text' },
 			],
 			sortData: [{ field: '', direction: 'ASC' }],
 			columns : [{
-				field : 'name',
-				caption : '名称',
+				field : 'rids',
+				caption : '收件人',
 				size : '50px'
 			}, {
-				field : 'url',
-				caption : 'url',
-				size : '20%'
-			},{
-				field : 'format',
-				caption : '模板',
+				field : 'content',
+				caption : '内容',
 				size : '60%'
 			},{
-				field : 'active',
-				caption : '是否激活',
-				size : '15%'
+				field : 'percent',
+				caption : '进度',
+				size : '200px'
+			},{
+				field : 'operate',
+				caption : '操作',
+				size : '20%'
 			}],
-			records:<?=$json?>
 			
 		});
 		function checkinfo(url) {
@@ -115,5 +137,12 @@
 				overflow: 'hidden',
 			});
 		}
+		//w2ui['grid'].load('?m=flow&a=del&f=get');
+		window.onload=function(){
+			$('div').live('mouseover', function() {
+  				$(this).attr('title','');
+			});
+	       
+	    }
 	</script>
 </html>

@@ -7,7 +7,7 @@
 		open : true,
 		children : [{
 			name : "缴费明细",
-			 url:"<?echo k::url('msg/list');?>",
+			 url:"?m=msg&a=list",
 			 target: "grid"
 		}, {
 			name : "分级充值明细",

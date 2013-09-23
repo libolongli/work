@@ -67,7 +67,7 @@ class tpl
 	$target_html=str_replace($src,$target,$html);
 	foreach($t_array as $key => $value){
 		$arr = explode(".",$value);
-		$str = "?m=home&a=template&url=".$arr[0];
+		$str = k::url('home/template',array('url'=>$arr[0]));
 		$target_html=str_replace($value,$str,$target_html);
 	}
 	
