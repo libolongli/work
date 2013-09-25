@@ -1,30 +1,64 @@
 <?php
 	class module_graph_index{
 		function run(){
-			$html = $this->beforeDisplay();
+			$re = $this->beforeDisplay();
 			$t = new tpl();
-			$t->assign('html',join(',', $html));
-			$t->assign('title','添加报表');
-			$t->assign('url','');
+			$t->assign('field',$re['field']);
+			$t->assign('data',$re['data']);
+			$t->assign('samm',$re['samm']);
 			$t->display('index');
+
 		}
 
 		function beforeDisplay(){
-			// $array = array(
-			// 		'kc_course_pack_element'=>array('on'=>'element_packId','ontable'=>'kc_course_pack'),
-			// 		'kc_course'=>array('on'=>'element_courseId','ontable'=>'kc_course_pack_element'),
-			// 		);
-			//$str = serialize($array);
-			//echo $str;exit;
+
+			$tablejoin  = array(
+							array('kc_course_pack','kc_course_pack_element'),
+							array('kc_course_pack_element','kc_course')
+						);
+			$table = k::load('api')->load('config','graph')->tablejoin($tablejoin);
 			
+			//print_r($table);exit;
+
+			$re = array();
 			$gid = 3;
 			$graph = k::load('api')->load('graph')->getGraphById($gid);
+			// print_r($graph);exit;
+			$field = explode(",", $graph['field']);
+			//print_r($field);exit;
+			$re['field'] = $field;
+			// echo 1;exit;
 			$data = k::load('api')->load('graph')->getData($gid);
-			$samm = k::load('api')->load('graph')->getSamm($data,unserialize($graph['samm']));
-			$sum  = k::load('api')->load('graph')->sum($data,'pack_price');
-			$avg  = k::load('api')->load('graph')->avg($data,'pack_price');
-			$max  = k::load('api')->load('graph')->max($data,'pack_price');
-			$min  = k::load('api')->load('graph')->min($data,'pack_price');
+
+			$sammconfig = unserialize($graph['samm']);
+			//print_r($sammconfig);exit;
+			$sammfield = array();
+			
+			foreach ($sammconfig as $key => $value) {
+				$sammfield[] = $key;
+			}
+			
+
+			$samm = k::load('api')->load('graph')->getSamm($data,$sammconfig);
+			$re['samm'] = $samm;
+			// $sum  = k::load('api')->load('graph')->sum($data,'pack_price');
+			// $avg  = k::load('api')->load('graph')->avg($data,'pack_price');
+			// $max  = k::load('api')->load('graph')->max($data,'pack_price');
+			// $min  = k::load('api')->load('graph')->min($data,'pack_price');
+			$arr = array();
+			foreach ($data as $key => $value) {
+				foreach ($value as $k => $v) {
+					if(!in_array($k, $field)){
+						unset($data[$key][$k]);
+					}
+				
+				}
+				
+			}
+			$re['data'] = $data;
+			return $re;
+			// print_r($data);exit;
+			// echo $samm."-----------".$sum."----------".$avg."------".$max."----".$min;exit;
 			//print_r($samm);exit;
 			//$count  = k::load('graph')->count($data,'pack_price','400');
 
