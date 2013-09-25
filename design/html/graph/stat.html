@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>stat</title>
+		<meta name="author" content="Administrator" />
+		<link rel="stylesheet" href="images/css/module.css" type="text/css" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<!-- Date: 2013-09-18 -->
+	</head>
+	<body>
+		<div class="stat">
+			<div class="statTitle">
+				<i></i><span>系统设置</span>
+			</div>
+			<div class="statContent">
+				<dl class="statLeft">
+					<?
+						foreach ($tableall as $key => $value) {
+							echo "<dt>{$key}</dt>";
+							foreach ($value as $k => $v) {
+								$id = $key.".".$k;
+								echo "<dd id='{$id}'>{$v}</dd>";
+							}
+						}
+				    ?>
+				</dl>
+				<div class="statCenter">
+					<div class="statAdd">全部增加</div>
+					<div class="statDel">全部取消</div>
+				</div>
+				<dl class="statRight">
+				</dl>
+			</div>
+			<div class="clearit"></div>
+			<div class="statBtn">
+				<input class="blue-btn" type="button" id="bt1" value="保存" />
+				<input class="blue-btn" type="button" id="bt2" value="重置" />
+			</div>
+		</div>
+	</body>
+	<script>
+		window.onload = function(){
+			$(".stat").click(function(e){
+				if(e.target.tagName == "DD") {
+					if($(e.target).hasClass("fontred")) {
+						$(e.target).removeClass();
+						$(".statRight dd").remove("#"+$(e.target).attr("id"));
+					} else {
+						var pclass = $(e.target).parent().attr('class')
+						if(pclass == 'statLeft'){
+							$(".statRight").append($(e.target).clone());
+							$(e.target).addClass("fontred");
+						}
+					}
+				}
+				if($(e.target).hasClass("statAdd")) {
+					$.each($(".statLeft dd"),function(){
+						if(this.className == "") {
+							$(".statRight").append($(this).clone());
+							this.className = "fontred";
+						}
+					})
+				}
+				if($(e.target).hasClass("statDel")) {
+					$.each($(".statLeft dd"),function(){
+						$(this).removeClass();
+					});
+					$.each($(".statRight dd"),function(){
+						$(this).remove();
+					})
+				}
+			})	
+
+			$("#bt2").click(function(){
+				$(".statDel").click();
+			})		
+
+			$("#bt1").click(function(){
+				var field = [];
+				$.each($(".statRight dd"),function(){
+					field.push($(this).attr("id"));
+				});
+				$.ajax({
+					type : "Post",
+					cache : "false", //默认: true,dataType为script时默认为false) jQuery 1.2 新功能，设置为 false 将不会从浏览器缓存中加载请求信息。
+					url : "", //发送请求的地址。
+					data : {field:field}, //发送到服务器的数据
+					dataType : "text",
+					success : function(message) {
+						if(message){
+							window.location.href=message;
+						}else{
+							alert('保存失败2!');
+						}
+					}
+			});
+			})	
+		}
+	</script>
+</html>
+

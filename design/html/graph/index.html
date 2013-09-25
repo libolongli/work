@@ -4,32 +4,76 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title><?=$title?></title>
+		<title>统计图</title>
 		<? k::load('api')->load('layout','layout')->render('form') ?>
-	<script type="text/javascript">
-	
-		//配置磁块
-		//ajaxPost : true,
-		//callback:function(data){}
-		var from = new smartFrom('from_mandatory_table',{
-			url:'<?=$url?>',
-			center:true,
-			httpType : 'POST',
-			rows : [
-					<?=$html?>		
-				   ],
-		});
-		
-		//var thisRpIn = null;
-		
-		var thisView = null;
-		from.addListener('popupCallBack', function(view){
-			thisView = view;
-		});
-		// function setrp(name){
-		// 	//$(thisView).prev().val(name);
-		// 	//$().w2popup('close');
-		// };
-		
-	</script>
+	<table>
+	<tr>
+		<td colspan="2">
+			<table cellspacing="0" cellpadding="5" align="center" class="rptTable">
+				<tbody>
+					<tr>
+						<?
+							foreach ($field as $key => $value) {
+								$field ='<td class="rptCellLabel">';
+								$field .=k::load('api')->load('config','graph')->getFieldName('kc_course_pack',$value);
+								$field .='</td>';
+								echo $field;
+							}
+						?>
+						
+					</tr>
+					
+					<?
+						foreach ($data as $key => $value) {
+							$html ='<tr>';
+							foreach ($value as $k => $v) {
+								$html .='<td class="rptGrpHead">';
+								$html .=array_shift($value);
+								$html .='</td>';
+							}
+							$html.='</tr>';
+							echo $html;
+						}
+					?>
+				</tbody>
+			</table>
+				<script id="__reportrun_directoutput_recordcount_script" type="text/javascript">
+					if($('_reportrun_total')) $('_reportrun_total').innerHTML=4;
+				</script>					
+		</td>
+	</tr>
+
+				<tr>
+					<td colspan="2">
+					<table width="60%" cellspacing="0" cellpadding="3" border="0" align="center" class="rptTable">
+						<tbody>
+							<tr>
+								<td class="rptCellLabel">汇总字段</td>
+								<td class="rptCellLabel">合计</td>
+								<td class="rptCellLabel">平均</td>
+								<td class="rptCellLabel">最小</td>
+								<td class="rptCellLabel">最大</td>
+							</tr>
+							<?
+								foreach ($samm as $key => $value) {
+									$html = '<tr valign="top" class="rptGrpHead">';
+									$html .='<td class="rptData">'.k::load('api')->load('config','graph')->getFieldName('kc_course_pack',$key).'</td>';
+									$sum = isset($value['sum']) ? $value['sum'] :''; 
+									$avg = isset($value['avg']) ? $value['avg'] :''; 
+									$max = isset($value['max']) ? $value['max'] :''; 
+									$min = isset($value['min']) ? $value['min'] :''; 
+									$html .= '<td class="rptTotal">'.$sum.'</td>';
+									$html .= '<td class="rptTotal">'.$avg.'</td>';
+									$html .= '<td class="rptTotal">'.$min.'</td>';
+									$html .= '<td class="rptTotal">'.$max.'</td>';
+									$html .='</tr>';
+									echo $html;
+								}
+							?>
+							
+						</tbody>
+					</table>						
+					</td>
+				</tr>
+			</table>
 </html>

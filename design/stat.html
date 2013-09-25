@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>stat</title>
+		<meta name="author" content="Administrator" />
+		<link rel="stylesheet" href="images/css/module.css" type="text/css" />
+		<script src="images/js/jquery-1.8.3.min.js"></script>
+		<!-- Date: 2013-09-18 -->
+	</head>
+	<body>
+		<div class="stat">
+			<div class="statTitle">
+				<i></i><span>系统设置</span>
+			</div>
+			<div class="statContent">
+				<dl class="statLeft">
+					<dt>集合证明选项(48)</dt>
+					<dd id="e1">导数及其应用(79)</dd>
+					<dd id="e2">曲线与方程(30)</dd>
+					<dd id="e3">坐标系与参数方程(57)</dd>
+					<dd id="e4">算法初步(52)</dd>
+					<dd id="e5">计算原理(44)</dd>
+					<dd id="e6">概率(46)</dd>
+					<dd id="e7">解三角形(46)</dd>
+					<dd id="e8">三角函数(118)</dd>
+					<dd id="e9">推理与证明(47)</dd>
+					<dd id="e10">平面向量(65)</dd>
+					<dt>集合证明选项(48)</dt>
+					<dd id="e11">导数及其应用(79)</dd>
+					<dd id="e12">曲线与方程(30)</dd>
+					<dd id="e13">坐标系与参数方程(57)</dd>
+					<dd id="e14">算法初步(52)</dd>
+				</dl>
+				<div class="statCenter">
+					<div class="statAdd">全部增加</div>
+					<div class="statDel">全部取消</div>
+				</div>
+				<dl class="statRight">
+				</dl>
+			</div>
+			<div class="clearit"></div>
+			<div class="statBtn">
+				<input class="blue-btn" type="button" id="bt1" value="保存" />
+				<input class="blue-btn" type="button" id="bt2" value="重置" />
+			</div>
+		</div>
+	</body>
+	<script>
+		window.onload = function(){
+			$(".stat").click(function(e){
+				if(e.target.tagName == "DD") {
+					if($(e.target).hasClass("fontred")) {
+						$(e.target).removeClass();
+						$(".statRight dd").remove("#"+$(e.target).attr("id"));
+					} else {
+						var pclass = $(e.target).parent().attr('class')
+						if(pclass == 'statLeft'){
+							$(".statRight").append($(e.target).clone());
+							$(e.target).addClass("fontred");
+						}
+					}
+				}
+				if($(e.target).hasClass("statAdd")) {
+					$.each($(".statLeft dd"),function(){
+						if(this.className == "") {
+							$(".statRight").append($(this).clone());
+							this.className = "fontred";
+						}
+					})
+				}
+				if($(e.target).hasClass("statDel")) {
+					$.each($(".statLeft dd"),function(){
+						$(this).removeClass();
+					});
+					$.each($(".statRight dd"),function(){
+						$(this).remove();
+					})
+				}
+			})	
+
+			$("#bt2").click(function(){
+				$(".statDel").click();
+			})		
+
+			$("#bt1").click(function(){
+				$.each($(".statRight dd"),function(){
+					alert($(this).attr("id"));
+				})
+			})	
+		}
+	</script>
+</html>
+

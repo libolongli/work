@@ -3,29 +3,11 @@
 		
 		private $_db;
 		private $data;
+		
 		function __construct(){
 			$this->_db = new db();
 		}
 		
-		function teamSql($data){
-			foreach ($data as $key => $value) {
-				$sql = '';
-				$samm = array();
-				foreach($value as $k=>$v){
-					$samm[]= $this->samm($k,$v);
-				}
-				$samm =join(',',$samm);
-				$sql = "SELECT {$samm} FROM {$key}";
-
-				$table = k::load('api')->load('config','graph')->getTable('kc_course_pack');
-				$isnum = array_pop($table);
-				$field = array();
-				foreach($table as $k => $v){
-					array_push($field, $k);
-				}	
-				echo $sql;exit;
-			}
-		}
 
 		function samm($field,$str){
 			$s = array();
@@ -67,7 +49,7 @@
 			if($graph['where']) $sql .= " WHERE ".$graph['where']." "; 
 
 			if($graph['group']) $sql .= "GROUP BY ".$graph['group'];
-				
+			
 			return R::getAll($sql);
 		}
 
@@ -142,7 +124,6 @@
 				}
 				
 			}
-			//print_r($arr);exit;
 			return $arr;
 		}
 	}
