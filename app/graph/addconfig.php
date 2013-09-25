@@ -37,12 +37,25 @@
 					k::load('api')->load('graph','graph')->updateGraph(array('field'=>$field),$gid);
 					echo $url = k::url('graph/addconfig',array('gid'=>$gid,'step'=>4));exit;
 				}
+
+				if($step == 4){
+					$tmp = array();
+					foreach ($_POST as $key => $value) {
+						$tmp[$key] = join(',',$value);
+					}
+					$samm = serialize($tmp);
+					k::load('api')->load('graph','graph')->updateGraph(array('samm'=>$samm),$gid);
+					$url = k::url('graph/addconfig',array('gid'=>$gid,'step'=>5));
+					header("Location: $url");
+					//print_r($tmp);exit;
+				}
 			}
 			
 			$arr1 = array();
 			
 			$data = k::load('api')->load('config','graph')->getAlltable();
 			
+			//选择主表
 			if($step == 1){ 
 				$table = array_keys($data);
 				foreach ($table as $key => $value) {
@@ -55,6 +68,7 @@
 				$html = k::load('api')->load('form','form')->setSelect(array('title'=>'选择主表','name'=>'mtable','data'=>$arr1));
 			}
 			
+			//选择关联表
 			if($step == 2){
 				$graph = k::load('api')->load('graph')->getGraphById($gid);
 				$table = array_keys($data[$graph['mtable']]);
@@ -66,7 +80,7 @@
 				}
 				$html = k::load('api')->load('form','form')->setCheckbox(array('title'=>'选择关联表','name'=>'ltable[]','data'=>$arr1));
 			}
-			
+			//选择字段
 			if($step == 3){
 				$t = new tpl();
 				$graph = k::load('api')->load('graph')->getGraphById($gid);
@@ -82,11 +96,44 @@
 				exit;
 			}
 
+			//选择要统计的字段
 			if($step==4){
-					echo 1;exit;
+				 $graph = k::load('api')->load('graph')->getGraphById($gid);
+				 $ltable = unserialize($graph['ltable']);
+				 $tmp = array_keys($ltable);
+				 array_unshift($tmp,$graph['mtable']); 
+				 $html =  $arr = array();
+				 $data = array(
+				 		array('id'=>'sum','name'=>'sum'),
+				 		array('id'=>'avg','name'=>'avg'),
+				 		array('id'=>'max','name'=>'max'),
+				 		array('id'=>'min','name'=>'min'),
+				 		);
+
+				 foreach ($tmp as $key => $value) {
+				 	 $arr[$value] = k::load('api')->load('config','graph')->tableIntFileds($value);
+				 }
+
+				 foreach ($arr as $key => $value) {
+				 	if($value){
+				 		foreach ($value as $k => $v) {
+				 			$name = $k."[]";
+				 			$html[] = k::load('api')->load('form','form')->setCheckbox(array('title'=>$v,'name'=>$name,'data'=>$data));
+				 		}
+				 	}
+				 }
+
+				 $html = join(',',$html);
 			}
 
-			return $html;
+			if($step == 5){
+				echo '生成where条件!';exit;
+			}
+
+			if($step == 6){
+				echo '生成group!';exit;
+			}
+			return  $html;
 		}
 
 	}

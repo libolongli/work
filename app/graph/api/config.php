@@ -36,6 +36,23 @@
 			return $data[$table];
 		}
 
+
+		function tableIntFileds($table){
+			$data = array(
+				'kc_course_pack'=>array(
+					'pack_price'=>'课程包价格',
+					'pack_hit'=>'课程包点击量',
+					'pack_courseNum'=>'课程数量',
+				),
+				'kc_course'=>array(
+					'course_intro'=>'课程价格',
+					'course_hit'=>'课程点击量',
+				),
+				
+			);
+
+			return isset($data[$table]) ? $data[$table] :array();
+		}
 		/**
 		*根据表名和表的字段返回表的title
 		*
