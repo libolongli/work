@@ -35,9 +35,8 @@
 
 		function getData($gid){
 			$graph = $this->getGraphById($gid);
-			$sql = "SELECT * FROM {$graph['mtable']}";
+					$sql = "SELECT * FROM {$graph['mtable']}";
 			$ltable = $graph['ltable'];
-			
 			//代表有关联表,实现表的关联
 			if($ltable){
 				$ltable=unserialize($ltable);

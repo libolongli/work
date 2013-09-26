@@ -104,10 +104,10 @@
 				 array_unshift($tmp,$graph['mtable']); 
 				 $html =  $arr = array();
 				 $data = array(
-				 		array('id'=>'sum','name'=>'sum'),
-				 		array('id'=>'avg','name'=>'avg'),
-				 		array('id'=>'max','name'=>'max'),
-				 		array('id'=>'min','name'=>'min'),
+				 		array('id'=>'sum','name'=>'总计'),
+				 		array('id'=>'avg','name'=>'平均值'),
+				 		array('id'=>'max','name'=>'最大值'),
+				 		array('id'=>'min','name'=>'最小值'),
 				 		);
 
 				 foreach ($tmp as $key => $value) {
@@ -123,10 +123,22 @@
 				 	}
 				 }
 
-				 $html = join(',',$html);
+				  $html = join(',',$html);
 			}
 
 			if($step == 5){
+				$graph = k::load('api')->load('graph')->getGraphById($gid);
+			if(empty($graph['where'])){
+					if($graph['field']){
+						$str = $graph['field'];
+						$arr = explode(',',$str);
+					$graph['where'] = $arr['1'].'=1';
+					$tmp =array('where'=>$graph['where']);
+					print_r($tmp);
+					k::load('api')->load('graph','graph')->updateGraph($tmp,$gid);
+
+				}
+				}
 				echo '生成where条件!';exit;
 			}
 

@@ -27,21 +27,18 @@
 			$field = explode(",", $graph['field']);
 			//print_r($field);exit;
 			$re['field'] = $field;
+
 			// echo 1;exit;
 			$data = k::load('api')->load('graph')->getData($gid);
-
 			$sammconfig = unserialize($graph['samm']);
 			//print_r($sammconfig);exit;
-			$sammfield = array();
-			
+			$sammfield = array();		
 			foreach ($sammconfig as $key => $value) {
 				$sammfield[] = $key;
 			}
-			
-
 			$samm = k::load('api')->load('graph')->getSamm($data,$sammconfig);
 			$re['samm'] = $samm;
-			// $sum  = k::load('api')->load('graph')->sum($data,'pack_price');
+			//$sum  = k::load('api')->load('graph')->sum($data,'pack_price');
 			// $avg  = k::load('api')->load('graph')->avg($data,'pack_price');
 			// $max  = k::load('api')->load('graph')->max($data,'pack_price');
 			// $min  = k::load('api')->load('graph')->min($data,'pack_price');
