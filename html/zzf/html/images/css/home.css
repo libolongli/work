@@ -1,0 +1,36 @@
+.footer {
+	background-color: #00477F;
+    bottom: 0;
+    height: 35px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+}
+.footer_left img {
+	float: left;
+    margin: 8px;
+}
+.footer_left span {
+	color: #FFFFFF;
+    float: left;
+    font-size: 11px;
+    margin-top: 13px;
+}
+.footer_right {
+	 float: right;
+    margin: 2px;
+}
+.footer_right a {
+	margin: 0 10px;
+	 float: left;
+}
+
+#tools_menu {
+	 float: left;
+    margin: 0 10px;
+    position: relative;
+}
+#tools_menu .tools_menu_btn {
+	float: left;
+}
