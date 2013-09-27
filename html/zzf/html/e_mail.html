@@ -20,7 +20,7 @@
 					</div>
 					<div class="e_mail_list_cont_footer">
 						<div class="e_mail_list_cont_footer_left">
-							<input type="checkbox" name="list_checkbox" value="1">
+							<input type="checkbox" name="list_checkbox" class="all_checkbox" value="1">
 							<button>删除</button>
 							<button>标记为已读</button>
 						</div>
@@ -72,18 +72,34 @@
 		
 		
 		for (var i=0; i < 6; i++) {
-			$('.list_ul').append('<li><input type="checkbox" name="list_checkbox" value="1">'
+			$('.list_ul').append('<li><input type="checkbox" class="list_checkbox" value="1">'
 									+'<a href="#">你的信用卡还款通知！</a><span>7月24</span></li>');
 		 	
 		};
 		
-		$('.list_ul li').live('click', function(){
+		$('.list_ul li a').live('click', function(){
 			$('.e_mail_cont').animate({'left':'0px'}, 500);
 		});
 		
 		$('.e_mail_cont_back').click(function(){
 			$('.e_mail_cont').animate({'left':'600px'}, 500);
 		});
+		
+		$('.all_checkbox').click(function(){
+			if($(this).val() == "1"){
+				$(".list_checkbox").each(function(){
+					$(this).attr("checked", true);
+				});
+				$(this).val("0");
+			}else{
+				$(".list_checkbox").each(function(){
+					$(this).attr("checked", false);
+				});
+				$(this).val("1");
+			};
+		});
+		
+		
 	</script>
 </html>
 
