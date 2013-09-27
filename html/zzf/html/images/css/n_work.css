@@ -1,0 +1,135 @@
+body {
+	height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;
+}
+ul {}
+ul li { list-style: none outside none;}
+p {font-size: 13px}
+.backImg { height: 100%;
+    position: absolute;
+    width: 100%;background: url("../image/3.jpg") no-repeat;background-position:center;background-repeat:no-repeat;}
+#wrok { bottom: 50px;
+    left: 50px;
+    position: absolute;
+    right: 50px;
+    z-index:1;
+    top: 100px;}
+.w_list li {  float: left;
+    text-align: center;
+    margin : 30px;
+    width: 145px;}
+.w_list li span {   background-color: #003399;
+    border-radius: 22px 22px 22px 22px;
+    color: #FFFFFF;
+    float: left;
+    font-size: 13px;
+    margin: 0 15px;
+    width: 120px;}
+.rsBullets {
+	 height: auto;
+    line-height: 5px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 4px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 35;
+    top: -25px;
+}
+.wrod_setup {
+	background: url("../image/i_global.png") repeat scroll -190px -191px transparent;
+    float: left;
+    height: 18px;
+    width: 18px;
+}
+
+.delete_icon {
+    background: url("../image/i_global.png") repeat scroll -125px -540px transparent;
+    height: 18px;
+    position: relative;
+    right: -120px;
+    top: -135px;
+    width: 18px;
+    display:none
+}
+
+.rsBullet {
+    display: inline-block;
+    height: 15px;
+    padding: 6px;
+    width: 15px;
+}
+.rsNav .active span {
+    background: url("../image/d1.png");
+}
+.rsNav span {
+     background: url("../image/d2.png") repeat scroll 0 0 transparent;
+    border-radius: 50% 50% 50% 50%;
+    display: block;
+    float: left;
+    height: 13px;
+    margin: 2px;
+    width: 13px;
+}
+.rsNav li { float: left;
+    margin: 2px 7px;}
+.rsNav_right_btn { display: inline-block;
+    height: 13px;
+    padding: 0;
+    margin: 1px;
+    width: 13px;}
+.rsNav_right_btn img {
+	 float: left;
+}
+
+#scroller {
+	position: absolute;
+	width:3000px;
+	height:100%
+}
+
+.royalSlider {
+	display: block;
+    float: left;
+    height: 100%;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.wrok_li {
+	-moz-box-sizing: border-box;
+    display: block;
+    float: left;
+    font-family: georgia;
+    font-size: 18px;
+    height: 100%;
+    line-height: 140%;
+    text-align: center;
+}
+.rsNav {
+	background-color: #4592C0;
+    border-radius: 10px 10px 10px 10px;
+    float: left;
+    margin: 0;
+    padding: 0 10px;
+}
+
+#rNav { left: 45%;
+    position: absolute;
+    top: 75px;}
+
+.delete {
+	position: absolute;
+	bottom: 5px;
+	right: -128px;
+	width:128px;
+	height: 128px;
+	z-index:0;
+}

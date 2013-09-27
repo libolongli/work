@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>c_work</title>
+		<meta name="author" content="Administrator" />
+		<!-- Date: 2013-08-19 -->
+		<link href="images/css/w2ui-1.2.min.css" type="text/css" rel="stylesheet" />
+		<link href="images/css/n_work.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<img class="backImg" src="images/image/3.jpg" />
+		<div id="wrok">
+			<div id="scroller">
+				<ul id="slider-in-laptop" class="royalSlider"></ul>
+			</div>		
+		</div>
+		<div id="rNav">
+			<ul class="rsNav">
+			</ul>
+		</div>
+		<div class="delete">
+			<img src="http://un.go2oa.com/theme/11/images/slidebox/trash_hover.png" />
+		</div>
+	</body>
+	<script src="images/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="images/js/w2ui-1.2.min.js" type="text/javascript"></script>
+	<script src="images/js/iscroll.js" type="text/javascript"></script>
+	<script src="images/js/jquery.dragsort-0.5.1.min.js" type="text/javascript"></script>
+	<script src="images/js/jquery.sortable.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var pageIndex = 0;
+		var lists = [{
+					"id":0,
+					"data" : [
+								{"id":1, "icon":"images/image/p (1).png", "name":"工作月台", url:'http://www.baidu.com'},
+								{"id":2, "icon":"images/image/p (7).png", "name":"消息通知", url:'http://www.baidu.com'},
+								{"id":3, "icon":"images/image/p (9).png", "name":"招生统计", url:'http://www.baidu.com'},
+								{"id":4, "icon":"images/image/p (13).png", "name":"文件管理", url:'http://www.baidu.com'},
+								{"id":5, "icon":"images/image/p (16).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":6, "icon":"images/image/p (29).png", "name":"我的密匙", url:'http://www.baidu.com'},
+								{"id":7, "icon":"images/image/p (36).png", "name":"工具箱", url:'http://www.baidu.com'},
+								{"id":8, "icon":"images/image/p (38).png", "name":"我的收藏", url:'http://www.baidu.com'},
+								{"id":9, "icon":"images/image/p (67).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":10, "icon":"images/image/p (85).png", "name":"我的消息", url:'http://www.baidu.com'},
+								{"id":11, "icon":"images/image/p (67).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":12, "icon":"images/image/p (67).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":13, "icon":"images/image/p (67).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":14, "icon":"images/image/p (67).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":15, "icon":"images/image/p (67).png", "name":"财务信息", url:'http://www.baidu.com'}
+							]
+					}, {
+						"id":0,
+						"data" : [
+								{"id":1, "icon":"images/image/p (1).png", "name":"工作月台", url:'http://www.baidu.com'},
+								{"id":2, "icon":"images/image/p (7).png", "name":"消息通知", url:'http://www.baidu.com'},
+								{"id":3, "icon":"images/image/p (9).png", "name":"招生统计", url:'http://www.baidu.com'},
+								{"id":4, "icon":"images/image/p (13).png", "name":"文件管理", url:'http://www.baidu.com'},
+								{"id":5, "icon":"images/image/p (16).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":6, "icon":"images/image/p (29).png", "name":"我的密匙", url:'http://www.baidu.com'},
+								{"id":7, "icon":"images/image/p (36).png", "name":"工具箱", url:'http://www.baidu.com'},
+								{"id":8, "icon":"images/image/p (38).png", "name":"我的收藏", url:'http://www.baidu.com'},
+								{"id":9, "icon":"images/image/p (67).png", "name":"财务信息", url:'http://www.baidu.com'},
+								{"id":10, "icon":"images/image/p (85).png", "name":"我的消息", url:'http://www.baidu.com'}
+							]
+					}];
+	
+		var newList = function (data, id){
+			var view = "";
+			for (var i=0; i < data.length; i++) {
+				view += "<li class='wrok_li'><ul class='w_list'>";
+			  	for (var k=0; k < data[i].data.length; k++) {
+					view += '<li class="wrok_view" text="'+data[i].data[k].name+'" url="'+data[i].data[k].url+'" ><img src="'+data[i].data[k].icon+'" /><span>'+data[i].data[k].name+'</span><div class="delete_icon"></div></li>';
+				};
+				view += "</ul></li>";
+				if(i == 0){
+					$(".rsNav").append('<li class="active"><span></span></li>');
+				}else{
+					$(".rsNav").append('<li><span></span></li>');
+				}
+			};
+			$("#"+id).html(view);
+		};
+		
+		newList(lists, 'slider-in-laptop');
+		$('#scroller').width((($('.backImg').width() - 100) * lists.length));
+		function newPageList (){
+			$(".wrok_li").width(($('.backImg').width() - 100));
+			myScroll = new iScroll('wrok', {
+				snap: true,
+				momentum: false,
+				hScrollbar: false,
+				onScrollEnd: function () {
+					pageIndex = this.currPageX;
+					document.querySelector('.rsNav > li.active').className = '';
+					document.querySelector('.rsNav > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+				}
+			 });
+		};
+		
+		newPageList();
+		
+		$(".rsNav").append('<li><a href="#" class="rsNav_right_btn"><img src="images/image/d3.png"></a></li><li><a href="#" class="wrod_setup"></a></li>');
+		
+		$(".rsNav_right_btn").live("click", function(){
+			$().w2popup({
+				title   : '快捷键组合',
+				body    : '<iframe src="work_list.html" style="width: 100%; height: 100%;border: medium none;"></iframe>',
+				width   : 800,
+				height  : 500,
+				buttons : '<button>确定</button>' 
+			});
+		});
+		
+		function addWork(view){
+			$(".w_list").eq(pageIndex).append(view);
+			$().w2popup('close');
+		};
+		var Dragsort = null;
+		$(".wrod_setup").click(function(){
+			if($(".delete_icon").css("display") != "none"){
+				$(".w_list").find('li').find('div').hide();
+			}else{
+				$(".w_list").find('li').find('div').show();
+			};
+			return false;
+		});
+		
+		$('.w_list').sortable();
+		
+		$('.delete_icon').live('click',function(){
+			$(this).parent().remove();
+		});
+		
+		//点击事件添加
+		$('.wrok_view').live('click', function(){
+			parent.addTab({text : $(this).attr('text'), url :$(this).attr('url')});
+		});
+	</script>
+</html>
+
