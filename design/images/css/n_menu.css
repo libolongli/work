@@ -1,4 +1,8 @@
-body {margin: 0;padding: 0}
+body {  height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    width: 100%;}
 ul li {
 	 margin: 5px;
 	 list-style: none;
@@ -32,8 +36,8 @@ img {border-width: 0;}
     text-decoration: none;
     width: 17px;}
 
-.header {height:55px;width: 100%;border-bottom: 1px solid #CCCCCC;background:url("../image/0.jpg")}
-.content { bottom: 0;position: absolute;top: 56px;width: 100%;}
+.header {height:68px;width: 100%;border-bottom: 1px solid #CCCCCC;background:url("../image/tbg.jpg")}
+.content { bottom: 0;position: absolute;top: 68px;width: 100%;}
 .content iframe { border: medium none;
     height: 100%;
     position: absolute;
@@ -44,7 +48,7 @@ img {border-width: 0;}
 .n_menu_btn {background: url("../image/start_menu.png") no-repeat scroll 0 0 transparent;
     float: left;
     height: 40px;
-    margin: 8px 20px;
+    margin: 13px 20px;
     width: 97px;}
 .n_menu_btn:active {background: url("../image/start_menu.png") no-repeat scroll 0 -40px transparent;}
 .n_menu { height: auto;
@@ -138,7 +142,7 @@ img {border-width: 0;}
     width: 9px;}
 .n_menu_right li {float: left;
     list-style: none outside none;
-    padding: 7px 0;
+    padding: 0px;
     width: 100%;}
 .n_menu_right p {  font-size: 12px;
     margin: 3px 0 3px 40px;
@@ -188,7 +192,10 @@ img {border-width: 0;}
     padding: 2px 5px;}
 .header_home_btn img {width:30px;height:30px;}
 .header_right {width:202px;float:right;}
-.header_right img {width:30px;height:30px;}
+.header_right img {width:26px;height:26px;}
+.header_right span { color: #FFFFFF;
+    float: left;
+    font-size: 12px;}
 .header_right a {width:30px;height:30px;float: left;margin: 13px 10px;}
 .n_tabs_btn {background-color: #FFFFFF;
     border: 1px solid #CCCCCC;
@@ -275,7 +282,7 @@ img {border-width: 0;}
     
     
 /*----tabs--*/
-#n_tabs {background-color: transparent;float: left;margin-top: 22px;width: 700px; margin-left: 101px;}
+#n_tabs {background-color: transparent;float: left;margin-top: 28px;width: 700px; margin-left: 101px;}
 #n_tabs div.w2ui-tab {color: #3780DC;
     font-size: 13px; padding: 7px 20px 7px 15px;
     font-weight: bold;height: 30px}
