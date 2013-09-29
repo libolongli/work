@@ -1,0 +1,88 @@
+DROP TABLE IF EXISTS `graph`;
+CREATE TABLE `graph` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `category` int(11) default NULL,
+  `intro` varchar(255) default NULL,
+  `mtable` varchar(255) default NULL COMMENT '主表',
+  `ltable` text COMMENT '关联表',
+  `gtype` varchar(255) default NULL COMMENT '图表类型',
+  `field` varchar(255) default NULL COMMENT '查看的字段',
+  `samm` varchar(255) default NULL COMMENT 'avg,sum,max,min',
+  `w` varchar(255) default NULL COMMENT '其它条件',
+  `g` varchar(255) default NULL,
+  `ltablename` text,
+  `status` int(11) default '1',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `kc_course`;
+CREATE TABLE `kc_course` (
+  `course_id` bigint(20) NOT NULL auto_increment,
+  `course_name` varchar(100) NOT NULL default '' COMMENT '课程名称',
+  `course_periodsId` bigint(5) NOT NULL default '0' COMMENT '学段id,关联code中的学段',
+  `course_subjectId` bigint(5) NOT NULL default '0' COMMENT '科目id,关联答疑code',
+  `course_teacherId` bigint(20) NOT NULL default '0' COMMENT '教师id',
+  `course_teacherName` varchar(50) default NULL,
+  `course_isFree` tinyint(1) NOT NULL default '0' COMMENT '是否免费(试听)',
+  `course_intro` varchar(1000) NOT NULL default '' COMMENT '简介',
+  `course_timeLong` bigint(20) NOT NULL default '0' COMMENT '时长,存放秒数',
+  `course_imgUrl` varchar(200) NOT NULL default '' COMMENT '图片URL',
+  `course_handoutsUrl` varchar(200) NOT NULL default '' COMMENT '讲义下载URL',
+  `course_audioId` bigint(20) NOT NULL default '0',
+  `course_tool` varchar(2000) default '' COMMENT '小工具内容',
+  `course_addTime` bigint(20) default NULL,
+  `course_hit` bigint(20) default NULL,
+  `course_isRecommend` tinyint(1) NOT NULL default '0',
+  `course_isDeleted` tinyint(1) NOT NULL default '0',
+  `course_isCompleted` tinyint(1) NOT NULL default '0',
+  `course_freeStart` bigint(20) default NULL,
+  `course_freeEnd` bigint(20) default NULL,
+  `course_studyNum` bigint(20) NOT NULL default '0' COMMENT '课程学习人数',
+  `course_good_mark_value` int(12) NOT NULL default '0' COMMENT '课程好评数 4+5分评价',
+  `course_buy_value` int(11) NOT NULL default '0' COMMENT '购买人数',
+  `course_mark_value` int(11) NOT NULL default '0' COMMENT '评价人数',
+  `course_grade` set('1042','1041','1040','1039','1038','1036','1035','1034','1033','1032','1031','1037') default NULL COMMENT '年级字段',
+  PRIMARY KEY  (`course_id`),
+  KEY `course_audioId` (`course_audioId`)
+) ENGINE=InnoDB AUTO_INCREMENT=11472 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `kc_course_pack`;
+CREATE TABLE `kc_course_pack` (
+  `pack_id` bigint(20) NOT NULL auto_increment,
+  `pack_name` varchar(100) NOT NULL default '',
+  `pack_type` tinyint(1) NOT NULL default '1',
+  `pack_shortIntro` varchar(50) default NULL,
+  `pack_teacherIntro` varchar(50) default NULL,
+  `pack_content` varchar(8000) NOT NULL default '',
+  `pack_img` varchar(200) NOT NULL default '',
+  `pack_imgs` varchar(2000) default NULL,
+  `pack_contents` text COMMENT '序列化科目介绍',
+  `pack_price` decimal(8,2) NOT NULL default '0.00',
+  `pack_courseNum` bigint(10) NOT NULL default '0',
+  `pack_timeLong` bigint(20) NOT NULL default '0',
+  `pack_hit` bigint(20) NOT NULL default '0',
+  `pack_subjectType` bigint(20) NOT NULL default '2103',
+  `pack_bookVersion` bigint(20) default NULL,
+  `pack_handoutsUrl` varchar(200) default NULL,
+  `pack_addTime` bigint(20) default NULL,
+  `pack_updateTime` bigint(20) default NULL,
+  `pack_isDiscount` tinyint(1) NOT NULL default '0' COMMENT '是否为特价课程 0非特价 1特价',
+  `pack_shortAdapter` varchar(100) default NULL COMMENT '适用学生简短简介',
+  `pack_adapter` text COMMENT '适用学生',
+  `pack_result` text COMMENT '学习效果',
+  `pack_status` int(4) NOT NULL default '0' COMMENT '课程包状态:3701:正常,3702:废弃;3703:停售',
+  PRIMARY KEY  (`pack_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14507 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `kc_course_pack_element`;
+CREATE TABLE `kc_course_pack_element` (
+  `element_id` bigint(20) NOT NULL auto_increment,
+  `element_packId` bigint(20) NOT NULL default '0',
+  `element_courseId` bigint(20) NOT NULL default '0',
+  `element_sort` bigint(10) NOT NULL default '1',
+  PRIMARY KEY  (`element_id`),
+  KEY `FK_course_pack` (`element_courseId`),
+  KEY `FK_pack_course` (`element_packId`),
+  KEY `idx_kc_course_pack_element_packId` (`element_packId`),
+  KEY `idx_kc_course_pack_element_courseId` (`element_courseId`),
+  CONSTRAINT `kc_course_pack_element_ibfk_1` FOREIGN KEY (`element_courseId`) REFERENCES `kc_course` (`course_id`),
+  CONSTRAINT `kc_course_pack_element_ibfk_2` FOREIGN KEY (`element_packId`) REFERENCES `kc_course_pack` (`pack_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17719 DEFAULT CHARSET=utf8;

@@ -14,10 +14,10 @@
 					<tr>
 						<?
 							foreach ($field as $key => $value) {
-								$field ='<td class="rptCellLabel">';
-								$field .=k::load('api')->load('config','graph')->getFieldName('kc_course_pack',$value);
-								$field .='</td>';
-								echo $field;
+								$str ='<td class="rptCellLabel">';
+								$str .=k::load('api')->load('config','graph')->getFieldName($tablename,$value);
+								$str .='</td>';
+								echo $str;
 							}
 						?>
 						
@@ -25,10 +25,11 @@
 					
 					<?
 						foreach ($data as $key => $value) {
+							$i=0;
 							$html ='<tr>';
-							foreach ($value as $k => $v) {
+							foreach ($field as $k => $v) {
 								$html .='<td class="rptGrpHead">';
-								$html .=array_shift($value);
+								$html .=$value[$v];
 								$html .='</td>';
 							}
 							$html.='</tr>';

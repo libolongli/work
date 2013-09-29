@@ -201,7 +201,32 @@ function getOption(){
 			);
 			return $arr;
 		}
+		function install($file){
+			$dir = dirname(dirname(__FILE__)).'/';
+			 $sqlfile = $dir.$file;
+		if(file_exists($sqlfile)){
+			$dirArr = pathinfo($sqlfile);
+			 $dirArr['extension'];
+			if($dirArr['extension']=='sql'){
+		 $str = file_get_contents($sqlfile);
+			$arr = explode(';', $str);
+			//print_r($arr);exit;
+		foreach ($arr as $key => $value) {
+			if($value){
+				//echo trim($value);exit;
+				$data = R::exec(trim($value));
+				//exit;
+			  }
+			}
+			 //return $data;
+			}else{
+				echo '文件类型不服';
+			}
+		}else{
+				echo '文件不存在';
+			}
 	}
+}
 
 	
 	

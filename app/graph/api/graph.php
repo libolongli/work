@@ -45,10 +45,10 @@
 				}
 			}
 
-			if($graph['where']) $sql .= " WHERE ".$graph['where']." "; 
+			if($graph['w']) $sql .= " WHERE ".$graph['w']." "; 
 
-			if($graph['group']) $sql .= "GROUP BY ".$graph['group'];
-			
+			if($graph['g']) $sql .= "GROUP BY ".$graph['g'];
+			// echo $sql;exit;
 			return R::getAll($sql);
 		}
 
@@ -80,6 +80,7 @@
 		}
 
 		function min($data,$field){
+			//print_r($data);exit;
 			if($data && $field){
 				$min = 0;
 				foreach ($data as $key => $value) {
@@ -124,5 +125,44 @@
 				
 			}
 			return $arr;
+		}
+
+		function getListJson	($map){
+			$sql = "select *,id as recid from graph";
+			$where = " where status !=9 ";
+			
+			if(isset($_POST['search'])){
+				$where=k::load('api')->load('search','op')->teamSql($where,$map);
+			}
+			
+			foreach ($map as $key => $value) {
+				if(($key!='offset') && ($key!='limit') && ($key!='search'))
+				$where .= " AND {$key}='{$value}'";
+			}
+			
+			$sql .= $where;
+			//echo $sql;exit;
+			$total = count(R::getAll($sql));
+			
+			if(isset($map['limit']) && isset($map['offset'])){
+				$start = $map['offset'];
+				$limit = "limit {$start},{$map['limit']}";
+				$sql .= $limit;
+			}
+			//echo $sql;exit;
+			$result = R::getAll($sql);
+			
+			foreach($result as $key => $value){
+				$see = k::url('graph/index',array('gid'=>$value['recid']));
+				$update = k::url('graph/addconfig',array('gid'=>$value['recid'],'step'=>2));
+				$result[$key]['op'] = "<a href='javascript:void(0);return false;' onclick=checkinfo('{$see}')>查看报表</a>  ";
+				$result[$key]['op'] .= "<a href='javascript:void(0);return false;' onclick=checkinfo('{$update}')>修改</a>  ";
+			}
+			
+			return array(
+				'total' =>$total,
+				'page' =>$map['offset']/$map['limit'],
+				'records'=>$result
+			);
 		}
 	}

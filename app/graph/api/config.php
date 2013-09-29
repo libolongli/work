@@ -45,7 +45,7 @@
 					'pack_courseNum'=>'课程数量',
 				),
 				'kc_course'=>array(
-					'course_intro'=>'课程价格',
+					 'course_studyNum'=>'学习人数',
 					'course_hit'=>'课程点击量',
 				),
 				
@@ -55,7 +55,8 @@
 		}
 		/**
 		*根据表名和表的字段返回表的title
-		*
+		*$table = a,b,c
+		*@param string $table
 		*@param string 
 		*@return array
 		*
@@ -63,8 +64,17 @@
 		*/
 
 		function getFieldName($table,$field){
-			$table  = $this->tableDetail($table);
-			return $table[$field];
+			//print_r($table);exit;
+			$table  = explode(",", $table);
+			foreach ($table as $key => $value) {
+				$data  = $this->tableDetail($value);
+				if(isset($data[$field])){
+					return $data[$field];
+				}
+			}
+			
+
+			//return $table[$field];
 		}
 
 		function getAlltable(){
@@ -119,10 +129,10 @@
 
 			$table = $this->getAlltable();
 
-			foreach ($map as $key => $value) {
+			foreach ($map as $key => $value){
 				
-				$t1 = $value['0'];
-				$t2 = $value['1'];
+				 $t1 = $value['0'];
+				 $t2 = $value['1'];
 
 				$re[$t2] = array(
 					'on'=>$table[$t2][$t1],
