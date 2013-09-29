@@ -1,0 +1,125 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+ul, ol, li,
+dl, dt, dd,
+h1, h2, h3, h4, h5,
+p {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.e_mail_view {
+	 bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.e_mail_list_header {
+	-moz-box-shadow:0 2px 5px #999999;             
+    -webkit-box-shadow:0 2px 5px #999999;           
+    box-shadow:0 2px 5px #999999; 
+    height: 40px;
+    width: 100%;
+}
+.e_mail_list {
+   bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 600px;
+}
+.e_mail_list_header span {
+	float: left;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.e_mail_list_header div{
+	float: right;
+	margin: 10px;
+	font-weight: bold;
+}
+
+.e_mail_list_cont {
+	height: 245px;
+    padding: 0 20px;
+    position: relative;
+}
+
+.e_mail_list_cont_line {
+	background-color: #DDDDDD;
+    float: left;
+    height: 5px;
+    margin: 10px 0;
+    width: 100%;	
+}
+.list_ul li {
+	border-bottom: 1px solid #CCCCCC;
+    float: left;
+    padding: 5px 0;
+    width: 100%;
+    font-size: 11px;
+    
+}
+.list_ul li input{
+	float: left;
+}
+
+.list_ul li a {
+	float: left;
+    margin: 3px 15px;
+    color: #02679B;
+    text-decoration:none;
+}
+.list_ul li span {
+	color: #CCCCCC;
+    float: right;
+    margin: 4px 15px;
+}
+.pagination {
+	float: right;
+	font-size: 12px;
+	margin: 4px;
+}
+
+.e_mail_list_cont_footer{
+	background-color: #DDDDDD;
+    bottom: 0;
+    height: 25px;
+    position: absolute;
+    width: 540px;
+}
+.e_mail_list_cont_footer_left {
+	float:left
+}
+.e_mail_list_cont_footer_left input {
+	float: left;
+    margin: 6px 30px 0 5px;
+}
+.e_mail_list_cont_footer_left button {
+	float: left;
+    font-size: 11px;
+    margin: 2px 5px;
+    padding: 0;
+}
+
+.e_mail_cont {
+	left: 600px;
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff
+}
+.e_mail_content {
+	 height: 250px;
+    overflow: auto;
+    padding: 20px;
+}
