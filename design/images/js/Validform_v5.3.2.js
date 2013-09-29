@@ -1,4 +1,4 @@
-/*
+/*datatype
     通用表单验证方法
     Validform version 5.3.2
 	By sean during April 7, 2010 - March 26, 2013
@@ -85,9 +85,8 @@
 	var errorobj=null,//指示当前验证失败的表单元素;
 		msgobj=null,//pop box object 
 		msghidden=true;//msgbox hidden?
-
-	var tipmsg={//默认提示文字;
-		tit:"提示信息",
+	//默认提示文字;
+	var tipmsg = {tit:"提示信息",
 		w:{
 			"*":"不能为空！",
 			"*6-16":"请填写6到16位任意字符！",
@@ -108,7 +107,7 @@
 		s:"请{填写|选择}{0|信息}！",
 		v:"所填信息没有经过验证，请稍后…",
 		p:"正在提交数据…"
-	}
+	};
 	$.Tipmsg=tipmsg;
 	
 	var Validform=function(forms,settings,inited){
@@ -123,7 +122,7 @@
 		//创建子对象时不再绑定事件;
 		if(inited===true){
 			return false;
-		}
+		};
 		
 		forms.each(function(){
 			//已经绑定事件时跳过，避免事件重复绑定;
@@ -181,7 +180,7 @@
 		if( settings.tiptype==1 || (settings.tiptype==2 || settings.tiptype==3) && settings.ajaxPost ){		
 			creatMsgbox();
 		}
-	}
+	};
 	
 	Validform.defaults={
 		tiptype:1,
@@ -189,7 +188,7 @@
 		showAllError:false,
 		postonce:false,
 		ajaxPost:false
-	}
+	};
 	
 	Validform.util={
 		dataType:{
@@ -514,17 +513,15 @@
 				reg=/\/.+\//g,
 				regex=/^(.+?)(\d+)-(\d+)$/,
 				type=3;//default set to wrong type, 2,3,4;
-				
+			alert('1111');
 			//datatype有三种情况：正则，函数和直接绑定的正则;
-			
 			//直接是正则;
 			if(reg.test(datatype)){
 				var regstr=datatype.match(reg)[0].slice(1,-1);
 				var param=datatype.replace(reg,"");
 				var rexp=RegExp(regstr,param);
-
+				alert('22222');
 				passed=rexp.test(gets);
-
 			//function;
 			}else if(Validform.util.toString.call(Validform.util.dataType[datatype])=="[object Function]"){
 				passed=Validform.util.dataType[datatype](gets,obj,curform,Validform.util.dataType);
@@ -534,18 +531,20 @@
 					info= passed;
 					passed=false;
 				}
-			
+				alert('2');
 			//自定义正则;	
 			}else{
 				//自动扩展datatype;
 				if(!(datatype in Validform.util.dataType)){
-					var mac=datatype.match(regex),
+					var mac= datatype.match(regex),
 						temp;
-						
+					
 					if(!mac){
 						passed=false;
 						info=curform.data("tipmsg").undef||tipmsg.undef;
+						console.log('11111');
 					}else{
+						console.log('2222');
 						for(var name in Validform.util.dataType){
 							temp=name.match(regex);
 							if(!temp){continue;}
@@ -562,12 +561,12 @@
 				}
 				
 				if(Validform.util.toString.call(Validform.util.dataType[datatype])=="[object RegExp]"){
+					
 					passed=Validform.util.dataType[datatype].test(gets);
 				}
-					
 			}
 			
-			
+
 			if(passed){
 				type=2;
 				info=obj.attr("sucmsg") || curform.data("tipmsg").r||tipmsg.r;
@@ -1002,8 +1001,8 @@
 							}
 							
 							temp_suc(data,curform);
-						}
-					}
+						};
+					};
 					
 					if(ajaxsetup.error){
 						var temp_err=ajaxsetup.error;
@@ -1013,8 +1012,8 @@
 							curform[0].validform_ajax=null;
 							
 							temp_err(data,curform);
-						}	
-					}
+						};
+					};
 					
 					var localconfig={
 						type: "POST",
@@ -1043,7 +1042,7 @@
 							curform[0].validform_status="normal";
 							curform[0].validform_ajax=null;
 						}
-					}
+					};
 					
 					ajaxsetup=$.extend({},localconfig,ajaxsetup,{dataType:"json"});
 					
@@ -1090,7 +1089,7 @@
 			}
 		}
 		
-	}
+	};
 	
 	$.Datatype=Validform.util.dataType;
 	
@@ -1209,8 +1208,6 @@
 		
 		submitForm:function(flag,url){
 			/*flag===true时不做验证直接提交*/
-			
-
 			var obj=this;
 			
 			$(obj.forms).each(function(){
@@ -1281,7 +1278,7 @@
 			
 			return this;
 		}
-	}
+	};
 
 	$.fn.Validform=function(settings){
 		return new Validform(this,settings);

@@ -6,7 +6,7 @@ body {
 
 
 .recruit {
-	background: url("../image/i_global.png") no-repeat scroll -126px -158px transparent;
+	background: url("../image/i_global.png") no-repeat scroll -63px 3px transparent;
     height: 20px;
     margin: 6px 10px;
     width: 20px;
@@ -57,17 +57,17 @@ body {
 }
 
 .registerform .pr1 {
-	width: 5px;
+	width: 15px;
 	margin: 6px 0;
 }
 
 .form_btn {
-	margin: 20px auto;
-    width: 370px;
+	 margin: 0 auto;
+    width: 350px;
 }
 
 .registerform .rt2 {
-	width: 5px;
+	width: 15px;
 	margin: 6px 0;
 }
 
@@ -101,7 +101,8 @@ body {
 }
 
 .rp_view {
-	 background-color: #FFFFFF;
+	  border-radius: 0 5px 5px 0;
+	 background-color: #ddd;
     border: 1px solid #CCCCCC;
     height: 34px;
      left: 260px;

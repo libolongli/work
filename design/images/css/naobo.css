@@ -1,9 +1,7 @@
-﻿body {
+body {
 	margin: 0;
-	padding: 0;
-    background-color: #FFFFFF;
+	padding: 0
 }
-
 /*表单、详细信息框*/
 .n_backImg {
 	height: 100%;
@@ -14,27 +12,32 @@
 	overflow: hidden;
 	background-color: #F5F5F5;
     bottom: 40px;
+     border: 1px solid #FFFFFF;
     left: 30px;
     position: absolute;
-    border-radius: 2px 2px 2px 2px;
+    border-radius: 4px;
     right: 30px;
     top: 40px;
     z-index: 1;
 }
 .n_cont_view_h {
-	height: 50px;
+	height: 42px;
 	width: 100%;
+	background: url("../image/box_t_bg.jpg") repeat-x scroll 0 0 transparent;
 	border-bottom: 1px solid #CCCCCC;
 }
 .n_cont_view_h p {
-	font-size: 18px;
+	color: #FFFFFF;
+    float: left;
+    font-size: 16px;
     font-weight: bold;
-    left: 20px;
+    left: 0;
     margin: 0;
     padding: 0;
     position: relative;
     top: 13px;
 }
+
 .n_cont_view_c {
 	background-color: #FFFFFF;
     height: 85%;
@@ -43,9 +46,11 @@
 }
 
 .n_cont_tabs {
-	left: 115px;
+	float: left;
+    left: 15px;
     position: relative;
-    top: -11px;
+    top: 4px;
+    background-color:transparent
 }
 
 .n_cont_tabs .w2ui-tab  {
@@ -53,6 +58,8 @@
     font-size: 12px;
     font-weight: bold;
     padding: 11px 20px;
+   	border:none;
+	color:#fff
 }
 
 .n_cont_tabs .w2ui-tab.active {
@@ -69,6 +76,14 @@
 	height: 50px;
     margin: 0 auto;
     width: 385px;
+}
+
+.n_cont_view_h i {
+	background-color: #FFFFFF;
+    height: 15px;
+    margin: 14px 10px;
+    width: 5px;
+    float: left
 }
 
 .n_cont_view_btn_v  table {

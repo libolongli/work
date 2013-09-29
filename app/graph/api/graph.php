@@ -127,7 +127,7 @@
 			return $arr;
 		}
 
-		function getListJson	($map){
+		function getListJson($map){
 			$sql = "select *,id as recid from graph";
 			$where = " where status !=9 ";
 			
@@ -141,7 +141,7 @@
 			}
 			
 			$sql .= $where;
-			//echo $sql;exit;
+			// echo $sql;exit;
 			$total = count(R::getAll($sql));
 			
 			if(isset($map['limit']) && isset($map['offset'])){

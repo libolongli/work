@@ -25,14 +25,13 @@ obj  对象参数详解
 	
 
 	
-var smartFrom = function(id, obj){
+var smartForm = function(id, obj){
 	var views = '';				 			//表单对象字符
 	var fromMsgNull = "请填入信息！";			//表单元素为空              					  默认提示"请填入信息！"。
 	var fromSucMsg = "通过信息验证！";			//表单元素验证通过                                                            默认提示"通过信息验证！"。
 	var fromErrorMsg = "请输入正确信息！";		//表单元素验证不通过                                            	  默认提示"请输入正确信息！"
 	var tipType = 1;						//提示信息提示位置 					 1为内容里面提示	  	2为右侧提示                  
 	var times = [];
-	var hideView = '';
 	
 	
 	//加载头部信息
@@ -41,12 +40,21 @@ var smartFrom = function(id, obj){
 	views += view_header;
 
 	var configFrom = function(row){
+		var rTip = "";
+		var lTip = "";
+		//判断提示信息位置
+		if(tipType){
+			rTip = row.tip;
+		}else{
+			lTip = row.tip;
+		};
+		console.log(row.type);
 		switch(row.type){
 			case "input":
 				// inputType 列表类型            <td class="need" style="width:10px">*</td>
 				var input = '<tr><td class="from_title">'+row.title+'：</td>'
                     		+'<td><input ' 
-                    		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'" nullmsg="'+row.tip+'" name="'+row.name+'" datatype="'+row.datatype+'"' 
+                    		+'type="'+row.inputType+'" value="'+row.value+'" nullmsg="'+row.tip+'" name="'+row.name+'" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
                     		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
@@ -58,8 +66,8 @@ var smartFrom = function(id, obj){
                     		+'errormsg="'+row.errormsg+'">';
                     		select += '<option value="">'+row.doption+'</option>'; 
                     		for (var i = row.data.length - 1; i >= 0; i--){
-                    			if((row.value && row.value == i) || (row.value && row.value == row.data[i].value)){
-                    				select += '<option value="'+row.data[i].value+'" selected="selected" >'+row.data[i].value+'</option>'; 
+                    			if(row.value && row.value == i){
+                    				select += '<option value="'+row.data[i].value+'" selected="selected" >'+row.data[i].name+'</option>'; 
                     			}else{
                     				select += '<option value="'+row.data[i].value+'">'+row.data[i].name+'</option>'; 
                     			}
@@ -120,7 +128,7 @@ var smartFrom = function(id, obj){
 			break;
 			case "textarea":
 				var textarea = '<tr><td class="from_title">'+row.title+'：</td>'
-                    		+'<td><textarea  errormsg='+row.errormsg+'  name="'+row.name+'" value="">'+(row.value ? row.value : "")+'</textarea></td>'
+                    		+'<td><textarea  errormsg='+row.errormsg+'  name="'+row.name+'" value="">'+row.value+'</textarea></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div></td></tr>';
                views += textarea;
 			break;
@@ -136,10 +144,8 @@ var smartFrom = function(id, obj){
 			case "popup":
 				var recruitPeople = '<tr><td class="from_title">'+row.title+'：</td>'
                     		+'<td><input ' 
-                    		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'"  name="'+row.name+'" datatype="'+row.datatype+'"' 
-                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.data.name+'" title="'+(row.data.title ? row.data.title : "")+'"' 
-                    		+'url="'+row.data.url+'" width="'+(row.data.width ? row.data.width : "")+'" type="'+row.data.type+'"  >'
-                    		+'<div class="recruit"></div></div></td>'
+                    		+'type="'+row.inputType+'" value="'+row.value+'"  name="'+row.name+'" datatype="'+row.datatype+'"' 
+                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.data.name+'" url="'+row.data.url+'" type="'+row.data.type+'"  ><div class="'+row.data.name+'"></div></div></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
                     		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';     		
                 views += recruitPeople;
@@ -148,11 +154,20 @@ var smartFrom = function(id, obj){
 				times.push(row.id);
 				var datepicker = '<tr><td class="from_title">'+row.title+'：</td>'
                     		+'<td><input ' 
-                    		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'" id="'+row.id+'" name="'+row.name+'" plugin="datepicker" datatype="'+row.datatype+'"' 
+                    		+'type="'+row.inputType+'" value="'+row.value+'" id="'+row.id+'" name="'+row.name+'" plugin="datepicker" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
                     		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
                 views += datepicker;
+			break;
+			case "hideInput":
+				var input = '<tr style="display:'+row.display+'"><td class="from_title"></td>'
+                    		+'<td><input ' 
+                    		+'type="hidden" value="'+row.value+'" name="'+row.name+'"' 
+                    		+'/></td>'
+                    		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';
+                views += input;
 			break;
 			case 'html':
 				var cont = '<tr><td class="from_title">'+row.title+': </td><td>'+row.content+'</td></tr>';
@@ -160,40 +175,26 @@ var smartFrom = function(id, obj){
 			break;
 		}
 	};
-	
-	var showViewIndex = obj.rows.length;
-	//检测是否有隐藏元素
-	for (var i=0; i < obj.rows.length; i++) {
-		if(obj.rows[i].type == 'hideInput'){
-			showViewIndex = showViewIndex - 1;
-		};
-	};
-	
-	//加载子元素
+		//加载子元素
 	var data = obj.rows;
-	for (var i=0,k=0; i < data.length; i++) {
-		if(data[i].type == 'hideInput'){
-			hideView += '<input type="hidden" value="'+data[i].value+'" name="'+data[i].name+'" />';
-			continue;
-		};
+	for (var i=0; i < data.length; i++) {
 		if(! obj.center){
-			if(k == parseInt(showViewIndex / 2)){
+			if(i == parseInt(data.length / 2)){
 				views += '</table><table width="50%" style="table-layout:fixed;">';
 			};
 			configFrom(data[i]);
 		}else{
 			configFrom(data[i]);
 		};
-		k ++;
 	};
-	views += '</table>'+hideView+'<div class="form_btn"><input class="from_btn" type="submit" value="提 交" /> <input  class="from_btn" type="reset" value="重 置" /></div></form>';
+	views += '</table><div class="form_btn"><input class="from_btn" type="submit" value="提 交" /> <input  class="from_btn" type="reset" value="重 置" /></div></form>';
 	         
 	$("#"+id).append(views);
 	
 	var getInfoObj=function(){
 		return 	$(this).parents("td").next().find(".info");
 	};
-	//显示隐藏验证提示信息
+	
 	$("[datatype]").focusin(function(){
 		if(this.timeout){clearTimeout(this.timeout);}
 		var infoObj=getInfoObj.call(this);
@@ -201,6 +202,7 @@ var smartFrom = function(id, obj){
 			return;	
 		}
 		infoObj.show().siblings().hide();
+		
 	}).focusout(function(){
 		var infoObj=getInfoObj.call(this);
 		this.timeout=setTimeout(function(){
@@ -208,36 +210,30 @@ var smartFrom = function(id, obj){
 		},0);
 	});
 	
-	
-	//创建自动验证对象
 	$(".registerform").Validform({
 		tiptype : 2
 	});
-	//创建日期显示对象
+
 	for (var i=0; i < times.length; i++) {  
 	  $('#'+times[i]).Zebra_DatePicker();
 	};
-	//弹出窗口对象
+	
+	
+	//弹出窗口
 	var rp_view_c = null;
 	$(".rp_view").click(function(){
 		if($(this).attr('type') == "load"){
-			$().w2popup('load', { url: $(this).attr('url'), width: ($(this).attr('width') == "" ? 250 : parseInt($(this).attr('width')))});
+			$().w2popup('load', { url: $(this).attr('url'), width:250});
 		}else{
 			$().w2popup({
-				title   : $(this).attr('title'),
-				body    : '<iframe src="'+$(this).attr('url')+'?id='+$(this).prev().val()+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
-				width   : ($(this).attr('width') == "" ? 600 : parseInt($(this).attr('width')))
+				title   : '课程选择',
+				body    : '<iframe src="'+$(this).attr('url')+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
+				width   : 600
 			});
 		};
 		rp_view_c(this);
 	});
-
-	/**
-	 * 回调事件监听  获取当前选择对象
-	 * 参数 ： name 监听事件名称
-	 * 		callback 回调函数
-	 * 返回：无
-	 */
+	
 	this.addListener = function(view, fun){
 		switch(view){
 			case 'popupCallBack':
@@ -245,7 +241,6 @@ var smartFrom = function(id, obj){
 			break;
 		};
 	};
-
+	
 	return this;
 };
-

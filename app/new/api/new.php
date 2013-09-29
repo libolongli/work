@@ -202,7 +202,7 @@ function getOption(){
 			return $arr;
 		}
 		function install($file){
-			$dir = dirname(dirname(__FILE__)).'/';
+			 $dir = dirname(dirname(__FILE__)).'/';
 			 $sqlfile = $dir.$file;
 		if(file_exists($sqlfile)){
 			$dirArr = pathinfo($sqlfile);
@@ -210,7 +210,6 @@ function getOption(){
 			if($dirArr['extension']=='sql'){
 		 $str = file_get_contents($sqlfile);
 			$arr = explode(';', $str);
-			//print_r($arr);exit;
 		foreach ($arr as $key => $value) {
 			if($value){
 				//echo trim($value);exit;
@@ -218,7 +217,6 @@ function getOption(){
 				//exit;
 			  }
 			}
-			 //return $data;
 			}else{
 				echo '文件类型不服';
 			}

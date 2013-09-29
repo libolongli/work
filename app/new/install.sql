@@ -11,3 +11,13 @@ CREATE TABLE `news` (
   `top` int(11) NOT NULL default '1' COMMENT '1为置顶',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=95 DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `type`;
+CREATE TABLE `type` (
+  `id` int(11) NOT NULL auto_increment,
+  `titles` varchar(255) NOT NULL,
+  `tablename` varchar(255) NOT NULL,
+  `type_id` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL,
+  `cate` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
