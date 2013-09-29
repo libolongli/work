@@ -1,3 +1,2 @@
-mysql -u root -p
-root
-use  project
+mysql -u root -proot
+mysql > show databases;
