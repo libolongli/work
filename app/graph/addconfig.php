@@ -13,6 +13,7 @@
 			$gid = isset($_GET['gid']) ? $_GET['gid'] : 0;
 			if($_POST){
 				if($step == 1){
+					//print_r($_POST);exit;
 					$id = k::load('api')->load('graph','graph')->storeGraph($_POST);
 					$url = k::url('graph/addconfig',array('gid'=>$id,'step'=>2));
 					header("Location: $url");
@@ -23,10 +24,10 @@
 					$ltable = $_POST['ltable'];
 					$mtable = $graph['mtable'];
 					$map = array();
-
 					foreach ($ltable as $key => $value) {
 						array_push($map,array($mtable,$value));
 					}
+					//print_r($map);
 					$tablejoin = k::load('api')->load('config','graph')->tablejoin($map);
 					k::load('api')->load('graph','graph')->updateGraph(array('ltable'=>serialize($tablejoin),'ltablename'=>join(',',$ltable)),$gid);
 					$url = k::url('graph/addconfig',array('gid'=>$gid,'step'=>3));
@@ -34,7 +35,6 @@
 				}
 
 				if($step == 3){
-
 					$field = $_POST['field'];
 					$arr = array();
 					foreach ($field as $key => $value) {
@@ -58,12 +58,10 @@
 				}
 
 				if($step == 5){
-					// print_r($_POST);exit;
 					$arr = array();
 					foreach ($_POST as $key => $value) {
 						if($value) $arr[$key] = $value;
 					}
-					
 					$arr2 =array();
 					foreach ($arr as $key => $value) {
 						$tmp = explode('*', $key);
@@ -92,6 +90,7 @@
 						}
 					}
 					$where = join(" AND ",$arr3);
+					//echo $where;exit;
 					k::load('api')->load('graph','graph')->updateGraph(array('w'=>$where),$gid);
 					$url = k::url('graph/addconfig',array('gid'=>$gid,'step'=>6));
 					header("Location: $url");
@@ -159,16 +158,17 @@
 				 array_unshift($tmp,$graph['mtable']); 
 				 $html =  $arr = array();
 				 $data = array(
+
 					 		array('id'=>'sum','name'=>'sum'),
 					 		array('id'=>'avg','name'=>'avg'),
 					 		array('id'=>'max','name'=>'max'),
 					 		array('id'=>'min','name'=>'min'),
 					 	);
 
+
 				 foreach ($tmp as $key => $value) {
 				 	 $arr[$value] = k::load('api')->load('config','graph')->tableIntFileds($value);
 				 }
-				 //print_r($arr);exit;
 				 foreach ($arr as $key => $value) {
 				 	if($value){
 				 		foreach ($value as $k => $v) {
@@ -178,7 +178,7 @@
 				 	}
 				 }
 
-				 $html = join(',',$html);
+				  $html = join(',',$html);
 			}
 
 			if($step == 5){
@@ -209,6 +209,7 @@
 					$html = join(',',$html);
 			}	
 
+
 			if($step == 6){
 				$graph = k::load('api')->load('graph')->getGraphById($gid);
 				$ltable = unserialize($graph['ltable']);
@@ -226,10 +227,11 @@
 						$tmp['name'] = $v;
 						array_push($data,$tmp);
 					}
+
 				}
 				$html = k::load('api')->load('form','form')->setSelect(array('title'=>'请选择group字段','name'=>'group','data'=>$data));
-						
 			}
+
 			return  $html;
 		}
 

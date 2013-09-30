@@ -1,5 +1,6 @@
 <?php
 	require_once 'rb.php'; 
+	require_once 'db.class.php'; 
 	class db{
 		private $_writer; 
 		

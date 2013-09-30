@@ -1,0 +1,213 @@
+注：id为html标签id便于作为jquery对象的选择器。
+
+一、tab使用
+
+创建:
+
+	$(id).w2tabs();
+
+参数:
+
+	name		string		tab对象唯一表示符
+	active		string		字符数字“0”、“1”...默认选中那个tab标签
+	tabs 		array		初始化对象数组
+	right		string		定义HTML右角上的标签。
+
+返回
+	无
+
+方法
+	add				添加一个tab
+	disable				禁用标签或标签id
+	enable				使标签或标签id
+	get(id)				发现标签id并返回它或它的索引
+	hide(id)			隐藏每个id的tab
+	insert(before, tabs)		插入一个标签或标签选项卡之前与id =之前
+	remove(id1, id2)		删除一个或者多个tab
+	select(id)			设置选中某一个标签
+	show(id)			显示某一个标签
+事件
+	onClose 			关闭事件回调函数
+	onClick				点击事件回调函数
+
+二、grid使用
+
+创建
+	$('#id').w2grid();
+参数
+	name			String			当前对象名称（不可重复）
+	header			String			Grid头部对象 （可为字符、HTML代码）
+	recordsPerPage		int			一页显示个数
+	show			object			显示/隐藏配置组件
+	toolbar			object			头部操作Icon对象
+	searches		Array			当前对象名称（不可重复）
+	sortData		Array			当前对象名称（不可重复）
+	columns			Array			显示对象配置数组
+	fixedBody 		Boolean			是否允许这是宽高网格	
+	fixedRecord 		Boolean			是否允许网格内容宽高自定义
+	keyboard		Boolean			是否启用键盘
+	last			object			当前状态参数。
+	msgDelete		String			确认消息当用户点击删除按钮。
+	msgNotJSON		String			错误消息当服务器不返回JSON结构。
+	msgRefresh		String 			消息出现在网格刷新。
+	multiSearch		Boolean			表明如果多字段搜索是被允许的。
+	multiSelect		Boolean			表明如果记录多选择是允许的。
+	multiSort		Boolean			表明如果列多排序是允许的。
+	page			int			当前页面。
+	postData		object			地图的额外参数提交删除数据源。
+	records 		Array			搜索对象数组。	
+	searchData 		Array			搜索对象数组(提交数据来源记录过滤)
+	searches		Array			搜索对象数组。
+	sortData		Array			数组的排序对象提交数据来源记录排序
+
+	total			int			总数量的记录。
+	url 			String			一个远程数据源的URL(拉记录,应用搜索和排序,提交更改,删除)。
+
+
+事件
+
+show 对象参数
+    header         	Boolean			表明如果头是可见的
+    toolbar        	Boolean			表明如果工具栏是可见的
+    footer         	Boolean			表示如果页脚是可见的
+    columnHeaders  	Boolean			表示如果列是可见的
+    lineNumbers    	Boolean			表示如果行号列是可见的
+    expandColumn   	Boolean			表示如果扩大柱是可见的
+    selectColumn   	Boolean			表示如果选择列是可见的
+    emptyRecords   	Boolean			表示如果空的记录是可见的
+    toolbarReload  	Boolean			显示工具栏按钮是可见的,如果重新加载
+    toolbarColumns 	Boolean			表示如果工具栏按钮是可见的列
+    toolbarSearch  	Boolean			表示如果工具栏搜索控制是可见的
+    toolbarAdd     	Boolean			显示工具栏添加新的按钮是否可见
+    toolbarDelete  	Boolean			显示工具栏按钮是可见的,如果删除
+    toolbarSave    	Boolean			显示工具栏按钮是可见的,如果保存
+
+toolbar 对象参数
+	items 		Array		头部操作事件定义数组
+		type		String			按钮对象类型
+		id		String 			按钮对象id
+		caption		String			显示按钮名称
+		img		String			显示icon按钮图标
+		disabled	Boolean			true 为使用按钮 false 禁用按钮
+	onClick			function		点击事件回调
+
+last 对象参数
+	field       String        	最后搜索字段
+	caption     String 		最后搜索标题
+	logic       String        	最后搜索逻辑
+	search      String           	最后搜索文本
+	multi       Boolean        	最后多 
+	scrollTop   int           	最后滚动到头部位置
+	scrollLeft  int           	最后滚动左边位置
+	selected    Array           	最后选定的项目
+	sortData    null         	最后的排序数据
+	sortCount   int            	最后分类计数
+	xhr         null          	加载Jquery Ajax对象请求
+
+records 对象参数
+	recid      null   	独特的记录id
+    	[field-N]  String     	场N
+    	style      String     	额外的CSS样式为< tr……>标记     
+    	selected   Boolean  	表明如果记录被选中
+    	hidden     Boolean  	表明如果记录是隐藏的
+    	summary    Boolean  	表明如果它是一个总结记录(汇总记录出现在底部)
+    	editable   Boolean    	显示是记录是可编辑(必须列。ediable属性集)
+
+searchData  对象参数
+	field    String    	搜索字段名
+    	value    String    	字符串或字符串数组与价值观
+    	operator String  	搜索算子[之间,开始,结束,包含与)
+    	type     String     	数据类型(文本、整数、浮点、日期)
+
+searches 对象参数
+	type     String 	类型的搜索,(文本、整数、浮点、六角、金钱、字母数字、日期、列表)
+	caption  String     	标题搜索
+	field    String     	字段名称提交到服务器
+	inTag    String     	将文本内<输入……>标记
+	outTag   String     	将文本输入…外<>标记
+	items    int     	数组的条目对象{ id:”,文本:" }
+	hidden   Boolean   	表明如果搜索是显示或隐藏
+
+sortData 对象参数
+	 field     	String     	排序字段名
+    	 direction 	String  	方向的那种(asc或desc)
+
+
+
+三、from使用
+
+创建：
+
+var form = new smartForm(view, obj);
+
+参数 
+	view ： 表单要绑定的视图元素，表单将生产在这个对象里面
+	obj  ： 表单的其他配置元素对象
+
+返回 ： 对象自己（this）
+
+
+方法 
+	addListener ： 表单的弹出框事件绑定
+
+
+obj  对象参数详解：
+	obj.url		String	 	: 表单需要提交的url地址	
+	obj.httpType	String 		: 表单提交的方式
+	obj.center 	Boolean		: 表单生成的样式     false：双列     true :单列
+	obj.rows	Array		: 构建表单元素的配置文件
+
+rows 对象详解
+
+通用参数：
+	type	String		生成元素的类型
+	name	String		表单提交元素的Key
+	title	String		表单生成的名称
+	tip	String		表单验证提示信息
+	datatype	String	表单验证关键字也可以是正则表达式
+	errormsg	String	表示验证失败提示
+	data	object          额外的参数对象
+	value   String	        设置默认值
+其他
+	popup对象 
+	参数 ：data             
+	       		utl 	string 		显示提示框的url
+			type	string		显示提示框加载类型
+			name	string		提示框名称
+			title   string		显示提示框头部名称
+	select对象
+	参数 ：	data            Array   	下拉列表的可选元素数组对象
+			value 		int 		提示服务的值
+			name		String		显示的名称
+			class		string		显示或者隐藏from表单元素匹配关键字
+		doption		String		下拉框默认提示文字
+	radio对象
+	参数 ：	data		Array 		单选可选数据列表
+			value 		int 		提示服务的值
+			name		String		显示的名称
+			class		string		显示或者隐藏from表单元素匹配关键字
+	checkbox对象
+	参数 ： data		Array 		多选可选数据列表
+			value 		int 		提示服务的值
+			name		String		显示的名称
+			class		string		显示或者隐藏from表单元素匹配关键字
+	hideInput对象
+		display		String		none 隐藏这个元素
+		value		int   		提交的数值
+	html对象
+		content		String		自定义表单元素提供的HTML字段
+	datepicker对象
+		minutes		string		显示秒数	
+		
+popups	对象详解
+	url		String			显示提示框的页面地址
+	type		String			加载方式 使用什么方式加载
+	name		String			加载对象的名称
+
+
+三、tree使用
+
+ztree 因为是第三方插件 有详细的文档所以我就不在写了
+
+url：www.ztree.me/v3/api.php
+

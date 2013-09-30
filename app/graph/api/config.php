@@ -129,10 +129,10 @@
 
 			$table = $this->getAlltable();
 
-			foreach ($map as $key => $value) {
+			foreach ($map as $key => $value){
 				
-				$t1 = $value['0'];
-				$t2 = $value['1'];
+				 $t1 = $value['0'];
+				 $t2 = $value['1'];
 
 				$re[$t2] = array(
 					'on'=>$table[$t2][$t1],

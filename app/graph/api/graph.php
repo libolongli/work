@@ -35,9 +35,8 @@
 
 		function getData($gid){
 			$graph = $this->getGraphById($gid);
-			$sql = "SELECT * FROM {$graph['mtable']}";
+					$sql = "SELECT * FROM {$graph['mtable']}";
 			$ltable = $graph['ltable'];
-			
 			//代表有关联表,实现表的关联
 			if($ltable){
 				$ltable=unserialize($ltable);
@@ -49,13 +48,13 @@
 			if($graph['w']) $sql .= " WHERE ".$graph['w']." "; 
 
 			if($graph['g']) $sql .= "GROUP BY ".$graph['g'];
-			// echo $sql;exit;
 			return R::getAll($sql);
 		}
 
 		function getGraphById($gid){
 			$data =  $this->_db->find('graph',array('id'=>$gid));
-			return $data['0'];
+			if($data) return $data['0'];
+			return false;
 		}
 
 		function sum($data,$field){
@@ -150,7 +149,6 @@
 				$limit = "limit {$start},{$map['limit']}";
 				$sql .= $limit;
 			}
-			//echo $sql;exit;
 			$result = R::getAll($sql);
 			
 			foreach($result as $key => $value){

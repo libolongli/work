@@ -201,7 +201,41 @@ function getOption(){
 			);
 			return $arr;
 		}
-	}
+		function install($file){
+			$path = dirname($GLOBALS['f']);
+			$sqlfile = $path."/".$file;
+			if(file_exists($sqlfile)){
+				$dirArr = pathinfo($sqlfile);
+				$dirArr['extension'];
+				if($dirArr['extension']=='sql'){
+					$str = file_get_contents($sqlfile);
+					//$str = file_get_contents($path."/test.txt");
+					//正则匹配删除注释
+					$pa1 = '/\/\*([^(\*\/)])+\*\//i';
+					$re1 = '';
+					$str = preg_replace($pa1,$re1,$str);
+					//拿掉 -- ---等注释
+					$pa2 = '/--\s.*\s/i';
+					$str = preg_replace($pa2,$re1,$str);
+					//echo $str;exit;
+					$pa = '/;\r\n/i';
+					$re = ';*********';
+					$str = preg_replace($pa,$re,$str);
+					$arr = explode(';*********', $str);
+					foreach ($arr as $key => $value) {
+						$value = trim($value);
+						if($value){
+							R::exec($value);
+						}
+					}
+				}else{
+					echo '文件类型符';
+				}
+			}else{
+					echo '文件不存在';
+			}
+		}
+}
 
 	
 	

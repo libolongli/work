@@ -1,4 +1,3 @@
-d:
-cd d:\tools\php
+cd D:\\AppServ\\php5
 pear install phpDocumentor
 					

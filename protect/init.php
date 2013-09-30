@@ -62,6 +62,7 @@ class tpl
 			'newsList.html','calendar.html','schedule.html',
 			'Grid.html','ztree.html','newsList.html','e_mail.html',
 
+
 			);
 
 	$target_html=str_replace($src,$target,$html);

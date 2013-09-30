@@ -9,7 +9,7 @@ class module_index_index
 function run()
 {
 $t=new tpl();
-
+print_r($_SERVER['QUERY_STRING']);
 //购物车session的产生代码
 if(!$session && !$scid) { 
 /*
@@ -206,7 +206,7 @@ scid只用来标识一个购物车id号，可以看做是每个车的名字；
             $count++; //物品数量加一（即下一个物品）
         }
         $total = $this->cart_total($table, $session); 
-        $contents[final] = $total;
+        $contents['final'] = $total;
         /*
         同时调用上面那个cart_total函数，计算下总价钱
         并放入$contents数组中
@@ -223,7 +223,7 @@ scid只用来标识一个购物车id号，可以看做是每个车的名字；
     /*
     返回物品种类总数（也就是说，两个相同的东西算一种    好像是废话- -!）
     */
-        $query = SELECT * FROM $table WHERE session='$session' ;
+        $query = "SELECT * FROM $table WHERE session='{$session}'" ;
         $result = mysql_query($query);
         $num_rows = mysql_num_rows($result);
         return $num_rows;
@@ -237,7 +237,7 @@ scid只用来标识一个购物车id号，可以看做是每个车的名字；
     返回所有物品总数（也就是说，两个相同的东西也算两个物品   - -#）
     */
         $quant = 0;// 物品总量
-        $query = SELECT * FROM $table WHERE session='$session' ;
+        $query = "SELECT * FROM $table WHERE session='$session'" ;
         $result = mysql_query($query);
         while($row = mysql_fetch_object($result)) {
         /*
