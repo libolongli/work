@@ -16,8 +16,7 @@ class module_menu_api_menu
 	function getOption($type= 'part',$pid = 0)
 	{
 		if($type == 'all') $this->data= R::getAll( 'select * from menu' );
-		$this->teamData();
-		
+		$this->teamData();	
 		if($this->rdata) return $this->rdata;
 		return false;	 
 	}

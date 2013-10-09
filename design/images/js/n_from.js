@@ -31,9 +31,11 @@ var smartFrom = function(id, obj){
 	var fromSucMsg = "通过信息验证！";			//表单元素验证通过                                                            默认提示"通过信息验证！"。
 	var fromErrorMsg = "请输入正确信息！";		//表单元素验证不通过                                            	  默认提示"请输入正确信息！"
 	var tipType = 1;						//提示信息提示位置 					 1为内容里面提示	  	2为右侧提示                  
-	var times = [];
-	var hideView = '';
-	
+	var times = [];							//时间选择器对象数组
+	var hideView = '';						//隐藏元素字段
+	var popupValueObj = {};					//popup类弹出控件数据存储对象
+	var rp_view_c = null;					//popup  事件回调函数
+	var upView = null;						//记录隐藏对象
 	
 	//加载头部信息
 
@@ -44,7 +46,7 @@ var smartFrom = function(id, obj){
 		switch(row.type){
 			case "input":
 				// inputType 列表类型            <td class="need" style="width:10px">*</td>
-				var input = '<tr><td class="from_title">'+row.title+'：</td>'
+				var input = '<tr class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td>'
                     		+'<td><input ' 
                     		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'" nullmsg="'+row.tip+'" name="'+row.name+'" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /></td>'
@@ -53,7 +55,7 @@ var smartFrom = function(id, obj){
                 views += input;
 			break;
 			case "select":
-				var select = '<tr><td class="from_title">'+row.title+'：</td>'
+				var select = '<tr class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td>'
                     		+'<td><select name="'+row.name+'" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'">';
                     		select += '<option value="">'+row.doption+'</option>'; 
@@ -68,7 +70,7 @@ var smartFrom = function(id, obj){
 				views += select;
 			break;
 			case "radio":
-				var radio = '<tr><td class="from_title">'+row.title+'：</td>';
+				var radio = '<tr class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td>';
 							if(! row.data){
 								break;
 							};
@@ -93,7 +95,7 @@ var smartFrom = function(id, obj){
                 views += radio;
 			break;
 			case "checkbox":
-				var checkbox = '<tr><td class="from_title">'+row.title+'：</td><td>';
+				var checkbox = '<tr class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td><td>';
                     		for (var i = row.data.length - 1; i >= 0; i--){
 							   if(i == (row.data.length - 1)){
 							   		if(row.value && row.value == i){
@@ -119,13 +121,13 @@ var smartFrom = function(id, obj){
                views += checkbox;
 			break;
 			case "textarea":
-				var textarea = '<tr><td class="from_title">'+row.title+'：</td>'
+				var textarea = '<tr class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td>'
                     		+'<td><textarea  errormsg='+row.errormsg+'  name="'+row.name+'" value="">'+(row.value ? row.value : "")+'</textarea></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div></td></tr>';
                views += textarea;
 			break;
 			case "password":
-				var input = '<tr><td  class="from_title">'+row.title+'：</td>'
+				var input = '<tr class="'+(row.class ? row.class : "")+'"><td  class="from_title">'+row.title+'：</td>'
                     		+'<td style="width:205px;"><input type="password"  plugin="passwordStrength"  value=""  name="'+row.name+'" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
@@ -134,10 +136,10 @@ var smartFrom = function(id, obj){
                 views += input;
 			break;
 			case "popup":
-				var recruitPeople = '<tr><td class="from_title">'+row.title+'：</td>'
+				var recruitPeople = '<tr name="popup" class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td>'
                     		+'<td><input ' 
                     		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'"  name="'+row.name+'" datatype="'+row.datatype+'"' 
-                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.data.name+'" title="'+(row.data.title ? row.data.title : "")+'"' 
+                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.name+'" title="'+(row.data.title ? row.data.title : "")+'"' 
                     		+'url="'+row.data.url+'" width="'+(row.data.width ? row.data.width : "")+'" type="'+row.data.type+'"  >'
                     		+'<div class="recruit"></div></div></td>'
                     		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
@@ -146,7 +148,7 @@ var smartFrom = function(id, obj){
 			break;
 			case "datepicker":
 				times.push(row.id);
-				var datepicker = '<tr><td class="from_title">'+row.title+'：</td>'
+				var datepicker = '<tr class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td>'
                     		+'<td><input ' 
                     		+'type="'+row.inputType+'" value="'+(row.value ? row.value : "")+'" id="'+row.id+'" name="'+row.name+'" plugin="datepicker" datatype="'+row.datatype+'"' 
                     		+'errormsg="'+row.errormsg+'" /></td>'
@@ -155,20 +157,31 @@ var smartFrom = function(id, obj){
                 views += datepicker;
 			break;
 			case 'html':
-				var cont = '<tr><td class="from_title">'+row.title+': </td><td>'+row.content+'</td></tr>';
+				var cont = '<tr class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+': </td><td>'+row.content+'</td></tr>';
 				views += cont;
+			break;
+			case "popup_del":
+				var recruitPeople = '<tr name="popup_del" class="'+(row.class ? row.class : "")+'"><td class="from_title">'+row.title+'：</td>'
+                    		+'<td class="'+(row.class ? row.class : "")+'"><ul class="popup_del"></ul><input ' 
+                    		+'type="'+row.inputType+'" disabled="disabled" value="'+(row.value ? row.value : "")+'"  name="'+row.name+'" datatype="'+row.datatype+'"' 
+                    		+'errormsg="'+row.errormsg+'" /><div class="rp_view" name="'+row.name+'" title="'+(row.data.title ? row.data.title : "")+'"' 
+                    		+'url="'+row.data.url+'" width="'+(row.data.width ? row.data.width : "")+'" type="'+row.data.type+'"  >'
+                    		+'<div class="recruit" name="'+row.name+'" ></div></div></td>'
+                    		+'<td><div class="Validform_checktip">'+row.errormsg+'</div>'
+                    		+'<div class="info">'+row.tip+'<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div></td></tr>';     		
+                views += recruitPeople;
 			break;
 		}
 	};
 	
-	var showViewIndex = obj.rows.length;
+	var showViewIndex = obj.rows.length;	
 	//检测是否有隐藏元素
 	for (var i=0; i < obj.rows.length; i++) {
 		if(obj.rows[i].type == 'hideInput'){
 			showViewIndex = showViewIndex - 1;
 		};
 	};
-	
+
 	//加载子元素
 	var data = obj.rows;
 	for (var i=0,k=0; i < data.length; i++) {
@@ -217,19 +230,52 @@ var smartFrom = function(id, obj){
 	for (var i=0; i < times.length; i++) {  
 	  $('#'+times[i]).Zebra_DatePicker();
 	};
-	//弹出窗口对象
-	var rp_view_c = null;
+	
+	/**
+	 *  弹出框点击事件 
+	 */
+	var thisView = null;
+	var popupName = null;
 	$(".rp_view").click(function(){
+		thisView = this;
+		popupName = $(this).attr('name');
+		if(! popupValueObj[popupName]){
+			popupValueObj[popupName] = [];
+		};
 		if($(this).attr('type') == "load"){
 			$().w2popup('load', { url: $(this).attr('url'), width: ($(this).attr('width') == "" ? 250 : parseInt($(this).attr('width')))});
 		}else{
 			$().w2popup({
 				title   : $(this).attr('title'),
-				body    : '<iframe src="'+$(this).attr('url')+'?id='+$(this).prev().val()+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
+				body    : '<iframe src="'+$(this).attr('url')+($(this).prev().val() == "" ? "" : '?id='+$(this).prev().val())+'" style="width: 100%;height:99%;border: medium none;"></iframe>',
 				width   : ($(this).attr('width') == "" ? 600 : parseInt($(this).attr('width')))
 			});
 		};
-		rp_view_c(this);
+		rp_view_c(this, function(data){
+			for(i in data){
+				var isSave = true;
+				for(k in popupValueObj[popupName]){
+					if(data[i].id == popupValueObj[popupName][k].id){
+						isSave = false;
+					};
+				};
+				if(isSave){
+					popupValueObj[popupName].push(data[i]);
+				};
+			};
+			
+			console.log(popupValueObj[popupName]);
+			
+			if($(thisView).parent().parent().attr('name') == "popup_del"){
+				addInputView(popupValueObj[popupName]);
+			}else{
+				var  showValue = "";
+				for(i in popupValueObj[popupName]){
+					showValue += popupValueObj[popupName][i].value;
+				};
+				$(thisView).prev().val(showValue);
+			}
+		});
 	});
 
 	/**
@@ -245,6 +291,75 @@ var smartFrom = function(id, obj){
 			break;
 		};
 	};
+	
+	
+	/**
+	* popup_del 选择元素事件区
+	* 参数 	view ： 显示对象
+	* 		data ： 数据源
+	* 返回	无
+	*/
+	var lists = {};
+	function addInputView(data){
+		$(thisView).prev().prev().html('');
+		var aList = [];
+		if(! lists[$(thisView).attr('name')]){
+			lists[$(thisView).attr('name')] = [];
+		};
+		aList = lists[$(thisView).attr('name')];
+		for (var i=0; i < data.length; i++) {
+			aList.push(data[i].value);
+			$(thisView).prev().prev().append('<li><div class="show_del"><span>'+data[i].value+'</span></div><div class="n_form_del_icon" zhi="'+i+'"></div></li>');
+		};
+		$(thisView).css('color', '#FFFFFF');
+		$(thisView).val(aList);
+	};
+	
+	//删除选择值
+	$('.n_form_del_icon').live('click', function(){
+		$(this).parent().remove();
+		for(i in popupValueObj[popupName]){
+			if(popupValueObj[popupName][i].value == $(this).prev().find('span').html()){
+				popupValueObj[popupName].splice(i, 1);
+			};
+		};
+	});
+	
+	
+
+	$('select').live('change', function(){
+		$(this).find('option').each(function(){
+			if($(this).attr('selected')){
+				$('.'+$(this).attr('name')).hide();
+				if(upView != null){
+					upView.show();
+				};
+				upView = $('.'+$(this).attr('name'));
+			};
+		});
+	});
+	
+	$('input:radio').live('click', function(){
+		$(this).each(function(){
+			$('.'+$(this).attr('zhi')).hide();
+				if(upView != null){
+					upView.show();
+				};
+				upView = $('.'+$(this).attr('zhi'));
+		});
+	});
+	
+	$('input:checkbox').live('click', function(){
+		$(this).each(function(){
+			$('.'+$(this).attr('zhi')).hide();
+				if(upView != null){
+					upView.show();
+				};
+				upView = $('.'+$(this).attr('zhi'));
+		});
+	});
+	
+	
 
 	return this;
 };

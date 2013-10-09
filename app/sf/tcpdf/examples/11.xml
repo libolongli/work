@@ -1,0 +1,622 @@
+﻿<map version="0.9.0">
+    <node ID="BFE19F6D-20E6-4EFA-9E4D-581FD8274F8E" TEXT="模块的架构" FOLDED="false" COLOR="#000000">
+        <font NAME="STHeitiSC-Light" SIZE="13"></font>
+        <edge COLOR="#7F7F7F"></edge>
+        <node ID="99145C1D-1A26-4AA6-A1C0-736068C7DC09" TEXT="模块划分9大模块" POSITION="left" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#B2E54C"></edge>
+        </node>
+        <node ID="FD6EF809-8B81-491A-B276-4C1C7C40F86F" TEXT="系统核心流程（概述）" POSITION="right" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#B24CE5"></edge>
+            <node ID="DE8A1555-275D-4417-B242-AA36775AE4A1" TEXT="市场推广：先投入广告" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+                <node ID="10168146-51B8-4BA3-BD71-2C1EC533227B" TEXT="多种推广渠道" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                    <node ID="9528BC5B-C9E6-4534-A6BA-19DE35CBD961" TEXT="dm单" FOLDED="false" COLOR="#000000">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#B24CE5"></edge>
+                    </node>
+                    <node ID="3D999B85-A696-426B-BEFF-2ADD7C79988B" TEXT="报纸" FOLDED="false" COLOR="#000000">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#B24CE5"></edge>
+                    </node>
+                    <node ID="BD2CF134-1211-444C-AC00-CC7156EAF7F2" TEXT="网络" FOLDED="false" COLOR="#000000">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#B24CE5"></edge>
+                        <node ID="90742279-EA9A-4864-898D-5EC8497124DF" TEXT="新建节点" FOLDED="false" COLOR="#000000">
+                            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                            <edge COLOR="#B24CE5"></edge>
+                        </node>
+                    </node>
+                    <node ID="D4726391-8E26-47E3-8DF6-2BD647FBA3EF" TEXT="电视" FOLDED="false" COLOR="#000000">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#B24CE5"></edge>
+                    </node>
+                    <node ID="1BFC8160-D53D-4E07-B1B8-D10F64DF08B3" TEXT="。。" FOLDED="false" COLOR="#000000">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#B24CE5"></edge>
+                    </node>
+                </node>
+                <node ID="CD615400-1CF7-4556-9903-043D2ACA1FAA" TEXT="市场分析：回报率，预算费用" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+                <node ID="C100E033-E961-4029-88B0-5BEABE0E5EE6" TEXT="学生报名咨询（关联来源）" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+            </node>
+            <node ID="174D8082-9963-489A-AB9A-1FEDEA4E8689" TEXT="销售人员 ： 销售录入客户数据，电话跟踪，报名（继续报名收费，转发到报名老师）" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+                <node ID="19B311D8-469F-455A-BB07-5D16B822B9C9" TEXT="回访：多人回访信息，信息转给咨询师进行推荐课程， 学生信息多个老师共享（学生资料1:1：n 模式）" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+            </node>
+            <node ID="EC5063D1-BCC5-413F-9888-8B93DE5B0DEE" TEXT="报名老师：录入学生信息，选择班级，课程，缴费" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+                <node ID="12A83D59-4E6E-468F-B442-2E6073077451" TEXT="1 直接报名：选择班级课程缴费" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+                <node ID="3009009A-009A-4F2B-BEEE-1945DD35B28F" TEXT="2 咨询报名：先crm录入，直接点击报名" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+                <node ID="87FBD5BB-32FD-45CD-B0A5-49D81B0ED2C6" TEXT="3 先报名，后分班" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+                <node ID="8309C11A-5AA2-441A-ACB1-723CBE89604E" TEXT="缴费特殊打折，专人审核" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+                <node ID="CAD836B2-FD4E-4E83-AE11-7160A23A541C" TEXT="选择班级课程： 固定班，后分班" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                    <node ID="B2DFFCF0-F9D6-4DC8-9BEC-D0C122953B8B" TEXT="后分班：多种基础信息自选择分班规则" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#B24CE5"></edge>
+                    </node>
+                </node>
+            </node>
+            <node ID="115181F2-98B1-48CA-9C69-D6347E8C0E84" TEXT="上课老师：考勤，成绩统计，布置作业，奖惩，家长留言" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+            </node>
+            <node ID="BE0937B1-C554-46B6-90A8-A8D46E80DD7F" TEXT="教务老师：分班，排课，考勤" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+                <node ID="40F4A850-0669-4B05-8840-BC2A0918F0A2" TEXT="自动排课" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+                <node ID="B22BD8B0-4638-4769-8B65-0BE796DA0F37" TEXT="填格子的方式排课" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+            </node>
+            <node ID="3D8C59CB-FEF1-4F54-AD23-9F8F478147AC" TEXT="财务：收费，催费，管理资产，财务统计，员工工资发放，绩效统计，点卡生成发放" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+            </node>
+            <node ID="1CFD12D8-832B-4355-A8EB-269400BE32C3" TEXT="领导：查看统计分析" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+            </node>
+            <node ID="2E5C1ECC-CAD4-4C2F-AE99-ABFAD9BF5ABB" TEXT="学生：个人信息，成绩，奖惩，作业，考勤，课程表，缴费情况，老师互动，上课班级历史，关联IC卡" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+                <node ID="CD4E069E-A14A-4E97-9FDC-73C53F2A27AB" TEXT="上课：按照课时计费" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+            </node>
+            <node ID="2DC76615-47AC-47BD-89F2-6916FE3B054F" TEXT="办公oa ，共享知识库，通知（短信，邮件，站内信）" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+            </node>
+            <node ID="92F3CDD1-10F0-4554-B1D4-C39ECD7857A7" TEXT="分校" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+                <node ID="C095E2C6-D221-45BB-BAAD-CBF9F8F123C5" TEXT="校区管理，对账" FOLDED="false" COLOR="#000000">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#B24CE5"></edge>
+                </node>
+            </node>
+            <node ID="11F190F8-CED8-4B18-A3E5-64CED16651F6" TEXT="考勤：老师批量录入，补录，设备打卡" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#B24CE5"></edge>
+            </node>
+        </node>
+        <node ID="57F712B8-D465-4D5C-BDD0-29A2F72FC1E1" TEXT="客户信息（crm）（客户维护，导入，电话跟踪。。）" POSITION="left" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#CCFF66"></edge>
+        </node>
+        <node ID="7A42D973-99E9-4946-8386-2A4CF0B180CE" TEXT="报名（报名系统）" POSITION="left" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#4CE5B2"></edge>
+            <node ID="89D6FB28-D57D-495F-B9E4-6F24A39C46D7" TEXT="保存每次报名的购买的课时数（开发）" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CE5B2"></edge>
+            </node>
+        </node>
+        <node ID="912F28B0-74A6-46D0-B1C3-DE688964316C" TEXT="学员（教师）中心：我的。。。学生，老师。。。" POSITION="left" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#FFCC66"></edge>
+            <node ID="688FFA5C-0E18-4150-A72B-F82849E00B21" TEXT="学生" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFCC66"></edge>
+                <node ID="B3BD7CBC-427E-4FC7-B4E7-EA0DDF7F30C6" TEXT="字段管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                    <node ID="AF62F7F5-1A47-4CD2-B846-67A0BF2BD6D6" TEXT="所属班级" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="FDC7FF75-58B2-4C08-B299-3F4E66F095CC" TEXT="所属学校" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="525CDD32-82BE-4F40-AE81-578C7F6006F7" TEXT="姓名" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="622D4C84-A6DE-4228-8B5F-533B35C1FB62" TEXT="电话" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="A4DB9E78-3B27-4955-8851-10EF1E533090" TEXT="性别" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="9ACA9CC3-04C0-46AA-8354-DAED38204A1F" TEXT="年级" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="205E9C8A-6723-48E4-AC90-7B38FF529133" TEXT="报名日期" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="C54B2CF9-930E-4814-A903-17EAD66DD071" TEXT="班级" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="ECA8C5F5-3EC1-45ED-B9B1-8672CA20DEF8" TEXT="状态" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                        <node ID="6000DE54-9FD2-4FAA-B22F-3D19B1C9A2F5" TEXT="试听" FOLDED="false">
+                            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                            <edge COLOR="#FFCC66"></edge>
+                        </node>
+                        <node ID="E7CF93B2-EECF-4E8F-ADBA-0C389EE380E1" TEXT="在读" FOLDED="false">
+                            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                            <edge COLOR="#FFCC66"></edge>
+                        </node>
+                        <node ID="DCF83D30-0856-4FB3-BB69-7801D4DA99FF" TEXT="毕业" FOLDED="false">
+                            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                            <edge COLOR="#FFCC66"></edge>
+                        </node>
+                        <node ID="FB632728-782E-4F40-A07D-F9873405222B" TEXT="待班" FOLDED="false">
+                            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                            <edge COLOR="#FFCC66"></edge>
+                        </node>
+                        <node ID="1A5D5111-2EB8-4688-B179-98E619AB5C87" TEXT="插班" FOLDED="false">
+                            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                            <edge COLOR="#FFCC66"></edge>
+                        </node>
+                        <node ID="AE20B6BF-B06A-40E8-A2DE-202E66E85EAF" TEXT="转班" FOLDED="false">
+                            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                            <edge COLOR="#FFCC66"></edge>
+                        </node>
+                        <node ID="C13DDFE9-051A-46FC-A08F-C067F60EB2A2" TEXT="...." FOLDED="false">
+                            <font NAME="LucidaGrande" SIZE="12"></font>
+                            <edge COLOR="#FFCC66"></edge>
+                        </node>
+                    </node>
+                    <node ID="52D83A22-8188-4879-A8A4-5FA1FC4F9363" TEXT="咨询班级" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="AFCEAF18-C2E2-4C23-A708-689E33D0BCD4" TEXT="生日" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                </node>
+                <node ID="EF3554F0-77F8-4078-9E88-E18AE2286DFD" TEXT="费用交纳信息" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                    <node ID="E0FCD187-5A02-4FFD-B99F-50AEF98D038E" TEXT="比如交了多少,将要较多少" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                </node>
+                <node ID="487BB635-C281-44CF-A115-4C7A4DC49DE3" TEXT="考勤信息" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="96B8CFFA-4159-4E17-BF92-5413A9935432" TEXT="成绩管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="0CA7CAAB-7603-4548-89DA-F9E40FEEB0DA" TEXT="证书管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="181774BC-8E00-4C14-8491-A486D64DEED9" TEXT="续班管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+            </node>
+            <node ID="77AA0BB8-059E-4D40-B66D-F339107FFA86" TEXT="老师" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFCC66"></edge>
+                <node ID="AAB2EDA5-62EB-4EB4-A6A6-6D339A233C21" TEXT="考勤" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="2CB2FD47-A949-4AD8-A39B-BFE8B1FB0733" TEXT="所属学生" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="B9CB45F4-56AA-4D75-A09E-64B6E087867F" TEXT="老师的课程" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                    <node ID="82156FFB-8F11-47C7-9424-861D57218985" TEXT="校内课程" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="3804B1B6-9EEE-45FF-BA14-7676F68B29C5" TEXT="外部课程" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                </node>
+                <node ID="1E4FAE0A-3258-49F1-AB53-4C42BAE7D6F9" TEXT="补课记录" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="90DF9D27-631F-4D56-B996-1DD51ADDD719" TEXT="教学计划" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="E5D27204-7108-46E1-B8EE-0EFE20880295" TEXT="成绩管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+                <node ID="3F29D20B-76D5-4FE9-8240-6A892A33012B" TEXT="回访管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                    <node ID="30876200-0585-4024-97C6-2C2F6A3FC520" TEXT="回访反馈" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="CE06EAF9-252F-4011-A1E4-82839F511246" TEXT="满意回馈" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                    <node ID="62770A42-ABCA-4CCD-A881-152344AF6D76" TEXT="不满意反馈" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFCC66"></edge>
+                    </node>
+                </node>
+                <node ID="D57FE113-298C-4025-806C-5B3CA1B64040" TEXT="评语" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFCC66"></edge>
+                </node>
+            </node>
+        </node>
+        <node ID="E9F53C9D-54C6-4831-8823-CD97AF424705" TEXT="财务（报名费用管理）" POSITION="right" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#FFE57F"></edge>
+            <node ID="A91CC7DB-AEAA-4574-8308-4E36D88DF3B1" TEXT="刊物管理（行政管理的模块）" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFE57F"></edge>
+                <node ID="837FF43A-AF49-4D07-AB3E-A8BEAD77D1C7" TEXT="报刊入库" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="A4385C14-0FE2-4D07-AFC4-D135A5C069D6" TEXT="报刊查询" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="429CCECF-2D0B-4C21-9839-69F519B21CE6" TEXT="报刊节约" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="35C7BFE0-0469-428D-9B04-32ACA1F00552" TEXT="节约记录" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+            </node>
+            <node ID="DFE66457-4F8C-45AF-8D52-64F777892D7F" TEXT="资产管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFE57F"></edge>
+                <node ID="04CF6382-2EF5-40C1-83CD-03A0E2234843" TEXT="资产登记" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="9B9EBE6B-88DD-4022-BA81-0360EDABC720" TEXT="资产交接" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="676AD80B-CF7B-4AA8-89DE-3BDE6113E5DD" TEXT="交接记录" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="C3223EC8-5656-4F5E-B31B-CC18EF212930" TEXT="资产调拨" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="9BE4CC3D-9726-409C-982F-512D2AFA69C4" TEXT="调拨记录" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+            </node>
+            <node ID="69632F96-B61A-41B9-BB10-2CE33494C7EF" TEXT="费用管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFE57F"></edge>
+                <node ID="19BEC8C9-41C4-4662-93A5-4AE464355D9D" TEXT="收入管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                    <node ID="97EDE045-1C93-4641-9646-280E883A8A5E" TEXT="学费收取" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFE57F"></edge>
+                    </node>
+                    <node ID="00D36CDA-5552-4A5D-9821-BE25AFCA1718" TEXT="书费收取" FOLDED="false">
+                        <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                        <edge COLOR="#FFE57F"></edge>
+                    </node>
+                </node>
+                <node ID="C6118198-48AC-4750-B379-3E6D419C7690" TEXT="支出管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="29196333-DD72-45C0-881C-33699706B6B8" TEXT="资产管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="09AACB98-0937-4FE1-8FBC-D6656FE10E77" TEXT="负债管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="5DAE6C15-95E0-450A-93FD-5ECFE76EE745" TEXT="所有者权益???" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+            </node>
+            <node ID="5D1F11B9-764A-4E73-B740-8F5F97181047" TEXT="库存管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFE57F"></edge>
+                <node ID="9E8EA1F7-1CFA-4A12-A480-1EF4DCBDCB2A" TEXT="预定管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="D0F0CDAC-76C2-4A2D-88FF-2BDCFE66BCCD" TEXT="入库登记" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="12373E6D-F5C4-4EAD-8673-02CD34FA610A" TEXT="出库登记" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="FF0F1426-0964-4963-AF13-4AEB48827764" TEXT="库存调拨" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="587FE5A6-7938-44EF-9CA0-A702D146923D" TEXT="库存预警" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="354F3DC4-A84F-468B-9CD1-F4C433E31D9C" TEXT="预定申请" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="FDE719C7-6578-4466-9B08-C79CCA201736" TEXT="报损登记" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+            </node>
+            <node ID="0468765C-CEE0-4807-B227-7E0D83434E24" TEXT="学费管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFE57F"></edge>
+                <node ID="DCA61C2C-2CB9-47C2-88F8-2DFF9A60BCB3" TEXT="学费修改" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="7312BAF2-A863-4623-B8A7-6A4D4C8E786F" TEXT="学费减免" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="F4F1B260-B61B-45B5-B4C0-3FBE24C2B641" TEXT="学费打折" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="24DFEF29-1555-4082-884C-8FEA249EA93D" TEXT="特殊学费" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+                <node ID="5FD89E69-1ACA-4F4F-8A73-31FF953CF3FD" TEXT="退费" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#FFE57F"></edge>
+                </node>
+            </node>
+            <node ID="F5F72564-2971-4C2D-84CA-20014F6F6F20" TEXT="基础会计功能（记账，导出）：所有收，支的记录详情，真实收入" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#FFE57F"></edge>
+            </node>
+        </node>
+        <node ID="99E3C487-582A-43AE-9D47-A19D74C76AD5" TEXT="卡系统" POSITION="right" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#E5B24C"></edge>
+            <node ID="8E1A03A4-52B3-41A3-AE5B-DD6B794D6E42" TEXT="卡类管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#E5B24C"></edge>
+                <node ID="199B2BF4-287F-4226-B2BD-3D8B432DDF32" TEXT="储值卡" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#E5B24C"></edge>
+                </node>
+                <node ID="514747D0-ABB7-44A3-A57A-A0E45AA711E0" TEXT="推荐卡" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#E5B24C"></edge>
+                </node>
+            </node>
+        </node>
+        <node ID="F0EEA45F-D0AB-4639-805D-F175059E2CA8" TEXT="统计分析" POSITION="right" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#4CE5B2"></edge>
+            <node ID="C3B4C836-4350-43FA-9AC0-C22F7CB56BBC" TEXT="绩效图表" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CE5B2"></edge>
+            </node>
+            <node ID="F75239BD-CE7B-49CA-A2C2-4D64E0236171" TEXT="财务报表分析:收入，支出，亏盈，资产，库存，销售曲线，年份对比趋势图，成本。。（数值数据统计，对比，趋势）" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CE5B2"></edge>
+            </node>
+            <node ID="FB1A2B8E-E3B7-45F2-A4D0-914596FE2063" TEXT="学生相关：成绩。。" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CE5B2"></edge>
+            </node>
+        </node>
+        <node ID="19AD6626-AD15-4F4B-8B3E-4F0BE7A198C0" TEXT="信息交流" POSITION="left" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#4CB2E5"></edge>
+            <node ID="ABFB4B3E-7E06-4020-A6D2-B1C533AD1460" TEXT="短信" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CB2E5"></edge>
+            </node>
+            <node ID="D6AEC940-0722-4333-AE02-6A5BE4E48375" TEXT="bbs" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CB2E5"></edge>
+            </node>
+            <node ID="C81DBFFB-FD08-4644-8B2F-68C45B07E65A" TEXT="emali" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CB2E5"></edge>
+            </node>
+            <node ID="7D931191-47CB-43D7-813D-C98F6CA933E2" TEXT="知识库" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CB2E5"></edge>
+            </node>
+            <node ID="0FE0A1D9-A123-4E43-8122-EB8BCEF6BEEA" TEXT="规章制度" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CB2E5"></edge>
+            </node>
+            <node ID="476B9D57-EF5A-4384-98DE-2D0AB7D14EAE" TEXT="大事记录" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CB2E5"></edge>
+            </node>
+        </node>
+        <node ID="AF837B5B-5443-4C04-90CB-447C0D9C5E3C" TEXT="配置信息维护" POSITION="left" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#4CB2E5"></edge>
+            <node ID="9E1ECE15-58FA-46FE-98B4-8526BA453F50" TEXT="课程，班级维护" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#4CB2E5"></edge>
+                <node ID="9C435498-63A0-4BB7-9F8A-C87CE06A8602" TEXT="课程" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#4CB2E5"></edge>
+                </node>
+                <node ID="712158D7-F6B9-419E-AD6E-97FEE5A0ED1E" TEXT="评语(可以不针对教师,是针对所有的人)" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#4CB2E5"></edge>
+                </node>
+                <node ID="CA98470D-3B5C-4949-89AB-753C13FDEAE9" TEXT="课件管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#4CB2E5"></edge>
+                </node>
+            </node>
+        </node>
+        <node ID="3CBEF544-B46E-452E-BD2D-240BDC03074A" TEXT="oa（todo，calendar）" POSITION="right" FOLDED="false" COLOR="#000000">
+            <font NAME="STHeitiSC-Light" SIZE="12"></font>
+            <edge COLOR="#CC66FF"></edge>
+            <node ID="2482C6FA-C6C2-4086-8356-0EDB69B8E2DB" TEXT="会议管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+                <node ID="F604D41A-39BF-4A31-834F-ADC7C59ED041" TEXT="会议安排" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="C4185E6E-1D76-4036-8443-5FE98B624A03" TEXT="会议动态" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="B08FBF5F-0EE6-4D43-9FAD-B2C251ECA173" TEXT="会议纪要" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+            </node>
+            <node ID="2FC641C5-B613-4233-8800-5FFFD858B7CF" TEXT="计划任务" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+            </node>
+            <node ID="7559C426-5E1B-43CB-AFEA-A9647B96B3E5" TEXT="。。。" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+            </node>
+            <node ID="9EF81F19-E347-4E68-A1B9-0E95F8BCBF1A" TEXT="工作管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+                <node ID="38C47783-0B90-4C03-B763-189B4F3E9E70" TEXT="模板管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="15AD8FC7-D0B9-472D-89C5-9CE72028570C" TEXT="新建工作" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="5FA1AB94-6995-48FC-8AD9-259664D6298F" TEXT=".提交审核" FOLDED="false">
+                    <font NAME="LucidaGrande" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="8726193E-1C6A-4913-BBEC-8F42331B4861" TEXT="已发工作" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="73309303-9320-42A7-B4EA-B233B4D32171" TEXT="待办工作" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="30F49AD5-BE2E-4ADD-81F5-A3BDC3B407C6" TEXT="处理工作" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="BC433A71-CC7A-43A7-A153-46F1D9AFCE67" TEXT="在办架空" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="8EC514D6-FC5A-4BDA-9CD5-03C4F102D625" TEXT="流程监控" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+            </node>
+            <node ID="D692BD01-19A4-41C7-B01D-833D90A0B4DC" TEXT="活动管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+            </node>
+            <node ID="C92A0051-DDEF-4847-9CA2-24B4DC7CEDD5" TEXT="市场派发管理" FOLDED="false">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+                <node ID="4779FD57-5E6E-4355-80B8-8892D0BD6FF1" TEXT="兼职人员管理" FOLDED="false">
+                    <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+                <node ID="D3159F32-BA04-451F-B7DB-BE64CBF9B36C" TEXT="...." FOLDED="false">
+                    <font NAME="LucidaGrande" SIZE="12"></font>
+                    <edge COLOR="#CC66FF"></edge>
+                </node>
+            </node>
+            <node ID="5BA35689-EF21-440B-A92C-BABCC2CE525A" TEXT="新建节点" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+            </node>
+            <node ID="6E84C0F0-6933-415F-9EA2-0915BF38135D" TEXT="电子签章" FOLDED="false" COLOR="#000000">
+                <font NAME="STHeitiSC-Light" SIZE="12"></font>
+                <edge COLOR="#CC66FF"></edge>
+            </node>
+        </node>
+    </node>
+</map>

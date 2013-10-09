@@ -39,7 +39,7 @@ class module_feed_api_feed
 		$type = isset($data['type']) ? isset($data['type']) :''; 
 
 		foreach (explode(',', $data['rids']) as $key => $value) {
-			$array = array("uid=>{$data['uid']}","rid=>{$value}","content=>{$data['content']}");
+			$array = array("uid=>{$data['uid']}","rid=>{$value}","content=>{$data['content']}","mode=>{$data['mode']}");
 			if($type){
 				array_push($array,"type=>{$type}");
 			}
@@ -82,6 +82,11 @@ class module_feed_api_feed
 				$start = $map['offset'];
 				$limit = "limit {$start},{$map['limit']}";
 				$sql .= $limit;
+		}else{
+			foreach ($map as $key => $value) {
+				$sql.=" and ".$key."=".$value;
+				return R::getAll($sql);
+			}
 		}
 		$data = R::getAll($sql);
 		return array(
@@ -114,6 +119,5 @@ class module_feed_api_feed
 		if(is_array($map['id'])) $map['id'] = join(",",$map['id']);
 		$sql = "UPDATE feed set {$value} where id in({$map['id']})";
 		R::exec($sql);
-	}
-  
+	}  
 }
