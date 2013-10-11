@@ -14,7 +14,6 @@
 		
 		function add(){
 			$uid = $_SESSION['user']['id'];
-			// $task = new k_model_flow_task();
 			$task = k::load('api')->load('task','flow');
 			$array = array(
 				'rids'=>$_POST['rids'],

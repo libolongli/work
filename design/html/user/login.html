@@ -65,7 +65,7 @@
 				
 				success : function(message) {
 					if(message=='ok'){
-						window.location.href="<? echo k::url('home/index')?>";
+						window.location.href="<? $url = k::url('home/index');if(isset($_SESSION['RECENT_URL'])) {$url = $_SESSION['RECENT_URL'];}echo $url; ?>";
 					}else{
 						$("#LoginMsg").html("*用户名密码错误，请重新登录");
 					}

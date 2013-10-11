@@ -36,6 +36,14 @@ $f=K_ROOT_PATH.APP_PATH_BASE.$req;
 
 if(file_exists($f))
 {
+  //不需要登录的页面
+  $doNotLogin = array('index/index','user/login','user/register');
+  $url = $m."/".$a;
+  
+  if(!in_array($url, $doNotLogin)){
+  	 $_SESSION['RECENT_URL'] = k::url("$m/$a");
+  	 k::load('api')->load('user','user')->islogin();
+  }
   include_once($f);
   $oo='module_'.$m.'_'.$a;
   //echo $oo;

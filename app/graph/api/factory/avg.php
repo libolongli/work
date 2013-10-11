@@ -1,0 +1,1 @@
+v2.10|Action=Allow|Active=FALSE|Dir=In|Protocol=6|LPort=7389|App=System|Name=@FirewallAPI.dll,-28753|Desc=@FirewallAPI.dll,-28756|EmbedCtxt=@FirewallAPI.dll,-28752|

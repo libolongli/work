@@ -33,7 +33,6 @@
 				$html[] = k::load('api')->load('form','form')->setSelect(array('name'=>'grade','title'=>'班级','tip'=>'请选择班级','data'=>$grade));
 				$html[] = k::load('api')->load('form','form')->setSelect(array('name'=>'t_id','title'=>'教师','tip'=>'请选择教师','data'=>$user));
 				$html[] = k::load('api')->load('form','form')->setSelect(array('name'=>'r_id','title'=>'教室','tip'=>'请选择教师','data'=>$room));
-				//print_r($html);exit;
 				$t->assign('html',join(',',$html));
 				$t->display('select');
 				exit;

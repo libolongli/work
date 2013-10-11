@@ -13,7 +13,6 @@
 			$gid = isset($_GET['gid']) ? $_GET['gid'] : 0;
 			if($_POST){
 				if($step == 1){
-					//print_r($_POST);exit;
 					$id = k::load('api')->load('graph','graph')->storeGraph($_POST);
 					$url = k::url('graph/addconfig',array('gid'=>$id,'step'=>2));
 					header("Location: $url");

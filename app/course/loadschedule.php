@@ -6,9 +6,7 @@
 
 		function beforeDisplay(){
 			if($_GET){
-				//$map['s.t_id'] = $_GET['t_id'];
 				$map['s.r_id'] = $_GET['r_id'];
-				//$map['s.g_id'] = $_GET['g_id'];
 				$array = array();
 				$data = k::load('api')->load('course')->getSchedule($map);
 				$holiday = $this->getHoliday();

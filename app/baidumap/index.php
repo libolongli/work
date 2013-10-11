@@ -20,7 +20,14 @@
 				$data = array("desc=>$desc","tel=>$tel","addr=>$addr","name=>$name","lng=>$lng","lat=>$lat");
 				k::load('api')->load('map','baidumap')->store($data);
 			}else{
-				$json = file_get_contents("http://api.map.baidu.com/location/ip?ak=01ab9abebfe42e54d3dbb3c82c43fd54&coor=bd09ll");
+				//获取百度的经纬度,用于定位
+				$ip = $_SERVER['REMOTE_ADDR'];
+				//如果本地访问的话则不需要传ip地址过去
+				if($ip=='127.0.0.1'){
+					$json = file_get_contents("http://api.map.baidu.com/location/ip?ak=01ab9abebfe42e54d3dbb3c82c43fd54&coor=bd09ll");
+				}else{
+					$json = file_get_contents("http://api.map.baidu.com/location/ip?ak=01ab9abebfe42e54d3dbb3c82c43fd54&ip=$ip&coor=bd09ll");
+				}
 				$data = json_decode($json);
 				return $data->content->point;
 			}

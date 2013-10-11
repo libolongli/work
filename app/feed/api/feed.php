@@ -119,5 +119,16 @@ class module_feed_api_feed
 		if(is_array($map['id'])) $map['id'] = join(",",$map['id']);
 		$sql = "UPDATE feed set {$value} where id in({$map['id']})";
 		R::exec($sql);
-	}  
+	} 
+
+	public function getEmailNum(){
+		$sqlno  = "SELECT count(*) as total FROM feed where mode=2 and status!=2";
+		$sqlyes  = "SELECT count(*) as total  FROM feed where mode=2 and status=2";
+		$no = R::getCol($sqlno);
+		$yes = R::getCol($sqlyes);
+		return array(
+			'no'=>$no['0'],
+			'yes'=>$yes['0'],
+		);
+	} 
 }

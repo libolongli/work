@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>邮件数目</title>
+		<p>已经发送的<?=$yes?></p>
+		<p>未发送的<?=$no?></p>
+	<script type="text/javascript">
+		function myrefresh()
+		{
+		  window.location.reload();
+		}
+		setTimeout('myrefresh()',1000); //指定1秒刷新一次
+	</script>
+</html>

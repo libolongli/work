@@ -14,6 +14,7 @@
 		function beforeDisplay(){
 			$gid = isset($_GET['gid']) ? $_GET['gid'] :1 ;
 			$graph = k::load('api')->load('graph')->getGraphById($gid);
+			// print_r(unserialize($graph['ltable']));exit;
 			if(!$graph) {
 				$url = k::url('graph/addconfig');
 				echo "<a href='{$url}' >去生成配置文件</a>";
@@ -29,10 +30,11 @@
 			foreach ($sammconfig as $key => $value) {
 				$sammfield[] = $key;
 			}
-			
+			//print_r($sammconfig);exit;
 			$samm = k::load('api')->load('graph')->getSamm($data,$sammconfig);
 			$re['samm'] = $samm;
 			$arr = array();
+			//print_r($re);exit;
 			$re['data'] = $data;
 			return $re;
 		}

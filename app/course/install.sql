@@ -7,19 +7,19 @@ CREATE TABLE `course` (
   `t_id` int(11) default NULL,
   `status` tinyint(4) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `classroom`;
 CREATE TABLE `classroom` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `grade`;
 CREATE TABLE `grade` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `schedule`;
 CREATE TABLE `schedule` (
   `id` int(11) NOT NULL auto_increment,
@@ -31,7 +31,7 @@ CREATE TABLE `schedule` (
   `ts_end` int(11) default NULL,
   `status` tinyint(4) default '1',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `holiday`;
 CREATE TABLE `holiday` (
   `id` int(11) NOT NULL auto_increment,

@@ -9,7 +9,7 @@ CREATE TABLE `flow` (
   `ts_updated` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `flow_log`;
 CREATE TABLE `flow_log` (
   `id` int(11) NOT NULL auto_increment,
@@ -20,7 +20,7 @@ CREATE TABLE `flow_log` (
   `fleg` tinyint(4) NOT NULL default '1' COMMENT '1代表没有处理,2代表已经处理',
   `ts_created` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `common_config`;
 CREATE TABLE `common_config` (
   `id` int(11) NOT NULL auto_increment,
@@ -33,6 +33,6 @@ CREATE TABLE `common_config` (
   `variable` varchar(255) default NULL,
   `rids` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 

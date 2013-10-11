@@ -21,7 +21,6 @@
 				$map['f.uid']=$id;
 			}
 			$this->beforeDisplay($map,$model);
-			//$json = k::load('flow')->getListJson($map,$model);
 			$t->assign('title',"工作流");
 			$t->display('list');
 		
@@ -36,11 +35,6 @@
 					$map['search'] = $search;
 				}
 				$data = k::load('api')->load('flow')->getListJson($map,$model);
-				// $array = array(
-				// 	'total'=>$data['total'],
-				// 	'page'=>$_POST['offset']/$_POST['limit'],
-				// 	'records'=>$data['data']
-				// 	);
 				echo json_encode($data);exit;
 			}
 			

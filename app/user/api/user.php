@@ -19,11 +19,13 @@ class module_user_api_user
 	  return false;
 	 }
 	
-
+	 //登录的时候记录下登录的时候的IP地址
+	 $_SESSION['REMOTE_IP'] = $_SERVER['REMOTE_ADDR'];
 	 $_SESSION['is_login']=true;	 
 	 $_SESSION['user']['user']=$ds->user;
 	 $_SESSION['user']['id']=$ds->id;	
-	 
+	 //自动跳转到登陆前的页面
+	 //if(isset($_SESSION['RECENT_URL'])) header("Location: {$_SESSION['RECENT_URL']}");
 	 return true;
 	 
   }
@@ -36,7 +38,13 @@ class module_user_api_user
   
    function islogin()
   {
-   return $_SESSION['is_login'];
+  	if(($_SESSION['REMOTE_IP'] ==$_SERVER['REMOTE_ADDR']) && $_SESSION['is_login']){
+  		return true;
+  	}else{
+  		$url = k::url('user/login');
+  		header("Location: $url");
+  	}
+    
     
   }
   

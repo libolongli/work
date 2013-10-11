@@ -24,7 +24,6 @@
 
 			if(isset($_POST['status']) && isset($_POST['id'])){
 				$map = array('id'=>$_POST['id'],'status'=>$_POST['status']);
-				// print_r($map);exit;
 			 	k::load('api')->load('menu')->update($map);
 			 	exit;
 			}

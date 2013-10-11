@@ -24,6 +24,10 @@ return array(
             'text'  => '发送feed',
             'action'   => 'send',
         ),
+		array(
+            'text'  => 'feed邮件发送量',
+            'action'   => 'shownum',
+        ),
     ),
 );
 
