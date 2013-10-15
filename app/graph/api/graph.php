@@ -48,6 +48,7 @@
 			if($graph['w']) $sql .= " WHERE ".$graph['w']." "; 
 
 			if($graph['g']) $sql .= "GROUP BY ".$graph['g'];
+			//echo $sql;exit;
 			return R::getAll($sql);
 		}
 

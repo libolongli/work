@@ -1,1 +1,15 @@
-v2.10|Action=Allow|Active=FALSE|Dir=In|Protocol=6|LPort=7389|App=System|Name=@FirewallAPI.dll,-28753|Desc=@FirewallAPI.dll,-28756|EmbedCtxt=@FirewallAPI.dll,-28752|
+<?php
+	class module_graph_api_factory_avg{
+		
+		function avg($data,$field){
+			if($data && $field){
+				$total = k::load('api')->factory('graph','sum')->sum($data,$field);
+				//k::load('api')->factory('graph',$v)->$v($data,$key);
+				$avg = $total/count($data);
+				return $avg;
+			}else{
+				return 0;
+			}
+		}
+	
+	}
